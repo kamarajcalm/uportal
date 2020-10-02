@@ -140,7 +140,7 @@ class Home extends React.Component {
               <TextInput
               style={{borderWidth:0,marginHorizontal:6,
                 borderColor:'#000',width:width*0.6,borderRadius:10,
-                color:'#000',paddingHorizontal:15,backgroundColor:'gray'}}
+                color:'#000',paddingHorizontal:15,backgroundColor:'#3c3c3c'}}
                   placeholder="Type your comments here..."
                   selectionColor={'#fff'}
                   onChangeText={()=> this.setState({ comments})}
@@ -173,7 +173,7 @@ class Home extends React.Component {
            value={this.state.timelinepost}
        />
      </View>
-     <View style={{flexDirection:'row',marginTop:4,justifyContent:'space-between',backgroundColor:'gray',paddingHorizontal:30,paddingVertical:10,alignItems:'center'}}>
+     <View style={{flexDirection:'row',marginTop:4,justifyContent:'space-between',backgroundColor:'#3c3c3c',paddingHorizontal:30,paddingVertical:10,alignItems:'center'}}>
          <View style={{flexDirection:'row'}}>
            <FontAwesome name='image' size={20} color='#fff'/>
            <Text style={{color:'#fff',paddingHorizontal:6}}>PHOTO/VIDEOS</Text>

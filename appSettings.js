@@ -1,5 +1,5 @@
 const url = 'http://192.168.1.111:8000'
-const themeColor = '#000'
+const themeColor = '#3c3c3c'
 const loginType = 'otp' // options are password
 const statusBarStyle = 'light' //options are 'auto', 'inverted', 'light', or 'dark'
 
