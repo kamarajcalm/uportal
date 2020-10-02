@@ -68,7 +68,7 @@ class Home extends React.Component {
 
  }
  like=(item)=>{
-   this.state.timeline[item.like]=+1
+   this.state.timeline[item.like]=this.state.timeline[item.like+1]
    this.setState({timeline:this.state.timeline})
  }
  comment=(item)=>{

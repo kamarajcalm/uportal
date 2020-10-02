@@ -22,6 +22,12 @@ const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 
+const listofdetails=[{icon:'',name:'MARKS'},{icon:'',name:'ATTENDANCE'},
+                     {icon:'',name:'STATICS'},{icon:'',name:'LIBRARY'},
+                     {icon:'',name:'SYLLABUS & TIMETABLE'},{icon:'',name:'CALENDAR & REMINDERS'},
+                     {icon:'',name:'FACULTY DETAILS'},{icon:'',name:'MEDIA'},
+                     {icon:'',name:'QUESTION PAPERS'},{icon:'',name:'FORMS'},
+                     {icon:'',name:'FEEDBACK & REMARKS'},{icon:'',name:'SETTINGS'},]
 
 class PageFourth extends React.Component {
 
@@ -33,15 +39,62 @@ class PageFourth extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-
+      listofdetails:listofdetails
       }
     }
+
+  profileHead=()=>{
+    return(
+      <View style={{justifyContent:'center',backgroundColor:'#3c3c3c'}}>
+        <Text style={{color:'#fff',textAlign:'center',paddingVertical:10}}>K L N COLLEGE OF ENGINEERING</Text>
+        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',paddingHorizontal:15,paddingVertical:10}}>
+          <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:width*0.2,width:width*0.2,borderRadius:50}}/>
+          <View>
+            <Text style={{fontSize:12,color:'#fff'}}>Unique ID : AAA1111</Text>
+            <Text style={{fontSize:12,color:'#fff'}}>Name : Abishek Raj</Text>
+            <Text style={{fontSize:12,color:'#fff'}}>Student ID : AAA00001</Text>
+            <Text style={{fontSize:12,color:'#fff'}}>Class : III Sec:A</Text>
+          </View>
+          <View style={{height:width*0.18,borderWidth:0.5,borderColor:'#8c8c8c'}}></View>
+          <View>
+            <Text style={{color:'#fff',fontSize:12}}>REQUIRE ADMISSION</Text>
+            <TouchableOpacity style={{borderRadius:7,backgroundColor:'#000',borderWidth:1,paddingVertical:6,marginTop:2}}>
+              <Text style={{color:'#fff',textAlign:'center'}}>LOGOUT</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    )
+  }
+
+  listOfDetails=()=>{
+    return(
+      <FlatList
+           style={{paddingBottom:100}}
+           data={this.state.listofdetails}
+           keyExtractor={(item, index) => index.toString()}
+           renderItem={({item, index})=>(
+             <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,alignItems:'center',justifyContent:'space-between',paddingVertical:10}}>
+             <View style={{flexDirection:'row',alignItems:'center'}}>
+                <Image source={(item.icon)} style={{height:width*0.07,width:width*0.07}}/>
+                <Text style={{color:'#fff'}}>{item.name}</Text>
+              </View>
+              <FontAwesome name='angle-right' size={18} color='#fff'/>
+             </TouchableOpacity>
+           )
+         }
+      />
+    )
+  }
+
   render() {
     return (
-      <View style={{flex:1,}}>
-          <Headers navigation={this.props.navigation} name={'PageFirst'} screen={'PageFourth'}/>
-          <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-            <Text style={{color:'#000',fontSize:18}}>Page Fourth</Text>
+      <View style={{flex:1,backgroundColor:'#000'}}>
+          <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
+            {this.profileHead()}
+            <ScrollView>
+            {this.listOfDetails()}
+            </ScrollView>            
           </View>
           <TabComponent navigation={this.props.navigation}  />
       </View>
@@ -70,3 +123,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageFourth);
+// <Headers navigation={this.props.navigation} name={'PageFirst'} screen={'PageFourth'}/>
