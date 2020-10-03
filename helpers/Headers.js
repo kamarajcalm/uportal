@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Animated, StatusBar ,View,FlatList,StyleSheet,TouchableOpacity,TouchableHighlight,Text,Dimensions,Image,AppState,BackHandler,AsyncStorage , TextInput, ScrollView ,TouchableWithoutFeedback, KeyboardAvoidingView, Platform, Button, Alert,ActivityIndicator, ToastAndroid , WebView,Easing} from 'react-native';
 import  Constants  from 'expo-constants';
-import { FontAwesome ,MaterialCommunityIcons,MaterialIcons,SimpleLineIcons,Entypo,Fontisto,Feather,FontAwesome5,Ionicons} from '@expo/vector-icons';
+import {AntDesign, FontAwesome ,MaterialCommunityIcons,MaterialIcons,SimpleLineIcons,Entypo,Fontisto,Feather,FontAwesome5,Ionicons} from '@expo/vector-icons';
 import { StackActions, NavigationActions } from 'react-navigation';
 import settings from '../appSettings';
 
@@ -45,8 +45,9 @@ export default class Headers extends React.Component {
       var notify = [ 'Home' , 'PageFirst',]
       var notifychat = [ 'PageSecond',]
       var notifysport = ['PageThird']
+      var comp=['ProfileForms','ProfileFillForm','ProfileLibrary']
     return (
-      <View style={{height:55,width:width,backgroundColor:themeColor,marginTop:Constants.statusBarHeight}}>
+      <View style={{height:55,width:width,backgroundColor:comp.includes(this.props.screen)?'#000':themeColor,marginTop:Constants.statusBarHeight}}>
           <View style={{flexDirection: 'row',height:55,alignItems: 'center',}}>
 
              <View style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',}}>
@@ -58,6 +59,11 @@ export default class Headers extends React.Component {
               {notifychat.includes(this.props.screen)&&
                  <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal: 15,paddingVertical:10}}>
                    <FontAwesome5 name="chalkboard-teacher" size={20} color="#fff" />
+                 </TouchableOpacity>
+               }
+               {comp.includes(this.props.screen)&&
+                 <TouchableOpacity onPress={()=>{this.props.navigation.goBack()}} style={{paddingHorizontal: 15,paddingVertical:10}}>
+                   <AntDesign name="arrowleft" size={20} color="#fff" />
                  </TouchableOpacity>
                }
              </View>

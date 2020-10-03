@@ -21,6 +21,8 @@ import settings from '../appSettings';
 import SwitchSelector from "react-native-switch-selector";
 import {ScrollableTabView,DefaultTabBar,ScrollableTabBar} from '@valdio/react-native-scrollable-tabview';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import Modal from "react-native-modal";
+
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
@@ -45,6 +47,11 @@ const lions1inning=[{batsman:'Bowlers',od:'O',ms:'M',rs:'R',ws:'S',nb:'NB',wd:'W
                     {batsman:'Agar',od:'4',ms:'0',rs:'21',ws:'21',nb:'116.22',wd:'116.22',eco:'116.22'},
                     {batsman:'Bowlers',od:'4',ms:'0',rs:'9',ws:'9',nb:'116.22',wd:'116.22',eco:'116.22'}]
 
+const warriorsmodallist=[{name:'Tom Banton'},{name:'Baristow (wk)'},{name:'Malan'},
+                         {name:'Billings'},{name:'Moeen (c)'},{name:'J Denly'},
+                         {name:'Chris jordan'},{name:'Tom curron'},{name:'Adil Rashid'},
+                         {name:'Jofra Archer'},{name:'Mark Wood'},]
+
 class PageThird extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -59,9 +66,14 @@ class PageThird extends React.Component {
       openView:false,
       warriors1inning:warriors1inning,
       lions1inning:lions1inning,
-      activeSlide:this.props.activeSlide
+      activeSlide:0,
+      warriorsmodallist:warriorsmodallist,
+      lionsmodallist:warriorsmodallist
       }
+    
     }
+
+
 
     cricketView=()=>{
       return(
@@ -69,15 +81,16 @@ class PageThird extends React.Component {
           <TouchableOpacity style={{borderWidth:0,}}
           onPress={()=>{this.setState({openView:!this.state.openView})}}>
             <View style={{borderWidth:0,flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
-              <View style={{flexDirection:'row',alignItems:'center'}}>
+              <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}} onPress={()=>{this.setState({warriorsmodel:true})}}>
                 <Image source={require('../assets/warriors.jpeg')} style={{height:width*0.15,width:width*0.15}}/>
                 <Text style={{color:'#fff',fontSize:18,paddingHorizontal:6}}>131/10</Text>
-              </View>
+              </TouchableOpacity>
               <Text style={{color:'#fff'}}>vs</Text>
-              <View style={{flexDirection:'row',alignItems:'center'}}>
+              <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}}
+              onPress={()=>{this.setState({lionsmodel:true})}}>
                 <Text style={{color:'#fff',fontSize:18,paddingHorizontal:6}}>81/10</Text>
                 <Image source={require('../assets/lions.jpeg')} style={{height:width*0.15,width:width*0.15}}/>
-              </View>
+              </TouchableOpacity>
             </View>
             <View style={{borderWidth:0,paddingVertical:8,justifyContent:'space-between',flexDirection:'row'}}>
               <Text style={{color:'#fff',fontSize:18,textAlign:'center'}}>Warriors</Text>
@@ -271,23 +284,64 @@ class PageThird extends React.Component {
     )
   }
 
+  warriorsModal=()=>{
+    return(
+      <View>
+        <Modal isVisible={this.state.warriorsmodel}animationIn="slideInLeft" animationOut="slideOutLeft" hasBackdrop={true}
+            backdropColor={'transparent'} onBackdropPress={()=>{this.setState({warriorsmodel:false});}}>
+              <View style={{paddingVertical:20,alignItems:'flex-start',
+                            paddingHorizontal:20,backgroundColor:'#3c3c3c',borderRadius:10,width:width*0.4,
+                            marginHorizontal:-20}}>
+                    <Text style={{color:'#fff',fontSize:18,paddingVertical:4}}>WARRIOS</Text>
+                    <Text style={{color:'#fff',fontSize:14,paddingVertical:4}}>Playing XI</Text>
+                    <FlatList style={{}} data={this.state.warriorsmodallist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+                      <View style={{paddingVertical:10,}}>
+                      <Text style={{color:'#fff',fontSize:16,textAlign:'left',paddingVertical:4}}>{item.name}</Text>
+                      </View>
+                    )}/>
+              </View>
+        </Modal>
+      </View>
+    )
+  }
 
-
+  lionsModal=()=>{
+    return(
+      <View>
+        <Modal isVisible={this.state.lionsmodel}animationIn="slideInRight" animationOut="slideOutRight" hasBackdrop={true}
+            backdropColor={'transparent'} onBackdropPress={()=>{this.setState({lionsmodel:false});}}>
+              <View style={{paddingVertical:20,alignItems:'flex-start',
+                            paddingHorizontal:20,backgroundColor:'#3c3c3c',borderRadius:10,width:width*0.4,
+                            marginLeft:width*0.55}}>
+                    <Text style={{color:'#fff',fontSize:18,paddingVertical:4}}>LIONS</Text>
+                    <Text style={{color:'#fff',fontSize:14,paddingVertical:4}}>Playing XI</Text>
+                    <FlatList style={{}} data={this.state.lionsmodallist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+                      <View style={{paddingVertical:10,}}>
+                      <Text style={{color:'#fff',fontSize:16,textAlign:'left',paddingVertical:4}}>{item.name}</Text>
+                      </View>
+                    )}/>
+              </View>
+        </Modal>
+      </View>
+    )
+  }
 
   render() {
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
           <Headers navigation={this.props.navigation} name={'Sports Wall'} screen={'PageThird'}/>
+          {this.warriorsModal()}
+          {this.lionsModal()}
           <ScrollView style={{flex:1,paddingTop:this.state.openView?40:0,paddingBottom:100}}>
               {!this.state.openView&&
                 <View>
                 {this.switchTab()}
-                <MyCarousel render={this.props.render}/>
+                <MyCarousel navigation={this.props.navigation}  />
                 </View>
               }
               {this.state.activeSlide==0&&<View>
-              {this.cricketView()}
-              </View>}
+              {this.cricketView()}</View>}
+
 
               {this.state.openView &&
                 <ScrollView style={{paddingBottom:100}}>
@@ -300,6 +354,7 @@ class PageThird extends React.Component {
 
           </ScrollView>
           <TabComponent navigation={this.props.navigation}  />
+
       </View>
     );
   }
@@ -311,6 +366,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+
 });
 
 const mapStateToProps =(state) => {
@@ -352,7 +408,7 @@ class MyCarousel extends React.Component {
                   itemsPerInterval={1}
                   data={this.state.entries}
                   renderItem={this._renderItem}
-                  onSnapToItem={(index) => this.setState({ activeSlide: index }) }
+                  onSnapToItem={(index) => {this.setState({ activeSlide: index })}}
                   sliderWidth={sliderWidth}
                   itemWidth={itemWidth}
                   slideStyle={{alignItems:'center'}}

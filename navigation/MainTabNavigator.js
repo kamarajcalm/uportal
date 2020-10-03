@@ -18,6 +18,10 @@ import OtpLogin from '../OtpBasedLogin/OtpLogin';
 import OtpScreen from '../OtpBasedLogin/OtpScreen';
 import DrawerContent from '../navigationComponents/DrawerContent';
 
+import ProfileForms from '../screenComponents/ProfileForms';
+import ProfileFillForm from '../screenComponents/ProfileFillForm';
+import ProfileLibrary from '../screenComponents/ProfileLibrary';
+
 const HomeStack = createStackNavigator({
    Home:Home,
 },
@@ -48,6 +52,9 @@ const PageThirdStack = createStackNavigator({
 
 const PageFourthStack = createStackNavigator({
    PageFourth:PageFourth,
+   ProfileForms:ProfileForms,
+   ProfileFillForm:ProfileFillForm,
+   ProfileLibrary:ProfileLibrary
 },
 {
   initialRouteName: 'PageFourth',

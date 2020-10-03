@@ -30,7 +30,7 @@ const url = settings.url
 
 const timeline = [
   {img:require('../assets/Unknown_Boy.jpg'),name:'Stanly',dest:'PES UNIVERCITY',
-              like:0,time:'just ago',comment:true,
+              like:0,time:'just ago',comment:false,
               desc:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'},
 
             {img:require('../assets/Unknown_Boy.jpg'),name:'Stanly',dest:'PES UNIVERCITY',
@@ -58,8 +58,8 @@ class Home extends React.Component {
     this.state={
       like:0,
       timelinepost:'',
-      comments:'',
-      timeline:timeline
+      timeline:timeline,
+      comment:''
       }
     }
 
@@ -67,13 +67,13 @@ class Home extends React.Component {
  componentDidMount(){
 
  }
- like=(item)=>{
-   this.state.timeline[item.like]=this.state.timeline[item.like+1]
+ like=(item,index)=>{
+   this.state.timeline[index].like=this.state.timeline[index].like+1
    this.setState({timeline:this.state.timeline})
  }
- comment=(item)=>{
-   this.state.timeline[item.comment]=!this.state.timeline[item.comment]
-   this.setState({timeline:this.state.timeline})
+ comment=(item,index)=>{
+   this.state.timeline[index].comment=!this.state.timeline[index].comment
+   this.setState({timeline})
  }
 
  homeTimeLine=()=>{
@@ -114,16 +114,16 @@ class Home extends React.Component {
           }
         </View>
         {item.like!=0&&
-        <Text style={{color:'#fff'}}>{item.like} like</Text>
+        <Text style={{color:'#fff',paddingVertical:10}}>{item.like} like</Text>
         }
 
         <View style={{justifyContent:'space-between',borderWidth:1,flexDirection:'row',
                       alignItems:'center',marginVertical:15,marginHorizontal:12,paddingVertical:6}}>
-          <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{this.like(item)}}>
+          <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{this.like(item,index)}}>
             <AntDesign name='like1' size={20} color='#fff'/>
             <Text style={{color:'#fff',fontSize:14,paddingHorizontal:4}}>LIKE</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{this.comment(item)}}>
+          <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{this.comment(item,index)}}>
             <FontAwesome5 name='comment-alt' size={20} color='#fff'/>
             <Text style={{color:'#fff',fontSize:14,paddingHorizontal:4}}>COMMENT</Text>
           </TouchableOpacity>
@@ -133,7 +133,7 @@ class Home extends React.Component {
           </TouchableOpacity>
         </View>
 
-        {item.comment==true&&
+        {item.comment&&
           <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',paddingHorizontal:10,alignItems:'center'}}>
             <View style={{flexDirection:'row'}}>
               <Image source={(item.img)} style={{height:width*0.1,width:width*0.1,borderRadius:30}}/>
@@ -145,18 +145,14 @@ class Home extends React.Component {
                   selectionColor={'#fff'}
                   onChangeText={()=> this.setState({ comments})}
                   value={this.state.comments}
-
               />
             </View>
             <MaterialIcons name='navigate-next' size={20} color='#fff'/>
           </View>
         }
-
      </View>
-
    )}
    />
-
    </View>
    )
  }

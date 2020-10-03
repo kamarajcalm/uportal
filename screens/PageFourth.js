@@ -22,12 +22,12 @@ const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 
-const listofdetails=[{icon:'',name:'MARKS'},{icon:'',name:'ATTENDANCE'},
-                     {icon:'',name:'STATICS'},{icon:'',name:'LIBRARY'},
-                     {icon:'',name:'SYLLABUS & TIMETABLE'},{icon:'',name:'CALENDAR & REMINDERS'},
-                     {icon:'',name:'FACULTY DETAILS'},{icon:'',name:'MEDIA'},
-                     {icon:'',name:'QUESTION PAPERS'},{icon:'',name:'FORMS'},
-                     {icon:'',name:'FEEDBACK & REMARKS'},{icon:'',name:'SETTINGS'},]
+const listofdetails=[{id:1,icon:'',name:'MARKS'},{id:2,icon:'',name:'ATTENDANCE'},
+                     {id:3,icon:'',name:'STATICS'},{id:4,icon:'',name:'LIBRARY'},
+                     {id:5,icon:'',name:'SYLLABUS & TIMETABLE'},{id:6,icon:'',name:'CALENDAR & REMINDERS'},
+                     {id:7,icon:'',name:'FACULTY DETAILS'},{id:8,icon:'',name:'MEDIA'},
+                     {id:9,icon:'',name:'QUESTION PAPERS'},{id:10,icon:'',name:'FORMS'},
+                     {id:11,icon:'',name:'FEEDBACK & REMARKS'},{id:12,icon:'',name:'SETTINGS'},]
 
 class PageFourth extends React.Component {
 
@@ -74,7 +74,7 @@ class PageFourth extends React.Component {
            data={this.state.listofdetails}
            keyExtractor={(item, index) => index.toString()}
            renderItem={({item, index})=>(
-             <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,alignItems:'center',justifyContent:'space-between',paddingVertical:10}}>
+             <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,alignItems:'center',justifyContent:'space-between',paddingVertical:10}} onPress={()=>{this.onListTouch(item)}}>
              <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Image source={(item.icon)} style={{height:width*0.07,width:width*0.07}}/>
                 <Text style={{color:'#fff'}}>{item.name}</Text>
@@ -87,6 +87,16 @@ class PageFourth extends React.Component {
     )
   }
 
+  onListTouch=(item)=>{
+    console.log(item,'item')
+    if(item.name=='FORMS'){
+      this.props.navigation.navigate('ProfileForms')
+    }
+    else if (item.name=='LIBRARY') {
+      this.props.navigation.navigate('ProfileLibrary')
+    }
+  }
+
   render() {
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
@@ -94,7 +104,7 @@ class PageFourth extends React.Component {
             {this.profileHead()}
             <ScrollView>
             {this.listOfDetails()}
-            </ScrollView>            
+            </ScrollView>
           </View>
           <TabComponent navigation={this.props.navigation}  />
       </View>

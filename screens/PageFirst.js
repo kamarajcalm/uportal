@@ -55,6 +55,15 @@ class PageFirst extends React.Component {
       }
     }
 
+    like=(item,index)=>{
+      this.state.timeline[index].like=this.state.timeline[index].like+1
+      this.setState({timeline:this.state.timeline})
+    }
+    comment=(item,index)=>{
+      this.state.timeline[index].comment=!this.state.timeline[index].comment
+      this.setState({timeline})
+    }
+
   homeTimeLine=()=>{
     return(
       <View style={{flex:1}}>
@@ -99,16 +108,16 @@ class PageFirst extends React.Component {
              }
            </View>
            {item.like!=0&&
-           <Text style={{color:'#fff'}}>{item.like} like</Text>
+           <Text style={{color:'#fff',paddingVertical:8}}>{item.like} like</Text>
            }
 
            <View style={{justifyContent:'space-between',borderWidth:1,flexDirection:'row',
                          alignItems:'center',marginVertical:15,marginHorizontal:12,paddingVertical:6}}>
-             <TouchableOpacity style={{flexDirection:'row'}} >
+             <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{this.like(item,index)}}>
                <AntDesign name='like1' size={20} color='#fff'/>
                <Text style={{color:'#fff',fontSize:14,paddingHorizontal:4}}>LIKE</Text>
              </TouchableOpacity>
-             <TouchableOpacity style={{flexDirection:'row'}} >
+             <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{this.comment(item,index)}}>
                <FontAwesome5 name='comment-alt' size={20} color='#fff'/>
                <Text style={{color:'#fff',fontSize:14,paddingHorizontal:4}}>COMMENT</Text>
              </TouchableOpacity>
