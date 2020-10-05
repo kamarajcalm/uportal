@@ -98,6 +98,15 @@ class PageFourth extends React.Component {
     else if(item.name=='FACULTY DETAILS'){
       this.props.navigation.navigate('ProfileFacultyDetails')
     }
+    else if(item.name=='FEEDBACK & REMARKS'){
+      this.props.navigation.navigate('ProfileFeedback')
+    }
+    else if(item.name=='SETTINGS'){
+      this.props.navigation.navigate('ProfileSetting')
+    }
+    else if(item.name=='MARKS'){
+      this.props.navigation.navigate('ProfileMarks')
+    }
   }
 
   render() {

@@ -22,6 +22,14 @@ import ProfileForms from '../screenComponents/ProfileForms';
 import ProfileFillForm from '../screenComponents/ProfileFillForm';
 import ProfileLibrary from '../screenComponents/ProfileLibrary';
 import ProfileFacultyDetails from '../screenComponents/ProfileFacultyDetails';
+import PFacultyDetailsCarousel from '../screenComponents/PFacultyDetailsCarousel';
+import ProfileFeedback from '../screenComponents/ProfileFeedback';
+import ProfileSetting from '../screenComponents/ProfileSetting';
+import LinkEmail from '../screenComponents/LinkEmail';
+import Language from '../screenComponents/Language';
+import ChangePassword from '../screenComponents/ChangePassword';
+import ProfileMarks from '../screenComponents/ProfileMarks';
+
 const HomeStack = createStackNavigator({
    Home:Home,
 },
@@ -56,6 +64,13 @@ const PageFourthStack = createStackNavigator({
    ProfileFillForm:ProfileFillForm,
    ProfileLibrary:ProfileLibrary,
    ProfileFacultyDetails:ProfileFacultyDetails,
+   PFacultyDetailsCarousel:PFacultyDetailsCarousel,
+   ProfileFeedback:ProfileFeedback,
+   ProfileSetting:ProfileSetting,
+   LinkEmail:LinkEmail,
+   Language:Language,
+   ChangePassword:ChangePassword,
+   ProfileMarks:ProfileMarks
 },
 {
   initialRouteName: 'PageFourth',

@@ -22,21 +22,22 @@ import Headers  from '../helpers/Headers.js';
 import settings from '../appSettings';
 import HttpsClient from '../helpers/HttpsClient';
 
-
-
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
 
-const depatlist=[{name:'Aeronautical Engineering'},
-                  {name:'Electronics & Communication'},
-                  {name:'Computer science & Engineering'},
-                  {name:'Think and Grow Rich'},
-                  {name:'Think and Grow Rich'},
-                  {name:'Think and Grow Rich'},
-                  {name:'Think and Grow Rich'},
-                  {name:'Think and Grow Rich'},]
+const depatlist=[{depat:'Aeronautical Engineering'},
+                  {depat:'Electronics & Communication'},
+                  {depat:'Computer science & Engineering'},
+                  {depat:'Aeronautical Engineering'},
+                  {depat:'Electronics & Communication'},
+                  {depat:'Computer science & Engineering'},
+                  {depat:'Think and Grow Rich'},
+                  {depat:'Aeronautical Engineering'},
+                  {depat:'Electronics & Communication'},
+                  {depat:'Computer science & Engineering'},
+                  {depat:'Others'},]
 
 class ProfileFacultyDetails extends React.Component {
 
@@ -53,27 +54,23 @@ class ProfileFacultyDetails extends React.Component {
       }
     }
 
-
  componentDidMount(){
-
  }
 
  touch=(item,index)=>{
-   this.state.formlist[index].a1=!this.state.formlist[index].a1
-   this.setState({formlist})
+   this.props.navigation.navigate('PFacultyDetailsCarousel')
  }
 
- formList=()=>{
+ depatList=()=>{
    return(
      <View style={{justifyContent:'center',marginVertical:20}}>
       <FlatList style={{}} data={this.state.depatlist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-        <View>
-        <TouchableOpacity style={{}}onPress={()=>{this.touch(item,index)}}>
-            <Text style={{color:'#fff',fontSize:16}}>{item.depat}</Text>
-            <FontAwesome name='angle-right' size={18} color='#fff'/>
-
+        <View style={{marginVertical:0}}>
+        <TouchableOpacity style={{flexDirection:'row',justifyContent:'space-between',backgroundColor:'#000',width:width,paddingHorizontal:20,paddingVertical:15,alignItems:'center'}}onPress={()=>{this.touch(item,index)}}>
+            <Text style={{color:'#fff',fontSize:16,}}>{item.depat}</Text>
+            <FontAwesome name='angle-right' size={20} color='#fff'/>
         </TouchableOpacity>
-
+        <View style={{borderWidth:0.5,borderColor:'#fff'}}></View>
         </View>
       )}/>
      </View>
@@ -85,11 +82,10 @@ class ProfileFacultyDetails extends React.Component {
       <View style={{flex:1,backgroundColor:'#000'}}>
             <Headers navigation={this.props.navigation} name={'FACULTY DETAILS'} screen={'ProfileFacultyDetails'}/>
             <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-              <ScrollView >
-                  {this.formList()}
+              <ScrollView style={{paddingVertical:10}}>
+                  {this.depatList()}
               </ScrollView>
             </View>
-
       </View>
     );
   }
