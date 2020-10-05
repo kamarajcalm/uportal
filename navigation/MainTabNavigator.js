@@ -21,7 +21,7 @@ import DrawerContent from '../navigationComponents/DrawerContent';
 import ProfileForms from '../screenComponents/ProfileForms';
 import ProfileFillForm from '../screenComponents/ProfileFillForm';
 import ProfileLibrary from '../screenComponents/ProfileLibrary';
-
+import ProfileFacultyDetails from '../screenComponents/ProfileFacultyDetails';
 const HomeStack = createStackNavigator({
    Home:Home,
 },
@@ -54,7 +54,8 @@ const PageFourthStack = createStackNavigator({
    PageFourth:PageFourth,
    ProfileForms:ProfileForms,
    ProfileFillForm:ProfileFillForm,
-   ProfileLibrary:ProfileLibrary
+   ProfileLibrary:ProfileLibrary,
+   ProfileFacultyDetails:ProfileFacultyDetails,
 },
 {
   initialRouteName: 'PageFourth',

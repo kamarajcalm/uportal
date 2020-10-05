@@ -95,6 +95,9 @@ class PageFourth extends React.Component {
     else if (item.name=='LIBRARY') {
       this.props.navigation.navigate('ProfileLibrary')
     }
+    else if(item.name=='FACULTY DETAILS'){
+      this.props.navigation.navigate('ProfileFacultyDetails')
+    }
   }
 
   render() {

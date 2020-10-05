@@ -45,7 +45,7 @@ export default class Headers extends React.Component {
       var notify = [ 'Home' , 'PageFirst',]
       var notifychat = [ 'PageSecond',]
       var notifysport = ['PageThird']
-      var comp=['ProfileForms','ProfileFillForm','ProfileLibrary']
+      var comp=['ProfileForms','ProfileFillForm','ProfileLibrary','ProfileFacultyDetails']
     return (
       <View style={{height:55,width:width,backgroundColor:comp.includes(this.props.screen)?'#000':themeColor,marginTop:Constants.statusBarHeight}}>
           <View style={{flexDirection: 'row',height:55,alignItems: 'center',}}>
