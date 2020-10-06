@@ -21,6 +21,7 @@ import settings from '../appSettings';
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
+const fontFamily= settings.fontFamily
 
 const listofdetails=[{id:1,icon:'',name:'MARKS'},{id:2,icon:'',name:'ATTENDANCE'},
                      {id:3,icon:'',name:'STATICS'},{id:4,icon:'',name:'LIBRARY'},
@@ -45,21 +46,21 @@ class PageFourth extends React.Component {
 
   profileHead=()=>{
     return(
-      <View style={{justifyContent:'center',backgroundColor:'#3c3c3c'}}>
-        <Text style={{color:'#fff',textAlign:'center',paddingVertical:10}}>K L N COLLEGE OF ENGINEERING</Text>
+      <View style={{justifyContent:'center',backgroundColor:'#292929'}}>
+        <Text style={[styles.text,{color:'#fff',textAlign:'center',paddingVertical:10,fontSize:14,fontWeight:'700'}]}>K L N COLLEGE OF ENGINEERING</Text>
         <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',paddingHorizontal:15,paddingVertical:10}}>
           <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:width*0.2,width:width*0.2,borderRadius:50}}/>
           <View>
-            <Text style={{fontSize:12,color:'#fff'}}>Unique ID : AAA1111</Text>
-            <Text style={{fontSize:12,color:'#fff'}}>Name : Abishek Raj</Text>
-            <Text style={{fontSize:12,color:'#fff'}}>Student ID : AAA00001</Text>
-            <Text style={{fontSize:12,color:'#fff'}}>Class : III Sec:A</Text>
+            <Text style={[styles.text,{fontSize:12,color:'#fff',fontWeight:'700'}]}>Unique ID : AAA1111</Text>
+            <Text style={[styles.text,{fontSize:12,color:'#fff',fontWeight:'700'}]}>Name : Abishek Raj</Text>
+            <Text style={[styles.text,{fontSize:12,color:'#fff',fontWeight:'700'}]}>Student ID : AAA00001</Text>
+            <Text style={[styles.text,{fontSize:12,color:'#fff',fontWeight:'700'}]}>Class : III  Sec:A</Text>
           </View>
           <View style={{height:width*0.18,borderWidth:0.5,borderColor:'#8c8c8c'}}></View>
           <View>
-            <Text style={{color:'#fff',fontSize:12}}>REQUIRE ADMISSION</Text>
+            <Text style={[styles.text,{fontSize:12,color:'#fff',fontWeight:'700'}]}>REQUIRE ADMISSION</Text>
             <TouchableOpacity style={{borderRadius:7,backgroundColor:'#000',borderWidth:1,paddingVertical:6,marginTop:2}}>
-              <Text style={{color:'#fff',textAlign:'center'}}>LOGOUT</Text>
+              <Text style={[styles.text,{fontSize:14,color:'#fff',fontWeight:'700',textAlign:'center'}]}>LOGOUT</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -77,7 +78,7 @@ class PageFourth extends React.Component {
              <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,alignItems:'center',justifyContent:'space-between',paddingVertical:10}} onPress={()=>{this.onListTouch(item)}}>
              <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Image source={(item.icon)} style={{height:width*0.07,width:width*0.07}}/>
-                <Text style={{color:'#fff'}}>{item.name}</Text>
+                <Text style={[styles.text,{color:'#fff',fontWeight:'700',fontSize:14}]}>{item.name}</Text>
               </View>
               <FontAwesome name='angle-right' size={18} color='#fff'/>
              </TouchableOpacity>
@@ -107,6 +108,9 @@ class PageFourth extends React.Component {
     else if(item.name=='MARKS'){
       this.props.navigation.navigate('ProfileMarks')
     }
+    else if(item.name=='SYLLABUS & TIMETABLE'){
+      this.props.navigation.navigate('ProfileSyllabus')
+    }
   }
 
   render() {
@@ -130,6 +134,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  text:{
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22
+  }
 });
 
 const mapStateToProps =(state) => {

@@ -26,7 +26,7 @@ const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
-
+const fontFamily = settings.fontFamily
 
 class ChangePassword extends React.Component {
 
@@ -53,32 +53,32 @@ class ChangePassword extends React.Component {
             screen={'ChangePassword'}/>
             <View style={{flex:1,paddingVertical:20}}>
             <View style={{marginVertical:20,marginHorizontal:25}}>
-              <Text style={{color:'#fff',fontSize:16,paddingVertical:10}}>ENTER CURRENT PASSWORD</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,fontWeight:'700'}]}>ENTER CURRENT PASSWORD</Text>
               <TextInput style={{height: 45,borderWidth:1,borderColor:'#000',alignSelf:'center',
                                   width:'100%',borderRadius:7,color:'#fff',marginVertical:20,
-                                  paddingHorizontal:15,backgroundColor:'#3c3c3c'}}
+                                  paddingHorizontal:15,backgroundColor:'#333333'}}
                   placeholder=""
                   selectionColor={'#000'}
                   onChangeText={currentpass => { this.setState({ currentpass: currentpass }) }}
                   value={this.state.currentpass}/>
-               <Text style={{color:'#fff',fontSize:16,paddingVertical:10}}>ENTER NEW PASSWORD</Text>
+               <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,fontWeight:'700'}]}>ENTER NEW PASSWORD</Text>
                <TextInput style={{height: 45,borderWidth:1,borderColor:'#000',alignSelf:'center',
                                    width:'100%',borderRadius:7,color:'#fff',marginVertical:20,
-                                   paddingHorizontal:15,backgroundColor:'#3c3c3c'}}
+                                   paddingHorizontal:15,backgroundColor:'#333333'}}
                    placeholder=""
                    selectionColor={'#000'}
                    onChangeText={newpass => { this.setState({ newpass: newpass }) }}
                    value={this.state.newpass}/>
-               <Text style={{color:'#fff',fontSize:16,paddingVertical:10}}>RE-ENTER NEW PASSWORD</Text>
+               <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,fontWeight:'700'}]}>RE-ENTER NEW PASSWORD</Text>
                <TextInput style={{height: 45,borderWidth:1,borderColor:'#000',alignSelf:'center',
                                        width:'100%',borderRadius:7,color:'#fff',marginVertical:20,
-                                       paddingHorizontal:15,backgroundColor:'#3c3c3c'}}
+                                       paddingHorizontal:15,backgroundColor:'#333333'}}
                     placeholder=""
                     selectionColor={'#000'}
                     onChangeText={renewpass => { this.setState({ renewpass: renewpass }) }}
                     value={this.state.renewpass}/>
-               <TouchableOpacity style={{alignSelf:'center',paddingHorizontal:25,paddingVertical:10,backgroundColor:'#5e5e5e',marginVertical:20,borderRadius:7}} onPress={()=>{this.props.navigation.goBack()}}>
-               <Text style={{color:'#fff',fontSize:18}}>UPDATE</Text>
+               <TouchableOpacity style={{alignSelf:'center',paddingHorizontal:25,paddingVertical:10,backgroundColor:'#4F4F4F',marginVertical:20,borderRadius:7}} onPress={()=>{this.props.navigation.goBack()}}>
+               <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700'}]}>UPDATE</Text>
                </TouchableOpacity>
                </View>
             </View>
@@ -93,6 +93,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  text:{
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22
+  }
 });
 
 const mapStateToProps =(state) => {

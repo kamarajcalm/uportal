@@ -21,19 +21,23 @@ import TabComponent  from '../navigationComponents/TabComponent.js';
 import Headers  from '../helpers/Headers.js';
 import settings from '../appSettings';
 import HttpsClient from '../helpers/HttpsClient';
+import * as Font from 'expo-font';
 
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
-
+const fontFamily =settings.fontFamily
 const semdata=[{no:'#',sub:'SUBJECT',test1:'TEST I',test2:'TEST II',test3:'TEST III',exa:'EXA'},
               {no:'1',sub:'LANGUAGE',test1:'90',test2:'80',test3:'70',exa:'9'},
               {no:'2',sub:'ENGLISH',test1:'80',test2:'70',test3:'90',exa:'8'},
               {no:'3',sub:'MATHEMATICS',test1:'70',test2:'80',test3:'80',exa:'7'},
               {no:'4',sub:'PHYSICS',test1:'80',test2:'70',test3:'70',exa:'6'},
               {no:'5',sub:'EG',test1:'90',test2:'80',test3:'70',exa:'7'},]
-
+const classdata =[{no:'#',sub:'SUBJECT',test1:'TEST I',test2:'TEST II',test3:'TEST III',exa:'EXA'},
+              {no:'1',sub:'LANGUAGE',test1:'90',test2:'80',test3:'70',exa:'9'},
+              {no:'2',sub:'ENGLISH',test1:'80',test2:'70',test3:'90',exa:'8'},
+              {no:'3',sub:'MATHEMATICS',test1:'70',test2:'80',test3:'80',exa:'7'},]
 class ProfileMarks extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -48,11 +52,12 @@ class ProfileMarks extends React.Component {
       a1:false,
       a2:false,
       semdata:semdata,
-      classdata:semdata
+      classdata:classdata
       }
     }
 
- componentDidMount(){
+ componentDidMount=async()=>{
+
  }
 
  semResult=()=>{
@@ -61,99 +66,99 @@ class ProfileMarks extends React.Component {
         <FlatList style={{}} data={this.state.semdata} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
           <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingHorizontal:6,}}>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>{item.no}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:item.no=='#'?'700':'400'}]}>{item.no}</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.25}}>
-              <Text style={{color:'#fff',fontSize:12}}>{item.sub}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.no=='#'?'700':'400'}]}>{item.sub}</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>{item.test1}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:item.no=='#'?'700':'400'}]}>{item.test1}</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>{item.test2}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:item.no=='#'?'700':'400'}]}>{item.test2}</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>{item.test3}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:item.no=='#'?'700':'400'}]}>{item.test3}</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:14,textAlign:'center'}}>{item.exa}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:item.no=='#'?'700':'400'}]}>{item.exa}</Text>
             </View>
 
           </View>
         )}
         />
         <View>
-          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%'}}/>
+          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>
           <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingHorizontal:6,}}>
             <View style={{flex:0.13}}>
               <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}> </Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.25}}>
-              <Text style={{color:'#fff',fontSize:12}}>TOTAL</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700'}]}>TOTAL</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>380</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>380</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>380</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>380</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>380</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>380</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:14,textAlign:'center'}}>30</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>30</Text>
             </View>
           </View>
         </View>
         <View>
-          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%'}}/>
+          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>
           <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingHorizontal:6,}}>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}></Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'700'}]}></Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.25}}>
-              <Text style={{color:'#fff',fontSize:12}}>PERCENTAGE</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'700'}]}>PERCENTAGE</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>90%</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>90%</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>90%</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>90%</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>90%</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>90%</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:14,textAlign:'center'}}>90</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>90</Text>
             </View>
           </View>
         </View>
         <View>
-          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',height:1}}/>
+          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>
         </View>
         <View style={{marginVertical:10,marginHorizontal:10,flexDirection:'row',justifyContent:'space-between'}}>
           <View style={{flexDirection:'row'}}>
-          <Text style={{color:'#fff',paddingVertical:2,paddingHorizontal:2}}>SGPA</Text>
-          <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:6}}><Text style={{color:'#fff',paddingVertical:2,paddingHorizontal:4}}>7.7</Text></View>
+          <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',paddingVertical:2,paddingHorizontal:2}]}>SGPA</Text>
+          <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:6}}><Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',paddingVertical:2,paddingHorizontal:2}]}>7.7</Text></View>
           </View>
           <View style={{flexDirection:'row'}}>
-          <Text style={{color:'#fff',paddingVertical:2,paddingHorizontal:2}}>CGPA</Text>
-          <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:6}}><Text style={{color:'#fff',paddingVertical:2,paddingHorizontal:4}}>7.6</Text></View>
+          <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',paddingVertical:2,paddingHorizontal:2}]}>CGPA</Text>
+          <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:6}}><Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',paddingVertical:0.2,paddingHorizontal:2}]}>7.6</Text></View>
           </View>
         </View>
      </View>
@@ -162,17 +167,17 @@ class ProfileMarks extends React.Component {
 
  sem=()=>{
    return(
-     <View>
-      <View style={{borderRadius:10,marginHorizontal:15,marginVertical:10,backgroundColor:'#3c3c3c'}}>
-        <TouchableOpacity style={{height:width*0.35,alignItems:'center',justifyContent:'center',shadowOpacity: 0.18,elevation:5,backgroundColor:'#3c3c3c',shadowColor:'#000',borderRadius:10,shadowOffset: {height: 2,width:0}}} onPress={()=>{this.setState({a1:!this.state.a1,a2:false})}}>
-            <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:'100%',width:'100%',borderRadius:10,zIndex:0}}/>
+     <View >
+      <View style={{borderRadius:10,marginHorizontal:15,marginVertical:10,backgroundColor:'#3F3F3F'}}>
+        <TouchableOpacity style={{height:width*0.35,alignItems:'center',justifyContent:'center',shadowOpacity: 0.18,elevation:5,backgroundColor:'#3F3F3F',shadowColor:'#000',borderRadius:10,shadowOffset: {height: 2,width:0}}} onPress={()=>{this.setState({a1:!this.state.a1,a2:false})}}>
+            <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:'100%',width:'100%',borderRadius:10,zIndex:0,opacity:0.5}}/>
             <View style={{alignSelf:'center',position:'absolute',alignItems:'center',justifyContent:'center',zIndex:1}}>
-              <Text style={{color:'#000',fontSize:20}}>SEMESTER I</Text>
-              <FontAwesome name='angle-down' size={20} color='#000'/>
+              <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700'}]}>SEMESTER I</Text>
+              <FontAwesome name='angle-down' size={20} color='#fff'/>
             </View>
         </TouchableOpacity>
         {this.state.a1&&
-          <ScrollView style={{backgroundColor:'#3c3c3c',borderRadius:10,paddingVertical:10}}>
+          <ScrollView style={{backgroundColor:'#3F3F3F',borderRadius:10,paddingVertical:10}}>
               {this.semResult()}
           </ScrollView>
         }
@@ -186,99 +191,73 @@ class ProfileMarks extends React.Component {
         <FlatList style={{}} data={this.state.classdata} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
           <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingHorizontal:6,}}>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>{item.no}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:item.no=='#'?'700':'400'}]}>{item.no}</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.25}}>
-              <Text style={{color:'#fff',fontSize:12}}>{item.sub}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.no=='#'?'700':'400'}]}>{item.sub}</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>{item.test1}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:item.no=='#'?'700':'400'}]}>{item.test1}</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>{item.test2}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:item.no=='#'?'700':'400'}]}>{item.test2}</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>{item.test3}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:item.no=='#'?'700':'400'}]}>{item.test3}</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:14,textAlign:'center'}}>{item.exa}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:item.no=='#'?'700':'400'}]}>{item.exa}</Text>
             </View>
 
           </View>
         )}
         />
         <View>
-          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%'}}/>
+          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>
           <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingHorizontal:6,}}>
             <View style={{flex:0.13}}>
               <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}> </Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.25}}>
-              <Text style={{color:'#fff',fontSize:12}}>TOTAL</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700'}]}>TOTAL</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>380</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>380</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>380</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>380</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>380</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>380</Text>
             </View>
             <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
             <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:14,textAlign:'center'}}>30</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>30</Text>
             </View>
           </View>
         </View>
+
+
         <View>
-          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%'}}/>
-          <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingHorizontal:6,}}>
-            <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}></Text>
-            </View>
-            <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-            <View style={{flex:0.25}}>
-              <Text style={{color:'#fff',fontSize:12}}>PERCENTAGE</Text>
-            </View>
-            <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-            <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>90%</Text>
-            </View>
-            <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-            <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>90%</Text>
-            </View>
-            <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-            <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}>90%</Text>
-            </View>
-            <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-            <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:14,textAlign:'center'}}>90</Text>
-            </View>
-          </View>
-        </View>
-        <View>
-          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',height:1}}/>
+          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>
         </View>
         <View style={{marginVertical:10,marginHorizontal:10,flexDirection:'row',justifyContent:'space-between'}}>
           <View style={{flexDirection:'row'}}>
-          <Text style={{color:'#fff',paddingVertical:2,paddingHorizontal:2}}>SGPA</Text>
-          <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:6}}><Text style={{color:'#fff',paddingVertical:2,paddingHorizontal:4}}>7.7</Text></View>
+          <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',paddingVertical:2,paddingHorizontal:2}]}>TOTAL MARKS</Text>
+          <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:6}}><Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',paddingVertical:2,paddingHorizontal:2}]}>7.7</Text></View>
           </View>
           <View style={{flexDirection:'row'}}>
-          <Text style={{color:'#fff',paddingVertical:2,paddingHorizontal:2}}>CGPA</Text>
-          <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:6}}><Text style={{color:'#fff',paddingVertical:2,paddingHorizontal:4}}>7.6</Text></View>
+          <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',paddingVertical:2,paddingHorizontal:2}]}>ATTENDANCE</Text>
+          <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:6}}><Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',paddingVertical:0.2,paddingHorizontal:2}]}>7.6</Text></View>
           </View>
         </View>
      </View>
@@ -288,18 +267,18 @@ class ProfileMarks extends React.Component {
  classes=()=>{
    return(
      <View>
-      <View style={{borderRadius:10,marginHorizontal:15,marginVertical:10,backgroundColor:'#3c3c3c'}}>
-        <TouchableOpacity style={{height:width*0.35,alignItems:'center',justifyContent:'center',shadowOpacity: 0.18,elevation:5,backgroundColor:'#3c3c3c',shadowColor:'#000',borderRadius:10,shadowOffset: {height: 2,width:0}}} onPress={()=>{this.setState({a2:!this.state.a2,a1:false})}}>
-            <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:'100%',width:'100%',borderRadius:10,zIndex:0}}/>
+      <View style={{borderRadius:10,marginHorizontal:15,marginVertical:10,backgroundColor:'#3F3F3F',marginBottom:100}}>
+        <TouchableOpacity style={{height:width*0.35,alignItems:'center',justifyContent:'center',shadowOpacity: 0.18,elevation:5,backgroundColor:'#3F3F3F',shadowColor:'#000',borderRadius:10,shadowOffset: {height: 2,width:0}}} onPress={()=>{this.setState({a2:!this.state.a2,a1:false})}}>
+            <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:'100%',width:'100%',borderRadius:10,zIndex:0,opacity:0.5}}/>
             <View style={{alignSelf:'center',position:'absolute',alignItems:'center',justifyContent:'center',zIndex:1}}>
-              <Text style={{color:'#000',fontSize:20}}>CLASS XII</Text>
-              <FontAwesome name='angle-down' size={20} color='#000'/>
+              <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700'}]}>CLASS XII</Text>
+              <FontAwesome name='angle-down' size={20} color='#fff'/>
             </View>
         </TouchableOpacity>
         {this.state.a2&&
-          <View style={{alignItems:'center',backgroundColor:'#3c3c3c',paddingVertical:10,marginVertical:10}}>
+          <ScrollView style={{backgroundColor:'#3F3F3F',paddingVertical:10,marginVertical:10,}}>
               {this.classResult()}
-          </View>
+          </ScrollView>
         }
       </View>
      </View>
@@ -312,13 +291,13 @@ class ProfileMarks extends React.Component {
       <View style={{flex:1,backgroundColor:'#000'}}>
             <Headers navigation={this.props.navigation} name={'ACADEMIC MARKS'}
             screen={'ProfileMarks'}/>
-            <View style={{flex:1,paddingVertical:20}}>
-              <View>
-              <Text style={{color:'#fff',fontSize:20,textAlign:'center',paddingVertical:10}}>ENGINEERING</Text>
+            <View style={{flex:1,paddingVertical:20,}}>
+              <ScrollView>
+              <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'center',paddingVertical:10,fontWeight:'700'}]}>ENGINEERING</Text>
               {this.sem()}
-              <Text style={{color:'#fff',fontSize:20,textAlign:'center',paddingVertical:10}}>SCHOOL</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'center',paddingVertical:10,fontWeight:'700'}]}>SCHOOL</Text>
               {this.classes()}
-              </View>
+              </ScrollView>
 
           </View>
       </View>
@@ -332,6 +311,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  text:{
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22
+  }
 });
 
 const mapStateToProps =(state) => {

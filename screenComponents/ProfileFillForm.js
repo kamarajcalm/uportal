@@ -28,7 +28,7 @@ const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
-
+const fontFamily =settings.fontFamily
 const radio_props = [
   {label: '0-17', value: 0 },
   {label: '18-35', value: 1 },
@@ -75,7 +75,7 @@ class ProfileFillForm extends React.Component {
           buttonColor={'#fff'}
           selectedButtonColor={'#fff'}
           style={{color:'#fff',paddingVertical:10}}
-          labelStyle={{color:'#fff',textAlign:'center'}}
+          labelStyle={[styles.text,{color:'#fff',textAlign:'center',fontWeight:'400',fontSize:12}]}
           buttonSize={12}
           buttonOuterSize={16}
           isSelected={false}
@@ -97,7 +97,7 @@ class ProfileFillForm extends React.Component {
           buttonColor={'#fff'}
           selectedButtonColor={'#fff'}
           style={{color:'#fff',paddingVertical:10}}
-          labelStyle={{color:'#fff',textAlign:'center'}}
+          labelStyle={[styles.text,{color:'#fff',textAlign:'center',fontWeight:'400',fontSize:12}]}
           buttonSize={12}
           buttonOuterSize={16}
           isSelected={false}
@@ -119,7 +119,7 @@ class ProfileFillForm extends React.Component {
           buttonColor={'#fff'}
           selectedButtonColor={'#fff'}
           style={{color:'#fff',paddingVertical:10}}
-          labelStyle={{color:'#fff',textAlign:'center'}}
+          labelStyle={[styles.text,{color:'#fff',textAlign:'center',fontWeight:'400',fontSize:12}]}
           buttonSize={12}
           buttonOuterSize={16}
           isSelected={false}
@@ -141,13 +141,13 @@ class ProfileFillForm extends React.Component {
             <Headers navigation={this.props.navigation} name={item.name} screen={'ProfileFillForm'}/>
             <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
               <ScrollView >
-                <Text style={{color:'#fff',paddingVertical:20,textAlign:'center'}}>Please fill up the details below</Text>
+                <Text style={[styles.text,{color:'#fff',paddingVertical:20,textAlign:'center',fontWeight:'400',fontSize:14}]}>Please fill up the details below</Text>
                 <View >
-                    <Text style={{color:'#fff',paddingVertical:20}}>Lorem ipsum dolor sit amet,consectetur adipiscing elit.</Text>
+                    <Text style={[styles.text,{color:'#fff',paddingVertical:20,fontWeight:'400',fontSize:14}]}>Lorem ipsum dolor sit amet,consectetur adipiscing elit.</Text>
                     {this.radio1()}
                 </View>
                 <View >
-                    <Text style={{color:'#fff',paddingVertical:20}}>Nec sagittis.</Text>
+                    <Text style={[styles.text,{color:'#fff',paddingVertical:20,fontWeight:'400',fontSize:14}]}>Nec sagittis.</Text>
                     {this.radio2()}
                 </View>
                 <View >
@@ -155,11 +155,11 @@ class ProfileFillForm extends React.Component {
 
                 </View>
                 <View >
-                    <Text style={{color:'#fff',paddingVertical:20}}>Ultricies eu nisi eget feugiat id velit.</Text>
+                    <Text style={[styles.text,{color:'#fff',paddingVertical:20,fontWeight:'400',fontSize:14}]}>Ultricies eu nisi eget feugiat id velit.</Text>
                     {this.radio3()}
                 </View>
-                <TouchableOpacity style={{alignSelf:'center',backgroundColor:'#3c3c3c',paddingVertical:15,paddingHorizontal:40,borderRadius:7,marginVertical:20}} onPress={()=>{this.props.navigation.goBack()}}>
-                  <Text style={{color:'#fff',fontSize:16}}>SUBMEET</Text>
+                <TouchableOpacity style={{alignSelf:'center',backgroundColor:'#4F4F4F',paddingVertical:15,paddingHorizontal:40,borderRadius:7,marginVertical:20}} onPress={()=>{this.props.navigation.goBack()}}>
+                  <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700'}]}>SUBMEET</Text>
                 </TouchableOpacity>
               </ScrollView>
             </View>
@@ -175,6 +175,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  text:{
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22
+  }
 });
 
 const mapStateToProps =(state) => {

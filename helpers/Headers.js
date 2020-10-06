@@ -8,7 +8,7 @@ import settings from '../appSettings';
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
-
+const fontFamily=settings.fontFamily
 export default class Headers extends React.Component {
 
   constructor(props) {
@@ -18,7 +18,7 @@ export default class Headers extends React.Component {
       inactiveColor:'#000',
       scale: new Animated.Value(0),
       color:'#f2f2f2',
-      size:25,
+      size:20,
     };
 
   }
@@ -30,12 +30,12 @@ export default class Headers extends React.Component {
   headerChange=(notify,notifychat)=>{
     {notify.includes(this.props.screen)&&
        <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal: 15,paddingVertical:10}}>
-         <MaterialIcons name="notifications-none" size={20} color="#fff" />
+         <MaterialIcons name="notifications-none" size={this.state.size} color="#fff" />
        </TouchableOpacity>
      }
      {notifychat.includes(this.props.screen)&&
         <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal: 15,paddingVertical:10}}>
-          <FontAwesome5 name="chalkboard-teacher" size={20} color="#fff" />
+          <FontAwesome5 name="chalkboard-teacher" size={this.state.size} color="#fff" />
         </TouchableOpacity>
       }
   }
@@ -53,27 +53,27 @@ export default class Headers extends React.Component {
              <View style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',}}>
              {notify.includes(this.props.screen)&&
                 <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal: 15,paddingVertical:10}}>
-                  <MaterialIcons name="notifications-none" size={20} color="#fff" />
+                  <MaterialIcons name="notifications-none" size={this.state.size} color="#fff" />
                 </TouchableOpacity>
               }
               {notifychat.includes(this.props.screen)&&
                  <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal: 15,paddingVertical:10}}>
-                   <FontAwesome5 name="chalkboard-teacher" size={20} color="#fff" />
+                   <FontAwesome5 name="chalkboard-teacher" size={this.state.size} color="#fff" />
                  </TouchableOpacity>
                }
                {comp.includes(this.props.screen)&&
                  <TouchableOpacity onPress={()=>{this.props.navigation.goBack()}} style={{paddingHorizontal: 15,paddingVertical:10}}>
-                   <AntDesign name="arrowleft" size={20} color="#fff" />
+                   <AntDesign name="arrowleft" size={this.state.size} color="#fff" />
                  </TouchableOpacity>
                }
              </View>
 
              <View style={{ flex: 0.6, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
-               <Text   style={{ color:'#fff',fontWeight:'700',fontSize:20,textAlign:'center',}} numberOfLines={1}>{this.props.name}</Text>
+               <Text   style={[styles.text,{color:'#fff',fontSize:comp.includes(this.props.screen)?16:24,textAlign:'center',fontWeight:'700'}]} numberOfLines={1}>{this.props.name}</Text>
              </View>
               {notify.includes(this.props.screen)&&
                <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
-                  <Fontisto name="search" size={22} color="#fff" />
+                  <Fontisto name="search" size={this.state.size} color="#fff" />
               </TouchableOpacity>
             }
 
@@ -85,7 +85,7 @@ export default class Headers extends React.Component {
 
              {notifysport.includes(this.props.screen)&&
                <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
-                  <Fontisto name="search" size={22} color="#fff" />
+                  <Fontisto name="search" size={this.state.size} color="#fff" />
               </TouchableOpacity>
               }
 
@@ -95,3 +95,11 @@ export default class Headers extends React.Component {
     )
   }
 }
+
+const styles=StyleSheet.create({
+  text:{
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22
+  }
+})

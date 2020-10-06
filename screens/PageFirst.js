@@ -24,6 +24,7 @@ import settings from '../appSettings';
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
+const fontFamily = settings.fontFamily
 
 const timeline=[{img:require('../assets/Unknown_Boy.jpg'),name:'Stanly',dest:'PES UNIVERCITY',
             like:0,time:'just ago',comment:true,
@@ -81,26 +82,26 @@ class PageFirst extends React.Component {
                  <Image source={(item.img)} style={{width:'100%',height:'100%',borderRadius:30}} />
                </View>
                <View style={{paddingHorizontal:10}}>
-                 <Text style={{color:'#fff',fontSize:16}} numberOfLines={1}>{item.name}</Text>
-                 <Text style={{color:'#fff',fontSize:12}} numberOfLines={1}>{item.dest}</Text>
-                 <Text style={{color:'#fff',fontSize:12}} numberOfLines={1}>{item.time}</Text>
+                 <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'600'}]} numberOfLines={1}>{item.name}</Text>
+                 <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'600'}]} numberOfLines={1}>{item.dest}</Text>
+                 <Text style={[styles.text,{color:'#828282',fontSize:12,fontWeight:'600'}]} numberOfLines={1}>{item.time}</Text>
                </View>
              </View>
-             <MaterialCommunityIcons name="dots-vertical" size={18} color="#fff" />
+             <MaterialCommunityIcons name="dots-vertical" size={20} color="#fff" />
            </View>
 
            <View style={{height:width*0.4,borderWidth:1,marginTop:6}}>
-             {item.desc &&
-               <View>
-                 <Text style={{color:'#fff',fontSize:16}} numberOfLines={5}>{item.desc}</Text>
-                 <TouchableWithoutFeedback>
-                   <Text style={{color:'#fff',fontSize:16,paddingVertical:6}}>Read more</Text>
-                 </TouchableWithoutFeedback>
-               </View>
-             }
+           {item.desc &&
+             <View>
+               <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'400'}]} numberOfLines={5}>{item.desc}</Text>
+               <TouchableWithoutFeedback>
+                 <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:6,fontWeight:'600'}]}>Read more</Text>
+               </TouchableWithoutFeedback>
+             </View>
+           }
              {item.dest &&
                <View>
-                 <Text style={{color:'#fff',fontSize:16,paddingBottom:6}} numberOfLines={2}>{item.shortdesc}</Text>
+                 <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'400'}]} numberOfLines={2}>{item.shortdesc}</Text>
                  <View style={{height:width*0.3}}>
                    <Image source={(item.descimg)} style={{height:'100%',width:'100%'}}/>
                  </View>
@@ -108,7 +109,7 @@ class PageFirst extends React.Component {
              }
            </View>
            {item.like!=0&&
-           <Text style={{color:'#fff',paddingVertical:8}}>{item.like} like</Text>
+           <Text style={[styles.text,{color:'#828282',paddingVertical:10,fontSize:12,fontWeight:'600'}]}>{item.like} like</Text>
            }
 
            <View style={{justifyContent:'space-between',borderWidth:1,flexDirection:'row',
@@ -119,21 +120,28 @@ class PageFirst extends React.Component {
              </TouchableOpacity>
              <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{this.comment(item,index)}}>
                <FontAwesome5 name='comment-alt' size={20} color='#fff'/>
-               <Text style={{color:'#fff',fontSize:14,paddingHorizontal:4}}>COMMENT</Text>
+               <Text style={[styles.text,{color:'#fff',fontSize:14,paddingHorizontal:4,fontWeight:'600'}]}>COMMENT</Text>
              </TouchableOpacity>
              <TouchableOpacity style={{flexDirection:'row'}}>
                <Feather name='share-2' size={20} color='#fff'/>
-               <Text style={{color:'#fff',fontSize:14,paddingHorizontal:4}}>SHARE</Text>
+               <Text style={[styles.text,{color:'#fff',fontSize:14,paddingHorizontal:4,fontWeight:'600'}]}>SHARE</Text>
              </TouchableOpacity>
            </View>
 
-           {item.comment==true&&
+           {item.comment&&
              <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',paddingHorizontal:10,alignItems:'center'}}>
                <View style={{flexDirection:'row'}}>
                  <Image source={(item.img)} style={{height:width*0.1,width:width*0.1,borderRadius:30}}/>
-                 <View style={{backgroundColor:'gray',marginHorizontal:6,borderRadius:7,justifyContent:'center'}}>
-                   <Text style={{paddingHorizontal:10,marginRight:20}}>Type your comment here...</Text>
-                 </View>
+                 <TextInput
+                 style={{borderWidth:0,marginHorizontal:6,
+                   borderColor:'#000',width:width*0.6,borderRadius:10,
+                   color:'#000',paddingHorizontal:15,backgroundColor:'#2F2F2F'}}
+                     placeholder="Type your comments here..."
+                     placeholderTextColor={'#828282'}
+                     selectionColor={'#fff'}
+                     onChangeText={()=> this.setState({ comments})}
+                     value={this.state.comments}
+                 />
                </View>
                <MaterialIcons name='navigate-next' size={20} color='#fff'/>
              </View>
@@ -145,12 +153,44 @@ class PageFirst extends React.Component {
     )
   }
 
+  timelinePost=()=>{
+    return(
+    <View style={{flex:1}}>
+       <View style={{flexDirection:'row',paddingHorizontal:25}}>
+        <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:width*0.14,width:width*0.14,borderRadius:30}}/>
+        <TextInput
+        style={{borderWidth:0,borderColor:'#000',width:width*0.6,borderRadius:0,color:'#000',paddingHorizontal:15}}
+            placeholder="Whats on your mind?"
+            placeholderTextColor={'#7A7A7A'}
+            selectionColor={'#fff'}
+            onChangeText={()=> this.setState({ timelinepost})}
+            value={this.state.timelinepost}
+        />
+      </View>
+      <View style={{flexDirection:'row',marginTop:4,justifyContent:'space-between',backgroundColor:'#141414',paddingHorizontal:30,paddingVertical:15,alignItems:'center'}}>
+          <View style={{flexDirection:'row'}}>
+            <FontAwesome name='image' size={20} color='#fff'/>
+            <Text style={[styles.text,{color:'#fff',paddingHorizontal:6,fontWeight:'700',fontSize:14}]}>PHOTO/VIDEOS</Text>
+          </View>
+          <View style={{flexDirection:'row'}}>
+            <FontAwesome name='image' size={20} color='#fff'/>
+            <Text style={[styles.text,{color:'#fff',paddingHorizontal:6,fontWeight:'700',fontSize:14}]}>MY WALL</Text>
+          </View>
+      </View>
+    </View>
+    )
+  }
+
   render() {
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
           <Headers navigation={this.props.navigation} name={'Institute wall'} screen={'PageFirst'} />
-          <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+          <View style={{flex:1,}}>
+          <ScrollView>
+
+            {this.timelinePost()}
             {this.homeTimeLine()}
+            </ScrollView>
           </View>
           <TabComponent navigation={this.props.navigation}  />
       </View>
@@ -164,6 +204,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  text:{
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22
+  }
 });
 
 const mapStateToProps =(state) => {

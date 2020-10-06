@@ -26,7 +26,7 @@ const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
-
+const fontFamily = settings.fontFamily
 const depatlist=[{depat:'Aeronautical Engineering'},
                   {depat:'Electronics & Communication'},
                   {depat:'Computer science & Engineering'},
@@ -67,7 +67,7 @@ class ProfileFacultyDetails extends React.Component {
       <FlatList style={{}} data={this.state.depatlist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
         <View style={{marginVertical:0}}>
         <TouchableOpacity style={{flexDirection:'row',justifyContent:'space-between',backgroundColor:'#000',width:width,paddingHorizontal:20,paddingVertical:15,alignItems:'center'}}onPress={()=>{this.touch(item,index)}}>
-            <Text style={{color:'#fff',fontSize:16,}}>{item.depat}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700'}]}>{item.depat}</Text>
             <FontAwesome name='angle-right' size={20} color='#fff'/>
         </TouchableOpacity>
         <View style={{borderWidth:0.5,borderColor:'#fff'}}></View>
@@ -97,6 +97,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  text:{
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22
+  }
 });
 
 const mapStateToProps =(state) => {

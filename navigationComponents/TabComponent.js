@@ -8,6 +8,7 @@ import settings from '../appSettings';
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
+const fontFamily =settings.fontFamily
 
 export default class TabComponent extends React.Component {
 
@@ -49,7 +50,7 @@ export default class TabComponent extends React.Component {
      <Animated.View style={[{borderRadius:30,height:'100%',}]} >
       <TouchableOpacity onPress={()=>{this.navigate('Home')}} style={{borderRadius:20,justifyContent: 'center',alignItems: 'center',height:'100%'}}>
        <Entypo name="globe" size={this.state.size} color={home.includes(routeName)?this.state.activeColor:this.state.inactiveColor} />
-       <Text style={{color:home.includes(routeName)?'#fff':'#fff',fontSize:12,margin:0,padding:0}}>Univarsal</Text>
+       <Text style={[styles.text,{color:home.includes(routeName)?'#fff':'#fff',fontSize:12,margin:0,padding:0,fontWeight:'600'}]}>Univarsal</Text>
       </TouchableOpacity>
      </Animated.View>
     </View>
@@ -59,7 +60,7 @@ export default class TabComponent extends React.Component {
        <Animated.View style={[{borderRadius:30,height:'100%',}]} >
         <TouchableOpacity onPress={()=>{this.navigate('PageFirst')}} style={{borderRadius:20,justifyContent: 'center',alignItems: 'center',height:'100%'}}>
           <FontAwesome name="institution" size={this.state.size} color={pageFirst.includes(routeName)?this.state.activeColor:this.state.inactiveColor} />
-          <Text style={{color:pageFirst.includes(routeName)?'#fff':'#fff',fontSize:12,margin:0,padding:0}}>Institution</Text>
+          <Text style={[styles.text,{color:pageFirst.includes(routeName)?'#fff':'#fff',fontSize:12,margin:0,padding:0,fontWeight:'600'}]}>Institution</Text>
         </TouchableOpacity>
        </Animated.View>
       </View>
@@ -68,7 +69,7 @@ export default class TabComponent extends React.Component {
        <Animated.View style={[{borderRadius:30,height:'100%',}]} >
         <TouchableOpacity onPress={()=>{this.navigate('PageSecond')}} style={{borderRadius:20,justifyContent: 'center',alignItems: 'center',height:'100%'}}>
           <MaterialCommunityIcons name="google-classroom" size={this.state.size} color={pageSecond.includes(routeName)?this.state.activeColor:this.state.inactiveColor} />
-          <Text style={{color:pageSecond.includes(routeName)?'#fff':'#fff',fontSize:12,margin:0,padding:0}}>Class</Text>
+          <Text style={[styles.text,{color:pageSecond.includes(routeName)?'#fff':'#fff',fontSize:12,margin:0,padding:0,fontWeight:'600'}]}>Class</Text>
         </TouchableOpacity>
        </Animated.View>
       </View>
@@ -77,7 +78,7 @@ export default class TabComponent extends React.Component {
        <Animated.View style={[{borderRadius:30,height:'100%',}]} >
         <TouchableOpacity onPress={()=>{this.navigate('PageThird')}} style={{borderRadius:20,justifyContent: 'center',alignItems: 'center',height:'100%'}}>
           <MaterialIcons name="sports-tennis" size={this.state.size} color={pageThird.includes(routeName)?this.state.activeColor:this.state.inactiveColor} />
-          <Text style={{color:pageThird.includes(routeName)?'#fff':'#fff',fontSize:12,margin:0,padding:0}}>Sports</Text>
+          <Text style={[styles.text,{color:pageThird.includes(routeName)?'#fff':'#fff',fontSize:12,margin:0,padding:0,fontWeight:'600'}]}>Sports</Text>
         </TouchableOpacity>
        </Animated.View>
       </View>
@@ -86,7 +87,7 @@ export default class TabComponent extends React.Component {
        <Animated.View style={[{borderRadius:30,height:'100%',}]} >
         <TouchableOpacity onPress={()=>{this.navigate('PageFourth')}} style={{borderRadius:20,justifyContent: 'center',alignItems: 'center',height:'100%'}}>
           <FontAwesome name="user-circle-o" size={this.state.size} color={pageFourth.includes(routeName)?this.state.activeColor:this.state.inactiveColor} />
-          <Text style={{color:pageFourth.includes(routeName)?'#fff':'#fff',fontSize:12,margin:0,padding:0}}>Profile</Text>
+          <Text style={[styles.text,{color:pageFourth.includes(routeName)?'#fff':'#fff',fontSize:12,margin:0,padding:0,fontWeight:'600'}]}>Profile</Text>
         </TouchableOpacity>
        </Animated.View>
       </View>
@@ -96,3 +97,11 @@ export default class TabComponent extends React.Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  text:{
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22
+  }
+});

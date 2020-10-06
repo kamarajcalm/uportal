@@ -26,6 +26,7 @@ const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
+const fontFamily = settings.fontFamily
 
 const languageList=[{name:'ENGLISH'},{name:'HINDI'},{name:'KANNADA'}]
 class Language extends React.Component {
@@ -63,7 +64,7 @@ class Language extends React.Component {
                                          borderRadius:7,flexDirection:'row',alignItems:'center'}}
                 onPress={()=>{receivedLanguage(item.name)
             this.props.navigation.goBack()}}>
-                  <Text style={{color:'#fff',fontSize:18}}>{item.name}</Text>
+                  <Text style={[styles.text,{color:'#fff',fontSize:16}]}>{item.name}</Text>
                   <FontAwesome name='angle-right' size={20} color='#fff' style={{alignSelf:'flex-end'}}/>
                </TouchableOpacity>
              )}
@@ -81,6 +82,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  text:{
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22
+  }
 });
 
 const mapStateToProps =(state) => {

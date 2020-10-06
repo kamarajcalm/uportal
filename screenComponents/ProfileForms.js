@@ -28,6 +28,7 @@ const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
+const fontFamily= settings.fontFamily
 
 const formlist=[{name:'Hackathon 2020',
                   desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam libero eget aliquam dictum neque ullam corper bibendum bibendum at. Rutrum hendrerit crasquam sed malesuada consequat hendrerit.'},
@@ -59,8 +60,10 @@ class ProfileForms extends React.Component {
          initial={0}
          onPress={value => this.setState({ gender: value })}
          textColor={'#fff'} //'#7a44cf'
+         textStyle={[styles.text,{fontWeight:'700',fontSize:14}]}
+         selectedTextStyle={[styles.text,{fontWeight:'700',fontSize:14}]}
          selectedColor={'#000'}
-         backgroundColor={'#3c3c3c'}
+         backgroundColor={'#333333'}
          buttonColor={'#fff'}
          borderColor={'#000'}
          borderRadius={10}
@@ -85,11 +88,11 @@ class ProfileForms extends React.Component {
    return(
      <View style={{justifyContent:'center'}}>
       <FlatList style={{}} data={this.state.formlist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-        <TouchableOpacity style={{borderRadius:10,backgroundColor:'#3c3c3c',width:width*0.9,paddingVertical:10,paddingHorizontal:10,marginVertical:10}}onPress={()=>{this.props.navigation.navigate('ProfileFillForm',{item:item})}}>
-          <Text style={{fontSize:18,color:'#fff',paddingVertical:6}} numberOfLines={1}>{item.name}</Text>
-          <Text style={{fontSize:14,color:'#fff',paddingVertical:6}} numberOfLines={4}>{item.desc}</Text>
+        <TouchableOpacity style={{borderRadius:10,backgroundColor:'#3F3F3F',width:width*0.9,paddingVertical:10,paddingHorizontal:10,marginVertical:10}}onPress={()=>{this.props.navigation.navigate('ProfileFillForm',{item:item})}}>
+          <Text style={[styles.text,{fontSize:16,color:'#fff',paddingVertical:6,fontWeight:'700'}]} numberOfLines={1}>{item.name}</Text>
+          <Text style={[styles.text,{fontSize:14,color:'#fff',paddingVertical:6,fontWeight:'400'}]} numberOfLines={4}>{item.desc}</Text>
           <TouchableOpacity>
-            <Text style={{fontSize:12,color:'#fff',textDecorationLine: "underline",paddingVertical:6}}>APPLY NOW</Text>
+            <Text style={[styles.text,{fontSize:12,color:'#fff',textDecorationLine: "underline",paddingVertical:6,fontWeight:'700'}]}>APPLY NOW</Text>
           </TouchableOpacity>
         </TouchableOpacity>
       )}/>
@@ -121,6 +124,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  text:{
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22
+  }
 });
 
 const mapStateToProps =(state) => {

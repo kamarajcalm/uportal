@@ -29,6 +29,7 @@ import LinkEmail from '../screenComponents/LinkEmail';
 import Language from '../screenComponents/Language';
 import ChangePassword from '../screenComponents/ChangePassword';
 import ProfileMarks from '../screenComponents/ProfileMarks';
+import ProfileSyllabus from '../screenComponents/ProfileSyllabus';
 
 const HomeStack = createStackNavigator({
    Home:Home,
@@ -70,7 +71,8 @@ const PageFourthStack = createStackNavigator({
    LinkEmail:LinkEmail,
    Language:Language,
    ChangePassword:ChangePassword,
-   ProfileMarks:ProfileMarks
+   ProfileMarks:ProfileMarks,
+   ProfileSyllabus:ProfileSyllabus
 },
 {
   initialRouteName: 'PageFourth',

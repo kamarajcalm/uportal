@@ -28,6 +28,7 @@ const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
+const fontFamily=settings.fontFamily
 const entries=[{subject:'LANGUAGE',img:require('../assets/Unknown_Boy.jpg'),
                 name:'Stelaa Joseph',quali:'BE',
                 desig:'Lecture',emailid:'stella@gmail.com',
@@ -62,41 +63,41 @@ class PFacultyDetailsCarousel extends React.Component {
  _renderItem ({item, index}) {
      return(
      <View style={{width:width*0.65,borderWidth:0,borderColor:'#fff',
-                          backgroundColor:'#3c3c3c',justifyContent:'center',marginHorizontal:10,
+                          backgroundColor:'#3F3F3F',justifyContent:'center',marginHorizontal:10,
                           borderRadius:10,alignItems:'center',alignSelf:'center'}}>
           <View style={{width:width*0.65,borderWidth:0,
                             backgroundColor:'rgba(104, 104, 104, 0.6)',justifyContent:'center',paddingVertical:15,
-                            marginHorizontal:0,borderRadius:10,alignItems:'center',shadowRadius: 7,shadowColor:'#fff',shadowOpacity: 0.1,elevation:5,}}
+                            marginHorizontal:0,borderRadius:10,alignItems:'center',shadowRadius: 7,shadowColor:'blur(5.46863px)',shadowOpacity: 0.1,elevation:5,}}
                       >
               <View style={{width:width*0.65,justifyContent:'center',alignItems:'center'}}>
-                    <Text style={{color:'#fff',fontSize:16,paddingVertical:10,paddingLeft:0}}>{item.subject}</Text>
+                    <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:10,paddingLeft:0,fontWeight:'700'}]}>{item.subject}</Text>
                     <AntDesign name='infocirlceo' size={18} color='#fff'style={{position:'absolute',top:10,right:20}}/>
                     <Image source={(item.img)} style={{height:width*0.35,width:width*0.25}}/>
-                    <Text style={{color:'#fff',fontSize:16,
-                                paddingVertical:10,paddingLeft:0}}>{item.name}</Text>
+                    <Text style={[styles.text,{color:'#fff',fontSize:14,
+                                paddingVertical:10,paddingLeft:0,fontWeight:'700'}]}>{item.name}</Text>
               </View>
           </View>
           <View style={{paddingVertical:10}}>
               <View style={styles.view1}>
-                  <Text style={{color:'#fff',fontSize:16,paddingVertical:4,flex:0.6}}>Qualification</Text>
-                  <Text style={{color:'#fff',fontSize:12,paddingVertical:4,flex:0.4}}>{item.quali}</Text>
+                  <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:4,flex:0.6,fontWeight:'700'}]}>Qualification</Text>
+                  <Text style={[styles.text,{color:'#fff',fontSize:12,paddingVertical:4,flex:0.4,fontWeight:'400'}]}>{item.quali}</Text>
               </View>
               <View style={styles.view1}>
-                  <Text style={{color:'#fff',fontSize:16,paddingVertical:4,flex:0.6}}>Designation</Text>
-                  <Text style={{color:'#fff',fontSize:12,paddingVertical:4,flex:0.4}}>{item.quali}</Text>
+                  <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:4,flex:0.6,fontWeight:'700'}]}>Designation</Text>
+                  <Text style={[styles.text,{color:'#fff',fontSize:12,paddingVertical:4,flex:0.4,fontWeight:'400'}]}>{item.quali}</Text>
               </View>
               <View style={styles.view1}>
-                  <Text style={{color:'#fff',fontSize:16,paddingVertical:4,flex:0.6}}>Email ID</Text>
-                  <Text style={{color:'#fff',fontSize:12,paddingVertical:4,flex:0.4}}
+                  <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:4,flex:0.6,fontWeight:'700'}]}>Email ID</Text>
+                  <Text style={[styles.text,{color:'#fff',fontSize:12,paddingVertical:4,flex:0.4,fontWeight:'400'}]}
                     numberOfLines={1}>{item.emailid}</Text>
               </View>
               <View style={styles.view1}>
-                  <Text style={{color:'#fff',fontSize:16,paddingVertical:4,flex:0.6}}>Class handling</Text>
-                  <Text style={{color:'#fff',fontSize:12,paddingVertical:4,flex:0.4}}>{item.classeshandling}</Text>
+                  <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:4,flex:0.6,fontWeight:'700'}]}>Class handling</Text>
+                  <Text style={[styles.text,{color:'#fff',fontSize:12,paddingVertical:4,flex:0.4,fontWeight:'400'}]}>{item.classeshandling}</Text>
               </View>
 
               <TouchableOpacity style={{alignSelf:'center',backgroundColor:'#000',borderRadius:7,marginVertical:10}}>
-              <Text style={{color:'#fff',paddingVertical:6,paddingHorizontal:20}}>CONTACT</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:6,paddingHorizontal:20,fontWeight:'600'}]}>CONTACT</Text>
               </TouchableOpacity>
           </View>
        </View>
@@ -105,7 +106,7 @@ class PFacultyDetailsCarousel extends React.Component {
 
   render() {
     return (
-      <View style={{flex:1,backgroundColor:'#000'}}>
+      <View style={{flex:1,backgroundColor:'#000000'}}>
             <Headers navigation={this.props.navigation} name={'FACULTY DETAILS'} screen={'PFacultyDetailsCarousel'}/>
             <View style={{flex:1,alignItems:'center',}}>
             <View style={{margin:width*0.2,}}>
@@ -137,6 +138,11 @@ const styles = StyleSheet.create({
     paddingHorizontal:10,
     alignItems:'center',
     justifyContent:'space-between'
+  },
+  text:{
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22
   }
 });
 

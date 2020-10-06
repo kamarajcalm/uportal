@@ -26,7 +26,7 @@ const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
-
+const fontFamily=settings.fontFamily
 
 class ProfileSetting extends React.Component {
 
@@ -63,30 +63,30 @@ class ProfileSetting extends React.Component {
               <View style={{justifyContent:'center',alignItems:'center'}}>
                 <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:width*0.2,width:width*0.2,borderRadius:50}}/>
                 <TouchableOpacity style={{marginVertical:10,paddingVertical:8}}>
-                  <Text style={{color:'#fff',fontSize:14,textAlign:'center'}}>Change profile picture</Text>
+                  <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700'}]}>Change profile picture</Text>
                 </TouchableOpacity>
               </View>
               <View style={{justifyContent:'center',alignItems:'center'}}>
                   <TouchableOpacity style={{flexDirection:'row',justifyContent:'space-between',width:width*0.9,alignItems:'center',paddingVertical:20}} onPress={()=>{this.props.navigation.navigate('LinkEmail',{receivedValue: this.receivedValue })}}>
-                    <Text style={{color:'#fff',fontSize:18}}>Link Email ID</Text>
+                    <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700'}]}>Link Email ID</Text>
                     <View style={{flexDirection:'row',width:width*0.3,justifyContent:'space-between'}}>
-                      <Text style={{color:'#ababab',fontSize:14}}>{this.state.emailid}</Text>
+                      <Text style={[styles.text,{color:'#979797',fontSize:14,fontWeight:'400'}]}>{this.state.emailid}</Text>
                       <FontAwesome name='angle-right' size={18} color='#fff'/>
                     </View>
                   </TouchableOpacity>
                   <View style={{borderWidth:0.5,borderColor:'#fff',width:width}}></View>
                   <TouchableOpacity style={{flexDirection:'row',justifyContent:'space-between',width:width*0.9,alignItems:'center',paddingVertical:20}}
                   onPress={()=>{this.props.navigation.navigate('Language',{receivedLanguage: this.receivedLanguage })}}>
-                    <Text style={{color:'#fff',fontSize:18}}>Language</Text>
+                    <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700'}]}>Language</Text>
                     <View style={{flexDirection:'row',width:width*0.3,justifyContent:'flex-end'}}>
-                      <Text style={{color:'#ababab',fontSize:14,paddingHorizontal:10}}>{this.state.language}</Text>
+                      <Text style={[styles.text,{color:'#979797',fontSize:14,paddingHorizontal:10,fontWeight:'400'}]}>{this.state.language}</Text>
                       <FontAwesome name='angle-right' size={18} color='#fff'/>
                     </View>
                   </TouchableOpacity>
                   <View style={{borderWidth:0.5,borderColor:'#fff',width:width}}></View>
                   <TouchableOpacity style={{flexDirection:'row',justifyContent:'space-between',width:width*0.9,alignItems:'center',paddingVertical:20}}
                   onPress={()=>{this.props.navigation.navigate('ChangePassword')}}>
-                    <Text style={{color:'#fff',fontSize:18}}>Change password</Text>
+                    <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700'}]}>Change password</Text>
                     <FontAwesome name='angle-right' size={18} color='#fff' style={{alignSelf:'flex-end'}}/>
                   </TouchableOpacity>
                   <View style={{borderWidth:0.5,borderColor:'#fff',width:width}}></View>
@@ -103,6 +103,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  text:{
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22
+  }
 });
 
 const mapStateToProps =(state) => {

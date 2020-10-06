@@ -26,7 +26,7 @@ const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
-
+const fontFamily=settings.fontFamily
 const tabs = [{name:'FEEDBACKS'},
               {name:'REMARKS'}]
 
@@ -73,7 +73,7 @@ class ProfileFeedback extends React.Component {
                   {tabs.map((item, i) => {
                     return (
                       <TouchableOpacity key={i} onPress={()=>{this.setState({selectedTab:i});this.scroll.scrollTo({ x: (i)*width });this.setState({scrollY:new Animated.Value(0)})}} style={{flex:1,borderBottomWidth: 0,borderColor:'#f2f2f2',alignItems: 'center',justifyContent: 'center',height:45}} >
-                       <Text   style={{fontSize:16,fontWeight:'700',color:this.state.selectedTab==i?'#fff':'#d6d6d6'}}>{item.name}</Text>
+                       <Text   style={[styles.text,{fontSize:16,fontWeight:'700',color:this.state.selectedTab==i?'#fff':'#d6d6d6'}]}>{item.name}</Text>
                       </TouchableOpacity>
                     );
                   })}
@@ -98,14 +98,14 @@ class ProfileFeedback extends React.Component {
                         {i==0&&this.state.selectedTab==0&&
                            <View style={{flex:1,}}>
                             <ScrollView>
-                              <Text style={{color:'#000',fontSize:20}}>FEEDBACK</Text>
+                              <Text style={[styles.text,{color:'#fff',fontSize:20}]}>FEEDBACK</Text>
                             </ScrollView>
                            </View>
                         }
                         {i==1&&this.state.selectedTab==1&&
                           <View style={{flex:1,}}>
-                           <ScrollView>
-                             <Text style={{color:'#000',fontSize:20}}>Remark</Text>
+                           <ScrollView >
+                             <Text style={[styles.text,{color:'#fff',fontSize:20,}]}>Remark</Text>
                            </ScrollView>
                           </View>
                         }
@@ -125,6 +125,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  text:{
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22
+  }
 
 });
 
