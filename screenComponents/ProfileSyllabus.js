@@ -43,12 +43,23 @@ const syllabusdetails=[{term:'TERM I',chap1:'Chapter 1 : Shapes and space',
                         chap2:'Chapter 12 : Money',
                         chap3:'Chapter 13 : How Many',chap4:''},]
 
+const semtimetable=[{day:'DAY',i:'I',ii:'II',iii:'III',iv:'IV',v:'V',vi:'VI',vii:'VII',viii:'VIII'},
+                    {day:'MONDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
+                    {day:'TUESDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
+                    {day:'WEDNESDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
+                    {day:'THURSDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
+                    {day:'FRIDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
+                    {day:'SATURDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},]
+
 const syllabusdata =[{a1:false,name:'MATHEMATICS',pk:1,
                       img:require('../assets/Unknown_Boy.jpg'),syllabusdetails:syllabusdetails},
                       {a1:false,name:'ENGLISH',pk:2,
                       img:require('../assets/Unknown_Boy.jpg'),syllabusdetails:syllabusdetails},
                       {a1:false,name:'HINDI',pk:3,
                       img:require('../assets/Unknown_Boy.jpg'),syllabusdetails:syllabusdetails},]
+
+const semesterdata=[{a1:false,name:'SEMESTER III',pk:1,
+                      img:require('../assets/Unknown_Boy.jpg'),semtimetable:semtimetable}]
 
 const month =['January','February','March','April','May','Jun','July',
               'August','September','October','November','December']
@@ -69,6 +80,7 @@ class ProfileSyllabus extends React.Component {
       open:false,
       itemIndex:1,
       syllabusdata:syllabusdata,
+      semesterdata:semesterdata,
       today : new Date(),
       month:month
       }
@@ -99,6 +111,10 @@ class ProfileSyllabus extends React.Component {
    }
    console.log(this.state.open,'open')
  }
+ touch1=(item,index)=>{
+     this.state.semesterdata[index].a1=!this.state.semesterdata[index].a1
+     this.setState({semesterdata})
+ }
 
  syllabusDetails=(item,index)=>{
    console.log(item.syllabusdetails,'item.syllabusdetails')
@@ -121,10 +137,50 @@ class ProfileSyllabus extends React.Component {
         </View>
         )}
         />
+     </View>
+   )
+ }
+
+ semTimeTable=(item,index)=>{
+   console.log(item.semtimetable,'item.semtimetable')
+   return(
+     <View style={{margin:10,borderRadius:10}}>
+        <FlatList style={{}} data={item.semtimetable} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+          <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <View style={{flex:0.4,justifyContent:'flex-start',paddingVertical:10}}>
+              <Text style={[styles.text,{fontSize:12,fontWeight:item.day=='DAY'?'700':'400',textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.day}</Text>
+              </View>
+              <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+              <View style={{flexDirection:'row',flex:0.6,justifyContent:'space-between'}}>
+              <ScrollView style={{}} horizontal={true}>
+              <View style={{flexDirection:'row'}}>
+                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.i}</Text>
+                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.ii}</Text>
+                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.iii}</Text>
+                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.iv}</Text>
+                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.v}</Text>
+                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.vi}</Text>
+                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.vii}</Text>
+                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.viii}</Text>
+                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                </View>
+              </ScrollView>
+              </View>
+          </View>)}
+        />
 
      </View>
    )
  }
+
+
 
  syllabus=()=>{
    return(
@@ -151,8 +207,7 @@ class ProfileSyllabus extends React.Component {
  }
 next=(param,date)=>{
   if(param=='prev'){
-  var date=this.state.today.setDate(this.state.today.getDate()-1);
-
+    var today=this.state.today.toDateString(this.state.today.getDate()-1);
   }
   else if(param=='next'){
 
@@ -171,6 +226,31 @@ next=(param,date)=>{
             <FontAwesome name='angle-right' size={20} color='#fff'/>
           </TouchableOpacity>
         </View>
+     </View>
+   )
+ }
+
+ semester=()=>{
+   return(
+     <View style={{marginVertical:10}}>
+     <FlatList style={{}} data={this.state.semesterdata} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+      <View style={{borderRadius:10,marginHorizontal:15,marginVertical:10,backgroundColor:'#3F3F3F'}}>
+        <TouchableOpacity style={{height:width*0.35,alignItems:'center',justifyContent:'center',shadowOpacity: 0.18,elevation:5,backgroundColor:'#3F3F3F',shadowColor:'#000',borderRadius:10,shadowOffset: {height: 2,width:0}}} onPress={()=>{this.touch1(item,index)}}>
+            <Image source={(item.img)} style={{height:'100%',width:'100%',borderRadius:10,zIndex:0,opacity:0.5}}/>
+            <View style={{alignSelf:'center',position:'absolute',alignItems:'center',justifyContent:'center',zIndex:1}}>
+              <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700'}]}>{item.name}</Text>
+              <FontAwesome name='angle-down' size={20} color='#fff'/>
+            </View>
+        </TouchableOpacity>
+        {item.a1&&
+          <ScrollView style={{backgroundColor:'#3F3F3F',borderRadius:10,paddingVertical:10}}>
+          <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',textAlign:'center',paddingVertical:10}]}>PERIODS</Text>
+              {this.semTimeTable(item,index)}
+          </ScrollView>
+        }
+      </View>
+      )}
+      />
      </View>
    )
  }
@@ -224,6 +304,7 @@ next=(param,date)=>{
                           <View style={{flex:1,}}>
                            <ScrollView >
                              {this.timeTable()}
+                             {this.semester()}
                            </ScrollView>
                           </View>
                         }

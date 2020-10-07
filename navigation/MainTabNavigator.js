@@ -30,6 +30,13 @@ import Language from '../screenComponents/Language';
 import ChangePassword from '../screenComponents/ChangePassword';
 import ProfileMarks from '../screenComponents/ProfileMarks';
 import ProfileSyllabus from '../screenComponents/ProfileSyllabus';
+import ProfileMedia from '../screenComponents/ProfileMedia';
+import ProfileMediaChoose from '../screenComponents/ProfileMediaChoose';
+import MediaNotesVideo from '../screenComponents/MediaNotesVideo';
+import NotesVideosData from '../screenComponents/NotesVideosData';
+import MediaUniversity from '../screenComponents/MediaUniversity';
+import MediaDepart from '../screenComponents/MediaDepart';
+import ProfileQuestionPaper from '../screenComponents/ProfileQuestionPaper';
 
 const HomeStack = createStackNavigator({
    Home:Home,
@@ -72,7 +79,14 @@ const PageFourthStack = createStackNavigator({
    Language:Language,
    ChangePassword:ChangePassword,
    ProfileMarks:ProfileMarks,
-   ProfileSyllabus:ProfileSyllabus
+   ProfileSyllabus:ProfileSyllabus,
+   ProfileMedia:ProfileMedia,
+   ProfileMediaChoose:ProfileMediaChoose,
+   MediaNotesVideo:MediaNotesVideo,
+   NotesVideosData:NotesVideosData,
+   MediaUniversity:MediaUniversity,
+   MediaDepart:MediaDepart,
+   ProfileQuestionPaper:ProfileQuestionPaper
 },
 {
   initialRouteName: 'PageFourth',

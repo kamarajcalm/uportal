@@ -111,6 +111,12 @@ class PageFourth extends React.Component {
     else if(item.name=='SYLLABUS & TIMETABLE'){
       this.props.navigation.navigate('ProfileSyllabus')
     }
+    else if(item.name=='MEDIA'){
+      this.props.navigation.navigate('ProfileMedia')
+    }
+    else if(item.name=='QUESTION PAPERS'){
+      this.props.navigation.navigate('ProfileQuestionPaper')
+    }
   }
 
   render() {
