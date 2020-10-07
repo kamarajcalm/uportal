@@ -42,12 +42,16 @@ const syllabusdetails=[{term:'TERM I',chap1:'Chapter 1 : Shapes and space',
                       {term:'EXAM II',chap1:'Chapter 11 : Numbers',
                         chap2:'Chapter 12 : Money',
                         chap3:'Chapter 13 : How Many',chap4:''},]
+
 const syllabusdata =[{a1:false,name:'MATHEMATICS',pk:1,
                       img:require('../assets/Unknown_Boy.jpg'),syllabusdetails:syllabusdetails},
                       {a1:false,name:'ENGLISH',pk:2,
                       img:require('../assets/Unknown_Boy.jpg'),syllabusdetails:syllabusdetails},
                       {a1:false,name:'HINDI',pk:3,
                       img:require('../assets/Unknown_Boy.jpg'),syllabusdetails:syllabusdetails},]
+
+const month =['January','February','March','April','May','Jun','July',
+              'August','September','October','November','December']
 
 class ProfileSyllabus extends React.Component {
 
@@ -64,7 +68,9 @@ class ProfileSyllabus extends React.Component {
       selectedTab:0,
       open:false,
       itemIndex:1,
-      syllabusdata:syllabusdata
+      syllabusdata:syllabusdata,
+      today : new Date(),
+      month:month
       }
     }
 
@@ -143,6 +149,31 @@ class ProfileSyllabus extends React.Component {
      </View>
    )
  }
+next=(param,date)=>{
+  if(param=='prev'){
+  var date=this.state.today.setDate(this.state.today.getDate()-1);
+
+  }
+  else if(param=='next'){
+
+  }
+}
+ timeTable=()=>{
+   var date=this.state.today.getDate() + " "+ this.state.month[this.state.today.getMonth()] +" "+ this.state.today.getFullYear();
+   return(
+     <View style={{alignItems:'center',paddingVertical:20}}>
+        <View style={{flexDirection:'row',justifyContent:'space-between',paddingHorizontal:10,paddingVertical:10,width:width*0.6,alignItems:'center'}}>
+          <TouchableOpacity style={{padding:8}} onPress={()=>{this.next('prev',date)}}>
+            <FontAwesome name='angle-left' size={20} color='#fff'/>
+          </TouchableOpacity>
+          <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700'}]}>{date}</Text>
+          <TouchableOpacity style={{padding:8}} onPress={()=>{this.next('next',date)}}>
+            <FontAwesome name='angle-right' size={20} color='#fff'/>
+          </TouchableOpacity>
+        </View>
+     </View>
+   )
+ }
 
   render() {
     let left = this.state.scrollX.interpolate({
@@ -150,6 +181,7 @@ class ProfileSyllabus extends React.Component {
                  outputRange: [0, width*0.5,],
                  extrapolate: 'clamp'
                });
+
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
             <Headers navigation={this.props.navigation} name={this.state.open?'SYLLABUS':'SYLLABUS & TIMETABLE'}
@@ -191,7 +223,7 @@ class ProfileSyllabus extends React.Component {
                         {i==1&&this.state.selectedTab==1&&
                           <View style={{flex:1,}}>
                            <ScrollView >
-                             <Text style={[styles.text,{color:'#fff',fontSize:20,}]}>Timetable</Text>
+                             {this.timeTable()}
                            </ScrollView>
                           </View>
                         }
