@@ -24,6 +24,8 @@ import HttpsClient from '../helpers/HttpsClient';
 
 import SwitchSelector from "react-native-switch-selector";
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import DropDownPicker from 'react-native-dropdown-picker';
+
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
@@ -45,6 +47,9 @@ const radio_props3=[
   {label: 'Maybe', value: 2 },
 ]
 
+const dropdown=[{label: 'Item', value: 'Item'},{label: 'Item', value: 'Item'},
+              {label: 'Item', value: 'Item'},{label: 'Item', value: 'Item'},
+              ]
 
 class ProfileFillForm extends React.Component {
 
@@ -56,7 +61,9 @@ class ProfileFillForm extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      value:0
+      value:0,
+      drop:'',
+      dropdown : dropdown
       }
     }
 
@@ -132,6 +139,29 @@ class ProfileFillForm extends React.Component {
     )
   }
 
+  dropdown=()=>{
+    return(
+      <View>
+      <DropDownPicker
+            items={this.state.dropdown}
+            defaultNull={ null}
+            dropDownStyle={{backgroundColor:'#333333',borderWidth:0}}
+            defaultValue={this.state.drop}
+            placeholder="Select"
+            arrowColor={'#fff'}
+            dropDownMaxHeight={width}
+            style={{backgroundColor:'#333333',borderWidth:1,borderColor:'#333333'}}
+            placeholderStyle={{fontWeight: 'bold',color:'#fff'}}
+            labelStyle={{fontSize: 14, color: '#fff'}}
+            containerStyle={{height: 40,width:width*0.4}}
+            onChangeItem={item => this.setState({
+                drop: item.value
+            })}
+        />
+      </View>
+    )
+  }
+
 
   render() {
     var item=this.props.navigation.getParam('item',null)
@@ -152,7 +182,7 @@ class ProfileFillForm extends React.Component {
                 </View>
                 <View >
                     <Text style={{color:'#fff',paddingVertical:20}}>Porttitor id diam nisi ullamcorper.</Text>
-
+                    {this.dropdown()}
                 </View>
                 <View >
                     <Text style={[styles.text,{color:'#fff',paddingVertical:20,fontWeight:'400',fontSize:14}]}>Ultricies eu nisi eget feugiat id velit.</Text>

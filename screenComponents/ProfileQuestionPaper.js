@@ -29,16 +29,10 @@ const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
 const fontFamily=settings.fontFamily
-
-
-
-
-
-
-
-
-
-
+const year=[{label: '2000', value: '2000'},{label: '2001', value: '2001'},
+              {label: '2002', value: '2002'},{label: '2003', value: '2003'},
+              {label: '2004', value: '2004'},{label: '2005', value: '2005'},
+              {label: '2006', value: '2006'},{label: '2007', value: '2007'},]
 class ProfileQuestionPaper extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -49,8 +43,9 @@ class ProfileQuestionPaper extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-city:'',
-cities : [{label: 'Madrid', value: 'madrid'},{label: 'Madrid', value: 'madrid'}],
+        selectedyear:'',
+        year : year,
+        item:'QUESTION PAPERS'
       }
     }
 
@@ -58,13 +53,6 @@ cities : [{label: 'Madrid', value: 'madrid'},{label: 'Madrid', value: 'madrid'}]
  }
 
 
-
-
- changeCity(item) {
-         this.setState({
-             city: item.value
-         });
-     }
   render() {
 const depart =this.props.navigation.getParam('item',null)
 console.log(depart,'depart')
@@ -76,15 +64,20 @@ console.log(depart,'depart')
             <View style={{flexDirection:'row',justifyContent:'space-between',width:width*0.6}}>
               <Text style={[styles.text,{paddingVertical:10,color:'#fff',fontSize:14,fontWeight:'700',textAlign:'center'}]}>CHOOSE YEAR</Text>
               <DropDownPicker
-                    items={this.state.cities}
+                    items={this.state.year}
                     defaultNull={ null}
-                    value={this.state.city}
-                    defaultValue={this.state.city}
+                    dropDownStyle={{backgroundColor:'#333333',borderWidth:0}}
+                    defaultValue={this.state.selectedyear}
                     placeholder="Choose"
+                    arrowColor={'#fff'}
+                    dropDownMaxHeight={width}
+                    style={{backgroundColor:'#333333',borderWidth:1,borderColor:'#333333'}}
                     placeholderStyle={{fontWeight: 'bold',color:'#fff'}}
-                    labelStyle={{fontSize: 14, color: '#000'}}
-                    containerStyle={{height: 40}}
-                    onChangeItem={item => this.changeCity(item)}
+                    labelStyle={{fontSize: 14, color: '#fff'}}
+                    containerStyle={{height: 40,width:width*0.3}}
+                    onChangeItem={item => {this.setState({
+                        selectedyear: item.value
+                    });this.props.navigation.navigate('ProfileMedia',{item:this.state.item})}}
                 />
               </View>
             </View>

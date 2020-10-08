@@ -30,15 +30,12 @@ const fontFamily=settings.fontFamily
 const tabs = [{name:'NOTES'},
               {name:'VIDEOS'}]
 
-
-
 const depart=[{name:'Aeronautical Engineering',pk:1},{name:'Electronics & Communication',pk:2},
               {name:'Computer science & Engineering',pk:3},{name:'Aeronautical Engineering',pk:4},
               {name:'Electronics & Communication',pk:5},{name:'Computer science & Engineering',pk:6},
               {name:'Computer science & Engineering',pk:7},{name:'Aeronautical Engineering',pk:8},
               {name:'Electronics & Communication',pk:9},{name:'Computer science & Engineering',pk:10},
               {name:'Computer science & Engineering',pk:1},{name:'Aeronautical Engineering',pk:2}]
-
 
 const university=[{name:'Ramaiah University',pk:1,depart:depart},
                   {name:'VTU University',pk:2,depart:depart},
@@ -52,8 +49,6 @@ const university=[{name:'Ramaiah University',pk:1,depart:depart},
                   {name:'VTU University',pk:10,depart:depart},
                   {name:'Anna University',pk:1,depart:depart},
                   {name:'RGPV University',pk:2,depart:depart}]
-
-
 
 class MediaUniversity extends React.Component {
 
@@ -72,14 +67,19 @@ class MediaUniversity extends React.Component {
  componentDidMount(){
  }
 
+touchuniversity=(quespaper,item)=>{
+  if(quespaper!=null){
+    this.props.navigation.navigate('MediaDepart',{item:{item:item,quespaper:quespaper}})
+  }else{
+    this.props.navigation.navigate('MediaDepart',{item:{item:item}})
+  }
+}
 
-
-
- university=()=>{
+ university=(quespaper)=>{
    return(
      <View style={{marginVertical:15,width:width}}>
        <FlatList  data={this.state.university} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-         <TouchableOpacity  onPress={()=>{this.props.navigation.navigate('MediaDepart',{item:item})}} style={{flexDirection:'row',marginHorizontal:15,marginVertical:8,borderRadius:7,alignItems:'center',justifyContent:'space-between',paddingHorizontal:15,}}>
+         <TouchableOpacity  onPress={()=>{this.touchuniversity(quespaper,item)}} style={{flexDirection:'row',marginHorizontal:15,marginVertical:8,borderRadius:7,alignItems:'center',justifyContent:'space-between',paddingHorizontal:15,}}>
             <View style={{}}>
              <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:4,fontWeight:'700',textAlign:'center'}]}>{item.name}</Text>
            </View>
@@ -93,14 +93,14 @@ class MediaUniversity extends React.Component {
  }
 
   render() {
-
+    const quespaper =this.props.navigation.getParam('quespaper',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={'MEDIA'}
+            <Headers navigation={this.props.navigation} name={quespaper?'QUESTION PAPERS':'MEDIA'}
             screen={'MediaUniversity'}/>
             <View style={{flex:1,alignItems:'center',backgroundColor:'#000'}}>
               <Text style={[styles.text,{paddingVertical:10,color:'#fff',fontSize:14,fontWeight:'700',textAlign:'center'}]}>CHOOSE UNIVERSITY</Text>
-              {this.university()}
+              {this.university(quespaper)}
             </View>
       </View>
     );
@@ -118,7 +118,6 @@ const styles = StyleSheet.create({
     fontFamily:fontFamily,
     lineHeight:22
   }
-
 });
 
 const mapStateToProps =(state) => {

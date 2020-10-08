@@ -77,7 +77,7 @@ export default class TabComponent extends React.Component {
       <View style={{flex:1}} >
        <Animated.View style={[{borderRadius:30,height:'100%',}]} >
         <TouchableOpacity onPress={()=>{this.navigate('PageThird')}} style={{borderRadius:20,justifyContent: 'center',alignItems: 'center',height:'100%'}}>
-          <MaterialIcons name="sports-tennis" size={this.state.size} color={pageThird.includes(routeName)?this.state.activeColor:this.state.inactiveColor} />
+          <MaterialCommunityIcons name="tennis" size={this.state.size} color={pageThird.includes(routeName)?this.state.activeColor:this.state.inactiveColor} />
           <Text style={[styles.text,{color:pageThird.includes(routeName)?'#fff':'#fff',fontSize:12,margin:0,padding:0,fontWeight:'600'}]}>Sports</Text>
         </TouchableOpacity>
        </Animated.View>

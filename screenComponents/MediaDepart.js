@@ -61,7 +61,7 @@ class MediaDepart extends React.Component {
  depart=(depart)=>{
    return(
      <View style={{marginVertical:15,width:width}}>
-       <FlatList  data={depart.depart} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+       <FlatList  data={depart.item.depart} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
          <TouchableOpacity   style={{flexDirection:'row',marginHorizontal:15,marginVertical:8,borderRadius:7,alignItems:'center',justifyContent:'space-between',paddingHorizontal:15,}}>
             <View style={{}}>
              <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:4,fontWeight:'700',textAlign:'center'}]}>{item.name}</Text>
@@ -80,7 +80,7 @@ const depart =this.props.navigation.getParam('item',null)
 console.log(depart,'depart')
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={'MEDIA'}
+            <Headers navigation={this.props.navigation} name={depart.quespaper?'QUESTION PAPERS':'MEDIA'}
             screen={'MediaDepart'}/>
             <View style={{flex:1,alignItems:'center',backgroundColor:'#000'}}>
               <Text style={[styles.text,{paddingVertical:10,color:'#fff',fontSize:14,fontWeight:'700',textAlign:'center'}]}>CHOOSE DEPARTMENT</Text>

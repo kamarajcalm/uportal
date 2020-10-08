@@ -37,6 +37,9 @@ import NotesVideosData from '../screenComponents/NotesVideosData';
 import MediaUniversity from '../screenComponents/MediaUniversity';
 import MediaDepart from '../screenComponents/MediaDepart';
 import ProfileQuestionPaper from '../screenComponents/ProfileQuestionPaper';
+import QuestionPaper from '../screenComponents/QuestionPaper';
+import ProfileStatistics from '../screenComponents/ProfileStatistics';
+import StaticsAcademic from '../screenComponents/StaticsAcademic';
 
 const HomeStack = createStackNavigator({
    Home:Home,
@@ -86,7 +89,10 @@ const PageFourthStack = createStackNavigator({
    NotesVideosData:NotesVideosData,
    MediaUniversity:MediaUniversity,
    MediaDepart:MediaDepart,
-   ProfileQuestionPaper:ProfileQuestionPaper
+   ProfileQuestionPaper:ProfileQuestionPaper,
+   QuestionPaper:QuestionPaper,
+   ProfileStatistics:ProfileStatistics,
+   StaticsAcademic:StaticsAcademic
 },
 {
   initialRouteName: 'PageFourth',

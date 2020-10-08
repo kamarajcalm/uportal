@@ -117,6 +117,9 @@ class PageFourth extends React.Component {
     else if(item.name=='QUESTION PAPERS'){
       this.props.navigation.navigate('ProfileQuestionPaper')
     }
+    else if(item.name=='STATICS'){
+      this.props.navigation.navigate('ProfileStatistics')
+    }
   }
 
   render() {

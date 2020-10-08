@@ -31,7 +31,9 @@ const fontFamily =settings.fontFamily
 const semdata=[{name:'LANGUAGE'},{name:'MATHEMATICS'},{name:'ENGLISH'},
                 {name:'LANGUAGE'},{name:'MATHEMATICS'},
                 {name:'ENGLISH'},]
+
 const otherdata =[{name:'ENGINEERING'},{name:'MEDICAL'},{name:'COMMERCE'}]
+
 class ProfileMediaChoose extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -50,26 +52,40 @@ class ProfileMediaChoose extends React.Component {
       }
     }
 
- componentDidMount=async()=>{}
-touchsem=(semesters)=>{
-  this.props.navigation.navigate('MediaNotesVideo')
-}
-touch=()=>{
-  this.props.navigation.navigate('MediaUniversity')
-}
+ componentDidMount=()=>{
+ }
+
+  touchsem=(semesters)=>{
+    if(semesters.quespaper!=null){
+      this.props.navigation.navigate('QuestionPaper')
+    }else{
+        this.props.navigation.navigate('MediaNotesVideo')
+    }
+  }
+
+  touch=(semesters)=>{
+    if(semesters.quespaper!=null){
+        this.props.navigation.navigate('MediaUniversity',{quespaper:semesters.quespaper})
+    }else{
+      this.props.navigation.navigate('MediaUniversity')
+    }
+  }
+
   render() {
     const semesters=this.props.navigation.getParam('item',null)
+    console.log(semesters,'semesters')
+    // const itemother=this.props.navigation.getParam('itemother',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={'MEDIA'}
+            <Headers navigation={this.props.navigation} name={semesters.quespaper?'QUESTION PAPERS':'MEDIA'}
             screen={'ProfileMediaChoose'}/>
 
             <View style={{flex:1,paddingVertical:50,justifyContent:'center',alignItems:'center'}}>
-              {semesters &&
+              {semesters.item &&
                 <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',paddingVertical:15,fontWeight:'700'}]}>CHOOSE SUBJECT</Text>
               }
-              <FlatList contenContainerStyle={{justifyContent:'space-between',}} data={semesters?this.state.semdata:this.state.otherdata} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-                <TouchableOpacity  onPress={()=>{semesters?this.touchsem(semesters):this.touch()}} style={{marginHorizontal:10,marginVertical:15,paddingHorizontal:40,backgroundColor:'#333333',borderRadius:7,}}>
+              <FlatList contenContainerStyle={{justifyContent:'space-between',}} data={semesters.item?this.state.semdata:this.state.otherdata} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+                <TouchableOpacity  onPress={()=>{semesters.item?this.touchsem(semesters):this.touch(semesters)}} style={{marginHorizontal:10,marginVertical:15,paddingHorizontal:40,backgroundColor:'#333333',borderRadius:7,}}>
                   <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',paddingVertical:10,fontWeight:'700'}]}>{item.name}</Text>
                 </TouchableOpacity>
               )}/>

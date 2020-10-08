@@ -24,7 +24,6 @@ export default class Headers extends React.Component {
   }
 
   componentDidMount(){
-
   }
 
   headerChange=(notify,notifychat)=>{
@@ -49,7 +48,7 @@ export default class Headers extends React.Component {
                 'PFacultyDetailsCarousel','ProfileFeedback','ProfileSetting',
                 'LinkEmail','Language','ChangePassword','ProfileMarks',
                 'ProfileMedia','ProfileMediaChoose','MediaNotesVideo','NotesVideosData',
-                'MediaUniversity','MediaDepart','ProfileQuestionPaper']
+                'MediaUniversity','MediaDepart','ProfileQuestionPaper','QuestionPaper','ProfileStatistics']
     return (
       <View style={{height:55,width:width,backgroundColor:comp.includes(this.props.screen)?'#000':themeColor,marginTop:Constants.statusBarHeight}}>
           <View style={{flexDirection: 'row',height:55,alignItems: 'center',}}>
