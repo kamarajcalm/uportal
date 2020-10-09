@@ -25,7 +25,7 @@ const fontFamily= settings.fontFamily
 
 const listofdetails=[{id:1,icon:'',name:'MARKS'},{id:2,icon:'',name:'ATTENDANCE'},
                      {id:3,icon:'',name:'STATICS'},{id:4,icon:'',name:'LIBRARY'},
-                     {id:5,icon:'',name:'SYLLABUS & TIMETABLE'},{id:6,icon:'',name:'CALENDAR & REMINDERS'},
+                     {id:5,icon:'',name:'SYLLABUS & TIMETABLE'},{id:6,icon:'',name:'CALENDAR AND REMINDERS'},
                      {id:7,icon:'',name:'FACULTY DETAILS'},{id:8,icon:'',name:'MEDIA'},
                      {id:9,icon:'',name:'QUESTION PAPERS'},{id:10,icon:'',name:'FORMS'},
                      {id:11,icon:'',name:'FEEDBACK & REMARKS'},{id:12,icon:'',name:'SETTINGS'},]
@@ -119,6 +119,12 @@ class PageFourth extends React.Component {
     }
     else if(item.name=='STATICS'){
       this.props.navigation.navigate('ProfileStatistics')
+    }
+    else if(item.name=='ATTENDANCE'){
+      this.props.navigation.navigate('ProfileAttendance')
+    }
+    else if (item.name=='CALENDAR AND REMINDERS') {
+      this.props.navigation.navigate('ProfilCalendar')
     }
   }
 

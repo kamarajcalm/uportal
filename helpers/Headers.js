@@ -48,7 +48,9 @@ export default class Headers extends React.Component {
                 'PFacultyDetailsCarousel','ProfileFeedback','ProfileSetting',
                 'LinkEmail','Language','ChangePassword','ProfileMarks',
                 'ProfileMedia','ProfileMediaChoose','MediaNotesVideo','NotesVideosData',
-                'MediaUniversity','MediaDepart','ProfileQuestionPaper','QuestionPaper','ProfileStatistics']
+                'MediaUniversity','MediaDepart','ProfileQuestionPaper','QuestionPaper',
+                'ProfileStatistics','ProfileAttendance','ProfilCalendar','MyWallScreen']
+      var feed =['MyWallScreen']
     return (
       <View style={{height:55,width:width,backgroundColor:comp.includes(this.props.screen)?'#000':themeColor,marginTop:Constants.statusBarHeight}}>
           <View style={{flexDirection: 'row',height:55,alignItems: 'center',}}>
@@ -91,6 +93,12 @@ export default class Headers extends React.Component {
                   <Fontisto name="search" size={this.state.size} color="#fff" />
               </TouchableOpacity>
               }
+
+              {feed.includes(this.props.screen)&&
+                 <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
+                   <MaterialIcons name="notifications-none" size={this.state.size} color="#fff" />
+                 </TouchableOpacity>
+               }
 
 
            </View>

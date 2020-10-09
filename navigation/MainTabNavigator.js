@@ -40,9 +40,14 @@ import ProfileQuestionPaper from '../screenComponents/ProfileQuestionPaper';
 import QuestionPaper from '../screenComponents/QuestionPaper';
 import ProfileStatistics from '../screenComponents/ProfileStatistics';
 import StaticsAcademic from '../screenComponents/StaticsAcademic';
+import ProfileAttendance from '../screenComponents/ProfileAttendance';
+import ProfilCalendar from '../screenComponents/ProfilCalendar';
+
+import MyWallScreen from '../screenComponents/MyWallScreen';
 
 const HomeStack = createStackNavigator({
    Home:Home,
+   MyWallScreen:MyWallScreen,
 },
 {
   initialRouteName: 'Home',
@@ -92,7 +97,9 @@ const PageFourthStack = createStackNavigator({
    ProfileQuestionPaper:ProfileQuestionPaper,
    QuestionPaper:QuestionPaper,
    ProfileStatistics:ProfileStatistics,
-   StaticsAcademic:StaticsAcademic
+   StaticsAcademic:StaticsAcademic,
+   ProfileAttendance:ProfileAttendance,
+   ProfilCalendar:ProfilCalendar
 },
 {
   initialRouteName: 'PageFourth',

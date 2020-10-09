@@ -176,10 +176,10 @@ class Home extends React.Component {
            <FontAwesome name='image' size={20} color='#fff'/>
            <Text style={[styles.text,{color:'#fff',paddingHorizontal:6,fontWeight:'700',fontSize:14}]}>PHOTO/VIDEOS</Text>
          </View>
-         <View style={{flexDirection:'row'}}>
+         <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{this.props.navigation.navigate('MyWallScreen')}}>
            <FontAwesome name='image' size={20} color='#fff'/>
            <Text style={[styles.text,{color:'#fff',paddingHorizontal:6,fontWeight:'700',fontSize:14}]}>MY WALL</Text>
-         </View>
+         </TouchableOpacity>
      </View>
    </View>
    )
