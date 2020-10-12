@@ -21,12 +21,22 @@ import TabComponent  from '../navigationComponents/TabComponent.js';
 import Headers  from '../helpers/Headers.js';
 import settings from '../appSettings';
 import HttpsClient from '../helpers/HttpsClient';
+import Modal from "react-native-modal";
+import Swiper from 'react-native-swiper';
+import Notes from '../screenComponents/Notes';
+import Chat from '../screenComponents/Chat';
 
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
 const fontFamily = settings.fontFamily
+
+const warriorsmodallist=[{name:'Tom Banton'},{name:'Baristow (wk)'},{name:'Malan'},
+                         {name:'Billings'},{name:'Moeen (c)'},{name:'J Denly'},
+                         {name:'Chris jordan'},{name:'Tom curron'},{name:'Adil Rashid'},
+                         {name:'Jofra Archer'},{name:'Mark Wood'},]
+
 
 const timeline = [
   {img:require('../assets/Unknown_Boy.jpg'),name:'Stanly',dest:'PES UNIVERCITY',
@@ -46,6 +56,8 @@ const timeline = [
              desc:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'}
 ]
 
+const index=1
+
 class Home extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -59,7 +71,11 @@ class Home extends React.Component {
       like:0,
       timelinepost:'',
       timeline:timeline,
-      comment:''
+      comment:'',
+      warriorsmodallist:warriorsmodallist,
+      lionsmodallist:warriorsmodallist,
+      lionsmodel:false,
+      warriorsmodel:false
       }
     }
 
@@ -185,18 +201,97 @@ class Home extends React.Component {
    )
  }
 
+ warriorsModal=()=>{
+   return(
+     <View>
+       <Modal isVisible={this.state.warriorsmodel}animationIn="slideInLeft" animationOut="slideOutLeft" hasBackdrop={true}
+           backdropColor={'transparent'} onBackdropPress={()=>{this.setState({warriorsmodel:false});}}>
+             <View style={{paddingVertical:20,alignItems:'flex-start',
+                           paddingHorizontal:20,backgroundColor:'#333333',borderRadius:10,width:width*0.4,
+                           marginHorizontal:-20}}>
+                   <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,fontWeight:'700'}]}>WARRIOS</Text>
+                   <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,paddingVertical:4,fontWeight:'700'}]}>Playing XI</Text>
+                   <FlatList style={{}} data={this.state.warriorsmodallist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+                     <View style={{paddingVertical:10,}}>
+                     <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',paddingVertical:4,fontWeight:'700'}]}>{item.name}</Text>
+                     </View>
+                   )}/>
+             </View>
+       </Modal>
+     </View>
+   )
+ }
+
+ lionsModal=()=>{
+   return(
+     <View>
+       <Modal isVisible={this.state.lionsmodel}animationIn="slideInRight" animationOut="slideOutRight" hasBackdrop={true}
+           backdropColor={'transparent'} onBackdropPress={()=>{this.setState({lionsmodel:false});}}>
+             <View style={{paddingVertical:20,alignItems:'flex-start',
+                           paddingHorizontal:20,backgroundColor:'#333333',borderRadius:10,width:width*0.4,
+                           marginLeft:width*0.55}}>
+                   <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,fontWeight:'700'}]}>LIONS</Text>
+                   <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,paddingVertical:4,fontWeight:'700'}]}>Playing XI</Text>
+                   <FlatList style={{}} data={this.state.lionsmodallist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+                     <View style={{paddingVertical:10,}}>
+                     <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',paddingVertical:4,fontWeight:'700'}]}>{item.name}</Text>
+                     </View>
+                   )}/>
+             </View>
+       </Modal>
+     </View>
+   )
+ }
+
+home=()=>{
+  return(
+    <View>
+    <Headers navigation={this.props.navigation} name={'Universal wall'} screen={'Home'}/>
+    {this.warriorsModal()}
+    {this.lionsModal()}
+    <View style={{flex:1,}}>
+    <ScrollView stickyHeaderIndices={[0]}>
+      {this.timelinePost()}
+      {this.homeTimeLine()}
+
+      </ScrollView>
+
+    </View>
+    </View>
+  )
+}
+
   render() {
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={'Universal wall'} screen={'Home'}/>
-            <View style={{flex:1,}}>
-            <ScrollView>
+        <Swiper style={{}}
+                showsButtons={true} loop={false}
+                buttonWrapperStyle ={{backgroundColor:'transparent',flexDirection:'row',
+                                    position: 'absolute',top:0,left:0,flex:1,
+                                    paddingHorizontal:10,paddingVertical:10,
+                                    justifyContent: 'space-between',alignItems:'center'}}
+                prevButton={index==2?<Text style={[styles.text1,{transform:[{rotate:'270 deg'}],}]}>BACK</Text>:<Text style={[styles.text1,{transform:[{rotate:'270 deg'}],}]}>NOTES</Text>}
 
-              {this.timelinePost()}
-              {this.homeTimeLine()}
-              </ScrollView>
-            </View>
-            <TabComponent navigation={this.props.navigation}  />
+                nextButton={index==0?<Text style={[styles.text1,{transform:[{rotate:'90 deg'}],}]}>BACK</Text>:<Text style={[styles.text1,{transform:[{rotate:'90 deg'}],}]}>CHATS</Text>}
+
+                disablePrevButton={false}
+                scrollEnabled={true}
+                disableNextButton={false}
+                index={index}>
+                <View style={styles.slide1}>
+                    <Notes navigation={this.props.navigation}/>
+                </View>
+                <View style={styles.slide2}>
+                    {this.home()}
+                </View>
+                <View style={{}}>
+                  <View>
+                    <Headers navigation={this.props.navigation} name={'Chats'} screen={'Chat'}/>
+                    <Chat />
+                  </View>
+                </View>
+        </Swiper>
+        <TabComponent navigation={this.props.navigation}  />
       </View>
     );
   }
@@ -212,6 +307,36 @@ const styles = StyleSheet.create({
     fontStyle:'normal',
     fontFamily:fontFamily,
     lineHeight:22
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000'
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000'
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000'
+  },
+  text1: {
+    fontStyle:'normal',
+    fontFamily:fontFamily,
+    lineHeight:22,
+    backgroundColor:'#2f2f2f',
+    paddingHorizontal:20,
+    borderRadius:10,
+    marginHorizontal:-40,
+    color:'#fff',
+    fontSize:14,
+    fontWeight:'700',
   }
 });
 
@@ -228,3 +353,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
+// <TouchableOpacity  onPress={()=>{this.setState({warriorsmodel:true})}} style={{position:'absolute',bottom:width,left:0,backgroundColor:'#2f2f2f',paddingHorizontal:20,transform: [{ rotate: '270 deg' }],marginHorizontal:-25,borderRadius:10}}>
+// <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',}]}>NOTES</Text></TouchableOpacity>
+// <TouchableOpacity onPress={()=>{this.setState({lionsmodel:true})}} style={{position:'absolute',bottom:width,right:0,backgroundColor:'#2f2f2f',paddingHorizontal:20,transform: [{ rotate: '90 deg' }],marginHorizontal:-25,borderRadius:10}}>
+// <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',}]}>CHATS</Text></TouchableOpacity>

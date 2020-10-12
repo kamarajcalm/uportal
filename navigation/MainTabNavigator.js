@@ -42,12 +42,14 @@ import ProfileStatistics from '../screenComponents/ProfileStatistics';
 import StaticsAcademic from '../screenComponents/StaticsAcademic';
 import ProfileAttendance from '../screenComponents/ProfileAttendance';
 import ProfilCalendar from '../screenComponents/ProfilCalendar';
+import Notes from '../screenComponents/Notes';
 
 import MyWallScreen from '../screenComponents/MyWallScreen';
 
 const HomeStack = createStackNavigator({
    Home:Home,
    MyWallScreen:MyWallScreen,
+   Notes:Notes,
 },
 {
   initialRouteName: 'Home',

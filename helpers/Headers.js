@@ -49,7 +49,7 @@ export default class Headers extends React.Component {
                 'LinkEmail','Language','ChangePassword','ProfileMarks',
                 'ProfileMedia','ProfileMediaChoose','MediaNotesVideo','NotesVideosData',
                 'MediaUniversity','MediaDepart','ProfileQuestionPaper','QuestionPaper',
-                'ProfileStatistics','ProfileAttendance','ProfilCalendar','MyWallScreen']
+                'ProfileStatistics','ProfileAttendance','ProfilCalendar','MyWallScreen','Notes','Chat']
       var feed =['MyWallScreen']
     return (
       <View style={{height:55,width:width,backgroundColor:comp.includes(this.props.screen)?'#000':themeColor,marginTop:Constants.statusBarHeight}}>
