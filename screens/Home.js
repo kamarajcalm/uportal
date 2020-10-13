@@ -40,22 +40,27 @@ const warriorsmodallist=[{name:'Tom Banton'},{name:'Baristow (wk)'},{name:'Malan
 
 const timeline = [
   {img:require('../assets/Unknown_Boy.jpg'),name:'Stanly',dest:'PES UNIVERCITY',
-              like:0,time:'just ago',comment:false,
+              like:0,time:'just ago',comment:false,share:false,dot:false,
               desc:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'},
 
             {img:require('../assets/Unknown_Boy.jpg'),name:'Stanly',dest:'PES UNIVERCITY',
-            like:0,time:'just ago',comment:false,
+            like:0,time:'just ago',comment:false,share:false,dot:false,
              descimg:require('../assets/robot.jpg'),shortdesc:'Lorem ipsum dolor sit amet, consectetur ipsum dolor sit amet, consectetur adipiscing elit'},
 
             {img:require('../assets/Unknown_Boy.jpg'),name:'Stanly',dest:'PES UNIVERCITY',
-            like:0,time:'just ago',comment:false,
+            like:0,time:'just ago',comment:false,share:false,dot:false,
              descimg:require('../assets/robo.jpg'),shortdesc:'Lorem ipsum dolor sit amet, consectetur ipsum dolor sit amet, consectetur adipiscing elit'},
 
             {img:require('../assets/Unknown_Boy.jpg'),name:'Stanly',dest:'PES UNIVERCITY',
-            like:0,time:'just ago',comment:false,
+            like:0,time:'just ago',comment:false,share:false,dot:false,
              desc:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'}
 ]
 
+const imag=[{img:require('../assets/marks.png'),name:'Whatsapp'},
+            {img:require('../assets/marks.png'),name:'Facebook'},
+            {img:require('../assets/marks.png'),name:'Instagram'},
+            {img:require('../assets/marks.png'),name:'Mail'},
+          ]
 const index=1
 
 class Home extends React.Component {
@@ -69,13 +74,16 @@ class Home extends React.Component {
     super(props);
     this.state={
       like:0,
+      imag:imag,
       timelinepost:'',
       timeline:timeline,
       comment:'',
       warriorsmodallist:warriorsmodallist,
       lionsmodallist:warriorsmodallist,
       lionsmodel:false,
-      warriorsmodel:false
+      warriorsmodel:false,
+      share:false,
+      index:1,
       }
     }
 
@@ -91,6 +99,17 @@ class Home extends React.Component {
    this.state.timeline[index].comment=!this.state.timeline[index].comment
    this.setState({timeline})
  }
+
+ share=(item,index)=>{
+   this.state.timeline[index].share=!this.state.timeline[index].share
+   this.setState({timeline})
+ }
+
+ dot=(item,index)=>{
+   this.state.timeline[index].dot=!this.state.timeline[index].dot
+   this.setState({timeline})
+ }
+
 
  homeTimeLine=()=>{
    return(
@@ -108,8 +127,11 @@ class Home extends React.Component {
               <Text style={[styles.text,{color:'#828282',fontSize:12,fontWeight:'600'}]} numberOfLines={1}>{item.time}</Text>
             </View>
           </View>
-          <MaterialCommunityIcons name="dots-vertical" size={20} color="#fff" />
+          <TouchableOpacity onPress={()=>{this.dot(item,index)}}style={{padding:10}}>
+              <MaterialCommunityIcons name="dots-vertical" size={20} color="#fff" />
+          </TouchableOpacity>
         </View>
+        {item.dot&&<View>{this.dotModal(item,index)}</View>}
 
         <View style={{height:width*0.4,borderWidth:1,marginTop:6}}>
           {item.desc &&
@@ -143,7 +165,7 @@ class Home extends React.Component {
             <FontAwesome5 name='comment-alt' size={20} color='#fff'/>
             <Text style={[styles.text,{color:'#fff',fontSize:14,paddingHorizontal:4,fontWeight:'600'}]}>COMMENT</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{flexDirection:'row'}}>
+          <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{this.share(item,index)}}>
             <Feather name='share-2' size={20} color='#fff'/>
             <Text style={[styles.text,{color:'#fff',fontSize:14,paddingHorizontal:4,fontWeight:'600'}]}>SHARE</Text>
           </TouchableOpacity>
@@ -167,6 +189,8 @@ class Home extends React.Component {
             <MaterialIcons name='navigate-next' size={20} color='#fff'/>
           </View>
         }
+        {item.share&&<View>{this.shareModal(item,index)}</View>}
+
      </View>
    )}
    />
@@ -176,7 +200,7 @@ class Home extends React.Component {
  timelinePost=()=>{
    return(
    <View style={{flex:1}}>
-      <View style={{flexDirection:'row',paddingHorizontal:25}}>
+      <View style={{flexDirection:'row',paddingHorizontal:25,marginVertical:8}}>
        <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:width*0.14,width:width*0.14,borderRadius:30}}/>
        <TextInput
        style={{borderWidth:0,borderColor:'#000',width:width*0.6,borderRadius:0,color:'#000',paddingHorizontal:15}}
@@ -187,96 +211,125 @@ class Home extends React.Component {
            value={this.state.timelinepost}
        />
      </View>
-     <View style={{flexDirection:'row',marginTop:4,justifyContent:'space-between',backgroundColor:'#141414',paddingHorizontal:30,paddingVertical:15,alignItems:'center'}}>
-         <View style={{flexDirection:'row'}}>
-           <FontAwesome name='image' size={20} color='#fff'/>
-           <Text style={[styles.text,{color:'#fff',paddingHorizontal:6,fontWeight:'700',fontSize:14}]}>PHOTO/VIDEOS</Text>
-         </View>
-         <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{this.props.navigation.navigate('MyWallScreen')}}>
-           <FontAwesome name='image' size={20} color='#fff'/>
-           <Text style={[styles.text,{color:'#fff',paddingHorizontal:6,fontWeight:'700',fontSize:14}]}>MY WALL</Text>
-         </TouchableOpacity>
-     </View>
-   </View>
-   )
- }
+  </View>
+)
+}
 
- warriorsModal=()=>{
-   return(
-     <View>
-       <Modal isVisible={this.state.warriorsmodel}animationIn="slideInLeft" animationOut="slideOutLeft" hasBackdrop={true}
-           backdropColor={'transparent'} onBackdropPress={()=>{this.setState({warriorsmodel:false});}}>
-             <View style={{paddingVertical:20,alignItems:'flex-start',
-                           paddingHorizontal:20,backgroundColor:'#333333',borderRadius:10,width:width*0.4,
-                           marginHorizontal:-20}}>
-                   <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,fontWeight:'700'}]}>WARRIOS</Text>
-                   <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,paddingVertical:4,fontWeight:'700'}]}>Playing XI</Text>
-                   <FlatList style={{}} data={this.state.warriorsmodallist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-                     <View style={{paddingVertical:10,}}>
-                     <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',paddingVertical:4,fontWeight:'700'}]}>{item.name}</Text>
-                     </View>
-                   )}/>
-             </View>
-       </Modal>
-     </View>
-   )
- }
-
- lionsModal=()=>{
-   return(
-     <View>
-       <Modal isVisible={this.state.lionsmodel}animationIn="slideInRight" animationOut="slideOutRight" hasBackdrop={true}
-           backdropColor={'transparent'} onBackdropPress={()=>{this.setState({lionsmodel:false});}}>
-             <View style={{paddingVertical:20,alignItems:'flex-start',
-                           paddingHorizontal:20,backgroundColor:'#333333',borderRadius:10,width:width*0.4,
-                           marginLeft:width*0.55}}>
-                   <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,fontWeight:'700'}]}>LIONS</Text>
-                   <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,paddingVertical:4,fontWeight:'700'}]}>Playing XI</Text>
-                   <FlatList style={{}} data={this.state.lionsmodallist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-                     <View style={{paddingVertical:10,}}>
-                     <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',paddingVertical:4,fontWeight:'700'}]}>{item.name}</Text>
-                     </View>
-                   )}/>
-             </View>
-       </Modal>
-     </View>
-   )
- }
-
-home=()=>{
+timeline2=()=>{
   return(
     <View>
-    <Headers navigation={this.props.navigation} name={'Universal wall'} screen={'Home'}/>
-    {this.warriorsModal()}
-    {this.lionsModal()}
-    <View style={{flex:1,}}>
-    <ScrollView stickyHeaderIndices={[0]}>
-      {this.timelinePost()}
-      {this.homeTimeLine()}
-
-      </ScrollView>
-
+    <View style={{flexDirection:'row',marginTop:0,justifyContent:'space-between',backgroundColor:'#141414',paddingHorizontal:30,paddingVertical:15,alignItems:'center'}}>
+        <View style={{flexDirection:'row'}}>
+          <Image source={require('../assets/photovideo.png')} style={{height:width*0.07,width:width*0.07,}}/>
+          <Text style={[styles.text,{color:'#fff',paddingHorizontal:6,fontWeight:'700',fontSize:14}]}>PHOTO/VIDEOS</Text>
+        </View>
+        <TouchableOpacity style={{flexDirection:'row'}} onPress={()=>{this.props.navigation.navigate('MyWallScreen')}}>
+          <Image source={require('../assets/feed.png')} style={{height:width*0.07,width:width*0.07,}}/>
+          <Text style={[styles.text,{color:'#fff',paddingHorizontal:6,fontWeight:'700',fontSize:14}]}>MY WALL</Text>
+        </TouchableOpacity>
     </View>
+  </View>
+  )
+}
+
+
+
+ shareModal=(item,index)=>{
+   return(
+     <View>
+       <Modal isVisible={item.share}animationIn="slideInUp" animationOut="slideOutDown" hasBackdrop={true}
+           backdropColor={'transparent'} onBackdropPress={()=>{this.share(item,index)}}>
+             <View style={{paddingVertical:20,alignItems:'center',position:'absolute',bottom:0,left:0,right:0,
+                           paddingHorizontal:20,backgroundColor:'#000',borderRadius:10,width:width,
+                           marginHorizontal:-20,marginVertical:-20}}>
+                   <View style={{}}>
+                   <Text style={[styles.text,{color:'gray',fontSize:16,textAlign:'left'}]}>SHARE</Text>
+                   <FlatList
+                        data={this.state.imag}
+                        keyExtractor={(item, index) => index.toString()}
+                        horizontal={true}
+                        renderItem={({item, index})=>(
+                          <TouchableOpacity style={{flex:1,justifyContent:'center',paddingVertical:20,marginHorizontal:20}}>
+                             <Image source={(item.img)}
+                             style={{height:width*0.15,width:width*0.15,}}/>
+                             <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'left'}]}>{item.name}</Text>
+                          </TouchableOpacity>
+                        )
+                      }
+                   />
+                   </View>
+             </View>
+       </Modal>
+     </View>
+   )
+ }
+dotModal=(item,index)=>{
+  return(
+    <View>
+
+            <View   style={{paddingVertical:0,alignItems:'center',position:'absolute',top:-4,right:10,
+                          paddingHorizontal:0,backgroundColor:'#333333',borderRadius:0,zIndex:1
+                          }}>
+                  <View style={{}}>
+                  <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'center',padding:10,paddingHorizontal:20}]}>Turn on post notification</Text>
+                  <View style={{borderWidth:0.5,borderColor:'#5b5a5a'}}/>
+                  <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'center',padding:10}]}>Delete</Text>
+                  <View style={{borderWidth:0.5,borderColor:'#5b5a5a'}}/>
+                  <Text style={[styles.text,{color:'red',fontSize:16,textAlign:'center',padding:10}]}>Report</Text>
+                  </View>
+            </View>
+
     </View>
   )
 }
 
+home=()=>{
+  return(
+    <View>
+      <Headers navigation={this.props.navigation} name={'Universal wall'} screen={'Home'}/>
+      <View style={{flex:1,}}>
+        <ScrollView stickyHeaderIndices={[1]}>
+          {this.timelinePost()}
+          {this.timeline2()}
+          {this.homeTimeLine()}
+        </ScrollView>
+      </View>
+    </View>
+  )
+}
+
+
+_onScrollBeginDrag(e) {
+    console.log(e) // Logs 'dragging'
+}
+
+_onScrollSettlingDrag(e) {
+    console.log(e) // Logs 'settling'
+}
+
+_onScrollEndDrag(e) {
+    console.log(e) // Logs 'idle'
+}
   render() {
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
         <Swiper style={{}}
+                onScrollBeginDrag={this._onScrollBeginDrag.bind(this)}
+                onScrollSettlingDrag={this._onScrollSettlingDrag.bind(this)}
+                onScrollEndDrag={this._onScrollSettlingDrag.bind(this)}
                 showsButtons={true} loop={false}
                 buttonWrapperStyle ={{backgroundColor:'transparent',flexDirection:'row',
                                     position: 'absolute',top:0,left:0,flex:1,
                                     paddingHorizontal:10,paddingVertical:10,
                                     justifyContent: 'space-between',alignItems:'center'}}
-                prevButton={index==2?<Text style={[styles.text1,{transform:[{rotate:'270 deg'}],}]}>BACK</Text>:<Text style={[styles.text1,{transform:[{rotate:'270 deg'}],}]}>NOTES</Text>}
+                prevButton={this.state.index==2?<Text style={[styles.text1,{transform:[{rotate:'270 deg'}],}]}>BACK</Text>:<Text style={[styles.text1,{transform:[{rotate:'270 deg'}],}]}>NOTES</Text>}
 
-                nextButton={index==0?<Text style={[styles.text1,{transform:[{rotate:'90 deg'}],}]}>BACK</Text>:<Text style={[styles.text1,{transform:[{rotate:'90 deg'}],}]}>CHATS</Text>}
+                nextButton={this.state.index==0?<Text style={[styles.text1,{transform:[{rotate:'90 deg'}],}]}>BACK</Text>:<Text style={[styles.text1,{transform:[{rotate:'90 deg'}],}]}>CHATS</Text>}
 
                 disablePrevButton={false}
                 scrollEnabled={true}
                 disableNextButton={false}
+                onIndexChanged={(index)=>{this.setState({index})}}
                 index={index}>
                 <View style={styles.slide1}>
                     <Notes navigation={this.props.navigation}/>

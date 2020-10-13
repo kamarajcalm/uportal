@@ -65,11 +65,11 @@ const sportsdetails2=[{no:'#',batting:'FOOTBALL',tourna1:'TOURNAMENT 1',
                       {no:'6',batting:'FOULS',tourna1:'',tourna2:'',tourna3:''},]
 
 const sportsdata =[{a1:false,name:'CRICKET',pk:1,
-                    img:require('../assets/Unknown_Boy.jpg'),sportsdetails:sportsdetails},
+                    img:require('../assets/statisticssportscricket.png'),sportsdetails:sportsdetails},
                    {a1:false,name:'BASKETBALL',pk:2,
-                    img:require('../assets/Unknown_Boy.jpg'),sportsdetails:sportsdetails1},
+                    img:require('../assets/statisticssportsbasketball.png'),sportsdetails:sportsdetails1},
                    {a1:false,name:'FOOTBALL',pk:3,
-                    img:require('../assets/Unknown_Boy.jpg'),sportsdetails:sportsdetails2},]
+                    img:require('../assets/statisticssportsfottball.png'),sportsdetails:sportsdetails2},]
 
 
 class ProfileStatistics extends React.Component {

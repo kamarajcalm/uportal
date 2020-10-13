@@ -90,12 +90,13 @@ class MyWallScreen extends React.Component {
 images=()=>{
   return(
     <View style={{marginTop:2,borderRadius:10}}>
-       <FlatList style={{}} data={this.state.images} keyExtractor={(item, index) => index.toString()}numColumns={3} renderItem={({item, index})=>(
+       <FlatList style={{}} data={this.state.images} keyExtractor={(item, index) => index.toString()} numColumns={3}  renderItem={({item, index})=>(
          <View>
            <Image source={(item.img)} style={{height:width*0.33,width:width*0.33}}/>
        </View>
        )}
        />
+       <View style={{height:200}}/>
     </View>
   )
 }
@@ -134,15 +135,11 @@ tabs=()=>{
    </Animated.View>
    <ScrollView
       horizontal={true}
-      pagingEnabled={true}
-      showsHorizontalScrollIndicator={false}
-      onScroll={Animated.event(
-      [{ nativeEvent: { contentOffset: { x: this.state.scrollX } } }]  )}
-      scrollEventThrottle={16}
-      onMomentumScrollEnd={this.handlePageChange}
+      nestedScrollEnabled={true}
+      scrollEnabled={true}
+      onScroll={Animated.event([{nativeEvent:{contentOffset:{x:this.state.scrollX}}}])}
       ref={(node) => {this.scroll = node}}
       style={{flex:1,backgroundColor:'#000'}}
-      onContentSizeChange={() =>this.scroll.scrollTo({ x: (this.state.selectedTab)*width })}
       >
         {tabs.map((item, i) => {
             return (
@@ -158,6 +155,7 @@ tabs=()=>{
                 <View style={{flex:1,backgroundColor:'#fff'}}>
                  <ScrollView >
                  {this.images()}
+                 <View style={{height:300}}></View>
                  </ScrollView>
                 </View>
               }
@@ -178,7 +176,7 @@ tabs=()=>{
             screen={'MyWallScreen'}/>
           <View>
             {this.profileHead()}
-            <ScrollView>
+            <ScrollView scrollEnabled={false}>
             {this.tabs()}
 
             </ScrollView>

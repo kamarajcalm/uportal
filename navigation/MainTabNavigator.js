@@ -45,6 +45,7 @@ import ProfilCalendar from '../screenComponents/ProfilCalendar';
 import Notes from '../screenComponents/Notes';
 
 import MyWallScreen from '../screenComponents/MyWallScreen';
+import TeachersWall from '../screenComponents/TeachersWall';
 
 const HomeStack = createStackNavigator({
    Home:Home,
@@ -64,6 +65,7 @@ const PageFirstStack = createStackNavigator({
 
 const PageSecondStack = createStackNavigator({
    PageSecond:PageSecond,
+   TeachersWall:TeachersWall,
 },
 {
   initialRouteName: 'PageSecond',

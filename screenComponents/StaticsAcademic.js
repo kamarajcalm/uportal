@@ -63,12 +63,12 @@ const dropdown=[{label: 'ALL SEMESTERS', value: 'ALL SEMESTERS'},{label: 'SEM I'
 const droptest=[{label: 'TEST-1', value: 'TEST-1'},{label: 'TEST-1', value: 'TEST-1'},
                 {label: 'TEST-1', value: 'TEST-1'}]
 
-const subjects=[{name:'MATHS',color:'#FF0000',data:[20,30,70,10]},
-                {name:'SCIENCE',color:'#FFE600',data:[40,50,90,20]},
-                {name:'SOCIAL',color:'#04B600',data:[10,20,90,40]},
-                {name:'ENGLISH',color:'#001AFF',data:[30,50,40,20]},
-                {name:'KANNDA',color:'#FF4D00',data:[40,50,90,20]},
-                {name:'HINDI',color:'#10E9DC',data:[40,20,90,60]},]
+const subjects=[{name:'MATHS',color1:'#FF0000',color:(opacity=1)=>`rgba(255,0,0,${opacity})`,data:[20,30,70,10]},
+                {name:'SCIENCE',color1:'#FFE500',color:(opacity=1)=>`rgba(255,230,0,${opacity})`,data:[40,50,90,20]},
+                {name:'SOCIAL',color1:'#04B600',color:(opacity=1)=>`rgba(4,182,0,${opacity})`,data:[10,20,90,40]},
+                {name:'ENGLISH',color1:'#001AFF',color:(opacity=1)=>`rgba(0,26,255,${opacity})`,data:[30,50,40,20]},
+                {name:'KANNDA',color1:'#FF4D00',color:(opacity=1)=>`rgba(255,77,0,${opacity})`,data:[40,50,90,20]},
+                {name:'HINDI',color1:'#10E9DC',color:(opacity=1)=>`rgba(16,233,220,${opacity})`,data:[40,20,90,60]},]
 const data = {labels: ["1", "2", "3", "4", "5", "6","7","8"],
                   datasets: [
                     {
@@ -89,7 +89,8 @@ class StaticsAcademic extends React.Component {
       questionpapers:questionpapers,
         dropdown : dropdown,
         data:[40,50,90,20],
-        color:'#fff',
+        color:(opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+        color1:(opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
         subjects:subjects,
         droptest:droptest,
         drop:'',
@@ -173,14 +174,16 @@ class StaticsAcademic extends React.Component {
             fromZero={true}
             yAxisInterval={20}
             chartConfig={{
+              useShadowColorFromDataset:false,
               backgroundColor: "#000000",
               decimalPlaces: 0,
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              color: this.state.color,//(opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {borderRadius: 0,borderWidth:1,borderColor:'#fff'},
-              propsForDots: {r: "2",strokeWidth: "2",stroke: this.state.color,},
+              propsForDots: {r: "2",strokeWidth: "4",stroke: this.state.color,},
               propsForBackgroundLines:{color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,}
             }}
+
             strokeColor={this.state.color}
             yLabelsOffset={50}
             xLabelsOffset={0}
@@ -233,7 +236,7 @@ view1=()=>{
     <View style={{margin:10,marginVertical:20}}>
       <FlatList data={this.state.subjects} keyExtractor={(item, index) => index.toString()} numColumns={3} renderItem={({item, index})=>(
         <TouchableOpacity onPress={()=>{this.setState({color:item.color,data:item.data})}} style={{width:width*0.27,borderRadius:10,margin:10,paddingVertical:10,borderColor:'#fff',borderWidth:0.5,alignItems:'center',flexDirection:'row',justifyContent:'center',alignItems:'center',}}>
-            <View style={{backgroundColor:item.color,height:10,width:10}}></View>
+            <View style={{backgroundColor:item.color1,height:10,width:10}}></View>
             <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',paddingHorizontal:10}]}>{item.name}</Text>
         </TouchableOpacity>
         )}
@@ -283,7 +286,7 @@ view1=()=>{
               }
               {this.state.drop!='ALL SEMESTERS'&&
                 <View style={{marginHorizontal:25}}>
-                <TouchableOpacity  onPress={()=>{this.setState({color:'#fff',data:[40,50,90,20]})}} style={{borderRadius:10,paddingVertical:10,paddingHorizontal:0,borderColor:'#fff',borderWidth:0.5,alignItems:'center',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                <TouchableOpacity  onPress={()=>{this.setState({color:this.state.color1,data:[40,50,90,20]})}} style={{borderRadius:10,paddingVertical:10,paddingHorizontal:0,borderColor:'#fff',borderWidth:0.5,alignItems:'center',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                     <View style={{backgroundColor:'#fff',height:10,width:10}}></View>
                     <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',paddingHorizontal:10}]}>AVERAGE OF ALL THE SUBJECT</Text>
                 </TouchableOpacity>

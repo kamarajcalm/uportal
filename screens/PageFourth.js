@@ -23,12 +23,18 @@ const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const fontFamily= settings.fontFamily
 
-const listofdetails=[{id:1,icon:'',name:'MARKS'},{id:2,icon:'',name:'ATTENDANCE'},
-                     {id:3,icon:'',name:'STATICS'},{id:4,icon:'',name:'LIBRARY'},
-                     {id:5,icon:'',name:'SYLLABUS & TIMETABLE'},{id:6,icon:'',name:'CALENDAR AND REMINDERS'},
-                     {id:7,icon:'',name:'FACULTY DETAILS'},{id:8,icon:'',name:'MEDIA'},
-                     {id:9,icon:'',name:'QUESTION PAPERS'},{id:10,icon:'',name:'FORMS'},
-                     {id:11,icon:'',name:'FEEDBACK & REMARKS'},{id:12,icon:'',name:'SETTINGS'},]
+const listofdetails=[{id:1,icon:require('../assets/marks.png'),name:'MARKS'},
+                     {id:2,icon:require('../assets/Attendance.png'),name:'ATTENDANCE'},
+                     {id:3,icon:require('../assets/statistics.png'),name:'STATICS'},
+                     {id:4,icon:require('../assets/library.png'),name:'LIBRARY'},
+                     {id:5,icon:require('../assets/syllabus.png'),name:'SYLLABUS & TIMETABLE'},
+                     {id:6,icon:require('../assets/calendar.png'),name:'CALENDAR AND REMINDERS'},
+                     {id:7,icon:require('../assets/facultydetails.png'),name:'FACULTY DETAILS'},
+                     {id:8,icon:require('../assets/media.png'),name:'MEDIA'},
+                     {id:9,icon:require('../assets/questionpaper.png'),name:'QUESTION PAPERS'},
+                     {id:10,icon:require('../assets/forms.png'),name:'FORMS'},
+                     {id:11,icon:require('../assets/feedback.png'),name:'FEEDBACK & REMARKS'},
+                     {id:12,icon:require('../assets/settings.png'),name:'SETTINGS'},]
 
 class PageFourth extends React.Component {
 
@@ -77,8 +83,8 @@ class PageFourth extends React.Component {
            renderItem={({item, index})=>(
              <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,alignItems:'center',justifyContent:'space-between',paddingVertical:10}} onPress={()=>{this.onListTouch(item)}}>
              <View style={{flexDirection:'row',alignItems:'center'}}>
-                <Image source={(item.icon)} style={{height:width*0.07,width:width*0.07}}/>
-                <Text style={[styles.text,{color:'#fff',fontWeight:'700',fontSize:14}]}>{item.name}</Text>
+                <Image source={(item.icon)} style={{height:width*0.07,width:width*0.07,}}/>
+                <Text style={[styles.text,{color:'#fff',fontWeight:'700',fontSize:14,paddingHorizontal:10}]}>{item.name}</Text>
               </View>
               <FontAwesome name='angle-right' size={18} color='#fff'/>
              </TouchableOpacity>

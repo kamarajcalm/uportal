@@ -26,18 +26,7 @@ export default class Headers extends React.Component {
   componentDidMount(){
   }
 
-  headerChange=(notify,notifychat)=>{
-    {notify.includes(this.props.screen)&&
-       <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal: 15,paddingVertical:10}}>
-         <MaterialIcons name="notifications-none" size={this.state.size} color="#fff" />
-       </TouchableOpacity>
-     }
-     {notifychat.includes(this.props.screen)&&
-        <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal: 15,paddingVertical:10}}>
-          <FontAwesome5 name="chalkboard-teacher" size={this.state.size} color="#fff" />
-        </TouchableOpacity>
-      }
-  }
+
 
   render(){
     //If you intent to create customize header create screen itself
@@ -49,8 +38,11 @@ export default class Headers extends React.Component {
                 'LinkEmail','Language','ChangePassword','ProfileMarks',
                 'ProfileMedia','ProfileMediaChoose','MediaNotesVideo','NotesVideosData',
                 'MediaUniversity','MediaDepart','ProfileQuestionPaper','QuestionPaper',
-                'ProfileStatistics','ProfileAttendance','ProfilCalendar','MyWallScreen','Notes','Chat']
+                'ProfileStatistics','ProfileAttendance','ProfilCalendar','MyWallScreen','TeachersWall']
       var feed =['MyWallScreen']
+      var notes=['Notes']
+      var chat=['Chat']
+      var teach=['TeachersWall']
     return (
       <View style={{height:55,width:width,backgroundColor:comp.includes(this.props.screen)?'#000':themeColor,marginTop:Constants.statusBarHeight}}>
           <View style={{flexDirection: 'row',height:55,alignItems: 'center',}}>
@@ -61,11 +53,23 @@ export default class Headers extends React.Component {
                   <MaterialIcons name="notifications-none" size={this.state.size} color="#fff" />
                 </TouchableOpacity>
               }
-              {notifychat.includes(this.props.screen)&&
+              {notes.includes(this.props.screen)&&
                  <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal: 15,paddingVertical:10}}>
+                   <Feather name="camera" size={this.state.size} color="#fff" />
+                 </TouchableOpacity>
+               }
+               {chat.includes(this.props.screen)&&
+                  <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal: 15,paddingVertical:10}}>
+                    <Image source={require('../assets/questionpaper.png')} style={{height:width*0.07,width:width*0.07,}}/>
+                  </TouchableOpacity>
+                }
+              {notifychat.includes(this.props.screen)&&
+                 <TouchableOpacity onPress={()=>{this.props.navigation.navigate('TeachersWall')}} style={{paddingHorizontal: 15,paddingVertical:10}}>
                    <FontAwesome5 name="chalkboard-teacher" size={this.state.size} color="#fff" />
                  </TouchableOpacity>
                }
+
+
                {comp.includes(this.props.screen)&&
                  <TouchableOpacity onPress={()=>{this.props.navigation.goBack()}} style={{paddingHorizontal: 15,paddingVertical:10}}>
                    <AntDesign name="arrowleft" size={this.state.size} color="#fff" />
@@ -74,7 +78,7 @@ export default class Headers extends React.Component {
              </View>
 
              <View style={{ flex: 0.6, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
-               <Text   style={[styles.text,{color:'#fff',fontSize:comp.includes(this.props.screen)?16:24,textAlign:'center',fontWeight:'700'}]} numberOfLines={1}>{this.props.name}</Text>
+               <Text   style={[styles.text,{color:'#fff',fontSize:comp.includes(this.props.screen)||notes.includes(this.props.screen)?16:24,textAlign:'center',fontWeight:'700'}]} numberOfLines={1}>{this.props.name}</Text>
              </View>
               {notify.includes(this.props.screen)&&
                <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
@@ -87,6 +91,11 @@ export default class Headers extends React.Component {
                  <Ionicons name="md-information-circle-outline" size={22} color="#fff" />
              </TouchableOpacity>
              }
+             {teach.includes(this.props.screen)&&
+               <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
+                  <Ionicons name="md-information-circle-outline" size={22} color="#fff" />
+              </TouchableOpacity>
+              }
 
              {notifysport.includes(this.props.screen)&&
                <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
@@ -100,6 +109,16 @@ export default class Headers extends React.Component {
                  </TouchableOpacity>
                }
 
+               {notes.includes(this.props.screen)&&
+                  <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
+                    <FontAwesome5 name="edit" size={this.state.size} color="#fff" />
+                  </TouchableOpacity>
+                }
+                {chat.includes(this.props.screen)&&
+                   <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
+                     <Text   style={[styles.text,{color:'#fff',fontSize:16,textAlign:'center',fontWeight:'700'}]} numberOfLines={1}>+ADD</Text>
+                   </TouchableOpacity>
+                 }
 
            </View>
        </View>
