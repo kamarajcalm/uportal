@@ -20,105 +20,105 @@ export default class Headers extends React.Component {
       color:'#f2f2f2',
       size:20,
     };
-
   }
 
-  componentDidMount(){
-  }
-
-
+  componentDidMount(){}
 
   render(){
-    //If you intent to create customize header create screen itself
+
       var notify = [ 'Home' , 'PageFirst',]
       var notifychat = [ 'PageSecond',]
       var notifysport = ['PageThird']
-      var comp=['ProfileForms','ProfileFillForm','ProfileLibrary','ProfileFacultyDetails',
-                'PFacultyDetailsCarousel','ProfileFeedback','ProfileSetting',
-                'LinkEmail','Language','ChangePassword','ProfileMarks',
-                'ProfileMedia','ProfileMediaChoose','MediaNotesVideo','NotesVideosData',
-                'MediaUniversity','MediaDepart','ProfileQuestionPaper','QuestionPaper',
-                'ProfileStatistics','ProfileAttendance','ProfilCalendar','MyWallScreen','TeachersWall']
-      var feed =['MyWallScreen']
-      var notes=['Notes']
-      var chat=['Chat']
-      var teach=['TeachersWall']
+      var comp = ['ProfileForms','ProfileFillForm','ProfileLibrary','ProfileFacultyDetails',
+                  'PFacultyDetailsCarousel','ProfileFeedback','ProfileSetting','LinkEmail',
+                  'Language','ChangePassword','ProfileMarks','ProfileMedia','ProfileMediaChoose',
+                  'MediaNotesVideo','NotesVideosData','MediaUniversity','MediaDepart',
+                  'ProfileQuestionPaper','QuestionPaper','ProfileRank','ProfileStatistics',
+                  'ProfileAttendance','ProfilCalendar','MyWallScreen','TeachersWall','InfoScreen',
+                  'FacStuDetails','ProfileSchoolMarks']
+      var feed = ['MyWallScreen']
+      var notes = ['Notes','Chat']
+      var teach = ['TeachersWall']
+
     return (
-      <View style={{height:55,width:width,backgroundColor:comp.includes(this.props.screen)?'#000':themeColor,marginTop:Constants.statusBarHeight}}>
+      <View style={{height:55,width:width,backgroundColor:comp.includes(this.props.screen)?'#000':themeColor,
+              marginTop:Constants.statusBarHeight}}>
           <View style={{flexDirection: 'row',height:55,alignItems: 'center',}}>
 
-             <View style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',}}>
-             {notify.includes(this.props.screen)&&
-                <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal: 15,paddingVertical:10}}>
-                  <MaterialIcons name="notifications-none" size={this.state.size} color="#fff" />
-                </TouchableOpacity>
-              }
+             <View style={{ flex: 0.2,justifyContent: 'flex-start', alignItems: 'center',}}>
+
+               {notify.includes(this.props.screen)&&
+                  <TouchableOpacity onPress={()=>{this.props.navigation.openDrawer()}} style={{paddingHorizontal: 15,paddingVertical:10}}>
+                    <MaterialIcons name="notifications-none" size={this.state.size} color="#fff" />
+                  </TouchableOpacity>
+               }
               {notes.includes(this.props.screen)&&
                  <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal: 15,paddingVertical:10}}>
-                   <Feather name="camera" size={this.state.size} color="#fff" />
+                 <Text  numberOfLines={1} style={[styles.text,{color:'#fff',fontSize:16,
+                 textAlign:'left',fontWeight:'700'}]}>EDIT</Text>
                  </TouchableOpacity>
                }
-               {chat.includes(this.props.screen)&&
-                  <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal: 15,paddingVertical:10}}>
-                    <Image source={require('../assets/questionpaper.png')} style={{height:width*0.07,width:width*0.07,}}/>
-                  </TouchableOpacity>
-                }
-              {notifychat.includes(this.props.screen)&&
+
+                {notifychat.includes(this.props.screen)&&
                  <TouchableOpacity onPress={()=>{this.props.navigation.navigate('TeachersWall')}} style={{paddingHorizontal: 15,paddingVertical:10}}>
                    <FontAwesome5 name="chalkboard-teacher" size={this.state.size} color="#fff" />
                  </TouchableOpacity>
-               }
-
-
-               {comp.includes(this.props.screen)&&
+                }
+                {comp.includes(this.props.screen)&&
                  <TouchableOpacity onPress={()=>{this.props.navigation.goBack()}} style={{paddingHorizontal: 15,paddingVertical:10}}>
                    <AntDesign name="arrowleft" size={this.state.size} color="#fff" />
                  </TouchableOpacity>
-               }
+                }
+
              </View>
 
-             <View style={{ flex: 0.6, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
-               <Text   style={[styles.text,{color:'#fff',fontSize:comp.includes(this.props.screen)||notes.includes(this.props.screen)?16:24,textAlign:'center',fontWeight:'700'}]} numberOfLines={1}>{this.props.name}</Text>
+             <View style={{flex:0.6,flexDirection:'row',justifyContent:'center',alignItems:'center',}}>
+                 <Text  numberOfLines={1} style={[styles.text,{color:'#fff',fontSize:comp.includes(this.props.screen)||notes.includes(this.props.screen)?16:24,
+                 textAlign:'center',fontWeight:'700'}]}>{this.props.name}</Text>
              </View>
+
               {notify.includes(this.props.screen)&&
-               <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
+               <TouchableOpacity onPress={()=>{}}
+                  style={{flex:0.2,flexDirection:'row',justifyContent:'center',alignItems:'center',}}>
                   <Fontisto name="search" size={this.state.size} color="#fff" />
-              </TouchableOpacity>
-            }
-
-            {notifychat.includes(this.props.screen)&&
-              <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
-                 <Ionicons name="md-information-circle-outline" size={22} color="#fff" />
-             </TouchableOpacity>
-             }
-             {teach.includes(this.props.screen)&&
-               <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
-                  <Ionicons name="md-information-circle-outline" size={22} color="#fff" />
               </TouchableOpacity>
               }
 
-             {notifysport.includes(this.props.screen)&&
-               <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
+              {notifychat.includes(this.props.screen)&&
+                <TouchableOpacity onPress={()=>{this.props.navigation.navigate('InfoScreen')}}
+                  style={{flex:0.2,flexDirection:'row',justifyContent:'center',alignItems:'center',}}>
+                   <Ionicons name="md-information-circle-outline" size={22} color="#fff" />
+               </TouchableOpacity>
+              }
+
+              {teach.includes(this.props.screen)&&
+                 <TouchableOpacity       onPress={()=>{this.props.navigation.navigate('InfoScreen',{stud:true})}}
+                  style={{flex:0.2,flexDirection:'row',justifyContent:'center',alignItems:'center',}}>
+                    <Ionicons name="md-information-circle-outline" size={22} color="#fff" />
+                </TouchableOpacity>
+              }
+
+              {notifysport.includes(this.props.screen)&&
+                <TouchableOpacity onPress={()=>{}}
+                  style={{flex:0.2,flexDirection:'row',justifyContent:'center',alignItems:'center',}}>
                   <Fontisto name="search" size={this.state.size} color="#fff" />
-              </TouchableOpacity>
+                </TouchableOpacity>
               }
 
               {feed.includes(this.props.screen)&&
-                 <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
-                   <MaterialIcons name="notifications-none" size={this.state.size} color="#fff" />
-                 </TouchableOpacity>
-               }
+                <TouchableOpacity onPress={()=>{}}
+                    style={{flex:0.2,flexDirection:'row',justifyContent:'center',alignItems:'center',}}>
+                  <MaterialIcons name="notifications-none" size={this.state.size} color="#fff" />
+                </TouchableOpacity>
+              }
 
-               {notes.includes(this.props.screen)&&
-                  <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
-                    <FontAwesome5 name="edit" size={this.state.size} color="#fff" />
-                  </TouchableOpacity>
-                }
-                {chat.includes(this.props.screen)&&
-                   <TouchableOpacity onPress={()=>{}} style={{ flex: 0.2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
-                     <Text   style={[styles.text,{color:'#fff',fontSize:16,textAlign:'center',fontWeight:'700'}]} numberOfLines={1}>+ADD</Text>
-                   </TouchableOpacity>
-                 }
+              {notes.includes(this.props.screen)&&
+                <TouchableOpacity onPress={()=>{}}
+                    style={{flex:0.2,flexDirection:'row',justifyContent:'center',alignItems:'center',}}>
+                  <FontAwesome5 name="edit" size={this.state.size} color="#fff" />
+                </TouchableOpacity>
+              }
+
 
            </View>
        </View>

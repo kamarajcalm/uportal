@@ -70,26 +70,26 @@ class DrawerContent  extends React.Component {
              }
 
             {Platform.OS === 'android' &&
-               <TouchableNativeFeedback centered={true} background={TouchableNativeFeedback.Ripple('grey')} onPress={()=>this.props.navigation.navigate('PageFirst')}>
+               <TouchableNativeFeedback centered={true} background={TouchableNativeFeedback.Ripple('grey')} onPress={()=>{this.props.navigation.navigate('PageFourth',{college:true})}}>
                   <View style={{flexDirection: 'row',paddingVertical:14,backgroundColor:routeName.routeName=='PageFirst'?'#f2f2f2':'#fff', alignItems: 'center',}}>
                      <View style={{flex:0.22,justifyContent: 'center',alignItems: 'center',}}>
                         <Entypo name="documents" size={20} color={routeName.routeName=='PageFirst'?themeColor:"black"} />
                      </View>
                      <View style={{flex:0.75,justifyContent: 'center',alignItems: 'flex-start',marginLeft:14}}>
-                         <Text style={{color:routeName.routeName=='PageFirst'?themeColor:"black",fontWeight:'normal',fontSize:16,}} >PageFirst</Text>
+                         <Text style={{color:routeName.routeName=='PageFirst'?themeColor:"black",fontWeight:'normal',fontSize:16,}} >College-Student</Text>
                      </View>
                   </View>
               </TouchableNativeFeedback>
           }
 
           {Platform.OS === 'android' &&
-             <TouchableNativeFeedback centered={true} background={TouchableNativeFeedback.Ripple('grey')} onPress={()=>this.props.navigation.navigate('PageSecond')}>
+             <TouchableNativeFeedback centered={true} background={TouchableNativeFeedback.Ripple('grey')} onPress={()=>{this.props.navigation.navigate('PageFourth',{school:true})}}>
                 <View style={{flexDirection: 'row',paddingVertical:14,backgroundColor:routeName.routeName=='PageSecond'?'#f2f2f2':'#fff', alignItems: 'center',}}>
                    <View style={{flex:0.22,justifyContent: 'center',alignItems: 'center',}}>
                       <Entypo name="documents" size={20} color={routeName.routeName=='PageSecond'?themeColor:"black"} />
                    </View>
                    <View style={{flex:0.75,justifyContent: 'center',alignItems: 'flex-start',marginLeft:14}}>
-                       <Text style={{color:routeName.routeName=='PageSecond'?themeColor:"black",fontWeight:'normal',fontSize:16,}} >PageSecond</Text>
+                       <Text style={{color:routeName.routeName=='PageSecond'?themeColor:"black",fontWeight:'normal',fontSize:16,}} >School-Student</Text>
                    </View>
                 </View>
             </TouchableNativeFeedback>

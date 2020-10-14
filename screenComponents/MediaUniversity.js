@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -64,44 +65,49 @@ class MediaUniversity extends React.Component {
       }
     }
 
- componentDidMount(){
- }
-
-touchuniversity=(quespaper,item)=>{
-  if(quespaper!=null){
-    this.props.navigation.navigate('MediaDepart',{item:{item:item,quespaper:quespaper}})
-  }else{
-    this.props.navigation.navigate('MediaDepart',{item:{item:item}})
+  componentDidMount(){
   }
-}
 
- university=(quespaper)=>{
-   return(
-     <View style={{marginVertical:15,width:width}}>
-       <FlatList  data={this.state.university} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-         <TouchableOpacity  onPress={()=>{this.touchuniversity(quespaper,item)}} style={{flexDirection:'row',marginHorizontal:15,marginVertical:8,borderRadius:7,alignItems:'center',justifyContent:'space-between',paddingHorizontal:15,}}>
+  touchuniversity=(quespaper,item)=>{
+    if(quespaper!=null){
+      this.props.navigation.navigate('MediaDepart',{item:{item:item,quespaper:quespaper}})
+    }else{
+      this.props.navigation.navigate('MediaDepart',{item:{item:item}})
+    }
+  }
+
+  university=(quespaper)=>{
+    return(
+      <View style={{marginVertical:15,width:width}}>
+        <FlatList  data={this.state.university}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+          <TouchableOpacity  onPress={()=>{this.touchuniversity(quespaper,item)}} style={{flexDirection:'row',marginHorizontal:15,marginVertical:8,borderRadius:7,
+                  alignItems:'center',justifyContent:'space-between',paddingHorizontal:15,}}>
             <View style={{}}>
-             <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:4,fontWeight:'700',textAlign:'center'}]}>{item.name}</Text>
-           </View>
-           <View>
-            <FontAwesome name={'angle-right'} size={20} color={'#fff'}/>
-          </View>
-         </TouchableOpacity>
-       )}/>
-     </View>
-   )
- }
+              <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:4,
+                          fontWeight:'700',textAlign:'center'}]}>{item.name}</Text>
+            </View>
+            <View>
+              <FontAwesome name={'angle-right'} size={20} color={'#fff'}/>
+            </View>
+          </TouchableOpacity>
+        )}/>
+      </View>
+    )
+  }
 
   render() {
     const quespaper =this.props.navigation.getParam('quespaper',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={quespaper?'QUESTION PAPERS':'MEDIA'}
+        <Headers navigation={this.props.navigation} name={quespaper?'QUESTION PAPERS':'MEDIA'}
             screen={'MediaUniversity'}/>
-            <View style={{flex:1,alignItems:'center',backgroundColor:'#000'}}>
-              <Text style={[styles.text,{paddingVertical:10,color:'#fff',fontSize:14,fontWeight:'700',textAlign:'center'}]}>CHOOSE UNIVERSITY</Text>
+          <View style={{flex:1,alignItems:'center',backgroundColor:'#000'}}>
+              <Text style={[styles.text,{paddingVertical:10,color:'#fff',fontSize:14,
+                    fontWeight:'700',textAlign:'center'}]}>CHOOSE UNIVERSITY</Text>
               {this.university(quespaper)}
-            </View>
+          </View>
       </View>
     );
   }

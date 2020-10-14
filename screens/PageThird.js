@@ -8,8 +8,11 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
-import {Fontisto, FontAwesome,Entypo,SimpleLineIcons,MaterialCommunityIcons,Feather,Octicons,MaterialIcons,FontAwesome5 } from '@expo/vector-icons';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+import {Fontisto, FontAwesome,Entypo,SimpleLineIcons,
+  MaterialCommunityIcons,Feather,Octicons,
+  MaterialIcons,FontAwesome5 } from '@expo/vector-icons';
 import  Constants  from 'expo-constants';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
@@ -19,7 +22,8 @@ import Headers  from '../helpers/Headers.js';
 import settings from '../appSettings';
 
 import SwitchSelector from "react-native-switch-selector";
-import {ScrollableTabView,DefaultTabBar,ScrollableTabBar} from '@valdio/react-native-scrollable-tabview';
+import {ScrollableTabView,DefaultTabBar,
+  ScrollableTabBar} from '@valdio/react-native-scrollable-tabview';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import Modal from "react-native-modal";
 
@@ -70,54 +74,71 @@ class PageThird extends React.Component {
       activeSlide:0,
       warriorsmodallist:warriorsmodallist,
       lionsmodallist:warriorsmodallist
-      }
-
     }
+  }
 
-
-
-    cricketView=()=>{
-      return(
-        <View style={{backgroundColor:'#333333',paddingVertical:15,paddingHorizontal:15,marginHorizontal:15,marginVertical:20,}}>
-          <TouchableOpacity style={{borderWidth:0,}}
+  cricketView=()=>{
+    return(
+      <View style={{backgroundColor:'#333333',paddingVertical:15,paddingHorizontal:15,
+                    marginHorizontal:15,marginVertical:20,}}>
+        <TouchableOpacity style={{borderWidth:0,}}
           onPress={()=>{this.setState({openView:!this.state.openView})}}>
-            <View style={{borderWidth:0,flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
-              <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}} onPress={()=>{this.setState({warriorsmodel:true})}}>
-                <Image source={require('../assets/warriors.jpeg')} style={{height:width*0.15,width:width*0.15}}/>
-                <Text style={[styles.text,{color:'#fff',fontSize:14,paddingHorizontal:6,fontWeight:'700'}]}>131/10</Text>
-              </TouchableOpacity>
-              <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700'}]}>vs</Text>
-              <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}}
+          <View style={{borderWidth:0,flexDirection:'row',alignItems:'center',
+                        justifyContent:'space-between'}}>
+            <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}}  onPress={()=>{this.setState({warriorsmodel:true})}}>
+              <Image source={require('../assets/warriors.jpeg')} style={{height:width*0.15,width:width*0.15}}/>
+              <Text style={[styles.text,{color:'#fff',fontSize:14,paddingHorizontal:6,
+                        fontWeight:'700'}]}>131/10</Text>
+            </TouchableOpacity>
+
+            <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700'}]}>vs</Text>
+
+            <TouchableOpacity style={{flexDirection:'row',alignItems:'center'}}
               onPress={()=>{this.setState({lionsmodel:true})}}>
-                <Text style={[styles.text,{color:'#fff',fontSize:14,paddingHorizontal:6,fontSize:14,fontWeight:'700'}]}>81/10</Text>
-                <Image source={require('../assets/lions.jpeg')} style={{height:width*0.15,width:width*0.15}}/>
-              </TouchableOpacity>
+              <Text style={[styles.text,{color:'#fff',fontSize:14,paddingHorizontal:6,
+                          fontSize:14,fontWeight:'700'}]}>81/10</Text>
+              <Image source={require('../assets/lions.jpeg')} style={{height:width*0.15,width:width*0.15}}/>
+            </TouchableOpacity>
+          </View>
+          <View style={{borderWidth:0,paddingVertical:8,
+                justifyContent:'space-between',flexDirection:'row'}}>
+            <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
+                        fontWeight:'700'}]}>Warriors</Text>
+            <View style={{width:width*0.4,justifyContent:'center',
+                        alignSelf:'center',alignItems:'center'}}>
+              <Text style={[styles.text,
+                    {color:'#fff',fontSize:12,textAlign:'center',fontWeight:'700'}]}
+                    numberOfLines={2}>Warriors won by 50runs with 1 over left</Text>
             </View>
-            <View style={{borderWidth:0,paddingVertical:8,justifyContent:'space-between',flexDirection:'row'}}>
-              <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700'}]}>Warriors</Text>
-              <View style={{width:width*0.4,justifyContent:'center',alignSelf:'center',alignItems:'center'}}>
-              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'700'}]} numberOfLines={2}>Warriors won by 50runs with 1 over left</Text></View>
-              <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700'}]}>Lions</Text>
-            </View>
-          </TouchableOpacity>
+            <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
+                    fontWeight:'700'}]}>Lions</Text>
+          </View>
+        </TouchableOpacity>
           {this.state.openView &&
             <View style={{borderWidth:0,marginVertical:10,alignItems:'center'}}>
-              <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',fontWeight:'400'}]}>Poll ratings</Text>
-              <View style={{width:width*0.6,borderWidth:0,flexDirection:'row',justifyContent:'space-between',paddingVertical:10}}>
+              <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
+                      fontWeight:'400'}]}>Poll ratings</Text>
+              <View style={{width:width*0.6,borderWidth:0,flexDirection:'row',
+                        justifyContent:'space-between',paddingVertical:10}}>
                 <View style={{}}>
                   <View style={{backgroundColor:'blue',width:width*0.4}}>
-                    <Text style={[styles.text,{color:'#fff',textAlign:'center',paddingVertical:6,fontSize:14,fontWeight:'700'}]}>70%</Text>
+                    <Text style={[styles.text,{color:'#fff',textAlign:'center',paddingVertical:6,
+                          fontSize:14,fontWeight:'700'}]}>70%</Text>
                   </View>
-                  <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',paddingVertical:6,fontWeight:'700'}]}>Warriors</Text>
+                  <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',paddingVertical:6,
+                          fontWeight:'700'}]}>Warriors</Text>
                 </View>
                 <View>
                   <View style={{backgroundColor:'red',width:width*0.2}}>
-                    <Text style={[styles.text,{color:'#fff',textAlign:'center',paddingVertical:6,fontSize:14,fontWeight:'700'}]}>30%</Text>
+                    <Text style={[styles.text,{color:'#fff',textAlign:'center',paddingVertical:6,
+                          fontSize:14,fontWeight:'700'}]}>30%</Text>
                   </View>
-                  <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'right',paddingVertical:6,fontWeight:'700'}]}>Lions</Text>
+                  <Text style={[styles.text,{color:'#fff',fontSize:14,
+                          textAlign:'right',paddingVertical:6,fontWeight:'700'}]}>Lions</Text>
                 </View>
               </View>
-              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>You have choosen warriors</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',
+                    fontWeight:'400'}]}>You have choosen warriors</Text>
             </View>
           }
         </View>
@@ -149,160 +170,222 @@ class PageThird extends React.Component {
             { label: "INTRA", value: "f", },
             { label: "INTER", value: "m",  }
           ]}
-        />
+      />
     )
   }
 
   warriors1inning=()=>{
     return(
-      <FlatList style={{}} data={this.state.warriors1inning} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-        <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',flex:1,paddingVertical:10}}>
-          <View style={{flexDirection:'row',alignItems:'center',flex:0.6,justifyContent:'space-between'}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',fontWeight:'700'}]}>{item.batsman}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'left',fontWeight:'700'}]}>{item.batsmansome}</Text>
+      <FlatList style={{}} data={this.state.warriors1inning}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item, index})=>(
+        <View style={{flexDirection:'row',justifyContent:'space-between',
+                      alignItems:'center',flex:1,paddingVertical:10}}>
+          <View style={{flexDirection:'row',alignItems:'center',flex:0.6,
+                      justifyContent:'space-between'}}>
+            <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',
+                      fontWeight:'700'}]}>{item.batsman}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'left',
+                      fontWeight:'700'}]}>{item.batsmansome}</Text>
           </View>
-          <View style={{flexDirection:'row',alignItems:'center',flex:0.4,justifyContent:'space-between',paddingLeft:4}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.Rs}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.Bs}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.s4}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.s6}</Text>
+          <View style={{flexDirection:'row',alignItems:'center',flex:0.4,
+                        justifyContent:'space-between',paddingLeft:4}}>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                      fontWeight:'700'}]}>{item.Rs}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                      fontWeight:'700'}]}>{item.Bs}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                      fontWeight:'700'}]}>{item.s4}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                      fontWeight:'700'}]}>{item.s6}</Text>
           </View>
         </View>
-        )
-      }
-    />
+        )}
+      />
     )
   }
 
   lions1inning=()=>{
     return(
-      <FlatList style={{}} data={this.state.lions1inning} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+      <FlatList style={{}} data={this.state.lions1inning}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item, index})=>(
         <View style={{flexDirection:'row',justifyContent:'space-between',
                       alignItems:'center',flex:1,paddingVertical:10}}>
-          <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',flex:0.2,fontWeight:'700'}]}>{item.batsman}</Text>
-          <View style={{flexDirection:'row',alignItems:'center',flex:0.4,justifyContent:'space-between',paddingRight:4}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.os}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.ms}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.rs}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.ws}</Text>
+          <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',flex:0.2,
+                      fontWeight:'700'}]}>{item.batsman}</Text>
+          <View style={{flexDirection:'row',alignItems:'center',flex:0.4,
+                      justifyContent:'space-between',paddingRight:4}}>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.os}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.ms}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.rs}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.ws}</Text>
           </View>
-          <View style={{flexDirection:'row',alignItems:'center',flex:0.4,justifyContent:'space-between',paddingLeft:4}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.nb}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.wd}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.eco}</Text>
+          <View style={{flexDirection:'row',alignItems:'center',flex:0.4,
+                      justifyContent:'space-between',paddingLeft:4}}>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                      fontWeight:'700'}]}>{item.nb}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                      fontWeight:'700'}]}>{item.wd}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                      fontWeight:'700'}]}>{item.eco}</Text>
           </View>
         </View>
-        )
-      }
+        )}
     />
     )
   }
 
   winnerList1inning=()=>{
     return(
-      <View style={{backgroundColor:'#333333',paddingVertical:15,paddingHorizontal:15,marginHorizontal:15,marginVertical:20,borderRadius:10}}>
-        <View style={{justifyContent:'space-between',flexDirection:'row',alignItems:'center',marginTop:10}}>
+      <View style={{backgroundColor:'#333333',paddingVertical:15,paddingHorizontal:15,
+                    marginHorizontal:15,marginVertical:20,borderRadius:10}}>
+        <View style={{justifyContent:'space-between',flexDirection:'row',
+                      alignItems:'center',marginTop:10}}>
           <View style={{flexDirection:'row',alignItems:'center'}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'left',fontWeight:'700'}]}>Warriors</Text>
-            <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,textAlign:'left',paddingLeft:6,fontWeight:'700'}]}>1st innings</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'left',
+                        fontWeight:'700'}]}>Warriors</Text>
+            <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,textAlign:'left',
+                        paddingLeft:6,fontWeight:'700'}]}>1st innings</Text>
           </View>
-          <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'right',fontWeight:'700'}]}>131/10</Text>
+          <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'right',
+                        fontWeight:'700'}]}>131/10</Text>
         </View>
         {this.warriors1inning()}
-
         <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'left',fontWeight:'700'}]}>Lions</Text>
-            <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,textAlign:'left',paddingLeft:6,fontWeight:'700'}]}>1st innings</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'left',
+                      fontWeight:'700'}]}>Lions</Text>
+            <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,textAlign:'left',paddingLeft:6,
+                      fontWeight:'700'}]}>1st innings</Text>
         </View>
         {this.lions1inning()}
-
       </View>
     )
   }
 
   winnerList2inning=()=>{
     return(
-      <View style={{backgroundColor:'#333333',paddingVertical:15,paddingHorizontal:15,marginHorizontal:15,marginVertical:20,borderRadius:10}}>
-        <View style={{justifyContent:'space-between',flexDirection:'row',alignItems:'center',marginTop:10}}>
+      <View style={{backgroundColor:'#333333',paddingVertical:15,paddingHorizontal:15,
+                    marginHorizontal:15,marginVertical:20,borderRadius:10}}>
+        <View style={{justifyContent:'space-between',
+                    flexDirection:'row',alignItems:'center',marginTop:10}}>
           <View style={{flexDirection:'row',alignItems:'center'}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'left',fontWeight:'700'}]}>Lions</Text>
-            <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,textAlign:'left',paddingLeft:6,fontWeight:'700'}]}>2nd innings</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'left',
+                          fontWeight:'700'}]}>Lions</Text>
+            <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,textAlign:'left',
+                          paddingLeft:6,fontWeight:'700'}]}>2nd innings</Text>
           </View>
-          <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'right',fontWeight:'700'}]}>81/10</Text>
+          <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'right',
+                          fontWeight:'700'}]}>81/10</Text>
         </View>
+
         {this.warriors2inning()}
 
         <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'left',fontWeight:'700'}]}>Warriors</Text>
-            <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,textAlign:'left',paddingLeft:6,fontWeight:'700'}]}>2nd innings</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'left',
+                          fontWeight:'700'}]}>Warriors</Text>
+            <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,textAlign:'left',
+                        paddingLeft:6,fontWeight:'700'}]}>2nd innings</Text>
         </View>
         {this.lions2inning()}
-
       </View>
     )
   }
 
   warriors2inning=()=>{
     return(
-      <FlatList style={{}} data={this.state.warriors1inning} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-        <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',flex:1,paddingVertical:10}}>
-          <View style={{flexDirection:'row',alignItems:'center',flex:0.6,justifyContent:'space-between'}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',fontWeight:'700'}]}>{item.batsman}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'left',fontWeight:'700'}]}>{item.batsmansome}</Text>
+      <FlatList style={{}} data={this.state.warriors1inning}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+        <View style={{flexDirection:'row',justifyContent:'space-between',
+                      alignItems:'center',flex:1,paddingVertical:10}}>
+          <View style={{flexDirection:'row',alignItems:'center',flex:0.6,
+                        justifyContent:'space-between'}}>
+            <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',
+                        fontWeight:'700'}]}>{item.batsman}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'left',
+                        fontWeight:'700'}]}>{item.batsmansome}</Text>
           </View>
-          <View style={{flexDirection:'row',alignItems:'center',flex:0.4,justifyContent:'space-between',paddingLeft:4}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.Rs}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.Bs}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.s4}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.s6}</Text>
+          <View style={{flexDirection:'row',alignItems:'center',flex:0.4,
+                        justifyContent:'space-between',paddingLeft:4}}>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.Rs}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.Bs}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.s4}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.s6}</Text>
           </View>
         </View>
-        )
-      }
-    />
+        )}
+      />
     )
   }
 
   lions2inning=()=>{
     return(
-      <FlatList style={{}} data={this.state.lions1inning} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+      <FlatList style={{}} data={this.state.lions1inning}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item, index})=>(
         <View style={{flexDirection:'row',justifyContent:'space-between',
                       alignItems:'center',flex:1,paddingVertical:10}}>
-          <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',flex:0.2,fontWeight:'700'}]}>{item.batsman}</Text>
-          <View style={{flexDirection:'row',alignItems:'center',flex:0.4,justifyContent:'space-between',paddingRight:4}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.os}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.ms}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.rs}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.ws}</Text>
+          <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',
+                      flex:0.2,fontWeight:'700'}]}>{item.batsman}</Text>
+          <View style={{flexDirection:'row',alignItems:'center',
+                      flex:0.4,justifyContent:'space-between',paddingRight:4}}>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.os}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.ms}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.rs}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.ws}</Text>
           </View>
-          <View style={{flexDirection:'row',alignItems:'center',flex:0.4,justifyContent:'space-between',paddingLeft:4}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.nb}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.wd}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,fontWeight:'700'}]}>{item.eco}</Text>
+          <View style={{flexDirection:'row',alignItems:'center',flex:0.4,
+                        justifyContent:'space-between',paddingLeft:4}}>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.nb}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.wd}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:item.id==1?14:12,
+                        fontWeight:'700'}]}>{item.eco}</Text>
           </View>
         </View>
-        )
-      }
-    />
+        )}
+      />
     )
   }
 
   warriorsModal=()=>{
     return(
       <View>
-        <Modal isVisible={this.state.warriorsmodel}animationIn="slideInLeft" animationOut="slideOutLeft" hasBackdrop={true}
-            backdropColor={'transparent'} onBackdropPress={()=>{this.setState({warriorsmodel:false});}}>
-              <View style={{paddingVertical:20,alignItems:'flex-start',
-                            paddingHorizontal:20,backgroundColor:'#333333',borderRadius:10,width:width*0.4,
-                            marginHorizontal:-20}}>
-                    <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,fontWeight:'700'}]}>WARRIOS</Text>
-                    <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,paddingVertical:4,fontWeight:'700'}]}>Playing XI</Text>
-                    <FlatList style={{}} data={this.state.warriorsmodallist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-                      <View style={{paddingVertical:10,}}>
-                      <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',paddingVertical:4,fontWeight:'700'}]}>{item.name}</Text>
-                      </View>
-                    )}/>
-              </View>
+        <Modal isVisible={this.state.warriorsmodel}animationIn="slideInLeft"
+            animationOut="slideOutLeft" hasBackdrop={true}
+            backdropColor={'transparent'}
+            onBackdropPress={()=>{this.setState({warriorsmodel:false});}}>
+            <View style={{paddingVertical:20,alignItems:'flex-start',
+                            paddingHorizontal:20,backgroundColor:'#333333',borderRadius:10,
+                            width:width*0.4,marginHorizontal:-20}}>
+              <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,
+                            fontWeight:'700'}]}>WARRIOS</Text>
+              <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,paddingVertical:4,
+                            fontWeight:'700'}]}>Playing XI</Text>
+                <FlatList style={{}} data={this.state.warriorsmodallist}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({item, index})=>(
+                    <View style={{paddingVertical:10,}}>
+                      <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',
+                              paddingVertical:4,fontWeight:'700'}]}>{item.name}</Text>
+                    </View>
+                    )}
+                />
+            </View>
         </Modal>
       </View>
     )
@@ -311,18 +394,25 @@ class PageThird extends React.Component {
   lionsModal=()=>{
     return(
       <View>
-        <Modal isVisible={this.state.lionsmodel}animationIn="slideInRight" animationOut="slideOutRight" hasBackdrop={true}
-            backdropColor={'transparent'} onBackdropPress={()=>{this.setState({lionsmodel:false});}}>
+        <Modal isVisible={this.state.lionsmodel}animationIn="slideInRight"
+            animationOut="slideOutRight" hasBackdrop={true}
+            backdropColor={'transparent'}
+            onBackdropPress={()=>{this.setState({lionsmodel:false});}}>
               <View style={{paddingVertical:20,alignItems:'flex-start',
-                            paddingHorizontal:20,backgroundColor:'#333333',borderRadius:10,width:width*0.4,
-                            marginLeft:width*0.55}}>
-                    <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,fontWeight:'700'}]}>LIONS</Text>
-                    <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,paddingVertical:4,fontWeight:'700'}]}>Playing XI</Text>
-                    <FlatList style={{}} data={this.state.lionsmodallist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-                      <View style={{paddingVertical:10,}}>
-                      <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',paddingVertical:4,fontWeight:'700'}]}>{item.name}</Text>
-                      </View>
-                    )}/>
+                            paddingHorizontal:20,backgroundColor:'#333333',borderRadius:10,
+                            width:width*0.4,marginLeft:width*0.55}}>
+                <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,
+                            fontWeight:'700'}]}>LIONS</Text>
+                <Text style={[styles.text,{color:'#BDBDBD',fontSize:14,paddingVertical:4,
+                            fontWeight:'700'}]}>Playing XI</Text>
+                <FlatList style={{}} data={this.state.lionsmodallist}
+                  keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+                  <View style={{paddingVertical:10,}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'left',
+                            paddingVertical:4,fontWeight:'700'}]}>{item.name}</Text>
+                  </View>
+                  )}
+                />
               </View>
         </Modal>
       </View>
@@ -338,13 +428,11 @@ class PageThird extends React.Component {
           <ScrollView style={{flex:1,paddingTop:this.state.openView?40:0,paddingBottom:100}}>
               {!this.state.openView&&
                 <View>
-                {this.switchTab()}
-                <MyCarousel navigation={this.props.navigation}  />
+                  {this.switchTab()}
+                  <MyCarousel navigation={this.props.navigation}  />
                 </View>
               }
-              {this.state.activeSlide==0&&<View>
-              {this.cricketView()}</View>}
-
+              {this.state.activeSlide==0&&<View>{this.cricketView()}</View>}
 
               {this.state.openView &&
                 <ScrollView style={{paddingBottom:100}}>
@@ -353,11 +441,8 @@ class PageThird extends React.Component {
                   <View stytle={{height:0}}></View>
                 </ScrollView>
               }
-
-
           </ScrollView>
           <TabComponent navigation={this.props.navigation}  />
-
       </View>
     );
   }
@@ -401,11 +486,11 @@ class MyCarousel extends React.Component {
       }
     }
     _renderItem ({item, index}) {
-        return <View
-                  style={{width:width*0.35,
+        return <View style={{width:width*0.35,
                           justifyContent:'center',paddingVertical:4,marginHorizontal:0,
                           borderRadius:10,alignItems:'center'}}>
-                  <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:0,paddingLeft:0,fontWeight:'700'}]}>{item.name}</Text>
+                  <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:0,
+                            paddingLeft:0,fontWeight:'700'}]}>{item.name}</Text>
           </View>
     }
     render () {
@@ -422,7 +507,6 @@ class MyCarousel extends React.Component {
                   slideStyle={{alignItems:'center'}}
                   containerCustomStyle={'center'}
                 />
-
             </View>
         );
     }

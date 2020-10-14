@@ -21,6 +21,7 @@ import TabComponent  from '../navigationComponents/TabComponent.js';
 import Headers  from '../helpers/Headers.js';
 import settings from '../appSettings';
 import HttpsClient from '../helpers/HttpsClient';
+import Chat from '../screenComponents/Chat';
 
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
@@ -97,9 +98,9 @@ class ProfileFeedback extends React.Component {
                         <View key={i} style={{flex:1,backgroundColor: '#000',width:width*1,}} >
                         {i==0&&this.state.selectedTab==0&&
                            <View style={{flex:1,}}>
-                            <ScrollView>
-                              <Text style={[styles.text,{color:'#fff',fontSize:20}]}>FEEDBACK</Text>
-                            </ScrollView>
+
+                              <Chat/>
+                            
                            </View>
                         }
                         {i==1&&this.state.selectedTab==1&&

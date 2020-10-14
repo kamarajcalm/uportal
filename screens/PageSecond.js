@@ -8,8 +8,11 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
-import {Fontisto, FontAwesome,Entypo,SimpleLineIcons,MaterialCommunityIcons,Feather,Octicons,MaterialIcons,FontAwesome5 } from '@expo/vector-icons';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+import {Fontisto, FontAwesome,Entypo,
+  SimpleLineIcons,MaterialCommunityIcons,
+  Feather,Octicons,MaterialIcons,FontAwesome5 } from '@expo/vector-icons';
 import  Constants  from 'expo-constants';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
@@ -39,18 +42,16 @@ class PageSecond extends React.Component {
       }
     }
 
-
-
   render() {
-     const { messages } = this.state;
+    const { messages } = this.state;
     return (
       <View style={{flex:1,}}>
-          <Headers navigation={this.props.navigation} name={'Class wall'} screen={'PageSecond'}/>
-          <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+        <Headers navigation={this.props.navigation} name={'Class wall'} screen={'PageSecond'}/>
+        <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
           <Chat/>
           <View style={{height:50}}></View>
-          </View>
-          <TabComponent navigation={this.props.navigation}  />
+        </View>
+        <TabComponent navigation={this.props.navigation}  />
       </View>
     );
   }

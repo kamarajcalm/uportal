@@ -46,6 +46,11 @@ import Notes from '../screenComponents/Notes';
 
 import MyWallScreen from '../screenComponents/MyWallScreen';
 import TeachersWall from '../screenComponents/TeachersWall';
+import ProfileRank from '../screenComponents/ProfileRank';
+import InfoScreen from '../screenComponents/InfoScreen';
+import FacStuDetails from '../screenComponents/FacStuDetails';
+import ChooseType from '../type/ChooseType';
+import ProfileSchoolMarks from '../screenComponents/ProfileSchoolMarks';
 
 const HomeStack = createStackNavigator({
    Home:Home,
@@ -66,6 +71,8 @@ const PageFirstStack = createStackNavigator({
 const PageSecondStack = createStackNavigator({
    PageSecond:PageSecond,
    TeachersWall:TeachersWall,
+   InfoScreen:InfoScreen,
+   FacStuDetails:FacStuDetails
 },
 {
   initialRouteName: 'PageSecond',
@@ -103,7 +110,9 @@ const PageFourthStack = createStackNavigator({
    ProfileStatistics:ProfileStatistics,
    StaticsAcademic:StaticsAcademic,
    ProfileAttendance:ProfileAttendance,
-   ProfilCalendar:ProfilCalendar
+   ProfilCalendar:ProfilCalendar,
+   ProfileRank:ProfileRank,
+   ProfileSchoolMarks:ProfileSchoolMarks
 },
 {
   initialRouteName: 'PageFourth',
@@ -149,7 +158,6 @@ const OtpLoginStack = createStackNavigator({
   initialRouteName: 'OtpLogin',
 });
 
-
 const TabNavigator = createBottomTabNavigator({
   Home: HomeStack,
   PageFirst: PageFirstStack,
@@ -157,6 +165,20 @@ const TabNavigator = createBottomTabNavigator({
   PageThird: PageThirdStack,
   PageFourth: PageFourthStack,
 });
+
+const Navigater = createStackNavigator({
+   ChooseType:ChooseType,
+   TabNavigator:TabNavigator
+},
+{
+  initialRouteName: 'ChooseType',
+});
+Navigater.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = false;
+  return {
+    tabBarVisible,
+  };
+};
 
 const drawerNavigator = createDrawerNavigator({
   Home:{

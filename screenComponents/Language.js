@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,

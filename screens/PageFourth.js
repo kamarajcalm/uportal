@@ -8,8 +8,14 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
-import {Fontisto, FontAwesome,Entypo,SimpleLineIcons,MaterialCommunityIcons,Feather,Octicons,MaterialIcons,FontAwesome5 } from '@expo/vector-icons';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,
+  TouchableNativeFeedback} from 'react-native';
+
+import {Fontisto, FontAwesome,Entypo,
+  SimpleLineIcons,MaterialCommunityIcons,Feather,
+  Octicons,MaterialIcons,FontAwesome5 } from '@expo/vector-icons';
+
 import  Constants  from 'expo-constants';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
@@ -26,6 +32,7 @@ const fontFamily= settings.fontFamily
 const listofdetails=[{id:1,icon:require('../assets/marks.png'),name:'MARKS'},
                      {id:2,icon:require('../assets/Attendance.png'),name:'ATTENDANCE'},
                      {id:3,icon:require('../assets/statistics.png'),name:'STATICS'},
+                     {id:4,icon:require('../assets/statistics.png'),name:'RANKS'},
                      {id:4,icon:require('../assets/library.png'),name:'LIBRARY'},
                      {id:5,icon:require('../assets/syllabus.png'),name:'SYLLABUS & TIMETABLE'},
                      {id:6,icon:require('../assets/calendar.png'),name:'CALENDAR AND REMINDERS'},
@@ -43,18 +50,32 @@ class PageFourth extends React.Component {
     return {header:null}
   };
 
-  constructor(props) {
+  constructor(props){
     super(props);
     this.state={
-      listofdetails:listofdetails
+      listofdetails:listofdetails,
+      college:false,
+      school:false,
       }
-    }
+  }
 
-  profileHead=()=>{
+  componentDidMount(){}
+
+  profileHead=(type)=>{
     return(
       <View style={{justifyContent:'center',backgroundColor:'#292929'}}>
-        <Text style={[styles.text,{color:'#fff',textAlign:'center',paddingVertical:10,fontSize:14,fontWeight:'700'}]}>K L N COLLEGE OF ENGINEERING</Text>
-        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',paddingHorizontal:15,paddingVertical:10}}>
+        {type=='college'&&
+        <Text style={[styles.text,{color:'#fff',textAlign:'center',paddingVertical:10,
+            fontSize:14,fontWeight:'700'}]}>K L N COLLEGE OF ENGINEERING</Text>
+        }
+
+        {type=='school'&&
+        <Text style={[styles.text,{color:'#fff',textAlign:'center',paddingVertical:10,
+              fontSize:14,fontWeight:'700'}]}>THE CATHEDRAL HIGH SCHOOL</Text>
+        }
+
+        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',
+                      paddingHorizontal:15,paddingVertical:10}}>
           <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:width*0.2,width:width*0.2,borderRadius:50}}/>
           <View>
             <Text style={[styles.text,{fontSize:12,color:'#fff',fontWeight:'700'}]}>Unique ID : AAA1111</Text>
@@ -74,17 +95,20 @@ class PageFourth extends React.Component {
     )
   }
 
-  listOfDetails=()=>{
+  listOfDetails=(type)=>{
     return(
       <FlatList
-           style={{paddingBottom:100}}
-           data={this.state.listofdetails}
-           keyExtractor={(item, index) => index.toString()}
-           renderItem={({item, index})=>(
-             <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,alignItems:'center',justifyContent:'space-between',paddingVertical:10}} onPress={()=>{this.onListTouch(item)}}>
-             <View style={{flexDirection:'row',alignItems:'center'}}>
+          style={{paddingBottom:100}}
+          data={this.state.listofdetails}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+            <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,
+                        alignItems:'center',justifyContent:'space-between',paddingVertical:10}}
+               onPress={()=>{this.onListTouch(item,type)}}>
+              <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Image source={(item.icon)} style={{height:width*0.07,width:width*0.07,}}/>
-                <Text style={[styles.text,{color:'#fff',fontWeight:'700',fontSize:14,paddingHorizontal:10}]}>{item.name}</Text>
+                <Text style={[styles.text,{color:'#fff',fontWeight:'700',
+                          fontSize:14,paddingHorizontal:10}]}>{item.name}</Text>
               </View>
               <FontAwesome name='angle-right' size={18} color='#fff'/>
              </TouchableOpacity>
@@ -94,7 +118,7 @@ class PageFourth extends React.Component {
     )
   }
 
-  onListTouch=(item)=>{
+  onListTouch=(item,type)=>{
     console.log(item,'item')
     if(item.name=='FORMS'){
       this.props.navigation.navigate('ProfileForms')
@@ -112,7 +136,11 @@ class PageFourth extends React.Component {
       this.props.navigation.navigate('ProfileSetting')
     }
     else if(item.name=='MARKS'){
-      this.props.navigation.navigate('ProfileMarks')
+      if(type=='school'){
+        this.props.navigation.navigate('ProfileSchoolMarks')
+      }else {
+        this.props.navigation.navigate('ProfileMarks')
+      }
     }
     else if(item.name=='SYLLABUS & TIMETABLE'){
       this.props.navigation.navigate('ProfileSyllabus')
@@ -127,22 +155,42 @@ class PageFourth extends React.Component {
       this.props.navigation.navigate('ProfileStatistics')
     }
     else if(item.name=='ATTENDANCE'){
-      this.props.navigation.navigate('ProfileAttendance')
+      if(type=='school'){
+        this.props.navigation.navigate('ProfileAttendance',{school:true})
+      }else {
+        this.props.navigation.navigate('ProfileAttendance')
+      }
+
     }
     else if (item.name=='CALENDAR AND REMINDERS') {
       this.props.navigation.navigate('ProfilCalendar')
     }
+    else if (item.name=='RANKS'){
+      this.props.navigation.navigate('ProfileRank')
+    }
   }
 
   render() {
+    let college = false;
+    let school = false;
     return (
-      <View style={{flex:1,backgroundColor:'#000'}}>
-          <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
-            {this.profileHead()}
-            <ScrollView>
-            {this.listOfDetails()}
-            </ScrollView>
-          </View>
+      <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
+          {college ==false&&
+            <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
+              {this.profileHead('college')}
+              <ScrollView>
+                {this.listOfDetails('college')}
+              </ScrollView>
+            </View>
+          }
+          {school==true &&
+            <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
+              {this.profileHead('school')}
+              <ScrollView>
+                {this.listOfDetails('school')}
+              </ScrollView>
+            </View>
+          }
           <TabComponent navigation={this.props.navigation}  />
       </View>
     );
@@ -175,4 +223,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageFourth);
-// <Headers navigation={this.props.navigation} name={'PageFirst'} screen={'PageFourth'}/>

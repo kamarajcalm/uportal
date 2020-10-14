@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -35,10 +36,6 @@ const warriorsmodallist=[{name:'Tom Banton'},{name:'Baristow (wk)'},{name:'Malan
                          {name:'Chris jordan'},{name:'Tom curron'},{name:'Adil Rashid'},
                          {name:'Jofra Archer'},{name:'Mark Wood'},]
 
-
-
-
-
 class Notes extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -51,7 +48,6 @@ class Notes extends React.Component {
     this.state={
       like:0,
       timelinepost:'',
-
       comment:'',
       warriorsmodallist:warriorsmodallist,
       lionsmodallist:warriorsmodallist,
@@ -60,23 +56,19 @@ class Notes extends React.Component {
       }
     }
 
-
  componentDidMount(){
-
  }
 
   render() {
     return (
       <View style={{flex:1,backgroundColor:'gray'}}>
-            <Headers navigation={this.props.navigation} name={'NOTES'} screen={'Notes'}/>
+        <Headers navigation={this.props.navigation} name={'NOTES'} screen={'Notes'}/>
+        <View style={{flex:1,}}>
+          <ScrollView>
 
-            <View style={{flex:1,}}>
-            <ScrollView>
-
-            </ScrollView>
-            </View>
-
-            <TabComponent navigation={this.props.navigation}  />
+          </ScrollView>
+        </View>
+        <TabComponent navigation={this.props.navigation}  />
       </View>
     );
   }

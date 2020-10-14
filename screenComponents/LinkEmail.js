@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -53,7 +54,8 @@ class LinkEmail extends React.Component {
             screen={'LinkEmail'}/>
             <View style={{flex:1,paddingVertical:20}}>
             <View style={{marginVertical:20,marginHorizontal:25}}>
-              <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,fontWeight:'700'}]}>ENTER EMAIL ID</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,
+                    fontWeight:'700'}]}>ENTER EMAIL ID</Text>
               <TextInput style={{height: 45,borderWidth:1,borderColor:'#000',alignSelf:'center',
                                   width:'100%',borderRadius:10,color:'#fff',marginVertical:20,
                                   paddingHorizontal:15,backgroundColor:'#333333'}}
@@ -61,14 +63,15 @@ class LinkEmail extends React.Component {
                   selectionColor={'#000'}
                   onChangeText={emailid => { this.setState({ emailid: emailid }) }}
                   value={this.state.emailid}
-
-               />
-               <TouchableOpacity style={{alignSelf:'center',paddingHorizontal:25,paddingVertical:10,backgroundColor:'#4F4F4F',marginVertical:20,borderRadius:7}} onPress={()=>{receivedValue(this.state.emailid)
-            this.props.navigation.goBack()}}>
-               <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700'}]}>LINK</Text>
-               </TouchableOpacity>
-               </View>
+              />
+              <TouchableOpacity style={{alignSelf:'center',paddingHorizontal:25,paddingVertical:10,
+                      backgroundColor:'#4F4F4F',marginVertical:20,borderRadius:7}}
+                      onPress={()=>{receivedValue(this.state.emailid)
+                                  this.props.navigation.goBack()}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700'}]}>LINK</Text>
+              </TouchableOpacity>
             </View>
+          </View>
       </View>
     );
   }

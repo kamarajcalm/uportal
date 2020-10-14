@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -29,11 +30,6 @@ const url = settings.url
 const fontFamily=settings.fontFamily
 const tabs = [{name:'NOTES'},
               {name:'VIDEOS'}]
-
-
-
-
-
 
 const notes=[{chap:'CHAPTER 1',desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'},
              {chap:'CHAPTER 2',desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'},
@@ -76,42 +72,56 @@ class MediaNotesVideo extends React.Component {
     this.setState({scrollY:new Animated.Value(0)})
  }
 
- notes=()=>{
-   return(
-     <View style={{marginVertical:15}}>
-       <FlatList  data={this.state.notes} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-         <TouchableOpacity   onPress={()=>{this.props.navigation.navigate('NotesVideosData',{notes:
-         true})}} style={{flexDirection:'row',marginHorizontal:15,marginVertical:8,backgroundColor:'#333333',borderRadius:7,alignItems:'center',justifyContent:'space-between',paddingHorizontal:15}}>
+  notes=()=>{
+    return(
+      <View style={{marginVertical:15}}>
+        <FlatList  data={this.state.notes}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+          <TouchableOpacity
+            onPress={()=>{this.props.navigation.navigate('NotesVideosData',{notes:true})}}  style={{flexDirection:'row',marginHorizontal:15,marginVertical:8,
+                     backgroundColor:'#333333',borderRadius:7,alignItems:'center',
+                     justifyContent:'space-between',paddingHorizontal:15}}>
             <View>
-             <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:4,fontWeight:'700'}]}>{item.chap}</Text>
-             <Text style={[styles.text,{color:'#fff',fontSize:12,paddingVertical:4,fontWeight:'700'}]}>{item.desc}</Text>
-           </View>
-           <View>
-            <FontAwesome name={'angle-right'} size={20} color={'#fff'}/>
-          </View>
-         </TouchableOpacity>
-       )}/>
-     </View>
-   )
- }
- videos=()=>{
-   return(
-     <View style={{marginVertical:15}}>
-       <FlatList  data={this.state.notes} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-         <TouchableOpacity  onPress={()=>{this.props.navigation.navigate('NotesVideosData',{videos:
-         true})}} style={{flexDirection:'row',marginHorizontal:15,marginVertical:8,backgroundColor:'#333333',borderRadius:7,alignItems:'center',justifyContent:'space-between',paddingHorizontal:15}}>
+              <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:4,
+                    fontWeight:'700'}]}>{item.chap}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,paddingVertical:4,
+                    fontWeight:'700'}]}>{item.desc}</Text>
+            </View>
             <View>
-             <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:4,fontWeight:'700'}]}>{item.chap}</Text>
-             <Text style={[styles.text,{color:'#fff',fontSize:12,paddingVertical:4,fontWeight:'700'}]}>{item.desc}</Text>
-           </View>
-           <View>
-            <FontAwesome name={'angle-right'} size={20} color={'#fff'}/>
-          </View>
-         </TouchableOpacity>
+              <FontAwesome name={'angle-right'} size={20} color={'#fff'}/>
+            </View>
+          </TouchableOpacity>
        )}/>
-     </View>
-   )
- }
+      </View>
+    )
+  }
+
+  videos=()=>{
+    return(
+      <View style={{marginVertical:15}}>
+        <FlatList  data={this.state.notes}
+             keyExtractor={(item, index) => index.toString()}
+             renderItem={({item, index})=>(
+          <TouchableOpacity
+              onPress={()=>{this.props.navigation.navigate('NotesVideosData',{videos:true})}}
+              style={{flexDirection:'row',marginHorizontal:15,marginVertical:8,
+                      backgroundColor:'#333333',borderRadius:7,alignItems:'center',
+                      justifyContent:'space-between',paddingHorizontal:15}}>
+            <View>
+              <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:4,
+                      fontWeight:'700'}]}>{item.chap}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:12,paddingVertical:4,
+                      fontWeight:'700'}]}>{item.desc}</Text>
+            </View>
+            <View>
+              <FontAwesome name={'angle-right'} size={20} color={'#fff'}/>
+            </View>
+          </TouchableOpacity>
+       )}/>
+      </View>
+    )
+  }
 
   render() {
     let left = this.state.scrollX.interpolate({
@@ -122,20 +132,23 @@ class MediaNotesVideo extends React.Component {
 
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={'MEDIA'}
+          <Headers navigation={this.props.navigation} name={'MEDIA'}
             screen={'MediaNotesVideo'}/>
-            <View style={{flex:1,alignItems:'center',backgroundColor:'#000'}}>
-              <Animated.View style={{flexDirection: 'row',}}>
+          <View style={{flex:1,alignItems:'center',backgroundColor:'#000'}}>
+            <Animated.View style={{flexDirection: 'row',}}>
                   {tabs.map((item, i) => {
                     return (
-                      <TouchableOpacity key={i} onPress={()=>{this.setState({selectedTab:i});this.scroll.scrollTo({ x: (i)*width });this.setState({scrollY:new Animated.Value(0)})}} style={{flex:1,borderBottomWidth: 0,borderColor:'#f2f2f2',alignItems: 'center',justifyContent: 'center',height:45}} >
-                       <Text   style={[styles.text,{fontSize:16,fontWeight:'700',color:this.state.selectedTab==i?'#fff':'#d6d6d6'}]}>{item.name}</Text>
+                      <TouchableOpacity key={i} onPress={()=>{this.setState({selectedTab:i});this.scroll.scrollTo({ x: (i)*width });this.setState({scrollY:new Animated.Value(0)})}} style={{flex:1,borderBottomWidth: 0,borderColor:'#f2f2f2',
+                              alignItems: 'center',justifyContent: 'center',height:45}} >
+                        <Text   style={[styles.text,{fontSize:16,fontWeight:'700',
+                            color:this.state.selectedTab==i?'#fff':'#d6d6d6'}]}>{item.name}</Text>
                       </TouchableOpacity>
                     );
                   })}
                   <Animated.View
-                  style={{ height: 4, width: '50%', backgroundColor: '#fff',position: 'absolute',bottom: 0,left:0,transform: [{translateX:left}]}}/>
-             </Animated.View>
+                  style={{ height:4,width:'50%',backgroundColor:'#fff',position:'absolute',
+                          bottom: 0,left:0,transform: [{translateX:left}]}}/>
+            </Animated.View>
              <ScrollView
                 horizontal={true}
                 pagingEnabled={true}

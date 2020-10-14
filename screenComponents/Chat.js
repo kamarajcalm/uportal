@@ -124,7 +124,6 @@ export default class Chat extends Component {
 
     return (
       <View style={[styles.container,{backgroundColor:'#000',width:'100%'}]}>
-        
         <FlatList style={styles.list}
           data={this.state.data}
           keyExtractor= {(item) => {
@@ -137,17 +136,28 @@ export default class Chat extends Component {
             let itemStyle = inMessage ? styles.itemIn : styles.itemOut;
             return (
               <View style={[styles.item, itemStyle,{backgroundColor:'#000'}]}>
-                {!inMessage && this.renderDate(item.date)&&<View style={{flexDirection:'row',alignItems:'center',borderWidth:1,borderColor:'#000',backgroundColor:'#000'}}><View style={[styles.balloon,{backgroundColor:'#fff',marginHorizontal:10}]}>
-                  <Text style={{color:'#000'}}>{item.message}</Text>
 
-                </View><Image source={(item.attachment)} style={{width:50,height:50,borderRadius:30}}/></View>}
+                {!inMessage && this.renderDate(item.date)&&<View style={{flexDirection:'row',alignItems:'center',borderWidth:1,
+                        borderColor:'#000',backgroundColor:'#000'}}>
+                  <View style={[styles.balloon,{backgroundColor:'#fff',marginHorizontal:10}]}>
+                    <Text style={{color:'#000'}}>{item.message}</Text>
+                  </View>
+                  <Image source={(item.attachment)} style={{width:50,height:50,borderRadius:30}}/>
+                </View>}
 
-                {inMessage && this.renderDate(item.date)&&<View style={{flexDirection:'row',alignItems:'center',borderWidth:1,borderColor:'#000',backgroundColor:'#000'}}><Image source={(item.attachment)} style={{width:50,height:50,borderRadius:30}}/><View style={[styles.balloon,{backgroundColor:'#2f2f2f',marginHorizontal:10}]}>
-                  <Text style={{color:'#fff'}}>{item.message}</Text>
-                </View></View>}
+                {inMessage && this.renderDate(item.date)&&<View style={{flexDirection:'row',alignItems:'center',borderWidth:1,
+                        borderColor:'#000',backgroundColor:'#000'}}>
+                  <Image source={(item.attachment)}
+                    style={{width:50,height:50,borderRadius:30}}/>
+                  <View style={[styles.balloon,{backgroundColor:'#2f2f2f',marginHorizontal:10}]}>
+                    <Text style={{color:'#fff'}}>{item.message}</Text>
+                  </View>
+                </View>}
+
               </View>
             )
-          }}/>
+          }}
+        />
         <View style={[styles.footer,{backgroundColor:'#000',alignItems:'center',borderWidth:0}]}>
           <View style={[styles.inputContainer,{backgroundColor:'#000'}]}>
             <TextInput style={[styles.inputs,{backgroundColor:'#2f2f2f',borderRadius:7,padding:6}]}
