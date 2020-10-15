@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -63,12 +64,18 @@ const dropdown=[{label: 'ALL SEMESTERS', value: 'ALL SEMESTERS'},{label: 'SEM I'
 const droptest=[{label: 'TEST-1', value: 'TEST-1'},{label: 'TEST-1', value: 'TEST-1'},
                 {label: 'TEST-1', value: 'TEST-1'}]
 
-const subjects=[{name:'MATHS',color1:'#FF0000',color:(opacity=1)=>`rgba(255,0,0,${opacity})`,data:[20,30,70,10]},
-                {name:'SCIENCE',color1:'#FFE500',color:(opacity=1)=>`rgba(255,230,0,${opacity})`,data:[40,50,90,20]},
-                {name:'SOCIAL',color1:'#04B600',color:(opacity=1)=>`rgba(4,182,0,${opacity})`,data:[10,20,90,40]},
-                {name:'ENGLISH',color1:'#001AFF',color:(opacity=1)=>`rgba(0,26,255,${opacity})`,data:[30,50,40,20]},
-                {name:'KANNDA',color1:'#FF4D00',color:(opacity=1)=>`rgba(255,77,0,${opacity})`,data:[40,50,90,20]},
-                {name:'HINDI',color1:'#10E9DC',color:(opacity=1)=>`rgba(16,233,220,${opacity})`,data:[40,20,90,60]},]
+const subjects=[{name:'MATHS',color1:'#FF0000',data:[20,30,70,10],
+                 color:(opacity=1)=>`rgba(255,0,0,${opacity})`,},
+                {name:'SCIENCE',color1:'#FFE500',data:[40,50,90,20],
+                 color:(opacity=1)=>`rgba(255,230,0,${opacity})`},
+                {name:'SOCIAL',color1:'#04B600',data:[10,20,90,40],
+                color:(opacity=1)=>`rgba(4,182,0,${opacity})`},
+                {name:'ENGLISH',color1:'#001AFF',data:[30,50,40,20],
+                color:(opacity=1)=>`rgba(0,26,255,${opacity})`},
+                {name:'KANNDA',color1:'#FF4D00',data:[40,50,90,20],
+                color:(opacity=1)=>`rgba(255,77,0,${opacity})`,},
+                {name:'HINDI',color1:'#10E9DC',data:[40,20,90,60],
+                color:(opacity=1)=>`rgba(16,233,220,${opacity})`,},]
 const data = {labels: ["1", "2", "3", "4", "5", "6","7","8"],
                   datasets: [
                     {
@@ -180,7 +187,7 @@ class StaticsAcademic extends React.Component {
               color: this.state.color,//(opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
               style: {borderRadius: 0,borderWidth:1,borderColor:'#fff'},
-              propsForDots: {r: "2",strokeWidth: "4",stroke: this.state.color,},
+              propsForDots: {r: "4",strokeWidth: "8",stroke: this.state.color,},
               propsForBackgroundLines:{color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,}
             }}
 

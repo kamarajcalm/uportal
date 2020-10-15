@@ -116,8 +116,9 @@ export default class Chat extends Component {
 
  sendMessage = message => {
      this.setState(prevState => ({
-       messages: [message, ...prevState.messages],
+       messages: [this.state.message, ...prevState.messages],
      }));
+     console.log(this.state.messages,'this.state.message')
    };
 
   render() {

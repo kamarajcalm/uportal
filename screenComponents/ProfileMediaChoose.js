@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -28,9 +29,9 @@ const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
 const fontFamily =settings.fontFamily
-const semdata=[{name:'LANGUAGE'},{name:'MATHEMATICS'},{name:'ENGLISH'},
-                {name:'LANGUAGE'},{name:'MATHEMATICS'},
-                {name:'ENGLISH'},]
+const semdata=[{name:'LANGUAGE'},{name:'MATHEMATICS'},
+               {name:'ENGLISH'},{name:'LANGUAGE'},
+               {name:'MATHEMATICS'},{name:'ENGLISH'},]
 
 const otherdata =[{name:'ENGINEERING'},{name:'MEDICAL'},{name:'COMMERCE'}]
 
@@ -49,11 +50,11 @@ class ProfileMediaChoose extends React.Component {
       a2:false,
       semdata:semdata,
       otherdata:otherdata,
-      }
     }
+  }
 
- componentDidMount=()=>{
- }
+  componentDidMount=()=>{
+  }
 
   touchsem=(semesters)=>{
     if(semesters.quespaper!=null){
@@ -82,14 +83,21 @@ class ProfileMediaChoose extends React.Component {
 
             <View style={{flex:1,paddingVertical:50,justifyContent:'center',alignItems:'center'}}>
               {semesters.item &&
-                <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',paddingVertical:15,fontWeight:'700'}]}>CHOOSE SUBJECT</Text>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
+                          paddingVertical:15,fontWeight:'700'}]}>CHOOSE SUBJECT</Text>
               }
-              <FlatList contenContainerStyle={{justifyContent:'space-between',}} data={semesters.item?this.state.semdata:this.state.otherdata} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-                <TouchableOpacity  onPress={()=>{semesters.item?this.touchsem(semesters):this.touch(semesters)}} style={{marginHorizontal:10,marginVertical:15,paddingHorizontal:40,backgroundColor:'#333333',borderRadius:7,}}>
-                  <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',paddingVertical:10,fontWeight:'700'}]}>{item.name}</Text>
-                </TouchableOpacity>
-              )}/>
-          </View>
+              <FlatList
+                contenContainerStyle={{justifyContent:'space-between',}} data={semesters.item?this.state.semdata:this.state.otherdata}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({item, index})=>(
+                  <TouchableOpacity  onPress={()=>{semesters.item?this.touchsem(semesters):this.touch(semesters)}} style={{marginHorizontal:10,marginVertical:15,paddingHorizontal:40,
+                          backgroundColor:'#333333',borderRadius:7,}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
+                          paddingVertical:10,fontWeight:'700'}]}>{item.name}</Text>
+                  </TouchableOpacity>
+                )}
+              />
+            </View>
       </View>
     );
   }

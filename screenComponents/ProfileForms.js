@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -46,17 +47,16 @@ class ProfileForms extends React.Component {
     super(props);
     this.state={
       formlist:formlist,
-      }
     }
+  }
 
 
- componentDidMount(){
+  componentDidMount(){
+  }
 
- }
-
- switchTab=()=>{
-   return(
-     <SwitchSelector
+  switchTab=()=>{
+    return(
+      <SwitchSelector
          initial={0}
          onPress={value => this.setState({ gender: value })}
          textColor={'#fff'} //'#7a44cf'
@@ -80,39 +80,48 @@ class ProfileForms extends React.Component {
            { label: "INTER", value: "m",  },
            { label: "COMPLETED", value: "m",  }
          ]}
-       />
-   )
- }
+      />
+    )
+  }
 
- formList=()=>{
-   return(
-     <View style={{justifyContent:'center'}}>
-      <FlatList style={{}} data={this.state.formlist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-        <TouchableOpacity style={{borderRadius:10,backgroundColor:'#3F3F3F',width:width*0.9,paddingVertical:10,paddingHorizontal:10,marginVertical:10}}onPress={()=>{this.props.navigation.navigate('ProfileFillForm',{item:item})}}>
-          <Text style={[styles.text,{fontSize:16,color:'#fff',paddingVertical:6,fontWeight:'700'}]} numberOfLines={1}>{item.name}</Text>
-          <Text style={[styles.text,{fontSize:14,color:'#fff',paddingVertical:6,fontWeight:'400'}]} numberOfLines={4}>{item.desc}</Text>
-          <TouchableOpacity>
-            <Text style={[styles.text,{fontSize:12,color:'#fff',textDecorationLine: "underline",paddingVertical:6,fontWeight:'700'}]}>APPLY NOW</Text>
-          </TouchableOpacity>
-        </TouchableOpacity>
-      )}/>
-     </View>
-   )
- }
+  formList=()=>{
+    return(
+      <View style={{justifyContent:'center'}}>
+        <FlatList style={{}} data={this.state.formlist}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+            <TouchableOpacity   style={{borderRadius:10,backgroundColor:'#3F3F3F',
+                                        width:width*0.9,paddingVertical:10,
+                                        paddingHorizontal:10,marginVertical:10}}
+              onPress={()=>{this.props.navigation.navigate('ProfileFillForm',{item:item})}}>
+              <Text style={[styles.text,{fontSize:16,color:'#fff',paddingVertical:6,
+                        fontWeight:'700'}]} numberOfLines={1}>{item.name}</Text>
+              <Text style={[styles.text,{fontSize:14,color:'#fff',paddingVertical:6,
+                        fontWeight:'400'}]} numberOfLines={4}>{item.desc}</Text>
+              <TouchableOpacity>
+                <Text style={[styles.text,{fontSize:12,color:'#fff',
+                        textDecorationLine: "underline",
+                        paddingVertical:6,fontWeight:'700'}]}>APPLY NOW</Text>
+              </TouchableOpacity>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    )
+  }
 
 
 
   render() {
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={'FORMS'} screen={'ProfileForms'}/>
-            <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-              <ScrollView >
-                {this.switchTab()}
-                {this.formList()}
-              </ScrollView>
-            </View>
-
+        <Headers navigation={this.props.navigation} name={'FORMS'} screen={'ProfileForms'}/>
+        <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+          <ScrollView >
+            {this.switchTab()}
+            {this.formList()}
+          </ScrollView>
+        </View>
       </View>
     );
   }

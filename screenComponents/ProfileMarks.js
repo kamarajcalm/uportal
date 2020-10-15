@@ -78,11 +78,13 @@ class ProfileMarks extends React.Component {
                   {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>}
                   <View style={{flex:1,paddingHorizontal:6,flexDirection:'row'}}>
                     <View style={{width:60}}>
-                      <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:item.no=='#'?'700':'400'}]}>{item.no}</Text>
+                      <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',
+                              fontWeight:item.no=='#'?'700':'400'}]}>{item.no}</Text>
                     </View>
                     <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
                     <View style={{width:140}}>
-                      <Text style={[styles.text,{color:'#fff',paddingHorizontal:10,fontSize:12,fontWeight:item.no=='#'?'700':'400'}]}>{item.sub}</Text>
+                      <Text style={[styles.text,{color:'#fff',paddingHorizontal:10,fontSize:12,
+                              fontWeight:item.no=='#'?'700':'400'}]}>{item.sub}</Text>
                     </View>
                   <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
                 </View>
@@ -145,7 +147,8 @@ class ProfileMarks extends React.Component {
           </View>
           <View style={{flexDirection:'row'}}>
             <Text style={[styles.text,
-                        {color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',paddingVertical:2,paddingHorizontal:2}]}>CGPA</Text>
+                        {color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',paddingVertical:2,
+                        paddingHorizontal:2}]}>CGPA</Text>
             <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:6}}>
               <Text style={[styles.text,
                         {color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',paddingVertical:0.2,paddingHorizontal:2}]}>7.6</Text>

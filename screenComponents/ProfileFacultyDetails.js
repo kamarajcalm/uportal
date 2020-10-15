@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -57,25 +58,32 @@ class ProfileFacultyDetails extends React.Component {
  componentDidMount(){
  }
 
- touch=(item,index)=>{
-   this.props.navigation.navigate('PFacultyDetailsCarousel')
- }
+  touch=(item,index)=>{
+    this.props.navigation.navigate('PFacultyDetailsCarousel')
+  }
 
- depatList=()=>{
-   return(
-     <View style={{justifyContent:'center',marginVertical:20}}>
-      <FlatList style={{}} data={this.state.depatlist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-        <View style={{marginVertical:0}}>
-        <TouchableOpacity style={{flexDirection:'row',justifyContent:'space-between',backgroundColor:'#000',width:width,paddingHorizontal:20,paddingVertical:15,alignItems:'center'}}onPress={()=>{this.touch(item,index)}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700'}]}>{item.depat}</Text>
-            <FontAwesome name='angle-right' size={20} color='#fff'/>
-        </TouchableOpacity>
-        <View style={{borderWidth:0.5,borderColor:'#fff'}}></View>
-        </View>
-      )}/>
-     </View>
-   )
- }
+  depatList=()=>{
+    return(
+      <View style={{justifyContent:'center',marginVertical:20}}>
+        <FlatList style={{}} data={this.state.depatlist}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+            <View style={{marginVertical:0}}>
+              <TouchableOpacity
+                style={{flexDirection:'row',justifyContent:'space-between',
+                          backgroundColor:'#000',width:width,paddingHorizontal:20,
+                          paddingVertical:15,alignItems:'center'}}
+                onPress={()=>{this.touch(item,index)}}>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,
+                            fontWeight:'700'}]}>{item.depat}</Text>
+                <FontAwesome name='angle-right' size={20} color='#fff'/>
+              </TouchableOpacity>
+            <View style={{borderWidth:0.5,borderColor:'#fff'}}></View>
+          </View>
+        )}/>
+      </View>
+    )
+  }
 
   render() {
     return (

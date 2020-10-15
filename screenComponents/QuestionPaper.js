@@ -56,20 +56,21 @@ class QuestionPaper extends React.Component {
     super(props);
     this.state={
       questionpapers:questionpapers
-      }
     }
+  }
 
- componentDidMount(){
- }
+  componentDidMount(){
+  }
 
- questionPapers=()=>{
-   return(
+  questionPapers=()=>{
+    return(
      <View style={{marginVertical:15,marginHorizontal:10}}>
        <FlatList  data={this.state.questionpapers} numColumns={3} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
          <TouchableOpacity style={{borderRadius:7,marginHorizontal:10}}>
             <View>
              <Image source={(item.img)} style={{height:width*0.3,width:width*0.27,borderRadius:7}}/>
-             <Text style={[styles.text,{color:'#fff',fontSize:12,paddingVertical:4,fontWeight:'700',textAlign:'center'}]}>{item.name}</Text>
+             <Text style={[styles.text,{color:'#fff',fontSize:12,paddingVertical:4,
+             fontWeight:'700',textAlign:'center'}]}>{item.name}</Text>
            </View>
          </TouchableOpacity>
        )}/>

@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -81,204 +82,273 @@ class ProfileSyllabus extends React.Component {
       itemIndex:1,
       syllabusdata:syllabusdata,
       semesterdata:semesterdata,
-      today : new Date(),
-      month:month
+      month:month,
+      selectedDate: null
       }
     }
 
- componentDidMount(){
- }
+  componentDidMount(){
+    this.setDate();
+  }
 
- handlePageChange=(e)=>{
-   var offset = e.nativeEvent.contentOffset;
+  handlePageChange=(e)=>{
+    var offset = e.nativeEvent.contentOffset;
     if(offset) {
       var page = Math.round(offset.x / width) ;
       this.setState({selectedTab:page})
     }
     this.setState({scrollY:new Animated.Value(0)})
- }
+  }
 
- touch=(item,index)=>{
+  touch=(item,index)=>{
+    this.state.syllabusdata[index].a1=!this.state.syllabusdata[index].a1
+    this.setState({syllabusdata})
+    if(this.state.syllabusdata[index].a1==true){
+      this.setState({open:true})
+      this.setState({itemIndex:item.pk})
+    }else{
+      this.setState({open:false})
+    }
+    console.log(this.state.open,'open')
+  }
 
-     this.state.syllabusdata[index].a1=!this.state.syllabusdata[index].a1
-     this.setState({syllabusdata})
+  touch1=(item,index)=>{
+    this.state.semesterdata[index].a1=!this.state.semesterdata[index].a1
+    this.setState({semesterdata})
+  }
 
-   if(this.state.syllabusdata[index].a1==true){
-     this.setState({open:true})
-     this.setState({itemIndex:item.pk})
-   }else{
-     this.setState({open:false})
-   }
-   console.log(this.state.open,'open')
- }
- touch1=(item,index)=>{
-     this.state.semesterdata[index].a1=!this.state.semesterdata[index].a1
-     this.setState({semesterdata})
- }
-
- syllabusDetails=(item,index)=>{
-   console.log(item.syllabusdetails,'item.syllabusdetails')
-   return(
-     <View style={{marginTop:10,borderRadius:10}}>
-        <FlatList style={{}} data={item.syllabusdetails} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+  syllabusDetails=(item,index)=>{
+    console.log(item.syllabusdetails,'item.syllabusdetails')
+    return(
+      <View style={{marginTop:10,borderRadius:10}}>
+        <FlatList style={{}} data={item.syllabusdetails}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
           <View>
-            <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',paddingHorizontal:6,}}>
+            <View style={{flex:1,flexDirection:'row',
+                    justifyContent:'space-between',paddingHorizontal:6,}}>
               <View style={{flex:0.25,justifyContent:'flex-start',paddingVertical:10}}>
-              <Text style={[styles.text,{fontSize:16,fontWeight:'700',textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.term}</Text>
+                <Text style={[styles.text,{fontSize:16,fontWeight:'700',textAlign:'left',
+                      color:'#fff',paddingHorizontal:10}]}>{item.term}</Text>
               </View>
               <View style={{flex:0.75,paddingHorizontal:10,paddingVertical:10}}>
-                <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'400'}]}>{item.chap1}</Text>
-                <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'400'}]}>{item.chap2}</Text>
-                <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'400'}]}>{item.chap3}</Text>
-                <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'400'}]}>{item.chap4}</Text>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,
+                        fontWeight:'400'}]}>{item.chap1}</Text>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,
+                        fontWeight:'400'}]}>{item.chap2}</Text>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,
+                        fontWeight:'400'}]}>{item.chap3}</Text>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,
+                        fontWeight:'400'}]}>{item.chap4}</Text>
               </View>
             </View>
-          <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
-        </View>
+            <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+          </View>
         )}
         />
-     </View>
-   )
- }
+      </View>
+    )
+  }
 
- semTimeTable=(item,index)=>{
-   console.log(item.semtimetable,'item.semtimetable')
-   return(
-     <View style={{margin:10,borderRadius:10}}>
-        <FlatList style={{}} data={item.semtimetable} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+  semTimeTable=(item,index)=>{
+    console.log(item.semtimetable,'item.semtimetable')
+    return(
+      <View style={{margin:10,borderRadius:10}}>
+        <FlatList style={{}} data={item.semtimetable}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
           <View style={{flexDirection:'row',justifyContent:'space-between'}}>
               <View style={{flex:0.4,justifyContent:'flex-start',paddingVertical:10}}>
-              <Text style={[styles.text,{fontSize:12,fontWeight:item.day=='DAY'?'700':'400',textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.day}</Text>
+                <Text style={[styles.text,{fontSize:12,fontWeight:item.day=='DAY'?'700':'400',
+                        textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.day}</Text>
               </View>
               <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
               <View style={{flexDirection:'row',flex:0.6,justifyContent:'space-between'}}>
-              <ScrollView style={{}} horizontal={true}>
-              <View style={{flexDirection:'row'}}>
-                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.i}</Text>
-                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
-                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.ii}</Text>
-                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
-                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.iii}</Text>
-                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
-                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.iv}</Text>
-                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
-                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.v}</Text>
-                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
-                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.vi}</Text>
-                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
-                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.vii}</Text>
-                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
-                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,textAlign:'center',paddingVertical:10}]}>{item.viii}</Text>
-                <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
-                </View>
-              </ScrollView>
+                <ScrollView style={{}} horizontal={true}>
+                  <View style={{flexDirection:'row'}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:12,
+                              fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,
+                              textAlign:'center',paddingVertical:10}]}>{item.i}</Text>
+                    <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                    <Text style={[styles.text,{color:'#fff',fontSize:12,
+                              fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,
+                              textAlign:'center',paddingVertical:10}]}>{item.ii}</Text>
+                    <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                    <Text style={[styles.text,{color:'#fff',fontSize:12,
+                              fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,
+                              textAlign:'center',paddingVertical:10}]}>{item.iii}</Text>
+                    <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                    <Text style={[styles.text,{color:'#fff',fontSize:12,
+                              fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,
+                              textAlign:'center',paddingVertical:10}]}>{item.iv}</Text>
+                    <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                    <Text style={[styles.text,{color:'#fff',fontSize:12,
+                              fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,
+                              textAlign:'center',paddingVertical:10}]}>{item.v}</Text>
+                    <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                    <Text style={[styles.text,{color:'#fff',fontSize:12,
+                              fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,
+                              textAlign:'center',paddingVertical:10}]}>{item.vi}</Text>
+                    <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                    <Text style={[styles.text,{color:'#fff',fontSize:12,
+                              fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,
+                              textAlign:'center',paddingVertical:10}]}>{item.vii}</Text>
+                    <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                    <Text style={[styles.text,{color:'#fff',fontSize:12,
+                              fontWeight:item.day=='DAY'?'700':'400',width:width*0.2,
+                              textAlign:'center',paddingVertical:10}]}>{item.viii}</Text>
+                    <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:10}}/>
+                  </View>
+                </ScrollView>
               </View>
-          </View>)}
-        />
-
-     </View>
-   )
- }
-
-
-
- syllabus=()=>{
-   return(
-     <View style={{marginVertical:10}}>
-     <FlatList style={{}} data={this.state.syllabusdata} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-      <View style={{borderRadius:10,marginHorizontal:15,marginVertical:10,backgroundColor:'#3F3F3F'}}>
-        <TouchableOpacity style={{height:width*0.35,alignItems:'center',justifyContent:'center',shadowOpacity: 0.18,elevation:5,backgroundColor:'#3F3F3F',shadowColor:'#000',borderRadius:10,shadowOffset: {height: 2,width:0}}} onPress={()=>{this.touch(item,index)}}>
-            <Image source={(item.img)} style={{height:'100%',width:'100%',borderRadius:10,zIndex:0,opacity:0.5}}/>
-            <View style={{alignSelf:'center',position:'absolute',alignItems:'center',justifyContent:'center',zIndex:1}}>
-              <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700'}]}>{item.name}</Text>
-              <FontAwesome name='angle-down' size={20} color='#fff'/>
-            </View>
-        </TouchableOpacity>
-        {(item.a1&&item.pk==this.state.itemIndex)&&
-          <ScrollView style={{backgroundColor:'#3F3F3F',borderRadius:10,paddingVertical:10}}>
-              {this.syllabusDetails(item,index)}
-          </ScrollView>
-        }
+            </View>)}
+          />
       </View>
-      )}
-      />
-     </View>
-   )
- }
-next=(param,date)=>{
-  if(param=='prev'){
-    var today=this.state.today.toDateString(this.state.today.getDate()-1);
+    )
   }
-  else if(param=='next'){
 
+
+
+  syllabus=()=>{
+    return(
+      <View style={{marginVertical:10}}>
+        <FlatList style={{}} data={this.state.syllabusdata}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+            <View style={{borderRadius:10,marginHorizontal:15,marginVertical:10,
+                          backgroundColor:'#3F3F3F'}}>
+              <TouchableOpacity style={{height:width*0.35,alignItems:'center',justifyContent:'center',
+              shadowOpacity: 0.18,elevation:5,backgroundColor:'#3F3F3F',
+              shadowColor:'#000',borderRadius:10,shadowOffset: {height: 2,width:0}}}
+              onPress={()=>{this.touch(item,index)}}>
+                <Image source={(item.img)} style={{height:'100%',width:'100%',borderRadius:10,zIndex:0,opacity:0.5}}/>
+                <View style={{alignSelf:'center',position:'absolute',alignItems:'center',
+                        justifyContent:'center',zIndex:1}}>
+                  <Text style={[styles.text,{color:'#fff',fontSize:16,
+                          fontWeight:'700'}]}>{item.name}</Text>
+                  <FontAwesome name='angle-down' size={20} color='#fff'/>
+                </View>
+              </TouchableOpacity>
+              {(item.a1&&item.pk==this.state.itemIndex)&&
+                <ScrollView style={{backgroundColor:'#3F3F3F',borderRadius:10,paddingVertical:10}}>
+                  {this.syllabusDetails(item,index)}
+                </ScrollView>
+              }
+            </View>
+          )}
+        />
+      </View>
+    )
   }
-}
- timeTable=()=>{
-   var date=this.state.today.getDate() + " "+ this.state.month[this.state.today.getMonth()] +" "+ this.state.today.getFullYear();
-   return(
-     <View style={{alignItems:'center',paddingVertical:20}}>
-        <View style={{flexDirection:'row',justifyContent:'space-between',paddingHorizontal:10,paddingVertical:10,width:width*0.6,alignItems:'center'}}>
-          <TouchableOpacity style={{padding:8}} onPress={()=>{this.next('prev',date)}}>
+
+
+
+  setDate = (newDate) => {
+    const date = newDate || new Date();
+    this.setState({
+      selectedDate:
+        date.getDate() + " " + this.state.month[date.getMonth()] + " " + date.getFullYear()
+    });
+  };
+
+  getPreviousDate = () => {
+    const { selectedDate } = this.state
+    const currentDayInMilli = new Date(selectedDate).getTime()
+    const oneDay = 1000 * 60 *60 *24
+    const previousDayInMilli = currentDayInMilli - oneDay
+    const previousDate = new Date(previousDayInMilli)
+    this.setDate(previousDate)
+  }
+
+  getNextDate = () => {
+    const { selectedDate } = this.state
+    const currentDayInMilli = new Date(selectedDate).getTime()
+    const oneDay = 1000 * 60 *60 *24
+    const nextDayInMilli = currentDayInMilli + oneDay
+    const nextDate = new Date(nextDayInMilli)
+    this.setDate(nextDate)
+  }
+
+  timeTable=()=>{
+    return(
+      <View style={{alignItems:'center',paddingVertical:20}}>
+        <View style={{flexDirection:'row',justifyContent:'space-between',
+                    paddingHorizontal:10,paddingVertical:10,width:width*0.6,alignItems:'center'}}>
+          <TouchableOpacity style={{padding:8}} onPress={()=>{this.getPreviousDate()}}>
             <FontAwesome name='angle-left' size={20} color='#fff'/>
           </TouchableOpacity>
-          <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700'}]}>{date}</Text>
-          <TouchableOpacity style={{padding:8}} onPress={()=>{this.next('next',date)}}>
+          <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700'}]}>{this.state.selectedDate}</Text>
+          <TouchableOpacity style={{padding:8}} onPress={()=>{this.getNextDate()}}>
             <FontAwesome name='angle-right' size={20} color='#fff'/>
           </TouchableOpacity>
         </View>
-     </View>
-   )
- }
-
- semester=()=>{
-   return(
-     <View style={{marginVertical:10}}>
-     <FlatList style={{}} data={this.state.semesterdata} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-      <View style={{borderRadius:10,marginHorizontal:15,marginVertical:10,backgroundColor:'#3F3F3F'}}>
-        <TouchableOpacity style={{height:width*0.35,alignItems:'center',justifyContent:'center',shadowOpacity: 0.18,elevation:5,backgroundColor:'#3F3F3F',shadowColor:'#000',borderRadius:10,shadowOffset: {height: 2,width:0}}} onPress={()=>{this.touch1(item,index)}}>
-            <Image source={(item.img)} style={{height:'100%',width:'100%',borderRadius:10,zIndex:0,opacity:0.5}}/>
-            <View style={{alignSelf:'center',position:'absolute',alignItems:'center',justifyContent:'center',zIndex:1}}>
-              <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700'}]}>{item.name}</Text>
-              <FontAwesome name='angle-down' size={20} color='#fff'/>
-            </View>
-        </TouchableOpacity>
-        {item.a1&&
-          <ScrollView style={{backgroundColor:'#3F3F3F',borderRadius:10,paddingVertical:10}}>
-          <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',textAlign:'center',paddingVertical:10}]}>PERIODS</Text>
-              {this.semTimeTable(item,index)}
-          </ScrollView>
-        }
       </View>
-      )}
-      />
-     </View>
-   )
- }
+    )
+  }
+
+  semester=()=>{
+    return(
+      <View style={{marginVertical:10}}>
+        <FlatList style={{}} data={this.state.semesterdata}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+          <View style={{borderRadius:10,marginHorizontal:15,marginVertical:10,
+                  backgroundColor:'#3F3F3F'}}>
+            <TouchableOpacity style={{height:width*0.35,alignItems:'center',justifyContent:'center',
+                  shadowOpacity: 0.18,elevation:5,backgroundColor:'#3F3F3F',
+                  shadowColor:'#000',borderRadius:10,shadowOffset: {height: 2,width:0}}} onPress={()=>{this.touch1(item,index)}}>
+              <Image source={(item.img)} style={{height:'100%',width:'100%',borderRadius:10,zIndex:0,opacity:0.5}}/>
+              <View style={{alignSelf:'center',position:'absolute',alignItems:'center',
+                    justifyContent:'center',zIndex:1}}>
+                <Text style={[styles.text,{color:'#fff',fontSize:16,
+                    fontWeight:'700'}]}>{item.name}</Text>
+                <FontAwesome name='angle-down' size={20} color='#fff'/>
+              </View>
+            </TouchableOpacity>
+            {item.a1&&
+              <ScrollView style={{backgroundColor:'#3F3F3F',borderRadius:10,paddingVertical:10}}>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',
+                      textAlign:'center',paddingVertical:10}]}>PERIODS</Text>
+                {this.semTimeTable(item,index)}
+              </ScrollView>
+            }
+          </View>
+        )}
+        />
+      </View>
+    )
+  }
 
   render() {
     let left = this.state.scrollX.interpolate({
                  inputRange: [0,1*width, ],
                  outputRange: [0, width*0.5,],
-                 extrapolate: 'clamp'
-               });
+                 extrapolate: 'clamp'});
 
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={this.state.open?'SYLLABUS':'SYLLABUS & TIMETABLE'}
-            screen={'ProfileFeedback'}/>
-            <View style={{flex:1,alignItems:'center',backgroundColor:'#000'}}>
-              {!this.state.open&&<Animated.View style={{flexDirection: 'row',}}>
-                  {tabs.map((item, i) => {
-                    return (
-                      <TouchableOpacity key={i} onPress={()=>{this.setState({selectedTab:i});this.scroll.scrollTo({ x: (i)*width });this.setState({scrollY:new Animated.Value(0)})}} style={{flex:1,borderBottomWidth: 0,borderColor:'#f2f2f2',alignItems: 'center',justifyContent: 'center',height:45}} >
-                       <Text   style={[styles.text,{fontSize:16,fontWeight:'700',color:this.state.selectedTab==i?'#fff':'#d6d6d6'}]}>{item.name}</Text>
-                      </TouchableOpacity>
-                    );
-                  })}
-                  <Animated.View
-                  style={{ height: 4, width: '50%', backgroundColor: '#fff',position: 'absolute',bottom: 0,left:0,transform: [{translateX:left}]}}/>
-             </Animated.View>}
-             <ScrollView
+        <Headers navigation={this.props.navigation}
+        name={this.state.open?'SYLLABUS':'SYLLABUS & TIMETABLE'}
+        screen={'ProfileFeedback'}/>
+        <View style={{flex:1,alignItems:'center',backgroundColor:'#000'}}>
+          {!this.state.open&&<Animated.View style={{flexDirection: 'row',}}>
+            {tabs.map((item, i) => {
+              return (
+                <TouchableOpacity key={i} onPress={()=>{this.setState({selectedTab:i});
+                  this.scroll.scrollTo({ x: (i)*width });
+                  this.setState({scrollY:new Animated.Value(0)})}}
+                  style={{flex:1,borderBottomWidth: 0,borderColor:'#f2f2f2',
+                  alignItems: 'center',justifyContent: 'center',height:45}} >
+                  <Text   style={[styles.text,{fontSize:16,fontWeight:'700',
+                      color:this.state.selectedTab==i?'#fff':'#d6d6d6'}]}>{item.name}</Text>
+                </TouchableOpacity>
+              );
+            })}
+            <Animated.View
+                  style={{ height: 4, width: '50%', backgroundColor: '#fff',
+                  position: 'absolute',bottom: 0,left:0,transform: [{translateX:left}]}}/>
+          </Animated.View>}
+          <ScrollView
                 horizontal={true}
                 pagingEnabled={true}
                 showsHorizontalScrollIndicator={false}
@@ -311,8 +381,8 @@ next=(param,date)=>{
                         </View>
                       );
                     })}
-                </ScrollView>
-            </View>
+          </ScrollView>
+        </View>
       </View>
     );
   }

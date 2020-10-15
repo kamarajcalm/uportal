@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -33,6 +34,7 @@ const year=[{label: '2000', value: '2000'},{label: '2001', value: '2001'},
               {label: '2002', value: '2002'},{label: '2003', value: '2003'},
               {label: '2004', value: '2004'},{label: '2005', value: '2005'},
               {label: '2006', value: '2006'},{label: '2007', value: '2007'},]
+
 class ProfileQuestionPaper extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -46,24 +48,25 @@ class ProfileQuestionPaper extends React.Component {
         selectedyear:'',
         year : year,
         item:'QUESTION PAPERS'
-      }
     }
+  }
 
- componentDidMount(){
- }
+  componentDidMount(){
+  }
 
 
   render() {
-const depart =this.props.navigation.getParam('item',null)
-console.log(depart,'depart')
+    const depart =this.props.navigation.getParam('item',null)
+    console.log(depart,'depart')
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={'QUESTION PAPERS'}
+        <Headers navigation={this.props.navigation} name={'QUESTION PAPERS'}
             screen={'ProfileQuestionPaper'}/>
-            <View style={{flex:1,alignItems:'center',backgroundColor:'#000',}}>
-            <View style={{flexDirection:'row',justifyContent:'space-between',width:width*0.6}}>
-              <Text style={[styles.text,{paddingVertical:10,color:'#fff',fontSize:14,fontWeight:'700',textAlign:'center'}]}>CHOOSE YEAR</Text>
-              <DropDownPicker
+        <View style={{flex:1,alignItems:'center',backgroundColor:'#000',}}>
+          <View style={{flexDirection:'row',justifyContent:'space-between',width:width*0.6}}>
+            <Text style={[styles.text,{paddingVertical:10,color:'#fff',fontSize:14,
+                        fontWeight:'700',textAlign:'center'}]}>CHOOSE YEAR</Text>
+            <DropDownPicker
                     items={this.state.year}
                     defaultNull={ null}
                     dropDownStyle={{backgroundColor:'#333333',borderWidth:0}}
@@ -78,9 +81,9 @@ console.log(depart,'depart')
                     onChangeItem={item => {this.setState({
                         selectedyear: item.value
                     });this.props.navigation.navigate('ProfileMedia',{item:this.state.item})}}
-                />
-              </View>
-            </View>
+            />
+          </View>
+        </View>
       </View>
     );
   }

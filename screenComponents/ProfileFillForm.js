@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -23,7 +24,8 @@ import settings from '../appSettings';
 import HttpsClient from '../helpers/HttpsClient';
 
 import SwitchSelector from "react-native-switch-selector";
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import RadioForm, {RadioButton, RadioButtonInput,
+  RadioButtonLabel} from 'react-native-simple-radio-button';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 const { width } = Dimensions.get('window');
@@ -31,25 +33,20 @@ const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
 const fontFamily =settings.fontFamily
-const radio_props = [
-  {label: '0-17', value: 0 },
-  {label: '18-35', value: 1 },
-  {label: '36-70', value: 2 },
-  {label: '70 & above', value: 3 }
-];
-const radio_props2 =[
-  {label: 'Male', value: 0 },
-  {label: 'Female', value: 1 },
-]
-const radio_props3=[
-  {label: 'Yes', value: 0 },
-  {label: 'No', value: 1 },
-  {label: 'Maybe', value: 2 },
-]
+const radio_props = [{label: '0-17', value: 0 },
+                     {label: '18-35', value: 1 },
+                     {label: '36-70', value: 2 },
+                     {label: '70 & above', value: 3 }];
+
+const radio_props2 =[{label: 'Male', value: 0 },
+                     {label: 'Female', value: 1 },]
+
+const radio_props3=[{label: 'Yes', value: 0 },
+                    {label: 'No', value: 1 },
+                    {label: 'Maybe', value: 2 },]
 
 const dropdown=[{label: 'Item', value: 'Item'},{label: 'Item', value: 'Item'},
-              {label: 'Item', value: 'Item'},{label: 'Item', value: 'Item'},
-              ]
+                {label: 'Item', value: 'Item'},{label: 'Item', value: 'Item'},]
 
 class ProfileFillForm extends React.Component {
 
@@ -64,13 +61,13 @@ class ProfileFillForm extends React.Component {
       value:0,
       drop:'',
       dropdown : dropdown
-      }
     }
+  }
 
 
- componentDidMount(){
+  componentDidMount(){
 
- }
+  }
 
   radio1=()=>{
     return(
@@ -171,13 +168,16 @@ class ProfileFillForm extends React.Component {
             <Headers navigation={this.props.navigation} name={item.name} screen={'ProfileFillForm'}/>
             <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
               <ScrollView >
-                <Text style={[styles.text,{color:'#fff',paddingVertical:20,textAlign:'center',fontWeight:'400',fontSize:14}]}>Please fill up the details below</Text>
+                <Text style={[styles.text,{color:'#fff',paddingVertical:20,textAlign:'center',
+                      fontWeight:'400',fontSize:14}]}>Please fill up the details below</Text>
                 <View >
-                    <Text style={[styles.text,{color:'#fff',paddingVertical:20,fontWeight:'400',fontSize:14}]}>Lorem ipsum dolor sit amet,consectetur adipiscing elit.</Text>
+                    <Text style={[styles.text,{color:'#fff',paddingVertical:20,fontWeight:'400',
+                        fontSize:14}]}>Lorem ipsum dolor sit amet,consectetur adipiscing elit.</Text>
                     {this.radio1()}
                 </View>
                 <View >
-                    <Text style={[styles.text,{color:'#fff',paddingVertical:20,fontWeight:'400',fontSize:14}]}>Nec sagittis.</Text>
+                    <Text style={[styles.text,{color:'#fff',paddingVertical:20,fontWeight:'400',
+                        fontSize:14}]}>Nec sagittis.</Text>
                     {this.radio2()}
                 </View>
                 <View >
@@ -185,15 +185,18 @@ class ProfileFillForm extends React.Component {
                     {this.dropdown()}
                 </View>
                 <View >
-                    <Text style={[styles.text,{color:'#fff',paddingVertical:20,fontWeight:'400',fontSize:14}]}>Ultricies eu nisi eget feugiat id velit.</Text>
+                    <Text style={[styles.text,{color:'#fff',paddingVertical:20,fontWeight:'400',
+                        fontSize:14}]}>Ultricies eu nisi eget feugiat id velit.</Text>
                     {this.radio3()}
                 </View>
-                <TouchableOpacity style={{alignSelf:'center',backgroundColor:'#4F4F4F',paddingVertical:15,paddingHorizontal:40,borderRadius:7,marginVertical:20}} onPress={()=>{this.props.navigation.goBack()}}>
-                  <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700'}]}>SUBMEET</Text>
+                <TouchableOpacity style={{alignSelf:'center',backgroundColor:'#4F4F4F',paddingVertical:15,
+                            paddingHorizontal:40,borderRadius:7,marginVertical:20}}
+                    onPress={()=>{this.props.navigation.goBack()}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:14,
+                            fontWeight:'700'}]}>SUBMEET</Text>
                 </TouchableOpacity>
               </ScrollView>
             </View>
-
       </View>
     );
   }

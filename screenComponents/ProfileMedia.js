@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -28,7 +29,8 @@ const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
 const fontFamily =settings.fontFamily
-const semdata=[{name:'SEM I'},{name:'SEM V'},{name:'SEM II'},{name:'SEM VI'},{name:'SEM III'},
+const semdata=[{name:'SEM I'},{name:'SEM V'},{name:'SEM II'},
+                {name:'SEM VI'},{name:'SEM III'},
                 {name:'SEM VII'},{name:'SEM IV'},{name:'SEM VIII'}]
 
 class ProfileMedia extends React.Component {
@@ -45,16 +47,17 @@ class ProfileMedia extends React.Component {
       a1:false,
       a2:false,
       semdata:semdata
-      }
     }
+  }
 
- componentDidMount=async()=>{}
+  componentDidMount=async()=>{}
+
   touch=(item,quespaper)=>{
-    if(quespaper!=null){
-      this.props.navigation.navigate('ProfileMediaChoose',{item:{item:item,quespaper:quespaper}})
-    }else{
-      this.props.navigation.navigate('ProfileMediaChoose',{item:{item:item}})
-    }
+      if(quespaper!=null){
+        this.props.navigation.navigate('ProfileMediaChoose',{item:{item:item,quespaper:quespaper}})
+      }else{
+        this.props.navigation.navigate('ProfileMediaChoose',{item:{item:item}})
+      }
   }
 
   otherTouch=(quespaper)=>{
@@ -64,6 +67,7 @@ class ProfileMedia extends React.Component {
         this.props.navigation.navigate('ProfileMediaChoose',{item:{}})
     }
   }
+
   render() {
     const quespaper=this.props.navigation.getParam('item',null)
     console.log(quespaper,'quespaper')
@@ -73,14 +77,24 @@ class ProfileMedia extends React.Component {
             screen={'ProfileMedia'}/>
             <View style={{flex:1,paddingVertical:50,justifyContent:'center',alignItems:'center'}}>
 
-              <FlatList contenContainerStyle={{justifyContent:'space-between',}} data={this.state.semdata} keyExtractor={(item, index) => index.toString()} numColumns={2}renderItem={({item, index})=>(
-                <TouchableOpacity onPress={()=>{this.touch(item,quespaper)}} style={{marginHorizontal:10,marginVertical:10,paddingHorizontal:40,backgroundColor:'#333333',borderRadius:7,width:width*0.35}}>
-                  <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',paddingVertical:10,fontWeight:'700'}]}>{item.name}</Text>
-                </TouchableOpacity>
-              )}/>
+              <FlatList
+                contenContainerStyle={{justifyContent:'space-between',}}
+                data={this.state.semdata}
+                keyExtractor={(item, index) => index.toString()}
+                numColumns={2}
+                renderItem={({item, index})=>(
+                  <TouchableOpacity
+                    onPress={()=>{this.touch(item,quespaper)}}  style={{marginHorizontal:10,marginVertical:10,paddingHorizontal:40,
+                          backgroundColor:'#333333',borderRadius:7,width:width*0.35}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
+                            paddingVertical:10,fontWeight:'700'}]}>{item.name}</Text>
+                  </TouchableOpacity>
+                )}
+              />
 
               <TouchableOpacity onPress={()=>{this.otherTouch(quespaper)}} style={{marginVertical:10,paddingHorizontal:40,backgroundColor:'#333333',borderRadius:7}}>
-                  <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',paddingVertical:10,fontWeight:'700'}]}>OTHERS</Text>
+                  <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
+                                paddingVertical:10,fontWeight:'700'}]}>OTHERS</Text>
               </TouchableOpacity>
           </View>
       </View>

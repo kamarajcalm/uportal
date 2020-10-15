@@ -8,8 +8,11 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
-import {Fontisto, FontAwesome,Entypo,SimpleLineIcons,MaterialCommunityIcons,Feather,Octicons,MaterialIcons,FontAwesome5 } from '@expo/vector-icons';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+import {Fontisto, FontAwesome,Entypo,SimpleLineIcons,
+  MaterialCommunityIcons,Feather,Octicons,
+  MaterialIcons,FontAwesome5 } from '@expo/vector-icons';
 import  Constants  from 'expo-constants';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
@@ -54,11 +57,13 @@ class ProfileRank extends React.Component {
       dropdown:dropdown,
       droptest:droptest,
       ranksdata:ranksdata
-      }
     }
-    dropTest=()=>{
-      return(
-        <View style={{justifyContent:'flex-end',marginVertical:20,alignSelf:'flex-end',marginHorizontal:20}}>
+  }
+
+  dropTest=()=>{
+    return(
+      <View style={{justifyContent:'flex-end',marginVertical:20,
+                    alignSelf:'flex-end',marginHorizontal:20}}>
         <DropDownPicker
               items={this.state.droptest}
               defaultNull={ null}
@@ -74,13 +79,15 @@ class ProfileRank extends React.Component {
               onChangeItem={item => this.setState({
                   test: item.value
               })}
-          />
-        </View>
-      )
-    }
-    dropdown=()=>{
-      return(
-        <View style={{justifyContent:'flex-end',marginVertical:20,alignSelf:'flex-end',marginHorizontal:20}}>
+        />
+      </View>
+    )
+  }
+
+  dropdown=()=>{
+    return(
+      <View style={{justifyContent:'flex-end',marginVertical:20,
+                    alignSelf:'flex-end',marginHorizontal:20}}>
         <DropDownPicker
               items={this.state.dropdown}
               defaultNull={ null}
@@ -96,35 +103,47 @@ class ProfileRank extends React.Component {
               onChangeItem={item => this.setState({
                   drop: item.value
               })}
-          />
-        </View>
-      )
-    }
-rankers=()=>{
-  return(
-    <View>
-      <FlatList style={{}} data={this.state.ranksdata} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-around',paddingHorizontal:20,paddingVertical:10,width:width*0.7}}>
+        />
+      </View>
+    )
+  }
 
-          <Text style={[styles.text,{color:'#fff',fontSize:24,fontWeight:'700'}]}>{item.rank}</Text>
-          <Image source={(item.img)} style={{height:width*0.12,width:width*0.12,borderRadius:30}}/>
-          <View style={{borderWidth:1,borderColor:'#fff',borderRadius:15,padding:4}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',textAlign:'center'}]}>{item.name}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',textAlign:'center'}]}>{item.nameid}</Text>
-          </View>
-        </View>
-      )}/>
-    </View>
-  )
-}
+  rankers=()=>{
+    return(
+      <View>
+        <FlatList style={{}} data={this.state.ranksdata}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+            <View style={{flexDirection:'row',alignItems:'center',
+                          justifyContent:'space-around',paddingHorizontal:20,
+                          paddingVertical:10,width:width*0.7}}>
+              <Text style={[styles.text,{color:'#fff',fontSize:24,fontWeight:'700'}]}>{item.rank}</Text>
+              <Image source={(item.img)} style={{height:width*0.12,width:width*0.12,borderRadius:30}}/>
+              <View style={{borderWidth:1,borderColor:'#fff',borderRadius:15,padding:4}}>
+                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',
+                              textAlign:'center'}]}>{item.name}</Text>
+                <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',
+                              textAlign:'center'}]}>{item.nameid}</Text>
+              </View>
+            </View>
+          )}
+        />
+      </View>
+    )
+  }
 topRanks=()=>{
   return(
-    <View style={{flexDirection:'row',justifyContent:'space-between',paddingHorizontal:10,paddingVertical:20}}>
+    <View style={{flexDirection:'row',
+                  justifyContent:'space-between',
+                  paddingHorizontal:10,paddingVertical:20}}>
       <View style={{paddingHorizontal:6,paddingVertical:10,alignItems:'center'}}>
         <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:width*0.12,width:width*0.12,borderRadius:30}}/>
-        <View style={{borderWidth:1,borderColor:'#fff',borderRadius:15,padding:4,width:width*0.25,marginVertical:10}}>
-          <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',textAlign:'center'}]}>KAMAL HASAN</Text>
-          <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',textAlign:'center'}]}>AAA001</Text>
+        <View style={{borderWidth:1,borderColor:'#fff',borderRadius:15,padding:4,
+                      width:width*0.25,marginVertical:10}}>
+          <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',
+                      textAlign:'center'}]}>KAMAL HASAN</Text>
+          <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',
+                      textAlign:'center'}]}>AAA001</Text>
         </View>
         <Text style={[styles.text,{color:'#fff',fontSize:24,fontWeight:'700'}]}>2</Text>
         <View style={{alignItems:'center'}}>
@@ -135,9 +154,12 @@ topRanks=()=>{
       </View>
       <View style={{paddingHorizontal:6,paddingVertical:10,alignItems:'center',marginTop:30}}>
         <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:width*0.12,width:width*0.12,borderRadius:30}}/>
-        <View style={{borderWidth:1,borderColor:'#fff',borderRadius:15,padding:4,width:width*0.25,marginVertical:10}}>
-          <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',textAlign:'center'}]}>KAMAL HASAN</Text>
-          <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',textAlign:'center'}]}>AAA001</Text>
+        <View style={{borderWidth:1,borderColor:'#fff',borderRadius:15,padding:4,
+                      width:width*0.25,marginVertical:10}}>
+          <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',
+                      textAlign:'center'}]}>KAMAL HASAN</Text>
+          <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',
+                      textAlign:'center'}]}>AAA001</Text>
         </View>
         <Text style={[styles.text,{color:'#fff',fontSize:24,fontWeight:'700'}]}>1</Text>
         <View style={{alignItems:'center'}}>
@@ -148,9 +170,12 @@ topRanks=()=>{
       </View>
       <View style={{paddingHorizontal:6,paddingVertical:10,alignItems:'center'}}>
         <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:width*0.12,width:width*0.12,borderRadius:30}}/>
-        <View style={{borderWidth:1,borderColor:'#fff',borderRadius:15,padding:4,width:width*0.25,marginVertical:10}}>
-          <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',textAlign:'center'}]}>KAMAL HASAN</Text>
-          <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',textAlign:'center'}]}>AAA001</Text>
+        <View style={{borderWidth:1,borderColor:'#fff',borderRadius:15,padding:4,
+                      width:width*0.25,marginVertical:10}}>
+          <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',
+                      textAlign:'center'}]}>KAMAL HASAN</Text>
+          <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700',
+                      textAlign:'center'}]}>AAA001</Text>
         </View>
         <Text style={[styles.text,{color:'#fff',fontSize:24,fontWeight:'700'}]}>3</Text>
         <View style={{alignItems:'center'}}>
@@ -167,21 +192,20 @@ topRanks=()=>{
      const { messages } = this.state;
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-          <Headers navigation={this.props.navigation} name={'Ranks'} screen={'ProfileRank'}/>
-          <ScrollView stickyHeaderIndices={[0]}>
+        <Headers navigation={this.props.navigation} name={'Ranks'} screen={'ProfileRank'}/>
+        <ScrollView stickyHeaderIndices={[0]}>
           <View>
             <View style={{flexDirection:'row',justifyContent:'space-between',backgroundColor:'#000'}}>
               {this.dropTest()}
               {this.dropdown()}
             </View>
-            </View>
-            <View>
+          </View>
+          <View>
             {this.topRanks()}
             {this.rankers()}
-            </View>
+          </View>
           <View style={{height:50}}></View>
-          </ScrollView>
-
+        </ScrollView>
       </View>
     );
   }

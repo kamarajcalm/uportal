@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -48,66 +49,75 @@ class ProfileLibrary extends React.Component {
     this.state={
       formlist:formlist,
       a1:false
-      }
     }
+  }
 
 
- componentDidMount(){
+  componentDidMount(){
+  }
 
- }
+  touch=(item,index)=>{
+    this.state.formlist[index].a1=!this.state.formlist[index].a1
+    this.setState({formlist})
+  }
 
- touch=(item,index)=>{
-   this.state.formlist[index].a1=!this.state.formlist[index].a1
-   this.setState({formlist})
- }
+  formList=()=>{
+    return(
+      <View style={{justifyContent:'center',marginVertical:20}}>
+        <FlatList style={{}} data={this.state.formlist}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+            <View>
+              <TouchableOpacity
+                style={{flex:1,borderRadius:10,backgroundColor:'#3F3F3F',
+                        width:width*0.9,marginVertical:15}}
+                onPress={()=>{this.touch(item,index)}}>
+                <View style={{flexDirection:'row',height:width*0.35,borderRadius:10,
+                            shadowRadius: 10,shadowColor:'#000000',borderColor:'#000',
+                            shadowOpacity: 0.18,elevation:5,backgroundColor:'#3F3F3F',
+                            shadowOffset:{height: 2,width:0}}}>
+                  <View style={{flex:0.32,}}>
+                    <Image source={(item.img)} style={{height:'100%',width:'100%',borderTopLeftRadius:10,
+                                                        borderBottomLeftRadius:10}}/>
+                  </View>
+                  <View style={{flex:0.67,paddingVertical:10}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'center',
+                              paddingVertical:4,fontWeight:'700'}]}>{item.name}</Text>
+                    <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',
+                              paddingVertical:4,fontWeight:'400'}]}>Issued by : {item.issuedby}</Text>
+                    <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',
+                            paddingVertical:4,fontWeight:'400'}]}>Issued Date : {item.issuedate}</Text>
+                    <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',
+                            paddingVertical:4,fontWeight:'700'}]}>{item.returndate}</Text>
+                  </View>
+                </View>
 
- formList=()=>{
-   return(
-     <View style={{justifyContent:'center',marginVertical:20}}>
-      <FlatList style={{}} data={this.state.formlist} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-        <View>
-        <TouchableOpacity style={{flex:1,borderRadius:10,backgroundColor:'#3F3F3F',width:width*0.9,marginVertical:15}}onPress={()=>{this.touch(item,index)}}>
-          <View style={{flexDirection:'row',height:width*0.35,borderRadius:10,shadowRadius: 10,shadowColor:'#000000',borderColor:'#000',shadowOpacity: 0.18,elevation:5,backgroundColor:'#3F3F3F',
-    shadowOffset: {
-      height: 2,
-      width:0
-    }}}>
-            <View style={{flex:0.32,}}>
-              <Image source={(item.img)} style={{height:'100%',width:'100%',borderTopLeftRadius:10,borderBottomLeftRadius:10}}/>
+                {item.a1&&
+                  <View style={{marginVertical:20,alignItems:'center'}}>
+                    <TouchableOpacity style={{paddingVertical:8,paddingHorizontal:25,borderRadius:10,
+                                              backgroundColor:'#4F4F4F',}}>
+                      <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
+                                    fontWeight:'700'}]}>Request for Extension</Text>
+                    </TouchableOpacity>
+                  </View>
+                }
+              </TouchableOpacity>
             </View>
-            <View style={{flex:0.67,paddingVertical:10}}>
-              <Text style={[styles.text,{color:'#fff',fontSize:16,textAlign:'center',paddingVertical:4,fontWeight:'700'}]}>{item.name}</Text>
-              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',paddingVertical:4,fontWeight:'400'}]}>Issued by : {item.issuedby}</Text>
-              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',paddingVertical:4,fontWeight:'400'}]}>Issued Date : {item.issuedate}</Text>
-              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',paddingVertical:4,fontWeight:'700'}]}>{item.returndate}</Text>
-            </View>
-            </View>
-            {item.a1&&
-
-              <View style={{marginVertical:20,alignItems:'center'}}>
-                  <TouchableOpacity style={{paddingVertical:8,paddingHorizontal:25,borderRadius:10,backgroundColor:'#4F4F4F',}}>
-                    <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700'}]}>Request for Extension</Text>
-                  </TouchableOpacity>
-              </View>
-            }
-        </TouchableOpacity>
-
-        </View>
-      )}/>
-     </View>
-   )
- }
+          )}
+        />
+      </View>
+    )
+  }
 
   render() {
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={'LIBRARY'} screen={'ProfileLibrary'}/>
-            <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-              <ScrollView >
-                  {this.formList()}
-              </ScrollView>
-            </View>
-
+        <Headers navigation={this.props.navigation} name={'LIBRARY'} screen={'ProfileLibrary'}/>
+          <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+            <ScrollView >
+              {this.formList()}
+            </ScrollView>
+          </View>
       </View>
     );
   }

@@ -21,7 +21,8 @@ import TabComponent  from '../navigationComponents/TabComponent.js';
 import Headers  from '../helpers/Headers.js';
 import settings from '../appSettings';
 import Chat from '../screenComponents/Chat';
-// import ChatApp from '../screenComponents/ChatApp';
+
+import ChatApp from '../screenComponents/ChatApp';
 
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
@@ -48,7 +49,7 @@ class PageSecond extends React.Component {
       <View style={{flex:1,}}>
         <Headers navigation={this.props.navigation} name={'Class wall'} screen={'PageSecond'}/>
         <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-          <Chat/>
+          <ChatApp/>
           <View style={{height:50}}></View>
         </View>
         <TabComponent navigation={this.props.navigation}  />

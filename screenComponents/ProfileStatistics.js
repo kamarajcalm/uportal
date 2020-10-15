@@ -8,7 +8,8 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
   Feather,Octicons,MaterialIcons,
@@ -87,145 +88,167 @@ class ProfileStatistics extends React.Component {
       selectedTab:0,
       itemIndex:1,
       sportsdata:sportsdata,
-      }
     }
+  }
 
- componentDidMount(){
- }
+  componentDidMount(){
+  }
 
- handlePageChange=(e)=>{
-   var offset = e.nativeEvent.contentOffset;
+  handlePageChange=(e)=>{
+    var offset = e.nativeEvent.contentOffset;
     if(offset) {
       var page = Math.round(offset.x / width) ;
       this.setState({selectedTab:page})
     }
     this.setState({scrollY:new Animated.Value(0)})
- }
+  }
 
- touch=(item,index)=>{
+  touch=(item,index)=>{
      this.state.sportsdata[index].a1=!this.state.sportsdata[index].a1
      this.setState({sportsdata})
      this.setState({itemIndex:item.pk})
- }
- sportsDetails=(item,index)=>{
-   console.log(item.sportsdetails,'item.syllabusdetails')
-   return(
-     <View style={{marginTop:10,borderRadius:0,borderWidth:0.5,borderColor:'#fff',margin:6}}>
-        <FlatList style={{}} data={item.sportsdetails} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
+  }
+
+  sportsDetails=(item,index)=>{
+    console.log(item.sportsdetails,'item.syllabusdetails')
+    return(
+      <View style={{marginTop:10,borderRadius:0,borderWidth:0.5,borderColor:'#fff',margin:6}}>
+        <FlatList style={{}}
+          data={item.sportsdetails}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
           <View>
             <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',paddingHorizontal:6,}}>
 
               <View style={{flex:0.15,justifyContent:'flex-start',paddingVertical:10,}}>
-              <Text style={[styles.text,{fontSize:12,fontWeight:item.no=="#"?'700':'400',textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.no}</Text>
+                <Text style={[styles.text,{fontSize:12,fontWeight:item.no=="#"?'700':'400',
+                      textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.no}</Text>
               </View>
               <View style={{borderWidth:0.2,borderColor:'#fff'}}/>
               <View style={{flex:0.25,justifyContent:'flex-start',paddingVertical:10}}>
-              <Text style={[styles.text,{fontSize:12,fontWeight:item.no=="#"?'700':'400',textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.batting}</Text>
+                <Text style={[styles.text,{fontSize:12,fontWeight:item.no=="#"?'700':'400',
+                      textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.batting}</Text>
               </View>
               <View style={{borderWidth:0.2,borderColor:'#fff'}}/>
               <View style={{flex:0.2,justifyContent:'flex-start',paddingVertical:10}}>
-              <Text style={[styles.text,{fontSize:item.no=="#"?10:12,fontWeight:item.no=="#"?'700':'400',textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.tourna1}</Text>
+                <Text style={[styles.text,{fontSize:item.no=="#"?10:12,
+                      fontWeight:item.no=="#"?'700':'400',
+                      textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.tourna1}</Text>
               </View>
               <View style={{borderWidth:0.2,borderColor:'#fff'}}/>
               <View style={{flex:0.2,justifyContent:'flex-start',paddingVertical:10}}>
-              <Text style={[styles.text,{fontSize:item.no=="#"?10:12,fontWeight:item.no=="#"?'700':'400',textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.tourna2}</Text>
+                <Text style={[styles.text,{fontSize:item.no=="#"?10:12,
+                      fontWeight:item.no=="#"?'700':'400',
+                      textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.tourna2}</Text>
               </View>
               <View style={{borderWidth:0.2,borderColor:'#fff'}}/>
               <View style={{flex:0.2,justifyContent:'flex-start',paddingVertical:10}}>
-              <Text style={[styles.text,{fontSize:item.no=="#"?10:12,fontWeight:item.no=="#"?'700':'400',textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.tourna3}</Text>
+                <Text style={[styles.text,{fontSize:item.no=="#"?10:12,
+                      fontWeight:item.no=="#"?'700':'400',
+                      textAlign:'left',color:'#fff',paddingHorizontal:10}]}>{item.tourna3}</Text>
               </View>
 
             </View>
-            {item.no=='#'&&
-            <View style={{borderWidth:0.2,borderColor:'#fff'}}></View>}
-        </View>
+            {item.no=='#'&&<View style={{borderWidth:0.2,borderColor:'#fff'}}></View>}
+          </View>
         )}
         />
-     </View>
-   )
- }
-
- sports=()=>{
-   return(
-     <View style={{marginVertical:10}}>
-     <FlatList style={{}} data={this.state.sportsdata} keyExtractor={(item, index) => index.toString()} renderItem={({item, index})=>(
-      <View style={{borderRadius:10,marginHorizontal:15,marginVertical:10,backgroundColor:'#3F3F3F'}}>
-        <TouchableOpacity style={{height:width*0.35,alignItems:'center',justifyContent:'center',shadowOpacity: 0.18,elevation:5,backgroundColor:'#3F3F3F',shadowColor:'#000',borderRadius:10,shadowOffset: {height: 2,width:0}}} onPress={()=>{this.touch(item,index)}}>
-            <Image source={(item.img)} style={{height:'100%',width:'100%',borderRadius:10,zIndex:0,opacity:0.5}}/>
-            <View style={{alignSelf:'center',position:'absolute',alignItems:'center',justifyContent:'center',zIndex:1}}>
-              <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700'}]}>{item.name}</Text>
-              <FontAwesome name='angle-down' size={20} color='#fff'/>
-            </View>
-        </TouchableOpacity>
-        {(item.a1&&item.pk==this.state.itemIndex)&&
-          <ScrollView style={{backgroundColor:'#3F3F3F',borderRadius:10,paddingVertical:10}}>
-              {this.sportsDetails(item,index)}
-          </ScrollView>
-        }
       </View>
-      )}
-      />
-     </View>
-   )
- }
+    )
+  }
+
+  sports=()=>{
+    return(
+      <View style={{marginVertical:10}}>
+        <FlatList style={{}} data={this.state.sportsdata}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+            <View style={{borderRadius:10,marginHorizontal:15,marginVertical:10,
+                          backgroundColor:'#3F3F3F'}}>
+              <TouchableOpacity style={{height:width*0.35,alignItems:'center',justifyContent:'center',
+                  shadowOpacity: 0.18,elevation:5,backgroundColor:'#3F3F3F',
+                  shadowColor:'#000',borderRadius:10,shadowOffset: {height: 2,width:0}}} onPress={()=>{this.touch(item,index)}}>
+                <Image source={(item.img)} style={{height:'100%',width:'100%',borderRadius:10,zIndex:0,opacity:0.5}}/>
+                <View style={{alignSelf:'center',position:'absolute',alignItems:'center',
+                            justifyContent:'center',zIndex:1}}>
+                  <Text style={[styles.text,{color:'#fff',fontSize:16,
+                            fontWeight:'700'}]}>{item.name}</Text>
+                  <FontAwesome name='angle-down' size={20} color='#fff'/>
+                </View>
+              </TouchableOpacity>
+              {(item.a1&&item.pk==this.state.itemIndex)&&
+                <ScrollView style={{backgroundColor:'#3F3F3F',borderRadius:10,paddingVertical:10}}>
+                  {this.sportsDetails(item,index)}
+                </ScrollView>
+              }
+            </View>
+          )}
+        />
+      </View>
+    )
+  }
 
   render() {
     let left = this.state.scrollX.interpolate({
                  inputRange: [0,1*width, ],
                  outputRange: [0, width*0.5,],
-                 extrapolate: 'clamp'
-               });
+                 extrapolate: 'clamp'});
 
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={'STATISTICS'}
+        <Headers navigation={this.props.navigation} name={'STATISTICS'}
             screen={'ProfileStatistics'}/>
-            <View style={{flex:1,alignItems:'center',backgroundColor:'#000'}}>
-              <Animated.View style={{flexDirection: 'row',}}>
-                  {tabs.map((item, i) => {
-                    return (
-                      <TouchableOpacity key={i} onPress={()=>{this.setState({selectedTab:i});this.scroll.scrollTo({ x: (i)*width });this.setState({scrollY:new Animated.Value(0)})}} style={{flex:1,borderBottomWidth: 0,borderColor:'#f2f2f2',alignItems: 'center',justifyContent: 'center',height:45}} >
-                       <Text   style={[styles.text,{fontSize:16,fontWeight:'700',color:this.state.selectedTab==i?'#fff':'#d6d6d6'}]}>{item.name}</Text>
-                      </TouchableOpacity>
-                    );
-                  })}
-                  <Animated.View
-                  style={{ height: 4, width: '50%', backgroundColor: '#fff',position: 'absolute',bottom: 0,left:0,transform: [{translateX:left}]}}/>
-             </Animated.View>
-             <ScrollView
-                horizontal={true}
-                pagingEnabled={true}
-                showsHorizontalScrollIndicator={false}
-                onScroll={Animated.event(
-                [{ nativeEvent: { contentOffset: { x: this.state.scrollX } } }]  )}
-                scrollEventThrottle={16}
-                onMomentumScrollEnd={this.handlePageChange}
-                ref={(node) => {this.scroll = node}}
-                style={{flex:1,backgroundColor:'#000'}}
-                onContentSizeChange={() =>this.scroll.scrollTo({ x: (this.state.selectedTab)*width })}
-                >
-                  {tabs.map((item, i) => {
-                      return (
-                        <View key={i} style={{flex:1,backgroundColor: '#000',width:width*1,}} >
-                        {i==0&&this.state.selectedTab==0&&
-                           <View style={{flex:1,}}>
-                            <ScrollView>
-                              {this.sports()}
-                            </ScrollView>
-                           </View>
-                        }
-                        {i==1&&this.state.selectedTab==1&&
-                          <View style={{flex:1,}}>
-                           <ScrollView >
-                              <StaticsAcademic  navigation={this.props.navigation}/>
-                           </ScrollView>
-                          </View>
-                        }
-                        </View>
-                      );
-                    })}
-                </ScrollView>
-            </View>
+        <View style={{flex:1,alignItems:'center',backgroundColor:'#000'}}>
+          <Animated.View style={{flexDirection: 'row',}}>
+            {tabs.map((item, i) => {
+              return (
+                <TouchableOpacity key={i} onPress={()=>{this.setState({selectedTab:i});
+                    this.scroll.scrollTo({ x: (i)*width });
+                    this.setState({scrollY:new Animated.Value(0)})}}
+                    style={{flex:1,borderBottomWidth: 0,borderColor:'#f2f2f2',
+                    alignItems: 'center',justifyContent: 'center',height:45}} >
+                  <Text   style={[styles.text,{fontSize:16,fontWeight:'700',
+                        color:this.state.selectedTab==i?'#fff':'#d6d6d6'}]}>{item.name}</Text>
+                </TouchableOpacity>
+              );
+            })}
+            <Animated.View
+                  style={{ height: 4, width: '50%', backgroundColor: '#fff',
+                  position: 'absolute',bottom: 0,left:0,transform: [{translateX:left}]}}/>
+          </Animated.View>
+          <ScrollView
+            horizontal={true}
+            pagingEnabled={true}
+            showsHorizontalScrollIndicator={false}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { x: this.state.scrollX } } }]  )}
+            scrollEventThrottle={16}
+            onMomentumScrollEnd={this.handlePageChange}
+            ref={(node) => {this.scroll = node}}
+            style={{flex:1,backgroundColor:'#000'}}
+            onContentSizeChange={() =>this.scroll.scrollTo({ x: (this.state.selectedTab)*width })}>
+              {tabs.map((item, i) => {
+                return (
+                  <View key={i} style={{flex:1,backgroundColor: '#000',width:width*1,}} >
+                    {i==0&&this.state.selectedTab==0&&
+                      <View style={{flex:1,}}>
+                        <ScrollView>
+                          {this.sports()}
+                        </ScrollView>
+                      </View>
+                    }
+                    {i==1&&this.state.selectedTab==1&&
+                      <View style={{flex:1,}}>
+                        <ScrollView >
+                          <StaticsAcademic  navigation={this.props.navigation}/>
+                        </ScrollView>
+                      </View>
+                    }
+                  </View>
+                );
+              })}
+          </ScrollView>
+        </View>
       </View>
     );
   }
