@@ -23,25 +23,17 @@ import * as actionTypes from '../actions/actionTypes';
 import TabComponent  from '../navigationComponents/TabComponent.js';
 import Headers  from '../helpers/Headers.js';
 import settings from '../appSettings';
+import CollegeStudProfile from '../forthpage/CollegeStudProfile';
+import CollegeStafProfile from '../forthpage/CollegeStafProfile';
+import CollegeAdProfile from '../forthpage/CollegeAdProfile';
+import SchoolStudProfile from '../forthpage/SchoolStudProfile';
+import SchoolStafProfile from '../forthpage/SchoolStafProfile';
+import SchoolAdProfile from '../forthpage/SchoolAdProfile';
 
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const fontFamily= settings.fontFamily
-
-const listofdetails=[{id:1,icon:require('../assets/marks.png'),name:'MARKS'},
-                     {id:2,icon:require('../assets/Attendance.png'),name:'ATTENDANCE'},
-                     {id:3,icon:require('../assets/statistics.png'),name:'STATICS'},
-                     {id:4,icon:require('../assets/statistics.png'),name:'RANKS'},
-                     {id:4,icon:require('../assets/library.png'),name:'LIBRARY'},
-                     {id:5,icon:require('../assets/syllabus.png'),name:'SYLLABUS & TIMETABLE'},
-                     {id:6,icon:require('../assets/calendar.png'),name:'CALENDAR AND REMINDERS'},
-                     {id:7,icon:require('../assets/facultydetails.png'),name:'FACULTY DETAILS'},
-                     {id:8,icon:require('../assets/media.png'),name:'MEDIA'},
-                     {id:9,icon:require('../assets/questionpaper.png'),name:'QUESTION PAPERS'},
-                     {id:10,icon:require('../assets/forms.png'),name:'FORMS'},
-                     {id:11,icon:require('../assets/feedback.png'),name:'FEEDBACK & REMARKS'},
-                     {id:12,icon:require('../assets/settings.png'),name:'SETTINGS'},]
 
 class PageFourth extends React.Component {
 
@@ -53,144 +45,53 @@ class PageFourth extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      listofdetails:listofdetails,
-      college:false,
-      school:false,
+      collegeStud:false,
+      schoolStud:false,
+      schoolAd:false,
+      collegeAd:false,
+      schoolStaf:false,
+      collegeStaf:false,
       }
   }
 
-  componentDidMount(){}
-
-  profileHead=(type)=>{
-    return(
-      <View style={{justifyContent:'center',backgroundColor:'#292929'}}>
-        {type=='college'&&
-        <Text style={[styles.text,{color:'#fff',textAlign:'center',paddingVertical:10,
-            fontSize:14,fontWeight:'700'}]}>K L N COLLEGE OF ENGINEERING</Text>
-        }
-
-        {type=='school'&&
-        <Text style={[styles.text,{color:'#fff',textAlign:'center',paddingVertical:10,
-              fontSize:14,fontWeight:'700'}]}>THE CATHEDRAL HIGH SCHOOL</Text>
-        }
-
-        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',
-                      paddingHorizontal:15,paddingVertical:10}}>
-          <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:width*0.2,width:width*0.2,borderRadius:50}}/>
-          <View>
-            <Text style={[styles.text,{fontSize:12,color:'#fff',fontWeight:'700'}]}>Unique ID : AAA1111</Text>
-            <Text style={[styles.text,{fontSize:12,color:'#fff',fontWeight:'700'}]}>Name : Abishek Raj</Text>
-            <Text style={[styles.text,{fontSize:12,color:'#fff',fontWeight:'700'}]}>Student ID : AAA00001</Text>
-            <Text style={[styles.text,{fontSize:12,color:'#fff',fontWeight:'700'}]}>Class : III  Sec:A</Text>
-          </View>
-          <View style={{height:width*0.18,borderWidth:0.5,borderColor:'#8c8c8c'}}></View>
-          <View>
-            <Text style={[styles.text,{fontSize:12,color:'#fff',fontWeight:'700'}]}>REQUIRE ADMISSION</Text>
-            <TouchableOpacity style={{borderRadius:7,backgroundColor:'#000',borderWidth:1,paddingVertical:6,marginTop:2}}>
-              <Text style={[styles.text,{fontSize:14,color:'#fff',fontWeight:'700',textAlign:'center'}]}>LOGOUT</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    )
+  componentDidMount=async()=>{
+    const collegeStud = await AsyncStorage.getItem('collegeStud');
+    const schoolStud = await AsyncStorage.getItem('schoolStud');
+    const schoolAd = await AsyncStorage.getItem('schoolAd');
+    const collegeAd = await AsyncStorage.getItem('collegeAd');
+    const schoolStaf = await AsyncStorage.getItem('schoolStaf');
+    const collegeStaf = await AsyncStorage.getItem('collegeStaf');
+    this.setState({collegeStud:collegeStud});
+    this.setState({schoolStud:schoolStud});
+    this.setState({schoolAd:schoolAd});
+    this.setState({collegeAd:collegeAd});
+    this.setState({schoolStaf:schoolStaf});
+    this.setState({collegeStaf:collegeStaf});
+    console.log(collegeStud,'collegeStud',this.state.collegeStud);
+    console.log(schoolStud,'schoolStud',this.state.schoolStud);
+    console.log(schoolAd,'schoolAd',this.state.schoolAd);
+    console.log(collegeAd,'collegeAd',this.state.collegeAd);
+    console.log(schoolStaf,'schoolStaf',this.state.schoolStaf);
+    console.log(collegeStaf,'collegeStaf',this.state.collegeStaf);
   }
 
-  listOfDetails=(type)=>{
-    return(
-      <FlatList
-          style={{paddingBottom:100}}
-          data={this.state.listofdetails}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({item, index})=>(
-            <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,
-                        alignItems:'center',justifyContent:'space-between',paddingVertical:10}}
-               onPress={()=>{this.onListTouch(item,type)}}>
-              <View style={{flexDirection:'row',alignItems:'center'}}>
-                <Image source={(item.icon)} style={{height:width*0.07,width:width*0.07,}}/>
-                <Text style={[styles.text,{color:'#fff',fontWeight:'700',
-                          fontSize:14,paddingHorizontal:10}]}>{item.name}</Text>
-              </View>
-              <FontAwesome name='angle-right' size={18} color='#fff'/>
-             </TouchableOpacity>
-           )
-         }
-      />
-    )
-  }
-
-  onListTouch=(item,type)=>{
-    console.log(item,'item')
-    if(item.name=='FORMS'){
-      this.props.navigation.navigate('ProfileForms')
-    }
-    else if (item.name=='LIBRARY') {
-      this.props.navigation.navigate('ProfileLibrary')
-    }
-    else if(item.name=='FACULTY DETAILS'){
-      this.props.navigation.navigate('ProfileFacultyDetails')
-    }
-    else if(item.name=='FEEDBACK & REMARKS'){
-      this.props.navigation.navigate('ProfileFeedback')
-    }
-    else if(item.name=='SETTINGS'){
-      this.props.navigation.navigate('ProfileSetting')
-    }
-    else if(item.name=='MARKS'){
-      if(type=='school'){
-        this.props.navigation.navigate('ProfileSchoolMarks')
-      }else {
-        this.props.navigation.navigate('ProfileMarks')
-      }
-    }
-    else if(item.name=='SYLLABUS & TIMETABLE'){
-      this.props.navigation.navigate('ProfileSyllabus')
-    }
-    else if(item.name=='MEDIA'){
-      this.props.navigation.navigate('ProfileMedia')
-    }
-    else if(item.name=='QUESTION PAPERS'){
-      this.props.navigation.navigate('ProfileQuestionPaper')
-    }
-    else if(item.name=='STATICS'){
-      this.props.navigation.navigate('ProfileStatistics')
-    }
-    else if(item.name=='ATTENDANCE'){
-      if(type=='school'){
-        this.props.navigation.navigate('ProfileAttendance',{school:true})
-      }else {
-        this.props.navigation.navigate('ProfileAttendance')
-      }
-
-    }
-    else if (item.name=='CALENDAR AND REMINDERS') {
-      this.props.navigation.navigate('ProfilCalendar')
-    }
-    else if (item.name=='RANKS'){
-      this.props.navigation.navigate('ProfileRank')
-    }
-  }
 
   render() {
-    let college = false;
-    let school = false;
+
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
-          {college ==false&&
-            <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
-              {this.profileHead('college')}
-              <ScrollView>
-                {this.listOfDetails('college')}
-              </ScrollView>
-            </View>
-          }
-          {school==true &&
-            <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
-              {this.profileHead('school')}
-              <ScrollView>
-                {this.listOfDetails('school')}
-              </ScrollView>
-            </View>
-          }
+          {this.state.collegeStud=='true'&&
+          <CollegeStudProfile navigation={this.props.navigation}/>}
+          {this.state.schoolStud =='true'&&
+          <SchoolStudProfile navigation={this.props.navigation}/>}
+          {this.state.schoolAd =='true'&&
+          <SchoolAdProfile navigation={this.props.navigation}/>}
+          {this.state.collegeAd =='true'&&
+          <CollegeAdProfile navigation={this.props.navigation}/>}
+          {this.state.schoolStaf =='true'&&
+          <SchoolStafProfile navigation={this.props.navigation}/>}
+          {this.state.collegeStaf =='true'&&
+          <CollegeStafProfile navigation={this.props.navigation}/>}
           <TabComponent navigation={this.props.navigation}  />
       </View>
     );

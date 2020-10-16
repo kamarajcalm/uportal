@@ -12,7 +12,7 @@ import {
   TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
 import {Fontisto,FontAwesome,Entypo,
   SimpleLineIcons,MaterialCommunityIcons,
-  Feather,Octicons,MaterialIcons,
+  Feather,Octicons,MaterialIcons,Ionicons,
   FontAwesome5,AntDesign} from '@expo/vector-icons';
 import  Constants  from 'expo-constants';
 import { connect } from 'react-redux';
@@ -26,6 +26,7 @@ import Modal from "react-native-modal";
 import Swiper from 'react-native-swiper';
 import Notes from '../screenComponents/Notes';
 import Chat from '../screenComponents/Chat';
+import TimeAgo from 'react-native-timeago';
 
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
@@ -41,19 +42,19 @@ const warriorsmodallist=[{name:'Tom Banton'},{name:'Baristow (wk)'},{name:'Malan
 
 const timeline = [
               {img:require('../assets/Unknown_Boy.jpg'),name:'Stanly',dest:'PES UNIVERCITY',
-              like:0,time:'just ago',comment:false,share:false,dot:false,
+              like:0,date:new Date(),comment:false,share:false,dot:false,
               desc:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'},
 
               {img:require('../assets/Unknown_Boy.jpg'),name:'Stanly',dest:'PES UNIVERCITY',
-              like:0,time:'just ago',comment:false,share:false,dot:false,
+              like:0,date:new Date(),comment:false,share:false,dot:false,
               descimg:require('../assets/robot.jpg'),shortdesc:'Lorem ipsum dolor sit amet, consectetur ipsum dolor sit amet, consectetur adipiscing elit'},
 
               {img:require('../assets/Unknown_Boy.jpg'),name:'Stanly',dest:'PES UNIVERCITY',
-              like:0,time:'just ago',comment:false,share:false,dot:false,
+              like:0,date:new Date("2015-06-21"),comment:false,share:false,dot:false,
               descimg:require('../assets/robo.jpg'),shortdesc:'Lorem ipsum dolor sit amet, consectetur ipsum dolor sit amet, consectetur adipiscing elit'},
 
               {img:require('../assets/Unknown_Boy.jpg'),name:'Stanly',dest:'PES UNIVERCITY',
-              like:0,time:'just ago',comment:false,share:false,dot:false,
+              like:0,date:new Date("2020-06-21"),comment:false,share:false,dot:false,
               desc:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'}]
 
 const imag=[{img:require('../assets/marks.png'),name:'Whatsapp'},
@@ -87,7 +88,26 @@ class Home extends React.Component {
       }
     }
 
-  componentDidMount(){}
+  componentDidMount=async()=>{
+    let collegeStud = this.props.navigation.getParam('collegeStud',false);
+    console.log(collegeStud,'collegeStud');
+    let schoolStud = this.props.navigation.getParam('schoolStud',false);
+    console.log(schoolStud,'schoolStud');
+    let schoolAd = this.props.navigation.getParam('schoolAd',false);
+    console.log(schoolAd,'schoolAd');
+    let collegeAd = this.props.navigation.getParam('collegeAd',false);
+    console.log(collegeAd,'collegeAd');
+    let schoolStaf = this.props.navigation.getParam('schoolStaf',false);
+    console.log(schoolStaf,'schoolStaf');
+    let collegeStaf = this.props.navigation.getParam('collegeStaf',false);
+    console.log(collegeStaf,'collegeStaf');
+    AsyncStorage.setItem("collegeStud", JSON.stringify(collegeStud));
+    AsyncStorage.setItem("schoolStud", JSON.stringify(schoolStud));
+    AsyncStorage.setItem("schoolAd", JSON.stringify(schoolAd));
+    AsyncStorage.setItem("collegeAd", JSON.stringify(collegeAd));
+    AsyncStorage.setItem("schoolStaf", JSON.stringify(schoolStaf));
+    AsyncStorage.setItem("collegeStaf", JSON.stringify(collegeStaf));
+  }
 
   like=(item,index)=>{
     this.state.timeline[index].like=this.state.timeline[index].like+1
@@ -127,8 +147,11 @@ class Home extends React.Component {
                         numberOfLines={1}>{item.name}</Text>
                   <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'600'}]}
                         numberOfLines={1}>{item.dest}</Text>
-                  <Text style={[styles.text,{color:'#828282',fontSize:12,fontWeight:'600'}]}
-                        numberOfLines={1}>{item.time}</Text>
+                  <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <Ionicons name={'md-time'} size={12} color={'#828282'}/>
+                    <TimeAgo time={(item.date)}hideAgo={false}interval={60000} style={[styles.text,{color:'#828282',fontSize:12,fontWeight:'600',
+                            paddingHorizontal:6}]}/>
+                  </View>
                 </View>
               </View>
               <TouchableOpacity onPress={()=>{this.dot(item,index)}}style={{padding:10}}>
@@ -331,7 +354,8 @@ class Home extends React.Component {
       console.log(e) // Logs 'idle'
   }
 
-  render() {
+  render(){
+
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
         <Swiper style={{}}

@@ -8,14 +8,15 @@ import {
   Dimensions, Alert,StatusBar,
   FlatList, AppState, BackHandler ,
   AsyncStorage,ActivityIndicator,
-  ToastAndroid,RefreshControl,TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
-import {Fontisto, FontAwesome,Entypo,SimpleLineIcons,MaterialCommunityIcons,Feather,Octicons,MaterialIcons,FontAwesome5 } from '@expo/vector-icons';
+  ToastAndroid,RefreshControl,
+  TouchableWithoutFeedback,TouchableNativeFeedback} from 'react-native';
+import {Fontisto, FontAwesome,Entypo,SimpleLineIcons,
+  MaterialCommunityIcons,Feather,Octicons,
+  MaterialIcons,FontAwesome5 } from '@expo/vector-icons';
 import  Constants  from 'expo-constants';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
 import * as actionTypes from '../actions/actionTypes';
-import TabComponent  from '../navigationComponents/TabComponent.js';
-import Headers  from '../helpers/Headers.js';
 import settings from '../appSettings';
 
 const { width } = Dimensions.get('window');
@@ -23,19 +24,7 @@ const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const fontFamily= settings.fontFamily
 
-const listofdetails=[{id:1,icon:require('../assets/marks.png'),name:'MARKS'},
-                     {id:2,icon:require('../assets/Attendance.png'),name:'ATTENDANCE'},
-                     {id:3,icon:require('../assets/statistics.png'),name:'STATICS'},
-                     {id:4,icon:require('../assets/statistics.png'),name:'RANKS'},
-                     {id:4,icon:require('../assets/library.png'),name:'LIBRARY'},
-                     {id:5,icon:require('../assets/syllabus.png'),name:'SYLLABUS & TIMETABLE'},
-                     {id:6,icon:require('../assets/calendar.png'),name:'CALENDAR AND REMINDERS'},
-                     {id:7,icon:require('../assets/facultydetails.png'),name:'FACULTY DETAILS'},
-                     {id:8,icon:require('../assets/media.png'),name:'MEDIA'},
-                     {id:9,icon:require('../assets/questionpaper.png'),name:'QUESTION PAPERS'},
-                     {id:10,icon:require('../assets/forms.png'),name:'FORMS'},
-                     {id:11,icon:require('../assets/feedback.png'),name:'FEEDBACK & REMARKS'},
-                     {id:12,icon:require('../assets/settings.png'),name:'SETTINGS'},]
+
 
 class ChooseType extends React.Component {
 
@@ -47,34 +36,57 @@ class ChooseType extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-
       college:false,
       school:false,
       }
     }
 
     componentDidMount(){
-
     }
 
-
-
-
-
-
-
   render() {
-
     return (
       <View style={{flex:1,backgroundColor:'#fff',alignItems:'center',justifyContent:'center'}}>
-
-          <TouchableOpacity style={{padding:20,backgroundColor:'#000',marginVertical:20}}
-          onPress={()=>{this.props.navigation.navigate('Home',{college:true})}}>
-          <Text style={[styles.text,{color:'#fff',fontSize:20,fontWeight:'700'}]}>College-Student</Text>
+          <TouchableOpacity style={{width:width*0.5,paddingHorizontal:20,paddingVertical:6,
+                                    marginVertical:20,borderRadius:17,borderWidth:1}}
+              onPress={()=>{this.props.navigation.navigate('Home',{collegeStud:true})}}>
+              <Text style={[styles.text,{fontSize:20,fontWeight:'700',
+                            textAlign:'center'}]}>College-Student</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{padding:20,backgroundColor:'#000',marginVertical:20}}
-          onPress={()=>{this.props.navigation.navigate('Home',{school:true})}}>
-          <Text style={[styles.text,{color:'#fff',fontSize:20,fontWeight:'700'}]}>School-Student</Text>
+
+          <TouchableOpacity style={{width:width*0.5,paddingHorizontal:20,paddingVertical:6,
+                                    marginVertical:20,borderRadius:17,borderWidth:1}}
+              onPress={()=>{this.props.navigation.navigate('Home',{schoolStud:true})}}>
+              <Text style={[styles.text,{fontSize:20,fontWeight:'700',
+                            textAlign:'center'}]}>School-Student</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{width:width*0.5,paddingHorizontal:20,paddingVertical:6,
+                                    marginVertical:20,borderRadius:17,borderWidth:1}}
+              onPress={()=>{this.props.navigation.navigate('Home',{schoolAd:true})}}>
+              <Text style={[styles.text,{fontSize:20,fontWeight:'700',
+                            textAlign:'center'}]}>School-Admin</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{width:width*0.5,paddingHorizontal:20,paddingVertical:6,
+                                    marginVertical:20,borderRadius:17,borderWidth:1}}
+              onPress={()=>{this.props.navigation.navigate('Home',{collegeAd:true})}}>
+              <Text style={[styles.text,{fontSize:20,fontWeight:'700',
+                            textAlign:'center'}]}>College-Admin</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{width:width*0.5,paddingHorizontal:20,paddingVertical:6,
+                                    marginVertical:20,borderRadius:17,borderWidth:1}}
+              onPress={()=>{this.props.navigation.navigate('Home',{schoolStaf:true})}}>
+              <Text style={[styles.text,{fontSize:20,fontWeight:'700',
+                            textAlign:'center'}]}>School-Staff</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{width:width*0.5,paddingHorizontal:20,paddingVertical:6,
+                                    marginVertical:20,borderRadius:17,borderWidth:1}}
+              onPress={()=>{this.props.navigation.navigate('Home',{collegeStaf:true})}}>
+              <Text style={[styles.text,{fontSize:20,fontWeight:'700',
+                            textAlign:'center'}]}>College-Staff</Text>
           </TouchableOpacity>
 
       </View>
@@ -108,4 +120,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChooseType);
-// <Headers navigation={this.props.navigation} name={'PageFirst'} screen={'PageFourth'}/>

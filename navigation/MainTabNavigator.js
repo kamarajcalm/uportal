@@ -18,6 +18,13 @@ import OtpLogin from '../OtpBasedLogin/OtpLogin';
 import OtpScreen from '../OtpBasedLogin/OtpScreen';
 import DrawerContent from '../navigationComponents/DrawerContent';
 
+import CollegeStudProfile from '../forthpage/CollegeStudProfile';
+import CollegeStafProfile from '../forthpage/CollegeStafProfile';
+import CollegeAdProfile from '../forthpage/CollegeAdProfile';
+import SchoolStudProfile from '../forthpage/SchoolStudProfile';
+import SchoolStafProfile from '../forthpage/SchoolStafProfile';
+import SchoolAdProfile from '../forthpage/SchoolAdProfile';
+
 import ProfileForms from '../screenComponents/ProfileForms';
 import ProfileFillForm from '../screenComponents/ProfileFillForm';
 import ProfileLibrary from '../screenComponents/ProfileLibrary';
@@ -28,7 +35,6 @@ import ProfileSetting from '../screenComponents/ProfileSetting';
 import LinkEmail from '../screenComponents/LinkEmail';
 import Language from '../screenComponents/Language';
 import ChangePassword from '../screenComponents/ChangePassword';
-import ProfileMarks from '../screenComponents/ProfileMarks';
 import ProfileSyllabus from '../screenComponents/ProfileSyllabus';
 import ProfileMedia from '../screenComponents/ProfileMedia';
 import ProfileMediaChoose from '../screenComponents/ProfileMediaChoose';
@@ -40,17 +46,25 @@ import ProfileQuestionPaper from '../screenComponents/ProfileQuestionPaper';
 import QuestionPaper from '../screenComponents/QuestionPaper';
 import ProfileStatistics from '../screenComponents/ProfileStatistics';
 import StaticsAcademic from '../screenComponents/StaticsAcademic';
-import ProfileAttendance from '../screenComponents/ProfileAttendance';
 import ProfilCalendar from '../screenComponents/ProfilCalendar';
 import Notes from '../screenComponents/Notes';
-
 import MyWallScreen from '../screenComponents/MyWallScreen';
 import TeachersWall from '../screenComponents/TeachersWall';
 import ProfileRank from '../screenComponents/ProfileRank';
 import InfoScreen from '../screenComponents/InfoScreen';
 import FacStuDetails from '../screenComponents/FacStuDetails';
 import ChooseType from '../type/ChooseType';
+import ChooseSec from '../screenComponents/ChooseSec';
+import StudentAttendance from '../screenComponents/StudentAttendance';
+import SchoolStafMarks from '../screenComponents/SchoolStafMarks';
+import ChooseSubject from '../screenComponents/ChooseSubject';
+
+import ProfileAttendance from '../screenComponents/ProfileAttendance';
+import SchoolAdminAttendance from '../screenComponents/SchoolAdminAttendance';
+
+import ProfileMarks from '../screenComponents/ProfileMarks';
 import ProfileSchoolMarks from '../screenComponents/ProfileSchoolMarks';
+import SchoolAdminMarks from '../screenComponents/SchoolAdminMarks';
 
 const HomeStack = createStackNavigator({
    Home:Home,
@@ -87,6 +101,14 @@ const PageThirdStack = createStackNavigator({
 
 const PageFourthStack = createStackNavigator({
    PageFourth:PageFourth,
+
+   CollegeStudProfile:CollegeStudProfile,
+   CollegeStafProfile:CollegeStafProfile,
+   CollegeAdProfile:CollegeAdProfile,
+   SchoolStudProfile:SchoolStudProfile,
+   SchoolStafProfile:SchoolStafProfile,
+   SchoolAdProfile:SchoolAdProfile,
+
    ProfileForms:ProfileForms,
    ProfileFillForm:ProfileFillForm,
    ProfileLibrary:ProfileLibrary,
@@ -97,7 +119,6 @@ const PageFourthStack = createStackNavigator({
    LinkEmail:LinkEmail,
    Language:Language,
    ChangePassword:ChangePassword,
-   ProfileMarks:ProfileMarks,
    ProfileSyllabus:ProfileSyllabus,
    ProfileMedia:ProfileMedia,
    ProfileMediaChoose:ProfileMediaChoose,
@@ -109,10 +130,19 @@ const PageFourthStack = createStackNavigator({
    QuestionPaper:QuestionPaper,
    ProfileStatistics:ProfileStatistics,
    StaticsAcademic:StaticsAcademic,
-   ProfileAttendance:ProfileAttendance,
    ProfilCalendar:ProfilCalendar,
    ProfileRank:ProfileRank,
-   ProfileSchoolMarks:ProfileSchoolMarks
+   ChooseSec:ChooseSec,
+   StudentAttendance:StudentAttendance,
+   SchoolStafMarks:SchoolStafMarks,
+   ChooseSubject:ChooseSubject,
+
+   ProfileAttendance:ProfileAttendance,
+   SchoolAdminAttendance:SchoolAdminAttendance,
+
+   ProfileMarks:ProfileMarks,
+   ProfileSchoolMarks:ProfileSchoolMarks,
+   SchoolAdminMarks:SchoolAdminMarks,
 },
 {
   initialRouteName: 'PageFourth',
@@ -172,12 +202,11 @@ const Navigater = createStackNavigator({
 },
 {
   initialRouteName: 'ChooseType',
+  headerMode:'none'
 });
 Navigater.navigationOptions = ({ navigation }) => {
   let tabBarVisible = false;
-  return {
-    tabBarVisible,
-  };
+  return null
 };
 
 const drawerNavigator = createDrawerNavigator({
@@ -240,4 +269,4 @@ const drawerNavigator = createDrawerNavigator({
   }
 );
 
-export default createAppContainer(TabNavigator);
+export default createAppContainer(Navigater);

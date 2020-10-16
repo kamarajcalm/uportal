@@ -101,15 +101,6 @@ class ProfileAttendance extends React.Component {
     this.setState({day:day});
   };
 
-  renderHeader=(date)=>{
-    return(
-      <View>
-        <Text style={[styles.text,{color:'#fff',fontSize:14,
-              fontWeight:'700'}]}>{months[date.getMonth()]}</Text>
-      </View>
-    )
-  }
-
   calendars=()=>{
     return(
       <Calendar
@@ -120,21 +111,27 @@ class ProfileAttendance extends React.Component {
         allowRangeSelection={true}
         onDayPress={(day) => {console.log('selected day', day);this.setState({selectedDay:day})}}
         onDayLongPress={(day) => {console.log('selected day', day)}}
-        monthFormat={' MM  yyyy'}
+        monthFormat={'long'}
         onMonthChange={(months) => {this.changeMonth(months)}}
         hideArrows={false}
         hideExtraDays={false}
         disableMonthChange={false}
         firstDay={1}
         hideDayNames={false}
-        renderHeader={(date)=>{}}
         showWeekNumbers={false}
         onPressArrowLeft={subtractMonth => subtractMonth()}
         onPressArrowRight={addMonth => addMonth()}
         disableArrowLeft={false}
         disableArrowRight={false}
         disableAllTouchEventsForDisabledDays={false}
-        renderHeader={(date) => {this.renderHeader(date)}}
+        renderHeader={date=>{
+                        return(
+                          <View>
+                            <Text style={[styles.text,{color:'#fff',fontSize:14,
+                                fontWeight:'700',}]}>{months[date.getMonth()]+" "+date.getFullYear()}</Text>
+                          </View>
+                        );
+                      }}
         enableSwipeMonths={false}
         markedDates={{
           '2020-10-16':{customStyles:{container:{backgroundColor: '#04BF00'},
@@ -151,8 +148,6 @@ class ProfileAttendance extends React.Component {
                          }},
          }}
          markingType={'custom'}
-
-
          style={{
           borderWidth: 0,
           borderColor: 'gray',

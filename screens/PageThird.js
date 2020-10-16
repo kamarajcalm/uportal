@@ -151,8 +151,10 @@ class PageThird extends React.Component {
           initial={0}
           onPress={value => this.setState({ gender: value })}
           textColor={'#fff'} //'#7a44cf'
-          textStyle={[styles.text,{fontWeight:'700',fontSize:14}]}
-          selectedTextStyle={[styles.text,{fontWeight:'700',fontSize:14}]}
+          textStyle={{fontStyle:'normal',fontFamily:fontFamily,
+                      lineHeight:22,fontWeight:'700',fontSize:14}}
+          selectedTextStyle={{fontStyle:'normal',fontFamily:fontFamily,
+                      lineHeight:22,fontWeight:'700',fontSize:14}}
           selectedColor={'#000'}
           backgroundColor={'#333333'}
           buttonColor={'#fff'}

@@ -176,12 +176,14 @@ class StaticsAcademic extends React.Component {
                  }}
             height={width*0.7}
             width={width*0.8}
-            withHorizontalLines={true}
-            withVerticalLines={true}
+            withHorizontalLines
+            withVerticalLines
             fromZero={true}
             yAxisInterval={20}
             chartConfig={{
               useShadowColorFromDataset:false,
+              backgroundGradientFromOpacity:0,
+              backgroundGradientToOpacity:0,
               backgroundColor: "#000000",
               decimalPlaces: 0,
               color: this.state.color,//(opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -196,9 +198,11 @@ class StaticsAcademic extends React.Component {
             xLabelsOffset={0}
             withHorizontalLabels={true}
             withVerticalLabels={true}
-            withOuterLines={true}
+            withOuterLines={false}
             withInnerLines={false}
             withDots
+            withShadow={false}
+            segments={9}
           />
          </View>
    )
@@ -333,27 +337,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StaticsAcademic);
-// <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-//   <View style={{width:width*0.27,borderRadius:10,margin:10,paddingVertical:10,borderColor:'#fff',borderWidth:0.5,alignItems:'center',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-//       <View style={{backgroundColor:'#FFE600',height:10,width:10}}></View>
-//       <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',paddingHorizontal:10}]}>SCIENCE</Text>
-//   </View>
-//   <View style={{width:width*0.27,borderRadius:10,margin:10,paddingVertical:10,borderColor:'#fff',borderWidth:0.5,alignItems:'center',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-//       <View style={{backgroundColor:'#04B600',height:10,width:10}}></View>
-//       <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',paddingHorizontal:10}]}>SOCIAL</Text>
-//   </View>
-// </View>
-// <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-//   <View style={{width:width*0.27,borderRadius:10,margin:10,paddingVertical:10,borderColor:'#fff',borderWidth:0.5,alignItems:'center',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-//       <View style={{backgroundColor:'#001AFF',height:10,width:10}}></View>
-//       <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',paddingHorizontal:10}]}>ENGLISH</Text>
-//   </View>
-//   <View style={{width:width*0.27,borderRadius:10,margin:10,paddingVertical:10,borderColor:'#fff',borderWidth:0.5,alignItems:'center',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-//       <View style={{backgroundColor:'#FF4D00',height:10,width:10}}></View>
-//       <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',paddingHorizontal:10}]}>KANNDA</Text>
-//   </View>
-//   <View style={{width:width*0.27,borderRadius:10,margin:10,paddingVertical:10,borderColor:'#fff',borderWidth:0.5,alignItems:'center',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-//       <View style={{backgroundColor:'#10E9DC',height:10,width:10}}></View>
-//       <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',paddingHorizontal:10}]}>HINDI</Text>
-//   </View>
-// </View>

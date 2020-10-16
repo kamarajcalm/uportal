@@ -27,6 +27,7 @@ import HTML from 'react-native-render-html';
 import { RNCamera } from 'react-native-camera';
 import FilePickerManager from 'react-native-file-picker';
 import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
 
 const options = {
   title: 'Select Avatar',
@@ -96,39 +97,47 @@ export default class ChatApp extends Component {
        file:{},
     };
     async function requestReadPermission() {
-      try {
-        const { status } = await ImagePicker.getCameraRollPermissionsAsync(
-          Permissions.getAsync(Permissions.CAMERA_ROLL),{
-            title: 'Cool Photo App Camera Permission',
-            message:'Cool Photo App needs access to your camera ' +
-                      'so you can take awesome pictures.',
-            buttonNeutral: 'Ask Me Later',
-            buttonNegative: 'Cancel',
-            buttonPositive: 'OK',
-          },
-        )
-        if(status === 'granted') {
-          console.log('You can Read');
-        }else{
-          console.log(' permission denied');
-        }
-      }catch (err) {
-        console.warn(err);
+    //   try {
+    //     const { status } = await ImagePicker.getCameraRollPermissionsAsync(
+    //       Permissions.getAsync(Permissions.CAMERA_ROLL),{
+    //         title: 'Cool Photo App Camera Permission',
+    //         message:'Cool Photo App needs access to your camera ' +
+    //                   'so you can take awesome pictures.',
+    //         buttonNeutral: 'Ask Me Later',
+    //         buttonNegative: 'Cancel',
+    //         buttonPositive: 'OK',
+    //       },
+    //     )
+    //     if(status === 'granted') {
+    //       console.log('You can Read');
+    //     }else{
+    //       console.log(' permission denied');
+    //     }
+    //   }catch (err) {
+    //     console.warn(err);
+    //   }
+    //   try{
+    //     const { status1 } = await ImagePicker.getCameraPermissionsAsync(
+    //       Permissions.getAsync(Permissions.CAMERA),{
+    //         title: 'Cool Photo App Camera Permission',
+    //         buttonPositive: 'OK',
+    //       },
+    //     )
+    //     if (status1 === 'granted') {
+    //       console.log('You can Read');
+    //     }else{
+    //       console.log(' permission denied');
+    //     }
+    //   }catch(err){
+    //     console.warn(err);
+    //   }
+      const { status } = await Permissions.getAsync(Permissions.CAMERA);
+      if (status !== 'granted') {
+         alert('Hey! we need camera roll permissions to make this work!');
       }
-      try{
-        const { status1 } = await ImagePicker.getCameraPermissionsAsync(
-          Permissions.getAsync(Permissions.CAMERA),{
-            title: 'Cool Photo App Camera Permission',
-            buttonPositive: 'OK',
-          },
-        )
-        if (status1 === 'granted') {
-          console.log('You can Read');
-        }else{
-          console.log(' permission denied');
-        }
-      }catch(err){
-        console.warn(err);
+      const { status1 } = await Permissions.getAsync(Permissions.CAMERA_ROLL);
+      if (status1 !== 'granted') {
+         alert('Hey!we need camera roll permissions to make this work!');
       }
     }
     requestReadPermission()
@@ -255,8 +264,8 @@ export default class ChatApp extends Component {
                               <Text style={{color:'#fff'}}>{item.message}</Text>
                           </View>}
                           {item.messageimg&&
-                            <View style={{height:210,width:210,alignItems:'center',backgroundColor:'#333333',borderRadius:17,justifyContent:'center'}}>
-                            <Image source={{uri:item.messageimg}} style={{height:200,width:200,borderRadius:17}}/>
+                            <View style={{height:210,width:210,alignItems:'center',backgroundColor:'#333333',borderRadius:10,justifyContent:'center'}}>
+                            <Image source={{uri:item.messageimg}} style={{height:200,width:200,borderRadius:7}}/>
                           </View>}
                           {this.renderDate(item.date)}
                         </View>
@@ -271,12 +280,12 @@ export default class ChatApp extends Component {
                             <Text style={{color:'#000'}}>{item.message}</Text>
                       </View>}
                       {item.messageimg&&
-                        <View style={{height:210,width:210,justifyContent:'center',alignItems:'center',backgroundColor:'#333333',borderRadius:17}}>
-                        <Image source={{uri:item.messageimg}} style={{height:200,width:200,borderRadius:17}}/>
+                        <View style={{height:210,width:210,justifyContent:'center',alignItems:'center',backgroundColor:'#333333',borderRadius:10}}>
+                        <Image source={{uri:item.messageimg}} style={{height:200,width:200,borderRadius:7}}/>
                       </View>}
-                      {item.message==''&&<View>
+                      {item.message==''?<View>
                       <View style={styles.balloon}></View>
-                      {this.renderDate(item.date)}</View>}
+                      {this.renderDate(item.date)}</View>:<View>{this.renderDate(item.date)}</View>}
                     </View>
                     <Image source={(item.attachment)} style={{width:50,height:50,borderRadius:30}}/>
                  </View>}
@@ -400,7 +409,7 @@ const styles = StyleSheet.create({
   balloon: {
     maxWidth: 250,
     padding: 15,
-    borderRadius: 20,
+    borderRadius: 10,
   },
   itemIn: {
     alignSelf: 'flex-start',

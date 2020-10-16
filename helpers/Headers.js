@@ -35,7 +35,8 @@ export default class Headers extends React.Component {
                   'MediaNotesVideo','NotesVideosData','MediaUniversity','MediaDepart',
                   'ProfileQuestionPaper','QuestionPaper','ProfileRank','ProfileStatistics',
                   'ProfileAttendance','ProfilCalendar','MyWallScreen','TeachersWall','InfoScreen',
-                  'FacStuDetails','ProfileSchoolMarks']
+                  'FacStuDetails','ProfileSchoolMarks','SchoolAdminMarks','SchoolAdminAttendance',
+                  'ChooseSec','StudentAttendance','SchoolStafMarks','ChooseSubject']
       var feed = ['MyWallScreen']
       var notes = ['Notes','Chat']
       var teach = ['TeachersWall']
@@ -48,7 +49,7 @@ export default class Headers extends React.Component {
              <View style={{ flex: 0.2,justifyContent: 'flex-start', alignItems: 'center',}}>
 
                {notify.includes(this.props.screen)&&
-                  <TouchableOpacity onPress={()=>{this.props.navigation.openDrawer()}} style={{paddingHorizontal: 15,paddingVertical:10}}>
+                  <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal: 15,paddingVertical:10}}>
                     <MaterialIcons name="notifications-none" size={this.state.size} color="#fff" />
                   </TouchableOpacity>
                }

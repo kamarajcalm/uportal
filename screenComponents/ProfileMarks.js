@@ -74,7 +74,7 @@ class ProfileMarks extends React.Component {
           <View style={{flex:0.35}}>
             {this.state.semdata.map((item,index)=>{
               return(
-                <View>
+                <View key={item}>
                   {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>}
                   <View style={{flex:1,paddingHorizontal:6,flexDirection:'row'}}>
                     <View style={{width:60}}>
@@ -95,7 +95,7 @@ class ProfileMarks extends React.Component {
           <View style={{flex:0.65}}>
             {this.state.semdata.map((item,index)=>{
               return(
-                <View>
+                <View  key={item}>
                   {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>}
                   <View style={{flex:1,paddingHorizontal:6,flexDirection:'row'}}>
                     <View style={{width:100}}>

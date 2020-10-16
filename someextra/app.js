@@ -13,7 +13,7 @@ const statusBarStyle = settings.statusBarStyle
 const url = settings.url
 
 const appLoad=async()=>{
-  await Font.loadAsync({'OpenSans-Regular':require('./assets/fonts/OpenSans-Regular.ttf')});
+  await Font.loadAsync({'OpenSans-Regular':require('../assets/fonts/OpenSans-Regular.ttf')});
 }
 export default function App() {
   return (
