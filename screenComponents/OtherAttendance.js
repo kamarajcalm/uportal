@@ -34,7 +34,7 @@ const semdata=[{name:'CLASS I'},{name:'CLASS VII'},{name:'CLASS II'},
                 {name:'CLASS IV'},{name:'CLASS X'},{name:'CLASS V'},
                 {name:'CLASS XI'},{name:'CLASS VI'},{name:'CLASS XII'}]
 
-class SchoolAdminAttendance extends React.Component {
+class OtherAttendance extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state
@@ -51,17 +51,27 @@ class SchoolAdminAttendance extends React.Component {
     }
   }
 
-  componentDidMount=async()=>{}
+  componentDidMount(){
+    var stafMarks = this.props.navigation.getParam('item',null)
+    this.setState({stafMarks:stafMarks})
+    console.log(this.props.navigation.getParam('item',null),this.state.stafMarks,'ugggggggg');
+  }
 
-  touch=(item)=>{
-      this.props.navigation.navigate('ChooseSec',{item:item})
+  touch=(item,stafMarks)=>{
+    console.log(item,'ffffffffffff')
+    if(stafMarks=!null){
+      this.props.navigation.navigate('StafChooseSec',{stafMarks:{item:item}})
+    }else{
+      this.props.navigation.navigate('StafChooseSec',{item:item})
+    }
   }
 
   render() {
+
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={'ATTENDANCE'}
-            screen={'SchoolAdminAttendance'}/>
+            <Headers navigation={this.props.navigation} name={this.state.stafMarks=!null?'ACADEMIC MARKS':'ATTENDANCE'}
+            screen={'OtherAttendance'}/>
             <View style={{flex:1,paddingVertical:50,justifyContent:'center',alignItems:'center'}}>
 
               <FlatList
@@ -70,7 +80,7 @@ class SchoolAdminAttendance extends React.Component {
                 keyExtractor={(item, index) => index.toString()}
                 numColumns={2}
                 renderItem={({item, index})=>(
-                  <TouchableOpacity onPress={()=>{this.touch(item)}}
+                  <TouchableOpacity onPress={()=>{this.touch(item,this.state.stafMarks)}}
                      style={{marginHorizontal:10,marginVertical:10,alignItems:'center',
                           backgroundColor:'#333333',borderRadius:7,width:width*0.35}}>
                     <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
@@ -109,4 +119,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SchoolAdminAttendance);
+export default connect(mapStateToProps, mapDispatchToProps)(OtherAttendance);

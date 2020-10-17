@@ -57,7 +57,7 @@ class ChooseSec extends React.Component {
 
 
 
-  listOfDetails=(class1,itemStaf)=>{
+  listOfDetails=(class1)=>{
     return(
       <FlatList
           style={{paddingBottom:100}}
@@ -66,7 +66,7 @@ class ChooseSec extends React.Component {
           renderItem={({item, index})=>(
             <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,
                         alignItems:'center',justifyContent:'space-between',paddingVertical:10}}
-               onPress={()=>{this.onListTouch(item,class1,itemStaf)}}>
+               onPress={()=>{this.onListTouch(item,class1)}}>
               <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Image source={(item.icon)} style={{height:width*0.12,width:width*0.12,borderRadius:30}}/>
                 <Text style={[styles.text,{color:'#fff',fontWeight:'700',
@@ -81,27 +81,20 @@ class ChooseSec extends React.Component {
   }
 
   onListTouch=(item,class1,itemStaf)=>{
-    if(itemStaf!=null){
-      this.props.navigation.navigate('ChooseSubject',{itemStaf:{name:item.name,itemStaf:itemStaf}})
-    }else{
-      console.log(item,'item')
       this.props.navigation.navigate('StudentAttendance',{item:{name:item.name,class1:class1}})
-    }
-
   }
 
   render() {
     const class1 = this.props.navigation.getParam('item',null)
-    const itemStaf = this.props.navigation.getParam('itemStaf',null)
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
-        <Headers navigation={this.props.navigation} name={itemStaf!=null?itemStaf.item.name:class1.name}
+        <Headers navigation={this.props.navigation} name={class1.name}
             screen={'SchoolAdminAttendance'}/>
             <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
             <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,
               paddingHorizontal:20,fontWeight:'700'}]}>CHOOSE SECTION</Text>
               <ScrollView>
-                {this.listOfDetails(class1,itemStaf)}
+                {this.listOfDetails(class1)}
               </ScrollView>
             </View>
 

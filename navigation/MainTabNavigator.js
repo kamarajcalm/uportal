@@ -46,25 +46,36 @@ import ProfileQuestionPaper from '../screenComponents/ProfileQuestionPaper';
 import QuestionPaper from '../screenComponents/QuestionPaper';
 import ProfileStatistics from '../screenComponents/ProfileStatistics';
 import StaticsAcademic from '../screenComponents/StaticsAcademic';
+import ProfileRank from '../screenComponents/ProfileRank';
+
 import ProfilCalendar from '../screenComponents/ProfilCalendar';
 import Notes from '../screenComponents/Notes';
 import MyWallScreen from '../screenComponents/MyWallScreen';
+
 import TeachersWall from '../screenComponents/TeachersWall';
-import ProfileRank from '../screenComponents/ProfileRank';
 import InfoScreen from '../screenComponents/InfoScreen';
 import FacStuDetails from '../screenComponents/FacStuDetails';
+
 import ChooseType from '../type/ChooseType';
-import ChooseSec from '../screenComponents/ChooseSec';
-import StudentAttendance from '../screenComponents/StudentAttendance';
+
 import SchoolStafMarks from '../screenComponents/SchoolStafMarks';
 import ChooseSubject from '../screenComponents/ChooseSubject';
-
-import ProfileAttendance from '../screenComponents/ProfileAttendance';
-import SchoolAdminAttendance from '../screenComponents/SchoolAdminAttendance';
+import SchoolStafAttendance from '../screenComponents/SchoolStafAttendance';
+import ChoosePeriod from '../screenComponents/ChoosePeriod';
+import TakeAttendace from '../screenComponents/TakeAttendace';
+import OtherAttendance from '../screenComponents/OtherAttendance';
+import StafChooseSec from '../screenComponents/StafChooseSec';
+import StafChooseSubject from '../screenComponents/StafChooseSubject';
 
 import ProfileMarks from '../screenComponents/ProfileMarks';
+import ProfileAttendance from '../screenComponents/ProfileAttendance';
+
 import ProfileSchoolMarks from '../screenComponents/ProfileSchoolMarks';
+
 import SchoolAdminMarks from '../screenComponents/SchoolAdminMarks';
+import SchoolAdminAttendance from '../screenComponents/SchoolAdminAttendance';
+import ChooseSec from '../screenComponents/ChooseSec';
+import StudentAttendance from '../screenComponents/StudentAttendance';
 
 const HomeStack = createStackNavigator({
    Home:Home,
@@ -132,17 +143,25 @@ const PageFourthStack = createStackNavigator({
    StaticsAcademic:StaticsAcademic,
    ProfilCalendar:ProfilCalendar,
    ProfileRank:ProfileRank,
-   ChooseSec:ChooseSec,
-   StudentAttendance:StudentAttendance,
+
    SchoolStafMarks:SchoolStafMarks,
    ChooseSubject:ChooseSubject,
-
-   ProfileAttendance:ProfileAttendance,
-   SchoolAdminAttendance:SchoolAdminAttendance,
+   ChoosePeriod:ChoosePeriod,
+   SchoolStafAttendance:SchoolStafAttendance,
+   TakeAttendace:TakeAttendace,
+   OtherAttendance:OtherAttendance,
+   StafChooseSec:StafChooseSec,
+   StafChooseSubject:StafChooseSubject,
 
    ProfileMarks:ProfileMarks,
+   ProfileAttendance:ProfileAttendance,
+
    ProfileSchoolMarks:ProfileSchoolMarks,
+
    SchoolAdminMarks:SchoolAdminMarks,
+   SchoolAdminAttendance:SchoolAdminAttendance,
+   ChooseSec:ChooseSec,
+   StudentAttendance:StudentAttendance,
 },
 {
   initialRouteName: 'PageFourth',

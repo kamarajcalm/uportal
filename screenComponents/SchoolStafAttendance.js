@@ -30,13 +30,13 @@ const themeColor = settings.themeColor
 const fontFamily= settings.fontFamily
 
 const listofsection=[{id:1,icon:require('../assets/Unknown_Boy.jpg'),
-                      name:'CLASS I',sec:'SECTION A'},
+                      nameid:'SEC A',name:'CLASS I'},
                      {id:2,icon:require('../assets/Unknown_Boy.jpg'),
-                     name:'CLASS III',sec:'SECTION B'},
+                     nameid:'SEC B',name:'CLASS III'},
                      {id:3,icon:require('../assets/Unknown_Boy.jpg'),
-                     name:'CLASS V',sec:'SECTION C'},]
+                     nameid:'SEC C',name:'CLASS V'},]
 
-class SchoolStafMarks extends React.Component {
+class SchoolStafAttendance extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state
@@ -69,14 +69,14 @@ class SchoolStafMarks extends React.Component {
           renderItem={({item, index})=>(
             <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,
                         alignItems:'center',justifyContent:'space-between',paddingVertical:10}}
-               onPress={()=>{this.onListTouch(item,)}}>
+               onPress={()=>{this.onListTouch(item)}}>
               <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Image source={(item.icon)} style={{height:width*0.12,width:width*0.12,borderRadius:30}}/>
                 <View>
                   <Text style={[styles.text,{color:'#fff',fontWeight:'700',
                           fontSize:14,paddingHorizontal:10}]}>{item.name}</Text>
                   <Text style={[styles.text,{color:'#fff',fontWeight:'700',
-                          fontSize:12,paddingHorizontal:10}]}>{item.sec}</Text>
+                          fontSize:12,paddingHorizontal:10}]}>{item.nameid}</Text>
                 </View>
               </View>
               <FontAwesome name='angle-right' size={18} color='#fff'/>
@@ -88,21 +88,18 @@ class SchoolStafMarks extends React.Component {
   }
 
   onListTouch=(item)=>{
-    console.log(item,'item')
-    this.props.navigation.navigate('ChooseSubject',{item:item})
+    this.props.navigation.navigate('ChoosePeriod',{class1:item})
   }
 
   others=()=>{
-    this.props.navigation.navigate('OtherAttendance',{item:{stafMarks:true}})
+    this.props.navigation.navigate('OtherAttendance')
   }
 
   render() {
-    const class1 = this.props.navigation.getParam('item',null)
-
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
-        <Headers navigation={this.props.navigation} name={'ACADEMIC MARKS'}
-            screen={'SchoolStafMarks'}/>
+        <Headers navigation={this.props.navigation} name={'ATTENDANCE'}
+            screen={'SchoolStafAttendance'}/>
             <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
             <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,
               paddingHorizontal:20,fontWeight:'700'}]}>MY CLASSES</Text>
@@ -115,7 +112,6 @@ class SchoolStafMarks extends React.Component {
                               fontSize:14,paddingHorizontal:10}]}>OTHERS</Text>
                  </TouchableOpacity>
               </ScrollView>
-
             </View>
 
           <TabComponent navigation={this.props.navigation}  />
@@ -149,4 +145,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SchoolStafMarks);
+export default connect(mapStateToProps, mapDispatchToProps)(SchoolStafAttendance);

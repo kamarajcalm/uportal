@@ -149,7 +149,7 @@ class SchoolStafProfile extends React.Component {
       this.props.navigation.navigate('ProfileStatistics')
     }
     else if(item.name=='ATTENDANCE'){
-
+      this.props.navigation.navigate('SchoolStafAttendance')
     }
     else if (item.name=='CALENDAR AND REMINDERS') {
       this.props.navigation.navigate('ProfilCalendar')

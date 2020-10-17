@@ -29,14 +29,20 @@ const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const fontFamily= settings.fontFamily
 
+const itemdata=[{name:'TEST-1'},{name:'TEST-2'},{name:'TEST-1'},
+                {name:'TEST-2'},{name:'ANNUAL'}]
 const listofsection=[{id:1,icon:require('../assets/Unknown_Boy.jpg'),
-                      name:'CLASS I',sec:'SECTION A'},
+                      name:'CHEMISTRY',itemdata:itemdata,open:false},
                      {id:2,icon:require('../assets/Unknown_Boy.jpg'),
-                     name:'CLASS III',sec:'SECTION B'},
+                     name:'MATHEMATICS',itemdata:itemdata,open:false},
                      {id:3,icon:require('../assets/Unknown_Boy.jpg'),
-                     name:'CLASS V',sec:'SECTION C'},]
+                     name:'ENGLISH',itemdata:itemdata,open:false},
+                     {id:2,icon:require('../assets/Unknown_Boy.jpg'),
+                     name:'EG',itemdata:itemdata,open:false},
+                     {id:3,icon:require('../assets/Unknown_Boy.jpg'),
+                     name:'PHYSICS',itemdata:itemdata,open:false},]
 
-class SchoolStafMarks extends React.Component {
+class StafChooseSubject extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state
@@ -60,62 +66,73 @@ class SchoolStafMarks extends React.Component {
 
 
 
-  listOfDetails=()=>{
+  listOfDetails=(stafMarks)=>{
     return(
       <FlatList
           style={{paddingBottom:100}}
           data={this.state.listofsection}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index})=>(
-            <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,
-                        alignItems:'center',justifyContent:'space-between',paddingVertical:10}}
-               onPress={()=>{this.onListTouch(item,)}}>
-              <View style={{flexDirection:'row',alignItems:'center'}}>
-                <Image source={(item.icon)} style={{height:width*0.12,width:width*0.12,borderRadius:30}}/>
-                <View>
-                  <Text style={[styles.text,{color:'#fff',fontWeight:'700',
+            <View style={{width:width*0.6,backgroundColor:'#141414',
+                        alignItems:'center',justifyContent:'center',marginVertical:10,borderRadius:10,alignSelf:'center'}}>
+            <TouchableOpacity style={{flexDirection:'row',width:width*0.6,backgroundColor:'#333333',
+                        alignItems:'center',justifyContent:'center',paddingVertical:10,borderRadius:10,alignSelf:'center'}}
+               onPress={()=>{this.onListTouch(item,index,stafMarks)}}>
+              <View style={{alignItems:'center',flexDirection:'row'}}>
+
+                <Text style={[styles.text,{color:'#fff',fontWeight:'700',
                           fontSize:14,paddingHorizontal:10}]}>{item.name}</Text>
-                  <Text style={[styles.text,{color:'#fff',fontWeight:'700',
-                          fontSize:12,paddingHorizontal:10}]}>{item.sec}</Text>
-                </View>
+
               </View>
-              <FontAwesome name='angle-right' size={18} color='#fff'/>
+
              </TouchableOpacity>
+             <View>{item.open &&this.state.itemIndex==item.id&& <View>
+               {this.openTest(item)}
+               </View>}</View>
+
+             </View>
            )
          }
       />
     )
   }
 
-  onListTouch=(item)=>{
-    console.log(item,'item')
-    this.props.navigation.navigate('ChooseSubject',{item:item})
+  openTest=(item,index)=>{
+    return(
+      <View>
+      <FlatList
+          style={{}}
+          data={item.itemdata}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+            <View style={{width:width*0.6,
+                        paddingVertical:10,borderRadius:10,}}>
+            <Text style={[styles.text,{color:'#fff',fontSize:14,
+              fontWeight:'700',paddingLeft:20}]}>{item.name}</Text>
+            </View>
+          )}/>
+      </View>
+    )
   }
 
-  others=()=>{
-    this.props.navigation.navigate('OtherAttendance',{item:{stafMarks:true}})
+
+
+  onListTouch=(item,index)=>{
+    this.props.navigation.navigate('ChoosePeriod',{others:item})
   }
 
   render() {
-    const class1 = this.props.navigation.getParam('item',null)
 
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
-        <Headers navigation={this.props.navigation} name={'ACADEMIC MARKS'}
-            screen={'SchoolStafMarks'}/>
+        <Headers navigation={this.props.navigation} name={'ATTENDANCE'}
+            screen={'StafChooseSubject'}/>
             <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
             <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,
-              paddingHorizontal:20,fontWeight:'700'}]}>MY CLASSES</Text>
+              paddingHorizontal:20,fontWeight:'700',textAlign:'center'}]}>CHOOSE SUBJECT</Text>
               <ScrollView>
                 {this.listOfDetails()}
-                <TouchableOpacity onPress={()=>{this.others()}} style={{flexDirection:'row',width:width*0.4,backgroundColor:'#333333',
-                            alignItems:'center',justifyContent:'center',paddingVertical:10,
-                            borderRadius:10,alignSelf:'center'}}>
-                    <Text style={[styles.text,{color:'#fff',fontWeight:'700',
-                              fontSize:14,paddingHorizontal:10}]}>OTHERS</Text>
-                 </TouchableOpacity>
               </ScrollView>
-
             </View>
 
           <TabComponent navigation={this.props.navigation}  />
@@ -149,4 +166,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SchoolStafMarks);
+export default connect(mapStateToProps, mapDispatchToProps)(StafChooseSubject);
