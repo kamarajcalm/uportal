@@ -29,12 +29,14 @@ const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
 const fontFamily =settings.fontFamily
-const semdata=[{name:'CLASS I'},{name:'CLASS VII'},{name:'CLASS II'},
-                {name:'CLASS VIII'},{name:'CLASS III'},{name:'CLASS IX'},
-                {name:'CLASS IV'},{name:'CLASS X'},{name:'CLASS V'},
-                {name:'CLASS XI'},{name:'CLASS VI'},{name:'CLASS XII'}]
+const semdata=[{name:'CLASS I'},{name:'CLASS VII'},
+               {name:'CLASS II'},{name:'CLASS VIII'},
+               {name:'CLASS III'},{name:'CLASS IX'},
+               {name:'CLASS IV'},{name:'CLASS X'},
+               {name:'CLASS V'},{name:'CLASS XI'},
+               {name:'CLASS VI'},{name:'CLASS XII'}]
 
-class OtherAttendance extends React.Component {
+class SchoolStafMediaChoose extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state
@@ -43,55 +45,44 @@ class OtherAttendance extends React.Component {
 
   constructor(props) {
     super(props);
-    var stafMarks = this.props.navigation.getParam('item',null)
-    console.log(this.props.navigation.getParam('item',null),stafMarks,'ugggggggg');
     this.state={
       emailid:'',
       a1:false,
       a2:false,
       semdata:semdata,
-      stafMarks:stafMarks
-    }
-    console.log(this.state.stafMarks,'stafMarks')
-  }
-
-  componentDidMount(){
-  }
-
-
-
-  touch=(item,stafMarks)=>{
-    console.log(item,'ffffffffffff',stafMarks)
-    if(stafMarks!=null){
-      this.props.navigation.navigate('StafChooseSec',{stafMarks:{item:item}})
-    }else{
-      this.props.navigation.navigate('StafChooseSec',{item:item})
     }
   }
 
-  render() {
+  componentDidMount=()=>{
+  }
 
+
+  touch=(item)=>{
+      this.props.navigation.navigate('MediaChooseSubject',{scStMeChoose:item})
+  }
+
+  render(){
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={this.state.stafMarks!=null?'ACADEMIC MARKS':'ATTENDANCE'}
-            screen={'OtherAttendance'}/>
+            <Headers navigation={this.props.navigation} name={'MEDIA'}
+            screen={'SchoolStafMediaChoose'}/>
             <View style={{flex:1,paddingVertical:50,justifyContent:'center',alignItems:'center'}}>
-
+              <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
+                          paddingVertical:15,fontWeight:'700'}]}>CHOOSE CLASS</Text>
               <FlatList
                 contenContainerStyle={{justifyContent:'space-between',}}
                 data={this.state.semdata}
-                keyExtractor={(item, index) => index.toString()}
                 numColumns={2}
+                keyExtractor={(item, index) => index.toString()}
                 renderItem={({item, index})=>(
-                  <TouchableOpacity onPress={()=>{this.touch(item,this.state.stafMarks)}}
-                     style={{marginHorizontal:10,marginVertical:10,alignItems:'center',
-                          backgroundColor:'#333333',borderRadius:7,width:width*0.35}}>
+                  <TouchableOpacity  onPress={()=>{this.touch()}} style={{marginHorizontal:10,marginVertical:15,paddingHorizontal:40,
+                          backgroundColor:'#333333',borderRadius:7,width:width*0.38}}>
                     <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
-                            paddingVertical:10,fontWeight:'700'}]}>{item.name}</Text>
+                          paddingVertical:10,fontWeight:'700'}]}>{item.name}</Text>
                   </TouchableOpacity>
                 )}
               />
-          </View>
+            </View>
       </View>
     );
   }
@@ -111,15 +102,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps =(state) => {
-    return {
-
-  }
+  return {}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
+  return {};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OtherAttendance);
+export default connect(mapStateToProps, mapDispatchToProps)(SchoolStafMediaChoose);

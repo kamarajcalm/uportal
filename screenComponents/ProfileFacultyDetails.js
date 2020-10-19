@@ -28,17 +28,17 @@ const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
 const fontFamily = settings.fontFamily
-const depatlist=[{depat:'Aeronautical Engineering'},
-                  {depat:'Electronics & Communication'},
-                  {depat:'Computer science & Engineering'},
-                  {depat:'Aeronautical Engineering'},
-                  {depat:'Electronics & Communication'},
-                  {depat:'Computer science & Engineering'},
-                  {depat:'Think and Grow Rich'},
-                  {depat:'Aeronautical Engineering'},
-                  {depat:'Electronics & Communication'},
-                  {depat:'Computer science & Engineering'},
-                  {depat:'Others'},]
+const depatlist=[{depat:'AE'},{depat:'EC'},
+                  {depat:'CsE'},{depat:'AE'},
+                  {depat:'EC'},{depat:'CsE'},
+                  {depat:'TGR'},{depat:'AE'},
+                  {depat:'EC'},{depat:'CsE'},]
+const classes=[{depat:'CLASS I'},{depat:'CLASS VII'},
+                  {depat:'CLASS II'},{depat:'CLASS VIII'},
+                  {depat:'CLASS III'},{depat:'CLASS IX'},
+                  {depat:'CLASS IV'},{depat:'CLASS X'},
+                  {depat:'CLASS V'},{depat:'CLASS XI'},
+                  {depat:'CLASS VI'},{depat:'CLASS XII'}]
 
 class ProfileFacultyDetails extends React.Component {
 
@@ -51,7 +51,8 @@ class ProfileFacultyDetails extends React.Component {
     super(props);
     this.state={
       depatlist:depatlist,
-      a1:false
+      a1:false,
+      classes:classes,
       }
     }
 
@@ -62,23 +63,23 @@ class ProfileFacultyDetails extends React.Component {
     this.props.navigation.navigate('PFacultyDetailsCarousel')
   }
 
-  depatList=()=>{
+  depatList=(school)=>{
     return(
       <View style={{justifyContent:'center',marginVertical:20}}>
-        <FlatList style={{}} data={this.state.depatlist}
+        <FlatList style={{}} data={school!=null?this.state.classes:this.state.depatlist}
+          numColumns={2}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index})=>(
             <View style={{marginVertical:0}}>
               <TouchableOpacity
-                style={{flexDirection:'row',justifyContent:'space-between',
-                          backgroundColor:'#000',width:width,paddingHorizontal:20,
-                          paddingVertical:15,alignItems:'center'}}
+                style={{backgroundColor:'#333333',width:width*0.3,paddingHorizontal:20,
+                borderRadius:10,paddingVertical:15,alignItems:'center',margin:10}}
                 onPress={()=>{this.touch(item,index)}}>
                 <Text style={[styles.text,{color:'#fff',fontSize:14,
-                            fontWeight:'700'}]}>{item.depat}</Text>
-                <FontAwesome name='angle-right' size={20} color='#fff'/>
+                            fontWeight:'700',textAlign:'center'}]}>{item.depat}</Text>
+
               </TouchableOpacity>
-            <View style={{borderWidth:0.5,borderColor:'#fff'}}></View>
+
           </View>
         )}/>
       </View>
@@ -86,12 +87,23 @@ class ProfileFacultyDetails extends React.Component {
   }
 
   render() {
+    var school = this.props.navigation.getParam('school',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
             <Headers navigation={this.props.navigation} name={'FACULTY DETAILS'} screen={'ProfileFacultyDetails'}/>
             <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
               <ScrollView style={{paddingVertical:10}}>
-                  {this.depatList()}
+                  {school!=null&&<Text style={[styles.text,{color:'#fff',fontSize:14,
+                        fontWeight:'700',textAlign:'center'}]}>CHOOSE CLASS</Text>}
+                  {this.depatList(school)}
+                  <TouchableOpacity
+                    style={{backgroundColor:'#333333',width:width*0.3,
+                            paddingHorizontal:20,borderRadius:10,paddingVertical:15,
+                            alignItems:'center',margin:10,alignSelf:'center'}}
+                    onPress={()=>{this.touch()}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:14,
+                                fontWeight:'700',textAlign:'center'}]}>OTHERS</Text>
+                  </TouchableOpacity>
               </ScrollView>
             </View>
       </View>

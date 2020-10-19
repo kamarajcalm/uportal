@@ -58,7 +58,7 @@ class StafChooseSec extends React.Component {
 
 
 
-  listOfDetails=()=>{
+  listOfDetails=(attend,stafMarks)=>{
     return(
       <FlatList
           style={{paddingBottom:100}}
@@ -67,7 +67,7 @@ class StafChooseSec extends React.Component {
           renderItem={({item, index})=>(
             <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,
                         alignItems:'center',justifyContent:'space-between',paddingVertical:10}}
-               onPress={()=>{this.onListTouch(item)}}>
+               onPress={()=>{this.onListTouch(item,attend,stafMarks)}}>
               <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Image source={(item.icon)} style={{height:width*0.12,width:width*0.12,borderRadius:30}}/>
                 <Text style={[styles.text,{color:'#fff',fontWeight:'700',
@@ -82,35 +82,31 @@ class StafChooseSec extends React.Component {
   }
 
   componentDidMount(){
-    
-    // var item1 = this.props.navigation.getParam('item',null);
-    // this.setState({})
   }
 
-  onListTouch=(item)=>{
-
-      this.props.navigation.navigate('StafChooseSubject',{item:{name:item.name,class1:class1}})
-
+  onListTouch=(item,attend,stafMarks)=>{
+    if(attend!=null){
+      this.props.navigation.navigate('StafChooseSubject',{attend:{name:item.name,attend:attend}})
+    }else if(stafMarks!=null){
+      this.props.navigation.navigate('StafChooseSubject',{stafMarks:{name:item.name,stafMarks:stafMarks.item.name}})
+    }
 
   }
 
   render() {
-
-    // const stafMarks = this.props.navigation.getParam('stafMarks',null)
+    var attend = this.props.navigation.getParam('item',null);
+    var stafMarks = this.props.navigation.getParam('stafMarks',null);
+    console.log(attend,'attend',stafMarks)
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
-      {this.state.item1!=null&&this.state.item1!=undefined&&
-        <Headers navigation={this.props.navigation} name={item1=!null?item1.name:'rtrtrt'} screen={'StafChooseSec'}/>
-      }
-
+        <Headers navigation={this.props.navigation} name={attend!=null?attend.name:stafMarks.item.name} screen={'StafChooseSec'}/>
             <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
             <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,
               paddingHorizontal:20,fontWeight:'700'}]}>CHOOSE SECTION</Text>
               <ScrollView>
-                {this.listOfDetails()}
+                {this.listOfDetails(attend,stafMarks)}
               </ScrollView>
             </View>
-
           <TabComponent navigation={this.props.navigation}  />
       </View>
     );

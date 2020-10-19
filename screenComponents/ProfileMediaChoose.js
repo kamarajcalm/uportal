@@ -44,12 +44,16 @@ class ProfileMediaChoose extends React.Component {
 
   constructor(props) {
     super(props);
+    var semesters=this.props.navigation.getParam('item',null)
+    console.log(semesters,'semesters')
+    
     this.state={
       emailid:'',
       a1:false,
       a2:false,
       semdata:semdata,
       otherdata:otherdata,
+      semesters:semesters,
     }
   }
 
@@ -73,24 +77,24 @@ class ProfileMediaChoose extends React.Component {
   }
 
   render() {
-    const semesters=this.props.navigation.getParam('item',null)
-    console.log(semesters,'semesters')
+
+
     // const itemother=this.props.navigation.getParam('itemother',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={semesters.quespaper?'QUESTION PAPERS':'MEDIA'}
+            <Headers navigation={this.props.navigation} name={this.state.semesters.quespaper?'QUESTION PAPERS':'MEDIA'}
             screen={'ProfileMediaChoose'}/>
 
             <View style={{flex:1,paddingVertical:50,justifyContent:'center',alignItems:'center'}}>
-              {semesters.item &&
+              {this.state.semesters.item &&
                 <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
                           paddingVertical:15,fontWeight:'700'}]}>CHOOSE SUBJECT</Text>
               }
               <FlatList
-                contenContainerStyle={{justifyContent:'space-between',}} data={semesters.item?this.state.semdata:this.state.otherdata}
+                contenContainerStyle={{justifyContent:'space-between',}} data={this.state.semesters.item?this.state.semdata:this.state.otherdata}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({item, index})=>(
-                  <TouchableOpacity  onPress={()=>{semesters.item?this.touchsem(semesters):this.touch(semesters)}} style={{marginHorizontal:10,marginVertical:15,paddingHorizontal:40,
+                  <TouchableOpacity  onPress={()=>{this.state.semesters.item?this.touchsem(this.state.semesters):this.touch(this.state.semesters)}} style={{marginHorizontal:10,marginVertical:15,paddingHorizontal:40,
                           backgroundColor:'#333333',borderRadius:7,}}>
                     <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
                           paddingVertical:10,fontWeight:'700'}]}>{item.name}</Text>

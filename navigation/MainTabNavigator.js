@@ -66,6 +66,12 @@ import TakeAttendace from '../screenComponents/TakeAttendace';
 import OtherAttendance from '../screenComponents/OtherAttendance';
 import StafChooseSec from '../screenComponents/StafChooseSec';
 import StafChooseSubject from '../screenComponents/StafChooseSubject';
+import SchoolStafStatistics from '../screenComponents/SchoolStafStatistics';
+import SchoolStafRank from '../screenComponents/SchoolStafRank';
+import SchoolStafMedia from '../screenComponents/SchoolStafMedia';
+import SchoolStafMediaChoose from '../screenComponents/SchoolStafMediaChoose';
+import MediaChooseSubject from '../screenComponents/MediaChooseSubject';
+import SchoolStafRemark from '../screenComponents/SchoolStafRemark';
 
 import ProfileMarks from '../screenComponents/ProfileMarks';
 import ProfileAttendance from '../screenComponents/ProfileAttendance';
@@ -152,6 +158,12 @@ const PageFourthStack = createStackNavigator({
    OtherAttendance:OtherAttendance,
    StafChooseSec:StafChooseSec,
    StafChooseSubject:StafChooseSubject,
+   SchoolStafStatistics:SchoolStafStatistics,
+   SchoolStafRank:SchoolStafRank,
+   SchoolStafMedia:SchoolStafMedia,
+   SchoolStafMediaChoose:SchoolStafMediaChoose,
+   MediaChooseSubject:MediaChooseSubject,
+   SchoolStafRemark:SchoolStafRemark,
 
    ProfileMarks:ProfileMarks,
    ProfileAttendance:ProfileAttendance,

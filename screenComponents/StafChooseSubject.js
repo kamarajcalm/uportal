@@ -32,15 +32,22 @@ const fontFamily= settings.fontFamily
 const itemdata=[{name:'TEST-1'},{name:'TEST-2'},{name:'TEST-1'},
                 {name:'TEST-2'},{name:'ANNUAL'}]
 const listofsection=[{id:1,icon:require('../assets/Unknown_Boy.jpg'),
-                      name:'CHEMISTRY',itemdata:itemdata,open:false},
+                      name:'CHEMISTRY',},
                      {id:2,icon:require('../assets/Unknown_Boy.jpg'),
-                     name:'MATHEMATICS',itemdata:itemdata,open:false},
+                     name:'MATHEMATICS',},
                      {id:3,icon:require('../assets/Unknown_Boy.jpg'),
-                     name:'ENGLISH',itemdata:itemdata,open:false},
+                     name:'ENGLISH',},
                      {id:2,icon:require('../assets/Unknown_Boy.jpg'),
-                     name:'EG',itemdata:itemdata,open:false},
+                     name:'EG',},
                      {id:3,icon:require('../assets/Unknown_Boy.jpg'),
-                     name:'PHYSICS',itemdata:itemdata,open:false},]
+                     name:'PHYSICS',},]
+
+const listofsub=[{id:1,icon:require('../assets/Unknown_Boy.jpg'),
+                      name:'LANGUAGE',itemdata:itemdata,open:false},
+                    {id:2,icon:require('../assets/Unknown_Boy.jpg'),
+                      name:'MATHEMATICS',itemdata:itemdata,open:false},
+                      {id:3,icon:require('../assets/Unknown_Boy.jpg'),
+                      name:'ENGLISH',itemdata:itemdata,open:false},]
 
 class StafChooseSubject extends React.Component {
 
@@ -61,6 +68,7 @@ class StafChooseSubject extends React.Component {
       listofsection:listofsection,
       college:false,
       school:false,
+      listofsub:listofsub,
       }
   }
 
@@ -70,7 +78,7 @@ class StafChooseSubject extends React.Component {
     return(
       <FlatList
           style={{paddingBottom:100}}
-          data={this.state.listofsection}
+          data={stafMarks!=null?this.state.listofsub:this.state.listofsection}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index})=>(
             <View style={{width:width*0.6,backgroundColor:'#141414',
@@ -107,8 +115,8 @@ class StafChooseSubject extends React.Component {
           renderItem={({item, index})=>(
             <View style={{width:width*0.6,
                         paddingVertical:10,borderRadius:10,}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:14,
-              fontWeight:'700',paddingLeft:20}]}>{item.name}</Text>
+              <Text style={[styles.text,{color:'#fff',fontSize:14,
+                fontWeight:'700',paddingLeft:20}]}>{item.name}</Text>
             </View>
           )}/>
       </View>
@@ -117,21 +125,29 @@ class StafChooseSubject extends React.Component {
 
 
 
-  onListTouch=(item,index)=>{
-    this.props.navigation.navigate('ChoosePeriod',{others:item})
+  onListTouch=(item,index,stafMarks)=>{
+    if(stafMarks!=null){
+      this.state.listofsub[index].open=!this.state.listofsub[index].open
+      this.setState({listofsub})
+      this.setState({itemIndex:item.id})
+    }else{
+      this.props.navigation.navigate('ChoosePeriod',{others:item})
+    }
   }
 
   render() {
-
+    var attend = this.props.navigation.getParam('attend',null);
+    var stafMarks = this.props.navigation.getParam('stafMarks',null);
+    console.log(attend,'attend',stafMarks)
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
-        <Headers navigation={this.props.navigation} name={'ATTENDANCE'}
+        <Headers navigation={this.props.navigation} name={attend!=null?'ATTENDANCE':stafMarks.name+ ' '+stafMarks.stafMarks}
             screen={'StafChooseSubject'}/>
             <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
             <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,
               paddingHorizontal:20,fontWeight:'700',textAlign:'center'}]}>CHOOSE SUBJECT</Text>
               <ScrollView>
-                {this.listOfDetails()}
+                {this.listOfDetails(stafMarks)}
               </ScrollView>
             </View>
 

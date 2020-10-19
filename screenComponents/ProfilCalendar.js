@@ -24,6 +24,8 @@ import settings from '../appSettings';
 import HttpsClient from '../helpers/HttpsClient';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import {LocaleConfig} from 'react-native-calendars';
+import Modal from "react-native-modal";
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
@@ -35,6 +37,7 @@ const month= 1
 const year= 2020
 const date=new Date()
 const dateString=date
+const dateToString=date
 const months = ["January", "February", "March", "April",
                 "May", "June", "July", "August", "September",
                 "October","November", "December"];
@@ -58,6 +61,11 @@ const presentdata=[{date:'Saturday,15 Aug',desc:'Holiday,73rd Indian Independanc
                     {date:'Friday,28 Aug',desc:'Holiday,Vinayagar chathurthi celebration'},
                     {date:'Wed,02 Sept',desc:'Annual Sports day'},]
 
+const dropdown=[{label:'CLASS I',label:'CLASS I'},
+                {label:'CLASS I',label:'CLASS I'},
+                {label:'CLASS I',label:'CLASS I'},
+                {label:'CLASS I',label:'CLASS I'}]
+
 class ProfilCalendar extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -78,6 +86,8 @@ class ProfilCalendar extends React.Component {
       present:false,
       absent:false,
       partial:false,
+      modal:false,
+      dropdown:dropdown,
     }
     this.onDateChange = this.onDateChange.bind(this);
   }
@@ -96,14 +106,7 @@ class ProfilCalendar extends React.Component {
     this.setState({day:day});
   };
 
-  renderHeader=(date)=>{
-    return(
-      <View>
-        <Text style={[styles.text,{color:'#fff',fontSize:14,
-              fontWeight:'700'}]}>{months[date.getMonth()]}</Text>
-      </View>
-    )
-  }
+
 
   calendars=()=>{
     return(
@@ -129,9 +132,19 @@ class ProfilCalendar extends React.Component {
         disableArrowLeft={false}
         disableArrowRight={false}
         disableAllTouchEventsForDisabledDays={false}
-        renderHeader={(date) => {this.renderHeader(date)}}
+        renderHeader={date => {
+          return(
+            <View>
+              <Text style={[styles.text,{color:'#fff',fontSize:14,
+                    fontWeight:'700'}]}>{months[date.getMonth()]}</Text>
+            </View>
+          )
+        }}
         enableSwipeMonths={false}
+        markedDates={this.state.markedDates}
         markedDates={{
+          '2020-10-31':{customStyles:{
+            container:{backgroundColor:'gray'},text:{color:'#fff',fontWeight:'bold'}}},
           '2020-10-15':{customStyles:{
             container:{backgroundColor:'#C60000'},text:{color:'#fff',fontWeight:'bold'}}},
           '2020-10-19':{customStyles:{
@@ -141,8 +154,8 @@ class ProfilCalendar extends React.Component {
           '2020-10-28':{customStyles:{
              container:{backgroundColor:'#C60000'},text:{color:'#fff',fontWeight:'bold'}}},
          }}
-         markingType={'custom'}
-         style={{borderWidth: 0,borderColor: 'gray',height: 350}}
+        markingType={'custom'}
+        style={{borderWidth: 0,borderColor: 'gray',height: 350}}
         theme={{
             backgroundColor: '#000',
             calendarBackground: '#000',
@@ -183,7 +196,7 @@ class ProfilCalendar extends React.Component {
   calendarlist=()=>{
     return(
       <CalendarList
-          onVisibleMonthsChange={(months) => {this.changeMonth(months)}}
+          onVisibleMonthsChange={(months)=>{this.changeMonth(months)}}
           pastScrollRange={50}
           futureScrollRange={50}
           scrollEnabled={true}
@@ -200,12 +213,15 @@ class ProfilCalendar extends React.Component {
   events=()=>{
     return(
       <View>
-        <FlatList style={{}} data={this.state.presentdata}
+        <FlatList style={{}}
+          data={this.state.presentdata}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index})=>(
           <View>
-            <Text style={[styles.text,{color:'#828282',fontSize:14,fontWeight:'700'}]}>{item.date}</Text>
-            <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700'}]}>{item.desc}</Text>
+            <Text style={[styles.text,{color:'#828282',fontSize:14,
+                          fontWeight:'700'}]}>{item.date}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:14,
+                          fontWeight:'700'}]}>{item.desc}</Text>
             <View style={{borderWidth:0.2,borderColor:'#fff',marginVertical:15}}></View>
           </View>
         )}
@@ -214,9 +230,91 @@ class ProfilCalendar extends React.Component {
     )
   }
 
-  render() {
+  dropdown=()=>{
+    return(
+      <View style={{justifyContent:'flex-end',alignSelf:'flex-end',}}>
+        <DropDownPicker
+            items={this.state.dropdown}
+            defaultNull={ null}
+            dropDownStyle={{backgroundColor:'#464545',borderWidth:0}}
+            defaultValue={this.state.drop}
+            placeholder="CHOOSE"
+            arrowColor={'#fff'}
+            dropDownMaxHeight={width}
+            style={{backgroundColor:'#464545',borderWidth:1,borderColor:'#464545'}}
+            placeholderStyle={{fontWeight:'bold',color:'#fff'}}
+            labelStyle={{fontSize:14,color:'#fff'}}
+            containerStyle={{height:40,width:width*0.45}}
+            onChangeItem={item =>this.setState({drop:item.value})}
+        />
+      </View>
+    )
+  }
+
+  reminderModal=()=>{
+    return(
+      <View>
+        <Modal isVisible={this.state.modal}
+            animationIn="slideInUp"
+            animationOut="slideOutDown"
+            hasBackdrop={true}
+            backdropColor={'transparent'}
+            onBackdropPress={()=>{this.setState({modal:false});}}>
+              <View style={{paddingVertical:20,alignItems:'center',
+                            paddingHorizontal:20,backgroundColor:'#333333',borderRadius:10,
+                            }}>
+                {this.state.proceed==true?
+                <View style={{}}>
+                  <View style={{flexDirection:'row',justifyContent:'space-between',
+                          alignItems:'flex-start'}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,
+                                fontWeight:'700'}]}>Remind what?* </Text>
+                    <View style={{paddingLeft:20,height:100,borderRadius:10,
+                                  width:width*0.45,backgroundColor:'#464545'}}></View>
+                  </View>
+                  <TouchableOpacity style={{marginTop:40,padding:10,borderRadius:10,
+                                  width:width*0.45,backgroundColor:'#464545',alignSelf:'center'}}
+                    onPress={()=>{this.setState({modal:false,proceed:false});}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:14,
+                          fontWeight:'700',textAlign:'center'}]}>SUBMEET</Text>
+                  </TouchableOpacity>
+                </View>:<View>
+                  <View style={{flexDirection:'row',justifyContent:'space-between',
+                        alignItems:'center'}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,
+                              fontWeight:'700'}]}>Select class</Text>
+                    <View style={{paddingLeft:20}}>{this.dropdown()}</View>
+                  </View>
+                  <Text style={[styles.text,{color:'#fff',fontSize:14,
+                      fontWeight:'700',textAlign:'center'}]}>OR</Text>
+                  <View style={{flexDirection:'row',justifyContent:'space-between',
+                        alignItems:'center',}}>
+                    <Text numberOfLines={2} style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,
+                        fontWeight:'700',width:width*0.27}]}>Enter name / unique id</Text>
+                    <View style={{paddingLeft:20,height:50,borderRadius:10,
+                    width:width*0.45,backgroundColor:'#464545'}}></View>
+                  </View>
+                  <TouchableOpacity
+                      style={{marginTop:40,padding:10,borderRadius:10,
+                          width:width*0.45,backgroundColor:'#464545',alignSelf:'center'}}
+                      onPress={()=>{this.setState({proceed:true})}}>
+                      <Text style={[styles.text,{color:'#fff',fontSize:14,
+                          fontWeight:'700',textAlign:'center'}]}>PROCEED</Text>
+                  </TouchableOpacity>
+                </View>}
+              </View>
+        </Modal>
+      </View>
+    )
+  }
+
+  render(){
+
     let date =this.state.date.toDateString()
     let date1=days[this.state.date.getDay()]+", "+this.state.date.getDate() + " "+ months[this.state.date.getMonth()] +" "+ this.state.date.getFullYear();
+    var schoolStafCal =this.props.navigation.getParam('schoolStafCal',null);
+    console.log(schoolStafCal,'schoolStafCal')
+
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
           <Headers navigation={this.props.navigation} name={'CALENDAR AND REMINDERS'}
@@ -226,14 +324,26 @@ class ProfilCalendar extends React.Component {
                     textAlign:'center'}]}>{date}</Text>
               <View style={{marginHorizontal:15}}>
                 {this.calendars()}
-
                 <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700',
                         textAlign:'left',paddingVertical:10,paddingHorizontal:10}]}>EVENTS</Text>
                 <View>
+                  {schoolStafCal!=null&&<View>
+                    {this.state.selectedDay!=null&&
+                    <View style={{flexDirection:'row',justifyContent:'space-between',
+                                  alignItems:'center',borderWidth:1,borderRadius:10,
+                                  borderColor:'#fff',padding:10,margin:2,marginBottom:20}}>
+                      <Text style={[styles.text,{color:'#fff'}]}>{new Date(this.state.selectedDay.dateString).getDate()+ " "+ months[new Date(this.state.selectedDay.dateString).getMonth()] +" "+ new Date(this.state.selectedDay.dateString).getFullYear()}</Text>
+                      <TouchableOpacity style={{padding:6,backgroundColor:'red',borderRadius:10}}
+                          onPress={()=>{this.setState({modal:true})}}>
+                          <Text style={[styles.text,{color:'#fff'}]}>REMIND</Text>
+                      </TouchableOpacity>
+                    </View>}
+                  </View>}
                   <View style={{marginHorizontal:10}}>{this.events()}</View>
                 </View>
               </View>
           </ScrollView>
+          {this.reminderModal()}
       </View>
     );
   }
@@ -253,15 +363,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps =(state) => {
-    return {
-
-  }
+  return {}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
+  return {};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilCalendar);

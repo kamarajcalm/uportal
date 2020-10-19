@@ -33,15 +33,15 @@ const listofdetails=[{id:1,icon:require('../assets/marks.png'),name:'MARKS'},
                      {id:2,icon:require('../assets/Attendance.png'),name:'ATTENDANCE'},
                      {id:3,icon:require('../assets/statistics.png'),name:'STATICS'},
                      {id:4,icon:require('../assets/statistics.png'),name:'RANKS'},
-                     {id:4,icon:require('../assets/library.png'),name:'LIBRARY'},
-                     {id:5,icon:require('../assets/syllabus.png'),name:'SYLLABUS & TIMETABLE'},
-                     {id:6,icon:require('../assets/calendar.png'),name:'CALENDAR AND REMINDERS'},
-                     {id:7,icon:require('../assets/facultydetails.png'),name:'FACULTY DETAILS'},
-                     {id:8,icon:require('../assets/media.png'),name:'MEDIA'},
-                     {id:9,icon:require('../assets/questionpaper.png'),name:'QUESTION PAPERS'},
-                     {id:10,icon:require('../assets/forms.png'),name:'FORMS'},
-                     {id:11,icon:require('../assets/feedback.png'),name:'FEEDBACK & REMARKS'},
-                     {id:12,icon:require('../assets/settings.png'),name:'SETTINGS'},]
+                     {id:5,icon:require('../assets/media.png'),name:'MEDIA'},
+                     {id:6,icon:require('../assets/library.png'),name:'LIBRARY'},
+                     {id:7,icon:require('../assets/syllabus.png'),name:'SYLLABUS & TIMETABLE'},
+                     {id:8,icon:require('../assets/calendar.png'),name:'CALENDAR AND REMINDERS'},
+                     {id:9,icon:require('../assets/facultydetails.png'),name:'FACULTY DETAILS'},
+                     {id:10,icon:require('../assets/questionpaper.png'),name:'QUESTION PAPERS'},
+                     {id:11,icon:require('../assets/forms.png'),name:'FORMS'},
+                     {id:12,icon:require('../assets/feedback.png'),name:'REMARKS'},
+                     {id:13,icon:require('../assets/settings.png'),name:'SETTINGS'},]
 
 class SchoolStafProfile extends React.Component {
 
@@ -125,10 +125,10 @@ class SchoolStafProfile extends React.Component {
       this.props.navigation.navigate('ProfileLibrary')
     }
     else if(item.name=='FACULTY DETAILS'){
-      this.props.navigation.navigate('ProfileFacultyDetails')
+      this.props.navigation.navigate('ProfileFacultyDetails',{school:item})
     }
-    else if(item.name=='FEEDBACK & REMARKS'){
-      this.props.navigation.navigate('ProfileFeedback')
+    else if(item.name=='REMARKS'){
+      this.props.navigation.navigate('SchoolStafRemark')
     }
     else if(item.name=='SETTINGS'){
       this.props.navigation.navigate('ProfileSetting')
@@ -140,22 +140,22 @@ class SchoolStafProfile extends React.Component {
       this.props.navigation.navigate('ProfileSyllabus')
     }
     else if(item.name=='MEDIA'){
-      this.props.navigation.navigate('ProfileMedia')
+      this.props.navigation.navigate('SchoolStafMedia',)
     }
     else if(item.name=='QUESTION PAPERS'){
       this.props.navigation.navigate('ProfileQuestionPaper')
     }
     else if(item.name=='STATICS'){
-      this.props.navigation.navigate('ProfileStatistics')
+      this.props.navigation.navigate('SchoolStafStatistics')
     }
     else if(item.name=='ATTENDANCE'){
       this.props.navigation.navigate('SchoolStafAttendance')
     }
     else if (item.name=='CALENDAR AND REMINDERS') {
-      this.props.navigation.navigate('ProfilCalendar')
+      this.props.navigation.navigate('ProfilCalendar',{schoolStafCal:item})
     }
     else if (item.name=='RANKS'){
-      this.props.navigation.navigate('ProfileRank')
+      this.props.navigation.navigate('SchoolStafRank')
     }
   }
 
@@ -163,14 +163,12 @@ class SchoolStafProfile extends React.Component {
 
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
-
             <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
               {this.profileHead()}
               <ScrollView>
                 {this.listOfDetails()}
               </ScrollView>
             </View>
-
           <TabComponent navigation={this.props.navigation}  />
       </View>
     );
@@ -191,15 +189,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps =(state) => {
-    return {
-
-  }
+    return {}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
+  return {};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchoolStafProfile);

@@ -29,12 +29,9 @@ const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
 const fontFamily =settings.fontFamily
-const semdata=[{name:'CLASS I'},{name:'CLASS VII'},{name:'CLASS II'},
-                {name:'CLASS VIII'},{name:'CLASS III'},{name:'CLASS IX'},
-                {name:'CLASS IV'},{name:'CLASS X'},{name:'CLASS V'},
-                {name:'CLASS XI'},{name:'CLASS VI'},{name:'CLASS XII'}]
+const semdata=[{name:'STATE'},{name:'CBSE'},{name:'ICSE'}]
 
-class OtherAttendance extends React.Component {
+class SchoolStafMedia extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state
@@ -43,49 +40,36 @@ class OtherAttendance extends React.Component {
 
   constructor(props) {
     super(props);
-    var stafMarks = this.props.navigation.getParam('item',null)
-    console.log(this.props.navigation.getParam('item',null),stafMarks,'ugggggggg');
     this.state={
       emailid:'',
       a1:false,
       a2:false,
-      semdata:semdata,
-      stafMarks:stafMarks
+      semdata:semdata
     }
-    console.log(this.state.stafMarks,'stafMarks')
   }
 
-  componentDidMount(){
-  }
+  componentDidMount=async()=>{}
 
-
-
-  touch=(item,stafMarks)=>{
-    console.log(item,'ffffffffffff',stafMarks)
-    if(stafMarks!=null){
-      this.props.navigation.navigate('StafChooseSec',{stafMarks:{item:item}})
-    }else{
-      this.props.navigation.navigate('StafChooseSec',{item:item})
-    }
+  touch=(item)=>{
+    this.props.navigation.navigate('SchoolStafMediaChoose',{item:{item:item}})
   }
 
   render() {
-
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={this.state.stafMarks!=null?'ACADEMIC MARKS':'ATTENDANCE'}
-            screen={'OtherAttendance'}/>
+            <Headers navigation={this.props.navigation} name={'MEDIA'}
+            screen={'SchoolStafMedia'}/>
             <View style={{flex:1,paddingVertical:50,justifyContent:'center',alignItems:'center'}}>
-
+              <Text style={[styles.text,{color:'#fff',fontSize:14,
+                  fontWeight:'700',paddingBottom:20}]}>CHOOSE BOARD</Text>
               <FlatList
                 contenContainerStyle={{justifyContent:'space-between',}}
                 data={this.state.semdata}
                 keyExtractor={(item, index) => index.toString()}
-                numColumns={2}
                 renderItem={({item, index})=>(
-                  <TouchableOpacity onPress={()=>{this.touch(item,this.state.stafMarks)}}
-                     style={{marginHorizontal:10,marginVertical:10,alignItems:'center',
-                          backgroundColor:'#333333',borderRadius:7,width:width*0.35}}>
+                  <TouchableOpacity
+                    onPress={()=>{this.touch(item)}}  style={{marginHorizontal:10,marginVertical:10,paddingHorizontal:40,
+                          backgroundColor:'#333333',borderRadius:7,width:width*0.5}}>
                     <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
                             paddingVertical:10,fontWeight:'700'}]}>{item.name}</Text>
                   </TouchableOpacity>
@@ -122,4 +106,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OtherAttendance);
+export default connect(mapStateToProps, mapDispatchToProps)(SchoolStafMedia);
