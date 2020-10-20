@@ -43,7 +43,9 @@ const semdata=[{no:'#',sub:'SUBJECT',test1:'TEST I',test2:'TEST II',test3:'TEST 
 const classdata =[{no:'#',sub:'SUBJECT',test1:'TEST I',test2:'TEST II',test3:'TEST III',exa:'EXA'},
               {no:'1',sub:'LANGUAGE',test1:'90',test2:'80',test3:'70',exa:'9'},
               {no:'2',sub:'ENGLISH',test1:'80',test2:'70',test3:'90',exa:'8'},
-              {no:'3',sub:'MATHEMATICS',test1:'70',test2:'80',test3:'80',exa:'7'},]
+              {no:'3',sub:'MATHEMATICS',test1:'70',test2:'80',test3:'80',exa:'7'},
+              {no:'',sub:'TOTAL',test1:'90%',test2:'90%',test3:'90%',exa:'9'},
+              {no:'',sub:'PERCENTAGE',test1:'90',test2:'80',test3:'70',exa:'7'},]
 
 class ProfileMarks extends React.Component {
 
@@ -65,99 +67,7 @@ class ProfileMarks extends React.Component {
 
   componentDidMount=async()=>{}
 
-  semResult=()=>{
-    return(
-      <View style={{marginTop:10,borderRadius:10,}}>
-        <ScrollView
-          contentContainerStyle={{flexDirection:'row',paddingHorizontal:10}}
-          horizontal={true} >
-          <View style={{flex:0.35}}>
-            {this.state.semdata.map((item,index)=>{
-              return(
-                <View key={item}>
-                  {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>}
-                  <View style={{flex:1,paddingHorizontal:6,flexDirection:'row'}}>
-                    <View style={{width:60}}>
-                      <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',
-                              fontWeight:item.no=='#'?'700':'400'}]}>{item.no}</Text>
-                    </View>
-                    <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-                    <View style={{width:140}}>
-                      <Text style={[styles.text,{color:'#fff',paddingHorizontal:10,fontSize:12,
-                              fontWeight:item.no=='#'?'700':'400'}]}>{item.sub}</Text>
-                    </View>
-                  <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-                </View>
-              </View>
-             )}
-            )}
-          </View>
-          <View style={{flex:0.65}}>
-            {this.state.semdata.map((item,index)=>{
-              return(
-                <View  key={item}>
-                  {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>}
-                  <View style={{flex:1,paddingHorizontal:6,flexDirection:'row'}}>
-                    <View style={{width:100}}>
-                      <Text style={[styles.text,
-                                {color:'#fff',fontSize:12,textAlign:'center',
-                                fontWeight:item.no=='#'?'700':'400'}]}>{item.test1}</Text>
-                    </View>
-                    <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-                    <View style={{width:100}}>
-                      <Text style={[styles.text,
-                                {color:'#fff',fontSize:12,textAlign:'center',
-                                fontWeight:item.no=='#'?'700':'400'}]}>{item.test2}</Text>
-                    </View>
-                    <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-                    <View style={{width:100}}>
-                      <Text style={[styles.text,
-                                {color:'#fff',fontSize:12,textAlign:'center',
-                                fontWeight:item.no=='#'?'700':'400'}]}>{item.test3}</Text>
-                    </View>
-                    <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-                    <View style={{width:100}}>
-                      <Text style={[styles.text,
-                                {color:'#fff',fontSize:12,textAlign:'center',
-                                fontWeight:item.no=='#'?'700':'400'}]}>{item.exa}</Text>
-                    </View>
-                  </View>
-                </View>
-              )
-            })}
-          </View>
-        </ScrollView>
 
-        <View>
-          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>
-        </View>
-
-        <View
-          style={{marginVertical:10,marginHorizontal:10,
-                  flexDirection:'row',justifyContent:'space-between'}}>
-          <View style={{flexDirection:'row'}}>
-            <Text style={[styles.text,
-                        {color:'#fff',fontSize:14,textAlign:'center',
-                        fontWeight:'700',paddingVertical:2,paddingHorizontal:2}]}>SGPA</Text>
-            <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:6}}>
-              <Text style={[styles.text,
-                        {color:'#fff',fontSize:14,textAlign:'center',
-                        fontWeight:'700',paddingVertical:2,paddingHorizontal:2}]}>7.7</Text>
-            </View>
-          </View>
-          <View style={{flexDirection:'row'}}>
-            <Text style={[styles.text,
-                        {color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',paddingVertical:2,
-                        paddingHorizontal:2}]}>CGPA</Text>
-            <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:6}}>
-              <Text style={[styles.text,
-                        {color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',paddingVertical:0.2,paddingHorizontal:2}]}>7.6</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-    )
-  }
 
  sem=()=>{
     return(
@@ -177,7 +87,7 @@ class ProfileMarks extends React.Component {
           </TouchableOpacity>
           {this.state.a1&&
             <ScrollView style={{backgroundColor:'#3F3F3F',borderRadius:10,paddingVertical:10}}>
-              {this.semResult()}
+              {this.sem1()}
             </ScrollView>
           }
         </View>
@@ -187,88 +97,78 @@ class ProfileMarks extends React.Component {
 
  classResult=()=>{
     return(
-      <View style={{marginTop:10,borderRadius:10}}>
+    <View style={{marginTop:10,borderRadius:10}}>
+      <View style={{flexDirection:'row',justifyContent:'space-between'}}>
         <FlatList style={{}}
           data={this.state.classdata}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index})=>(
+            <View>
+            {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',
+            paddingVertical:-6,width:width*0.7,marginHorizontal:10}}/>}
             <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',
-                          alignItems:'center',paddingHorizontal:6,}}>
-              <View style={{flex:0.13}}>
+                          alignItems:'center',paddingHorizontal:6,width:width*0.7}}>
+              <View style={{width:width*0.1}}>
                 <Text style={[styles.text,
                               {color:'#fff',fontSize:12,textAlign:'center',
                               fontWeight:item.no=='#'?'700':'400'}]}>{item.no}</Text>
               </View>
               <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-              <View style={{flex:0.25}}>
+              <View style={{width:width*0.45}}>
                 <Text style={[styles.text,
-                            {color:'#fff',fontSize:12,
+                            {color:'#fff',fontSize:12,textAlign:'left',
                             fontWeight:item.no=='#'?'700':'400'}]}>{item.sub}</Text>
               </View>
               <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-              <View style={{flex:0.13}}>
+              </View>
+            </View>
+          )}
+        />
+      <ScrollView horizontal={true}>
+       <FlatList style={{}}
+          data={this.state.classdata}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+          <View>
+          {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',
+          paddingVertical:-6,width:width*0.8,marginHorizontal:10}}/>}
+            <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',
+                      alignItems:'center',paddingHorizontal:6,width:width*0.8}}>
+
+              <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
+              <View style={{width:width*0.15}}>
                 <Text style={[styles.text,
                             {color:'#fff',fontSize:12,textAlign:'center',
                             fontWeight:item.no=='#'?'700':'400'}]}>{item.test1}</Text>
               </View>
               <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-              <View style={{flex:0.13}}>
+              <View style={{width:width*0.15}}>
                 <Text style={[styles.text,
                             {color:'#fff',fontSize:12,textAlign:'center',
                             fontWeight:item.no=='#'?'700':'400'}]}>{item.test2}</Text>
               </View>
               <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-              <View style={{flex:0.13}}>
+              <View style={{width:width*0.15}}>
                 <Text style={[styles.text,
                             {color:'#fff',fontSize:12,textAlign:'center',
                             fontWeight:item.no=='#'?'700':'400'}]}>{item.test3}</Text>
               </View>
               <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-              <View style={{flex:0.13}}>
+              <View style={{width:width*0.15}}>
                 <Text style={[styles.text,
                               {color:'#fff',fontSize:12,textAlign:'center',
                               fontWeight:item.no=='#'?'700':'400'}]}>{item.exa}</Text>
               </View>
             </View>
+            </View>
           )}
         />
-
-        <View>
-          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>
-          <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',
-                        alignItems:'center',paddingHorizontal:6,}}>
-            <View style={{flex:0.13}}>
-              <Text style={{color:'#fff',fontSize:12,textAlign:'center'}}> </Text>
-            </View>
-            <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-            <View style={{flex:0.25}}>
-              <Text style={[styles.text,{color:'#fff',fontSize:12,fontWeight:'700'}]}>TOTAL</Text>
-            </View>
-            <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-            <View style={{flex:0.13}}>
-              <Text style={[styles.text,
-                            {color:'#fff',fontSize:12,textAlign:'center',
-                            fontWeight:'400'}]}>380</Text>
-            </View>
-            <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-            <View style={{flex:0.13}}>
-              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>380</Text>
-            </View>
-            <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-            <View style={{flex:0.13}}>
-              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>380</Text>
-            </View>
-            <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-            <View style={{flex:0.13}}>
-              <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',fontWeight:'400'}]}>30</Text>
-            </View>
-          </View>
-        </View>
+       </ScrollView>
+      </View>
 
         <View>
           <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>
         </View>
-
         <View style={{marginVertical:10,marginHorizontal:10,flexDirection:'row',
                       justifyContent:'space-between'}}>
           <View style={{flexDirection:'row'}}>
@@ -320,6 +220,100 @@ class ProfileMarks extends React.Component {
           }
         </View>
       </View>
+    )
+  }
+
+  sem1=()=>{
+    return(
+    <View>
+     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+      <FlatList style={{}}
+        data={this.state.semdata}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item, index})=>(
+        <View>
+        {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',paddingVertical:-6,width:width*0.7,marginHorizontal:10}}/>}
+          <View style={{flex:1,paddingHorizontal:6,flexDirection:'row',width:width*0.7}}>
+            <View style={{width:width*0.12}}>
+                <Text style={[styles.text,{color:'#fff',fontSize:12,textAlign:'center',
+                              fontWeight:item.no=='#'?'700':'400'}]}>{item.no}</Text>
+            </View>
+            <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
+            <View style={{width:width*0.3}}>
+                <Text style={[styles.text,{color:'#fff',paddingHorizontal:10,fontSize:12,
+                              fontWeight:item.no=='#'?'700':'400'}]}>{item.sub}</Text>
+            </View>
+            <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
+          </View>
+        </View>)}
+      />
+       <ScrollView horizontal={true}>
+        <FlatList style={{}}
+          data={this.state.semdata}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+            <View>
+            {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',width:width*0.8,marginHorizontal:0}}/>}
+            <View style={{flex:1,paddingHorizontal:6,flexDirection:'row',width:width*0.8}}>
+
+              <View style={{width:100}}>
+                  <Text style={[styles.text,
+                                {color:'#fff',fontSize:12,textAlign:'center',
+                                fontWeight:item.no=='#'?'700':'400'}]}>{item.test1}</Text>
+              </View>
+              <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
+              <View style={{width:100}}>
+                  <Text style={[styles.text,
+                                {color:'#fff',fontSize:12,textAlign:'center',
+                                fontWeight:item.no=='#'?'700':'400'}]}>{item.test2}</Text>
+              </View>
+              <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
+              <View style={{width:100}}>
+                  <Text style={[styles.text,
+                                {color:'#fff',fontSize:12,textAlign:'center',
+                                fontWeight:item.no=='#'?'700':'400'}]}>{item.test3}</Text>
+              </View>
+              <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
+              <View style={{width:100}}>
+                  <Text style={[styles.text,
+                                {color:'#fff',fontSize:12,textAlign:'center',
+                                fontWeight:item.no=='#'?'700':'400'}]}>{item.exa}</Text>
+              </View>
+            </View>
+            </View>
+          )}
+          />
+        </ScrollView>
+      </View>
+      <View>
+        <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>
+      </View>
+      <View
+          style={{marginVertical:10,marginHorizontal:10,
+                  flexDirection:'row',justifyContent:'space-between'}}>
+        <View style={{flexDirection:'row'}}>
+          <Text style={[styles.text,
+                        {color:'#fff',fontSize:14,textAlign:'center',
+                        fontWeight:'700',paddingVertical:2,paddingHorizontal:2}]}>SGPA</Text>
+          <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:6}}>
+              <Text style={[styles.text,
+                        {color:'#fff',fontSize:14,textAlign:'center',
+                        fontWeight:'700',paddingVertical:2,paddingHorizontal:2}]}>7.7</Text>
+          </View>
+        </View>
+        <View style={{flexDirection:'row'}}>
+          <Text style={[styles.text,
+                        {color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',
+                        paddingVertical:2,
+                        paddingHorizontal:2}]}>CGPA</Text>
+          <View style={{borderWidth:0.2,borderColor:'#fff',marginHorizontal:6}}>
+              <Text style={[styles.text,
+                        {color:'#fff',fontSize:14,textAlign:'center',fontWeight:'700',
+                        paddingVertical:0.2,paddingHorizontal:2}]}>7.6</Text>
+          </View>
+        </View>
+      </View>
+    </View>
     )
   }
 

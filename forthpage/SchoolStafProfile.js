@@ -125,7 +125,7 @@ class SchoolStafProfile extends React.Component {
       this.props.navigation.navigate('ProfileLibrary')
     }
     else if(item.name=='FACULTY DETAILS'){
-      this.props.navigation.navigate('ProfileFacultyDetails',{school:item})
+      this.props.navigation.navigate('ProfileFacultyDetails',{schoolStaf:item})
     }
     else if(item.name=='REMARKS'){
       this.props.navigation.navigate('SchoolStafRemark')

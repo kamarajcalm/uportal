@@ -40,7 +40,7 @@ const listofdetails=[{id:1,icon:require('../assets/marks.png'),name:'MARKS'},
                      {id:8,icon:require('../assets/media.png'),name:'MEDIA'},
                      {id:9,icon:require('../assets/questionpaper.png'),name:'QUESTION PAPERS'},
                      {id:10,icon:require('../assets/forms.png'),name:'FORMS'},
-                     {id:11,icon:require('../assets/feedback.png'),name:'FEEDBACK & REMARKS'},
+                     {id:11,icon:require('../assets/feedback.png'),name:'REMARKS'},
                      {id:12,icon:require('../assets/settings.png'),name:'SETTINGS'},]
 
 class CollegeStafProfile extends React.Component {
@@ -125,16 +125,16 @@ class CollegeStafProfile extends React.Component {
       this.props.navigation.navigate('ProfileLibrary')
     }
     else if(item.name=='FACULTY DETAILS'){
-      this.props.navigation.navigate('ProfileFacultyDetails')
+      this.props.navigation.navigate('ProfileFacultyDetails',{collegeStaf:item})
     }
-    else if(item.name=='FEEDBACK & REMARKS'){
-      this.props.navigation.navigate('ProfileFeedback')
+    else if(item.name=='REMARKS'){
+      this.props.navigation.navigate('SchoolStafRemark',{collegeStaf:item})
     }
     else if(item.name=='SETTINGS'){
       this.props.navigation.navigate('ProfileSetting')
     }
     else if(item.name=='MARKS'){
-
+      this.props.navigation.navigate('SchoolStafMarks',{collegeStaf:item})
     }
     else if(item.name=='SYLLABUS & TIMETABLE'){
       this.props.navigation.navigate('ProfileSyllabus')
@@ -146,16 +146,16 @@ class CollegeStafProfile extends React.Component {
       this.props.navigation.navigate('ProfileQuestionPaper')
     }
     else if(item.name=='STATICS'){
-      this.props.navigation.navigate('ProfileStatistics')
+      this.props.navigation.navigate('SchoolStafStatistics',{collegeStaf:item})
     }
     else if(item.name=='ATTENDANCE'){
-
+      this.props.navigation.navigate('SchoolStafAttendance',{collegeStaf:item})
     }
     else if (item.name=='CALENDAR AND REMINDERS') {
-      this.props.navigation.navigate('ProfilCalendar')
+      this.props.navigation.navigate('ProfilCalendar',{collegeStafCal:item})
     }
     else if (item.name=='RANKS'){
-      this.props.navigation.navigate('ProfileRank')
+      this.props.navigation.navigate('SchoolStafRank')
     }
   }
 

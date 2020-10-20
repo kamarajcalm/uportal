@@ -35,7 +35,12 @@ const listofsection=[{id:1,icon:require('../assets/Unknown_Boy.jpg'),
                      name:'CLASS III',sec:'SECTION B'},
                      {id:3,icon:require('../assets/Unknown_Boy.jpg'),
                      name:'CLASS V',sec:'SECTION C'},]
-
+const collegeyear=[{id:1,icon:require('../assets/Unknown_Boy.jpg'),
+                      name:'SEC A',sec:'1st YEAR'},
+                     {id:2,icon:require('../assets/Unknown_Boy.jpg'),
+                     name:'SEC B',sec:'2nd YEAR'},
+                     {id:3,icon:require('../assets/Unknown_Boy.jpg'),
+                     name:'SEC C',sec:'3rd YEAR'},]
 class SchoolStafMarks extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -53,6 +58,7 @@ class SchoolStafMarks extends React.Component {
       schoolStaf:false,
       collegeStaf:false,
       listofsection:listofsection,
+      collegeyear:collegeyear,
       college:false,
       school:false,
       }
@@ -60,16 +66,16 @@ class SchoolStafMarks extends React.Component {
 
 
 
-  listOfDetails=()=>{
+  listOfDetails=(collegeStaf)=>{
     return(
       <FlatList
           style={{paddingBottom:100}}
-          data={this.state.listofsection}
+          data={collegeStaf!=null?this.state.collegeyear:this.state.listofsection}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index})=>(
             <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,
                         alignItems:'center',justifyContent:'space-between',paddingVertical:10}}
-               onPress={()=>{this.onListTouch(item,)}}>
+               onPress={()=>{this.onListTouch(item,collegeStaf)}}>
               <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Image source={(item.icon)} style={{height:width*0.12,width:width*0.12,borderRadius:30}}/>
                 <View>
@@ -87,17 +93,26 @@ class SchoolStafMarks extends React.Component {
     )
   }
 
-  onListTouch=(item)=>{
+  onListTouch=(item,collegeStaf)=>{
     console.log(item,'item')
-    this.props.navigation.navigate('ChooseSubject',{item:item})
+    if(collegeStaf!=null){
+      this.props.navigation.navigate('ChooseSubject',{collegeStaf:item})
+    }else{
+        this.props.navigation.navigate('ChooseSubject',{item:item})
+    }
+
   }
 
-  others=()=>{
-    this.props.navigation.navigate('OtherAttendance',{item:{stafMarks:true}})
+  others=(collegeStaf)=>{
+    if(collegeStaf!=null){
+    this.props.navigation.navigate('OtherAttendance',{collegeStaf:{stafMarks:true}})
+    }else{
+      this.props.navigation.navigate('OtherAttendance',{item:{stafMarks:true}})
+    }
   }
 
   render() {
-    const class1 = this.props.navigation.getParam('item',null)
+    const collegeStaf = this.props.navigation.getParam('collegeStaf',null)
 
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
@@ -107,8 +122,8 @@ class SchoolStafMarks extends React.Component {
             <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,
               paddingHorizontal:20,fontWeight:'700'}]}>MY CLASSES</Text>
               <ScrollView>
-                {this.listOfDetails()}
-                <TouchableOpacity onPress={()=>{this.others()}} style={{flexDirection:'row',width:width*0.4,backgroundColor:'#333333',
+                {this.listOfDetails(collegeStaf)}
+                <TouchableOpacity onPress={()=>{this.others(collegeStaf)}} style={{flexDirection:'row',width:width*0.4,backgroundColor:'#333333',
                             alignItems:'center',justifyContent:'center',paddingVertical:10,
                             borderRadius:10,alignSelf:'center'}}>
                     <Text style={[styles.text,{color:'#fff',fontWeight:'700',

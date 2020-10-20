@@ -59,14 +59,18 @@ class ProfileFacultyDetails extends React.Component {
  componentDidMount(){
  }
 
-  touch=(item,index)=>{
-    this.props.navigation.navigate('PFacultyDetailsCarousel')
+  touch=(item,index,school,college)=>{
+    if(college!=null){
+      this.props.navigation.navigate('PFacultyDetailsCarousel')
+    }else{
+      this.props.navigation.navigate('PFacultyDetailsCarousel')
+    }
   }
 
-  depatList=(school)=>{
+  depatList=(school,college)=>{
     return(
       <View style={{justifyContent:'center',marginVertical:20}}>
-        <FlatList style={{}} data={school!=null?this.state.classes:this.state.depatlist}
+        <FlatList style={{}} data={school!=null?this.state.classes:college!=null?this.state.depatlist:this.state.depatlist}
           numColumns={2}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index})=>(
@@ -87,7 +91,8 @@ class ProfileFacultyDetails extends React.Component {
   }
 
   render() {
-    var school = this.props.navigation.getParam('school',null)
+    var school = this.props.navigation.getParam('schoolStaf',null)
+    var college = this.props.navigation.getParam('collegeStaf',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
             <Headers navigation={this.props.navigation} name={'FACULTY DETAILS'} screen={'ProfileFacultyDetails'}/>
@@ -95,7 +100,8 @@ class ProfileFacultyDetails extends React.Component {
               <ScrollView style={{paddingVertical:10}}>
                   {school!=null&&<Text style={[styles.text,{color:'#fff',fontSize:14,
                         fontWeight:'700',textAlign:'center'}]}>CHOOSE CLASS</Text>}
-                  {this.depatList(school)}
+
+                  {this.depatList(school,college)}
                   <TouchableOpacity
                     style={{backgroundColor:'#333333',width:width*0.3,
                             paddingHorizontal:20,borderRadius:10,paddingVertical:15,

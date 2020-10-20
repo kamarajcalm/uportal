@@ -39,7 +39,8 @@ export default class Headers extends React.Component {
                   'ChooseSec','StudentAttendance','SchoolStafMarks','ChooseSubject',
                   'SchoolStafAttendance','ChoosePeriod','TakeAttendace','OtherAttendance',
                   'StafChooseSec','StafChooseSubject','SchoolStafStatistics','SchoolStafRank',
-                  'SchoolStafMedia','SchoolStafMediaChoose','MediaChooseSubject','SchoolStafRemark']
+                  'SchoolStafMedia','SchoolStafMediaChoose','MediaChooseSubject','SchoolStafRemark',
+                'SchoolAdminStatics','Semester']
       var feed = ['MyWallScreen']
       var notes = ['Notes','Chat']
       var teach = ['TeachersWall']

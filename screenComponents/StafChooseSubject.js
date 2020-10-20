@@ -49,6 +49,13 @@ const listofsub=[{id:1,icon:require('../assets/Unknown_Boy.jpg'),
                       {id:3,icon:require('../assets/Unknown_Boy.jpg'),
                       name:'ENGLISH',itemdata:itemdata,open:false},]
 
+const collegeData =[{id:1,icon:require('../assets/Unknown_Boy.jpg'),
+                      name:'EG',itemdata:itemdata,open:false},
+                    {id:2,icon:require('../assets/Unknown_Boy.jpg'),
+                      name:'MATHEMATICS',itemdata:itemdata,open:false},
+                      {id:3,icon:require('../assets/Unknown_Boy.jpg'),
+                      name:'ENGLISH',itemdata:itemdata,open:false},]
+
 class StafChooseSubject extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -59,12 +66,7 @@ class StafChooseSubject extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      collegeStud:false,
-      schoolStud:false,
-      schoolAd:false,
-      collegeAd:false,
-      schoolStaf:false,
-      collegeStaf:false,
+      collegeData:collegeData,
       listofsection:listofsection,
       college:false,
       school:false,
@@ -74,18 +76,18 @@ class StafChooseSubject extends React.Component {
 
 
 
-  listOfDetails=(stafMarks)=>{
+  listOfDetails=(stafMarks,collegeStaf,clgStafAttend)=>{
     return(
       <FlatList
           style={{paddingBottom:100}}
-          data={stafMarks!=null?this.state.listofsub:this.state.listofsection}
+          data={stafMarks!=null?this.state.listofsub:collegeStaf!=null?this.state.collegeData:clgStafAttend!=null?this.state.listofsection:this.state.listofsection}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index})=>(
             <View style={{width:width*0.6,backgroundColor:'#141414',
                         alignItems:'center',justifyContent:'center',marginVertical:10,borderRadius:10,alignSelf:'center'}}>
             <TouchableOpacity style={{flexDirection:'row',width:width*0.6,backgroundColor:'#333333',
                         alignItems:'center',justifyContent:'center',paddingVertical:10,borderRadius:10,alignSelf:'center'}}
-               onPress={()=>{this.onListTouch(item,index,stafMarks)}}>
+               onPress={()=>{this.onListTouch(item,index,stafMarks,collegeStaf,clgStafAttend)}}>
               <View style={{alignItems:'center',flexDirection:'row'}}>
 
                 <Text style={[styles.text,{color:'#fff',fontWeight:'700',
@@ -94,8 +96,8 @@ class StafChooseSubject extends React.Component {
               </View>
 
              </TouchableOpacity>
-             <View>{item.open &&this.state.itemIndex==item.id&& <View>
-               {this.openTest(item)}
+             <View>{item.open && this.state.itemIndex==item.id && <View>
+               {this.openTest(item,index)}
                </View>}</View>
 
              </View>
@@ -125,11 +127,18 @@ class StafChooseSubject extends React.Component {
 
 
 
-  onListTouch=(item,index,stafMarks)=>{
+  onListTouch=(item,index,stafMarks,collegeStaf,clgStafAttend)=>{
     if(stafMarks!=null){
       this.state.listofsub[index].open=!this.state.listofsub[index].open
       this.setState({listofsub})
       this.setState({itemIndex:item.id})
+    }else if(collegeStaf!=null) {
+      this.state.collegeData[index].open=!this.state.collegeData[index].open
+      this.setState({collegeData})
+      this.setState({itemIndex:item.id})
+    }
+    else if (clgStafAttend!=null){
+      this.props.navigation.navigate('TakeAttendace',{clgStafAttend:clgStafAttend})
     }else{
       this.props.navigation.navigate('ChoosePeriod',{others:item})
     }
@@ -138,16 +147,19 @@ class StafChooseSubject extends React.Component {
   render() {
     var attend = this.props.navigation.getParam('attend',null);
     var stafMarks = this.props.navigation.getParam('stafMarks',null);
-    console.log(attend,'attend',stafMarks)
+
+    var collegeStaf = this.props.navigation.getParam('collegeStaf',null);
+    var clgStafAttend =this.props.navigation.getParam('clgStafAttend',null);
+    console.log(attend,'attend',collegeStaf)
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
-        <Headers navigation={this.props.navigation} name={attend!=null?'ATTENDANCE':stafMarks.name+ ' '+stafMarks.stafMarks}
+        <Headers navigation={this.props.navigation} name={attend!=null?'ATTENDANCE':stafMarks!=null?stafMarks.name+ ' '+stafMarks.stafMarks:collegeStaf!=null?collegeStaf.name:clgStafAttend!=null?'ATTENDANCE':''}
             screen={'StafChooseSubject'}/>
             <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
             <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,
               paddingHorizontal:20,fontWeight:'700',textAlign:'center'}]}>CHOOSE SUBJECT</Text>
               <ScrollView>
-                {this.listOfDetails(stafMarks)}
+                {this.listOfDetails(stafMarks,collegeStaf,clgStafAttend)}
               </ScrollView>
             </View>
 

@@ -29,8 +29,8 @@ const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const fontFamily= settings.fontFamily
 
-const listofsection=[{id:1,icon:require('../assets/Unknown_Boy.jpg'),
-                      name:'ARTHY',percent:'70%',nameid:'AA001'},
+const listofsection=[{id:1,icon:'',
+                      name:'',percent:'ENGLISH',nameid:''},
                      {id:2,icon:require('../assets/Unknown_Boy.jpg'),
                       name:'AASHIKA',percent:'70%',nameid:'AA001'},
                      {id:3,icon:require('../assets/Unknown_Boy.jpg'),
@@ -46,7 +46,15 @@ const listofsection=[{id:1,icon:require('../assets/Unknown_Boy.jpg'),
                      {id:8,icon:require('../assets/Unknown_Boy.jpg'),
                       name:'AASHIKA',percent:'70%',nameid:'AA001'},
                      {id:9,icon:require('../assets/Unknown_Boy.jpg'),
-                      name:'AARAV',percent:'70%',nameid:'AA001'},]
+                      name:'AARAV',percent:'70%',nameid:'AA001'},
+                      {id:10,icon:require('../assets/Unknown_Boy.jpg'),
+                       name:'AARAV',percent:'70%',nameid:'AA001'},
+                      {id:11,icon:require('../assets/Unknown_Boy.jpg'),
+                       name:'ARTHY',percent:'70%',nameid:'AA001'},
+                      {id:12,icon:require('../assets/Unknown_Boy.jpg'),
+                       name:'AASHIKA',percent:'70%',nameid:'AA001'},
+                      {id:13,icon:require('../assets/Unknown_Boy.jpg'),
+                       name:'AARAV',percent:'70%',nameid:'AA001'},]
 
 class StudentAttendance extends React.Component {
 
@@ -69,8 +77,6 @@ class StudentAttendance extends React.Component {
       school:false,
       }
   }
-
-
 
   listOfDetails=()=>{
     return(
@@ -100,13 +106,71 @@ class StudentAttendance extends React.Component {
     )
   }
 
+  list=()=>{
+    return(
+      <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+      <FlatList
+          style={{paddingBottom:100}}
+          data={this.state.listofsection}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+            <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,
+                        alignItems:'center',justifyContent:'space-between',paddingVertical:10}}
+               >
+              <View style={{flexDirection:'row',alignItems:'center',width:width*0.4}}>
+                <Image source={(item.icon)} style={{height:width*0.12,width:width*0.12,borderRadius:30}}/>
+                <View>
+                  <Text style={[styles.text,{color:'#fff',fontWeight:'700',
+                          fontSize:14,paddingHorizontal:10}]}>{item.name}</Text>
+                  <Text style={[styles.text,{color:'#fff',fontWeight:'700',
+                          fontSize:12,paddingHorizontal:10}]}>{item.nameid}</Text>
+                </View>
+              </View>
+              </TouchableOpacity>
+            )
+          }
+       />
+       <ScrollView horizontal={true}>
+        <FlatList
+          style={{paddingBottom:100}}
+          data={this.state.listofsection}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index})=>(
+            <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,
+              alignItems:'center',justifyContent:'space-between',paddingVertical:10}} >
+              <View style={{height:width*0.12,flexDirection:'row',justifyContent:'space-between',width:width*0.7,marginRight:20}}>
+                <Text style={[styles.text,{color:'#fff',fontWeight:'700',width:width*0.17,
+                        fontSize:item.id==1?10:14,paddingHorizontal:10}]}>{item.percent}</Text>
+                <Text style={[styles.text,{color:'#fff',fontWeight:'700',width:width*0.17,
+                        fontSize:item.id==1?10:14,paddingHorizontal:10}]}>{item.percent}</Text>
+                <Text style={[styles.text,{color:'#fff',fontWeight:'700',width:width*0.17,
+                        fontSize:item.id==1?10:14,paddingHorizontal:10}]}>{item.percent}</Text>
+                <Text style={[styles.text,{color:'#fff',fontWeight:'700',width:width*0.17,
+                        fontSize:item.id==1?10:14,paddingHorizontal:10}]}>{item.percent}</Text>
+                <Text style={[styles.text,{color:'#fff',fontWeight:'700',width:width*0.17,
+                        fontSize:item.id==1?10:14,paddingHorizontal:10}]}>{item.percent}</Text>
+                <Text style={[styles.text,{color:'#fff',fontWeight:'700',width:width*0.17,
+                        fontSize:item.id==1?10:14,paddingHorizontal:10}]}>{item.percent}</Text>
+                <Text style={[styles.text,{color:'#fff',fontWeight:'700',width:width*0.17,
+                        fontSize:item.id==1?10:14,paddingHorizontal:10}]}>{item.percent}</Text>
+              </View>
 
+             </TouchableOpacity>
+           )
+         }
+      />
+      </ScrollView>
+      </View>
+    )
+  }
 
   render() {
-    const name = this.props.navigation.getParam('item',null)
+    var name = this.props.navigation.getParam('item',null)
+    var collegeAd = this.props.navigation.getParam('collegeAd',null)
+    console.log(name,'name',collegeAd)
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
-        <Headers navigation={this.props.navigation} name={name.class1.name +"  "+ name.name}
+        <Headers navigation={this.props.navigation} name={name!=null?name.class1.name +"  "+ name.name:collegeAd!=null?collegeAd.collegeAd.name+' '+collegeAd.name:''}
             screen={'StudentAttendance'}/>
             <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
             <View style={{flexDirection:'row',width:width,justifyContent:'space-between'}}>
@@ -116,10 +180,9 @@ class StudentAttendance extends React.Component {
                 paddingHorizontal:20,fontWeight:'700',textAlign:'right'}]}>ATTENDANCE %</Text>
             </View>
               <ScrollView>
-                {this.listOfDetails()}
+                {collegeAd!=null?<View>{this.list()}</View>:<View>{this.listOfDetails()}</View>}
               </ScrollView>
             </View>
-
           <TabComponent navigation={this.props.navigation}  />
       </View>
     );
@@ -140,15 +203,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps =(state) => {
-    return {
-
-  }
+  return{}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
+  return{};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StudentAttendance);

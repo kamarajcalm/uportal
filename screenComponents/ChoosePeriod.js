@@ -95,8 +95,14 @@ class ChoosePeriod extends React.Component {
     this.state.listofsection[index].checked=!this.state.listofsection[index].checked
     this.setState({listofsection})
   }
-  others=()=>{
-    this.props.navigation.navigate('TakeAttendace')
+  others=(college,clgStafAttend)=>{
+    if(college!=null){
+      this.props.navigation.navigate('TakeAttendace',{college:college})
+    }else if(clgStafAttend!=null){
+      this.props.navigation.navigate('StafChooseSubject',{clgStafAttend:clgStafAttend})
+    }else {
+      this.props.navigation.navigate('TakeAttendace')
+    }
   }
 
   checkedAll=()=>{
@@ -116,9 +122,11 @@ class ChoosePeriod extends React.Component {
   render() {
     const class1 = this.props.navigation.getParam('class1',null)
     const others = this.props.navigation.getParam('others',null)
+    var college = this.props.navigation.getParam('college',null)
+    var clgStafAttend = this.props.navigation.getParam('clgStafAttend',null)
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
-        <Headers navigation={this.props.navigation} name={others!=null?others.name:class1.name+" "+class1.nameid}
+        <Headers navigation={this.props.navigation} name={others!=null?others.name:class1!=null?class1.name+" "+class1.nameid:college!=null?college.name:clgStafAttend!=null?clgStafAttend.name:''}
             screen={'SchoolStafAttendance'}/>
             <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
               <View style={{flexDirection:'row',justifyContent:'space-between'}}>
@@ -136,7 +144,7 @@ class ChoosePeriod extends React.Component {
               </View>
               <ScrollView>
                 {this.listOfDetails()}
-                <TouchableOpacity onPress={()=>{this.others()}} style={{flexDirection:'row',width:width*0.4,backgroundColor:'#333333',
+                <TouchableOpacity onPress={()=>{this.others(college,clgStafAttend)}} style={{flexDirection:'row',width:width*0.4,backgroundColor:'#333333',
                             alignItems:'center',justifyContent:'center',paddingVertical:10,
                             borderRadius:10,alignSelf:'center'}}>
                     <Text style={[styles.text,{color:'#fff',fontWeight:'700',

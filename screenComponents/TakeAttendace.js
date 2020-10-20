@@ -209,9 +209,11 @@ class TakeAttendace extends React.Component {
 
   render(){
     const class1 = this.props.navigation.getParam('class1',null)
+    var college = this.props.navigation.getParam('college',null)
+    var clgStafAttend = this.props.navigation.getParam('clgStafAttend',null)
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
-        <Headers navigation={this.props.navigation} name={'CLASS I SEC A'}
+        <Headers navigation={this.props.navigation} name={college!=null?college.name:'CLASS I SEC A'}
             screen={'TakeAttendace'}/>
             <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
               <View>{this.timeTable()}</View>

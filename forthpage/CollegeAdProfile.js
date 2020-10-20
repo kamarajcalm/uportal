@@ -146,10 +146,10 @@ class CollegeAdProfile extends React.Component {
       this.props.navigation.navigate('ProfileQuestionPaper')
     }
     else if(item.name=='STATICS'){
-      this.props.navigation.navigate('ProfileStatistics')
+      this.props.navigation.navigate('SchoolAdminStatics',{collegeAd:item})
     }
     else if(item.name=='ATTENDANCE'){
-
+      this.props.navigation.navigate('SchoolAdminAttendance',{collegeAd:item})
     }
     else if (item.name=='CALENDAR AND REMINDERS') {
       this.props.navigation.navigate('ProfilCalendar')

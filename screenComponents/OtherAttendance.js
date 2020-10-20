@@ -33,7 +33,16 @@ const semdata=[{name:'CLASS I'},{name:'CLASS VII'},{name:'CLASS II'},
                 {name:'CLASS VIII'},{name:'CLASS III'},{name:'CLASS IX'},
                 {name:'CLASS IV'},{name:'CLASS X'},{name:'CLASS V'},
                 {name:'CLASS XI'},{name:'CLASS VI'},{name:'CLASS XII'}]
-
+const collegedata =[{name:'AE',fullname:'Aeronautical Engineering'},
+                    {name:'AE',fullname:'Aeronautical Engineering'},
+                    {name:'CSE',fullname:'Computer Science & Engineering'},
+                {name:'CSE',fullname:'Computer Science & Engineering'},
+                {name:'MECH',fullname:''},
+                {name:'MECH',fullname:''},
+                {name:'CIVIL',fullname:''},
+                {name:'CIVIL',fullname:''},
+                {name:'ARCH',fullname:''},
+                {name:'ARCH',fullname:''},]
 class OtherAttendance extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -44,13 +53,18 @@ class OtherAttendance extends React.Component {
   constructor(props) {
     super(props);
     var stafMarks = this.props.navigation.getParam('item',null)
-    console.log(this.props.navigation.getParam('item',null),stafMarks,'ugggggggg');
+    var clgStafAttend = this.props.navigation.getParam('clgStafAttend',null)
+    var collegeStaf = this.props.navigation.getParam('collegeStaf',null)
+    console.log(this.props.navigation.getParam('item',null),stafMarks,'ugggggggg',collegeStaf);
     this.state={
       emailid:'',
       a1:false,
       a2:false,
       semdata:semdata,
-      stafMarks:stafMarks
+      stafMarks:stafMarks,
+      collegeStaf:collegeStaf,
+      collegedata:collegedata,
+      clgStafAttend:clgStafAttend,
     }
     console.log(this.state.stafMarks,'stafMarks')
   }
@@ -60,10 +74,14 @@ class OtherAttendance extends React.Component {
 
 
 
-  touch=(item,stafMarks)=>{
+  touch=(item,stafMarks,collegeStaf,clgStafAttend)=>{
     console.log(item,'ffffffffffff',stafMarks)
     if(stafMarks!=null){
       this.props.navigation.navigate('StafChooseSec',{stafMarks:{item:item}})
+    }else if(collegeStaf!=null){
+      this.props.navigation.navigate('StafChooseSec',{collegeStaf:item})
+    }else if (clgStafAttend!=null) {
+      this.props.navigation.navigate('StafChooseSec',{clgStafAttend:item})
     }else{
       this.props.navigation.navigate('StafChooseSec',{item:item})
     }
@@ -73,17 +91,17 @@ class OtherAttendance extends React.Component {
 
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={this.state.stafMarks!=null?'ACADEMIC MARKS':'ATTENDANCE'}
+            <Headers navigation={this.props.navigation} name={this.state.stafMarks!=null?'ACADEMIC MARKS':this.state.collegeStaf!=null?'ACADEMIC MARKS':'ATTENDANCE'}
             screen={'OtherAttendance'}/>
             <View style={{flex:1,paddingVertical:50,justifyContent:'center',alignItems:'center'}}>
 
               <FlatList
                 contenContainerStyle={{justifyContent:'space-between',}}
-                data={this.state.semdata}
+                data={this.state.collegeStaf!=null?this.state.collegedata:this.state.clgStafAttend!=null?this.state.collegedata:this.state.semdata}
                 keyExtractor={(item, index) => index.toString()}
                 numColumns={2}
                 renderItem={({item, index})=>(
-                  <TouchableOpacity onPress={()=>{this.touch(item,this.state.stafMarks)}}
+                  <TouchableOpacity onPress={()=>{this.touch(item,this.state.stafMarks,this.state.collegeStaf,this.state.clgStafAttend)}}
                      style={{marginHorizontal:10,marginVertical:10,alignItems:'center',
                           backgroundColor:'#333333',borderRadius:7,width:width*0.35}}>
                     <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',

@@ -34,6 +34,10 @@ const semdata=[{name:'CLASS I'},{name:'CLASS VII'},{name:'CLASS II'},
                 {name:'CLASS IV'},{name:'CLASS X'},{name:'CLASS V'},
                 {name:'CLASS XI'},{name:'CLASS VI'},{name:'CLASS XII'}]
 
+const collegedata=[{name:'AE'},{name:'AE'},{name:'CSE'},
+                {name:'CSE'},{name:'MECH'},{name:'MECH'},
+                {name:'CIVIL'},{name:'CIVIL'},{name:'ARCH'},
+                {name:'ARCH'},]
 class SchoolAdminAttendance extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -47,17 +51,23 @@ class SchoolAdminAttendance extends React.Component {
       emailid:'',
       a1:false,
       a2:false,
-      semdata:semdata
+      semdata:semdata,
+      collegedata:collegedata,
     }
   }
 
   componentDidMount=async()=>{}
 
-  touch=(item)=>{
+  touch=(item,collegeAd)=>{
+    if(collegeAd!=null){
+      this.props.navigation.navigate('ChooseSec',{collegeAd:item})
+    }else {
       this.props.navigation.navigate('ChooseSec',{item:item})
+    }
   }
 
   render() {
+    var collegeAd = this.props.navigation.getParam('collegeAd',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
             <Headers navigation={this.props.navigation} name={'ATTENDANCE'}
@@ -66,11 +76,11 @@ class SchoolAdminAttendance extends React.Component {
 
               <FlatList
                 contenContainerStyle={{justifyContent:'space-between',}}
-                data={this.state.semdata}
+                data={collegeAd!=null?this.state.collegedata:this.state.semdata}
                 keyExtractor={(item, index) => index.toString()}
                 numColumns={2}
                 renderItem={({item, index})=>(
-                  <TouchableOpacity onPress={()=>{this.touch(item)}}
+                  <TouchableOpacity onPress={()=>{this.touch(item,collegeAd)}}
                      style={{marginHorizontal:10,marginVertical:10,alignItems:'center',
                           backgroundColor:'#333333',borderRadius:7,width:width*0.35}}>
                     <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',

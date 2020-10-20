@@ -147,7 +147,7 @@ class SchoolAdProfile extends React.Component {
       this.props.navigation.navigate('ProfileQuestionPaper')
     }
     else if(item.name=='STATICS'){
-      this.props.navigation.navigate('ProfileStatistics')
+      this.props.navigation.navigate('SchoolAdminStatics')
     }
     else if(item.name=='ATTENDANCE'){
       this.props.navigation.navigate('SchoolAdminAttendance')

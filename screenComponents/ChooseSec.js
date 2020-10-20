@@ -33,6 +33,9 @@ const listofsection=[{id:1,icon:require('../assets/Unknown_Boy.jpg'),name:'SEC A
                      {id:2,icon:require('../assets/Unknown_Boy.jpg'),name:'SEC B'},
                      {id:3,icon:require('../assets/Unknown_Boy.jpg'),name:'SEC C'},]
 
+const section=[{id:1,icon:require('../assets/Unknown_Boy.jpg'),name:'CSE SEC A'},
+                     {id:2,icon:require('../assets/Unknown_Boy.jpg'),name:'CSE SEC B'},
+                     {id:3,icon:require('../assets/Unknown_Boy.jpg'),name:'CSE SEC C'},]
 class ChooseSec extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -50,6 +53,7 @@ class ChooseSec extends React.Component {
       schoolStaf:false,
       collegeStaf:false,
       listofsection:listofsection,
+      section:section,
       college:false,
       school:false,
       }
@@ -57,16 +61,16 @@ class ChooseSec extends React.Component {
 
 
 
-  listOfDetails=(class1)=>{
+  listOfDetails=(class1,collegeAd)=>{
     return(
       <FlatList
           style={{paddingBottom:100}}
-          data={this.state.listofsection}
+          data={collegeAd!=null?this.state.section:this.state.listofsection}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index})=>(
             <TouchableOpacity style={{flex:1,flexDirection:'row',paddingHorizontal:20,
                         alignItems:'center',justifyContent:'space-between',paddingVertical:10}}
-               onPress={()=>{this.onListTouch(item,class1)}}>
+               onPress={()=>{this.onListTouch(item,class1,collegeAd)}}>
               <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Image source={(item.icon)} style={{height:width*0.12,width:width*0.12,borderRadius:30}}/>
                 <Text style={[styles.text,{color:'#fff',fontWeight:'700',
@@ -80,21 +84,37 @@ class ChooseSec extends React.Component {
     )
   }
 
-  onListTouch=(item,class1,itemStaf)=>{
+  onListTouch=(item,class1,collegeAd)=>{
+    if(collegeAd!=null){
+      this.props.navigation.navigate('Semester',{collegeAd:item})
+    }else{
       this.props.navigation.navigate('StudentAttendance',{item:{name:item.name,class1:class1}})
+    }  
   }
 
   render() {
     const class1 = this.props.navigation.getParam('item',null)
+    var collegeAd =this.props.navigation.getParam('collegeAd',null)
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
-        <Headers navigation={this.props.navigation} name={class1.name}
+        <Headers navigation={this.props.navigation} name={class1!=null?class1.name:collegeAd!=null?'ATTENDANCE':''}
             screen={'SchoolAdminAttendance'}/>
             <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
-            <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,
-              paddingHorizontal:20,fontWeight:'700'}]}>CHOOSE SECTION</Text>
+              {collegeAd!=null?<View></View>:<Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,
+              paddingHorizontal:20,fontWeight:'700'}]}>CHOOSE SECTION</Text>}
               <ScrollView>
-                {this.listOfDetails(class1)}
+              {collegeAd!=null &&<View style={{flexDirection:'row',
+                    justifyContent:'space-between',marginHorizontal:20,marginVertical:10}}>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,
+                            fontWeight:'700'}]}>1st Year</Text>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,
+                            fontWeight:'700'}]}>2nd Year</Text>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,
+                            fontWeight:'700'}]}>3rd Year</Text>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,
+                            fontWeight:'700'}]}>4th Year</Text>
+                </View>}
+                {this.listOfDetails(class1,collegeAd)}
               </ScrollView>
             </View>
 

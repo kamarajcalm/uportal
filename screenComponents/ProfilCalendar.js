@@ -66,6 +66,16 @@ const dropdown=[{label:'CLASS I',label:'CLASS I'},
                 {label:'CLASS I',label:'CLASS I'},
                 {label:'CLASS I',label:'CLASS I'}]
 
+const sem=[{label:'SEM I',label:'SEM I'},
+            {label:'SEM I',label:'SEM I'},
+            {label:'SEM I',label:'SEM I'},
+            {label:'SEM I',label:'SEM I'}]
+
+const dept=[{label:'CLASS I',label:'CLASS I'},
+            {label:'CLASS I',label:'CLASS I'},
+            {label:'CLASS I',label:'CLASS I'},
+            {label:'CLASS I',label:'CLASS I'}]
+
 class ProfilCalendar extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -79,6 +89,8 @@ class ProfilCalendar extends React.Component {
       date:new Date(),
       selectedStartDate: null,
       presentdata:presentdata,
+      sem:sem,
+      dept:dept,
       iconColour: "#bb5a51",
       day:1,
       selectedDay:null,
@@ -230,11 +242,11 @@ class ProfilCalendar extends React.Component {
     )
   }
 
-  dropdown=()=>{
+  dropdown=(type)=>{
     return(
       <View style={{justifyContent:'flex-end',alignSelf:'flex-end',}}>
         <DropDownPicker
-            items={this.state.dropdown}
+            items={type=='class'?this.state.dropdown:type=='sem'?this.state.sem:type=='dept'?this.state.dept:this.state.dropdown}
             defaultNull={ null}
             dropDownStyle={{backgroundColor:'#464545',borderWidth:0}}
             defaultValue={this.state.drop}
@@ -251,7 +263,7 @@ class ProfilCalendar extends React.Component {
     )
   }
 
-  reminderModal=()=>{
+  reminderModal=(collegeStafCal)=>{
     return(
       <View>
         <Modal isVisible={this.state.modal}
@@ -279,12 +291,26 @@ class ProfilCalendar extends React.Component {
                           fontWeight:'700',textAlign:'center'}]}>SUBMEET</Text>
                   </TouchableOpacity>
                 </View>:<View>
+                {collegeStafCal!=null?<View>
                   <View style={{flexDirection:'row',justifyContent:'space-between',
                         alignItems:'center'}}>
                     <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,
-                              fontWeight:'700'}]}>Select class</Text>
-                    <View style={{paddingLeft:20}}>{this.dropdown()}</View>
+                              fontWeight:'700'}]}>Select semester</Text>
+                    <View style={{paddingLeft:20}}>{this.dropdown('sem')}</View>
                   </View>
+                  <View style={{flexDirection:'row',justifyContent:'space-between',
+                        alignItems:'center'}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,
+                              fontWeight:'700'}]}>Select department</Text>
+                    <View style={{paddingLeft:20}}>{this.dropdown('dept')}</View>
+                  </View>
+                  </View>:<View style={{flexDirection:'row',justifyContent:'space-between',
+                      alignItems:'center'}}>
+                  <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,
+                            fontWeight:'700'}]}>Select class</Text>
+                  <View style={{paddingLeft:20}}>{this.dropdown('class')}</View>
+                </View>}
+
                   <Text style={[styles.text,{color:'#fff',fontSize:14,
                       fontWeight:'700',textAlign:'center'}]}>OR</Text>
                   <View style={{flexDirection:'row',justifyContent:'space-between',
@@ -314,7 +340,8 @@ class ProfilCalendar extends React.Component {
     let date1=days[this.state.date.getDay()]+", "+this.state.date.getDate() + " "+ months[this.state.date.getMonth()] +" "+ this.state.date.getFullYear();
     var schoolStafCal =this.props.navigation.getParam('schoolStafCal',null);
     console.log(schoolStafCal,'schoolStafCal')
-
+    var collegeStafCal =this.props.navigation.getParam('collegeStafCal',null);
+    console.log(collegeStafCal,'collegeStafCal')
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
           <Headers navigation={this.props.navigation} name={'CALENDAR AND REMINDERS'}
@@ -327,7 +354,7 @@ class ProfilCalendar extends React.Component {
                 <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700',
                         textAlign:'left',paddingVertical:10,paddingHorizontal:10}]}>EVENTS</Text>
                 <View>
-                  {schoolStafCal!=null&&<View>
+                  {(collegeStafCal!=null||schoolStafCal!=null)&&<View>
                     {this.state.selectedDay!=null&&
                     <View style={{flexDirection:'row',justifyContent:'space-between',
                                   alignItems:'center',borderWidth:1,borderRadius:10,
@@ -343,7 +370,7 @@ class ProfilCalendar extends React.Component {
                 </View>
               </View>
           </ScrollView>
-          {this.reminderModal()}
+          {this.reminderModal(collegeStafCal)}
       </View>
     );
   }

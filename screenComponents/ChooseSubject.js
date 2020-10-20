@@ -37,7 +37,12 @@ const listofsection=[{id:1,icon:require('../assets/Unknown_Boy.jpg'),
                      name:'MATHEMATICS',itemdata:itemdata,open:false},
                      {id:3,icon:require('../assets/Unknown_Boy.jpg'),
                      name:'ENGLISH',itemdata:itemdata,open:false},]
-
+const collageStaf = [{id:1,icon:require('../assets/Unknown_Boy.jpg'),
+                      name:'EG',itemdata:itemdata,open:false},
+                     {id:2,icon:require('../assets/Unknown_Boy.jpg'),
+                     name:'MATHEMATICS',itemdata:itemdata,open:false},
+                     {id:3,icon:require('../assets/Unknown_Boy.jpg'),
+                     name:'ENGLISH',itemdata:itemdata,open:false},]
 class ChooseSubject extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -48,12 +53,7 @@ class ChooseSubject extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      collegeStud:false,
-      schoolStud:false,
-      schoolAd:false,
-      collegeAd:false,
-      schoolStaf:false,
-      collegeStaf:false,
+      collageStaf:collageStaf,
       listofsection:listofsection,
       college:false,
       school:false,
@@ -62,18 +62,18 @@ class ChooseSubject extends React.Component {
 
 
 
-  listOfDetails=()=>{
+  listOfDetails=(class1,collegeStaf)=>{
     return(
       <FlatList
           style={{paddingBottom:100}}
-          data={this.state.listofsection}
+          data={collegeStaf!=null?this.state.collageStaf:this.state.listofsection}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index})=>(
             <View style={{width:width*0.6,backgroundColor:'#141414',
                         alignItems:'center',justifyContent:'center',marginVertical:10,borderRadius:10,alignSelf:'center'}}>
             <TouchableOpacity style={{flexDirection:'row',width:width*0.6,backgroundColor:'#333333',
                         alignItems:'center',justifyContent:'center',paddingVertical:10,borderRadius:10,alignSelf:'center'}}
-               onPress={()=>{this.onListTouch(item,index)}}>
+               onPress={()=>{this.onListTouch(item,index,collegeStaf)}}>
               <View style={{alignItems:'center',flexDirection:'row'}}>
 
                 <Text style={[styles.text,{color:'#fff',fontWeight:'700',
@@ -83,7 +83,7 @@ class ChooseSubject extends React.Component {
 
              </TouchableOpacity>
              {item.open &&this.state.itemIndex==item.id&& <View>
-               {this.openTest(item)}
+               {this.openTest(item,index)}
                </View>}
              </View>
            )
@@ -92,7 +92,7 @@ class ChooseSubject extends React.Component {
     )
   }
 
-  openTest=(item,index)=>{
+  openTest=(item,index,)=>{
     return(
       <View>
       <FlatList
@@ -110,25 +110,31 @@ class ChooseSubject extends React.Component {
     )
   }
 
-  onListTouch=(item,index)=>{
-    this.state.listofsection[index].open=!this.state.listofsection[index].open
-    this.setState({listofsection})
-    this.setState({itemIndex:item.id})
-
+  onListTouch=(item,index,collegeStaf)=>{
+    if(collegeStaf!=null){
+      this.state.collageStaf[index].open=!this.state.collageStaf[index].open
+      this.setState({collageStaf})
+      this.setState({itemIndex:item.id})
+    }else{
+      this.state.listofsection[index].open=!this.state.listofsection[index].open
+      this.setState({listofsection})
+      this.setState({itemIndex:item.id})
+    }
   }
 
   render() {
-    const class1 = this.props.navigation.getParam('item',null)
-    const itemStaf = this.props.navigation.getParam('itemStaf',null)
+    var class1 = this.props.navigation.getParam('item',null)
+    var itemStaf = this.props.navigation.getParam('itemStaf',null)
+    var collegeStaf = this.props.navigation.getParam('collegeStaf',null)
     return (
       <View style={{flex:1,backgroundColor:'#000',justifyContent:'center'}}>
-        <Headers navigation={this.props.navigation} name={itemStaf!=null?itemStaf.itemStaf.item.name + " " + itemStaf.name:class1.name+" "+class1.sec}
+        <Headers navigation={this.props.navigation} name={itemStaf!=null?itemStaf.itemStaf.item.name + " " + itemStaf.name:class1!=null?class1.name+" "+class1.sec:collegeStaf!=null?collegeStaf.name:''}
             screen={'ChooseSubject'}/>
             <View style={{flex:1,marginTop:Constants.statusBarHeight}}>
             <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:10,
               paddingHorizontal:20,fontWeight:'700',textAlign:'center'}]}>CHOOSE SUBJECT</Text>
               <ScrollView>
-                {this.listOfDetails(class1)}
+                {this.listOfDetails(class1,collegeStaf)}
               </ScrollView>
             </View>
 

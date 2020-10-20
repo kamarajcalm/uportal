@@ -42,6 +42,10 @@ const dropdown=[{label: 'CLASS I', value: 'CLASS I'},
                 {label: 'CLASS II', value: 'CLASS II'},
                 {label: 'CLASS III', value: 'CLASS III'},]
 
+const dropd = [{label: 'SEM I', value: 'SEM I'},
+                {label: 'SEM II', value: 'SEM II'},
+                {label: 'SEM III', value: 'SEM III'},]
+
 const subjects=[{name:'MATHS',color1:'#FF0000',data:[20,30,70,10],
                  color:(opacity=1)=>`rgba(255,0,0,${opacity})`,},
                 {name:'SCIENCE',color1:'#FFE500',data:[40,50,90,20],
@@ -74,7 +78,7 @@ class SchoolStafStatistics extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-
+        dropd:dropd,
         dropdown : dropdown,
         data:[40,50,90,20],
         color:(opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -89,11 +93,11 @@ class SchoolStafStatistics extends React.Component {
  componentDidMount(){
  }
 
- dropdown=()=>{
+ dropdown=(collegeStaf)=>{
    return(
      <View style={{justifyContent:'flex-end',marginVertical:20,alignSelf:'flex-end',marginHorizontal:20}}>
      <DropDownPicker
-           items={this.state.dropdown}
+           items={collegeStaf!=null?this.state.dropd:this.state.dropdown}
            defaultNull={ null}
            dropDownStyle={{backgroundColor:'#333333',borderWidth:0}}
            defaultValue={this.state.drop}
@@ -185,13 +189,13 @@ view1=()=>{
   )
 }
   render() {
-
+      var collegeStaf = this.props.navigation.getParam('collegeStaf',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
       <Headers navigation={this.props.navigation} name={'STATISTICS'}
           screen={'SchoolStafStatistics'}/>
             <ScrollView contenContainerStyle={{flex:1,alignItems:'center',backgroundColor:'#000'}}>
-              {this.dropdown()}
+              {this.dropdown(collegeStaf)}
               {this.secTion()}
               {this.chart()}
                 <View style={{marginVertical:20}}>

@@ -37,6 +37,8 @@ const remarksData = [{img:require('../assets/Unknown_Boy.jpg'),name:'Abhishek',
                      {img:require('../assets/Unknown_Boy.jpg'),name:'Abi',
                       cls:'CLASS III',time:'10:30 AM, 12Aug 2020',text:'Lorem ipsum dolor sit amet,  consectetur adipiscing elit'},]
 
+                     
+
 class SchoolStafRemark extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
@@ -46,6 +48,7 @@ class SchoolStafRemark extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state={
       remarksData:remarksData,
     }
@@ -56,6 +59,7 @@ class SchoolStafRemark extends React.Component {
 
 
   render() {
+    var collegeStaf = this.props.navigation.getParam('collegeStaf',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
             <Headers navigation={this.props.navigation} name={'REMARKS'}
