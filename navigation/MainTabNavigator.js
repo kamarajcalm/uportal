@@ -25,6 +25,7 @@ import SchoolStudProfile from '../forthpage/SchoolStudProfile';
 import SchoolStafProfile from '../forthpage/SchoolStafProfile';
 import SchoolAdProfile from '../forthpage/SchoolAdProfile';
 
+import ClassWall from '../screenComponents/ClassWall';
 import ProfileForms from '../screenComponents/ProfileForms';
 import ProfileFillForm from '../screenComponents/ProfileFillForm';
 import ProfileLibrary from '../screenComponents/ProfileLibrary';
@@ -105,7 +106,8 @@ const PageSecondStack = createStackNavigator({
    PageSecond:PageSecond,
    TeachersWall:TeachersWall,
    InfoScreen:InfoScreen,
-   FacStuDetails:FacStuDetails
+   FacStuDetails:FacStuDetails,
+   ClassWall:ClassWall
 },
 {
   initialRouteName: 'PageSecond',

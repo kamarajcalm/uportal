@@ -47,7 +47,7 @@ class ChangePassword extends React.Component {
  }
 
   render() {
-    const receivedValue = this.props.navigation.getParam('receivedValue',()=>{});
+
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
         <Headers navigation={this.props.navigation} name={'CHANGE PASSWORD'}

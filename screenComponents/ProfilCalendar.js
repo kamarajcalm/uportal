@@ -42,7 +42,7 @@ const months = ["January", "February", "March", "April",
                 "May", "June", "July", "August", "September",
                 "October","November", "December"];
 
-const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 
 const presentdata=[{date:'Saturday,15 Aug',desc:'Holiday,73rd Indian Independance day '},
                    {date:'Wednesday,19 Aug',desc:'Class 4 Parents teachers meeting'},
@@ -263,7 +263,7 @@ class ProfilCalendar extends React.Component {
     )
   }
 
-  reminderModal=(collegeStafCal)=>{
+  reminderModal=(collegeStafCal,collegeAdCal)=>{
     return(
       <View>
         <Modal isVisible={this.state.modal}
@@ -291,7 +291,7 @@ class ProfilCalendar extends React.Component {
                           fontWeight:'700',textAlign:'center'}]}>SUBMEET</Text>
                   </TouchableOpacity>
                 </View>:<View>
-                {collegeStafCal!=null?<View>
+                {(collegeStafCal!=null||collegeAdCal!=null)?<View>
                   <View style={{flexDirection:'row',justifyContent:'space-between',
                         alignItems:'center'}}>
                     <Text style={[styles.text,{color:'#fff',fontSize:16,paddingVertical:4,
@@ -337,11 +337,13 @@ class ProfilCalendar extends React.Component {
   render(){
 
     let date =this.state.date.toDateString()
-    let date1=days[this.state.date.getDay()]+", "+this.state.date.getDate() + " "+ months[this.state.date.getMonth()] +" "+ this.state.date.getFullYear();
+    let date1=days[this.state.date.getDay()]+", "+this.state.date.getDate() + " "+
+        months[this.state.date.getMonth()] +" "+ this.state.date.getFullYear();
+
     var schoolStafCal =this.props.navigation.getParam('schoolStafCal',null);
-    console.log(schoolStafCal,'schoolStafCal')
     var collegeStafCal =this.props.navigation.getParam('collegeStafCal',null);
-    console.log(collegeStafCal,'collegeStafCal')
+    var schoolAdCal = this.props.navigation.getParam('schoolAdCal',null);
+    var collegeAdCal = this.props.navigation.getParam('collegeAdCal',null);
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
           <Headers navigation={this.props.navigation} name={'CALENDAR AND REMINDERS'}
@@ -354,7 +356,7 @@ class ProfilCalendar extends React.Component {
                 <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700',
                         textAlign:'left',paddingVertical:10,paddingHorizontal:10}]}>EVENTS</Text>
                 <View>
-                  {(collegeStafCal!=null||schoolStafCal!=null)&&<View>
+                  {(collegeStafCal!=null||schoolStafCal!=null||schoolAdCal!=null||collegeAdCal!=null)&&<View>
                     {this.state.selectedDay!=null&&
                     <View style={{flexDirection:'row',justifyContent:'space-between',
                                   alignItems:'center',borderWidth:1,borderRadius:10,
@@ -370,7 +372,7 @@ class ProfilCalendar extends React.Component {
                 </View>
               </View>
           </ScrollView>
-          {this.reminderModal(collegeStafCal)}
+          {this.reminderModal(collegeStafCal,collegeAdCal)}
       </View>
     );
   }

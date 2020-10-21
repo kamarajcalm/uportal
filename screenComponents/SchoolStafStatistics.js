@@ -47,17 +47,17 @@ const dropd = [{label: 'SEM I', value: 'SEM I'},
                 {label: 'SEM III', value: 'SEM III'},]
 
 const subjects=[{name:'MATHS',color1:'#FF0000',data:[20,30,70,10],
-                 color:(opacity=1)=>`rgba(255,0,0,${opacity})`,},
+                 color:(opacity=1)=>`rgba(255,0,0,1)`,},
                 {name:'SCIENCE',color1:'#FFE500',data:[40,50,90,20],
-                 color:(opacity=1)=>`rgba(255,230,0,${opacity})`},
+                 color:(opacity=1)=>`rgba(255,230,0,1)`},
                 {name:'SOCIAL',color1:'#04B600',data:[10,20,90,40],
-                color:(opacity=1)=>`rgba(4,182,0,${opacity})`},
+                color:(opacity=1)=>`rgba(4,182,0,1)`},
                 {name:'ENGLISH',color1:'#001AFF',data:[30,50,40,20],
-                color:(opacity=1)=>`rgba(0,26,255,${opacity})`},
+                color:(opacity=1)=>`rgba(0,26,255,1)`},
                 {name:'KANNDA',color1:'#FF4D00',data:[40,50,90,20],
-                color:(opacity=1)=>`rgba(255,77,0,${opacity})`,},
+                color:(opacity=1)=>`rgba(255,77,0,1)`,},
                 {name:'HINDI',color1:'#10E9DC',data:[40,20,90,60],
-                color:(opacity=1)=>`rgba(16,233,220,${opacity})`,},]
+                color:(opacity=1)=>`rgba(16,233,220,1)`,},]
 const data = {labels: ["1", "2", "3", "4", "5", "6","7","8"],
                   datasets: [
                     {
@@ -81,8 +81,8 @@ class SchoolStafStatistics extends React.Component {
         dropd:dropd,
         dropdown : dropdown,
         data:[40,50,90,20],
-        color:(opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-        color1:(opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+        color:(opacity = 1) => `rgba(255, 255, 255, 1)`,
+        color1:(opacity = 1) => `rgba(255, 255, 255, 1)`,
         subjects:subjects,
         sections:sections,
         drop:'',

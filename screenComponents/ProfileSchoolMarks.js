@@ -55,16 +55,20 @@ class ProfileSchoolMarks extends React.Component {
       a1:false,
       a2:false,
       class1:class1,
-      }
     }
+  }
 
-  componentDidMount=async()=>{}
+  componentDidMount(){
+    
+  }
 
   classResult=(item,index)=>{
     return(
       <View style={{marginTop:10,borderRadius:10}}>
+      <View style={{flexDirection:'row'}}>
         <FlatList style={{}} data={item.classdata}
             keyExtractor={(item, index) => index.toString()}
+            listKey={(item, index) => index.toString()}
             renderItem={({item, index})=>(
           <View>
             {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>}
@@ -80,6 +84,18 @@ class ProfileSchoolMarks extends React.Component {
                 <Text style={[styles.text,
                   {color:'#fff',fontSize:12,fontWeight:item.no=='#'?'700':'400'}]}>{item.sub}</Text>
               </View>
+              </View>
+              </View>
+            )}/>
+            <ScrollView horizontal={true}>
+            <FlatList style={{}} data={item.classdata}
+                keyExtractor={(item, index) => index.toString()}
+                listKey={(item, index) => index.toString()}
+                renderItem={({item, index})=>(
+              <View>
+                {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>}
+                <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',
+                              alignItems:'center',paddingHorizontal:6,}}>
               <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
               <View style={{flex:0.13}}>
                 <Text style={[styles.text,{color:'#fff',fontSize:12,
@@ -107,6 +123,8 @@ class ProfileSchoolMarks extends React.Component {
           </View>
         )}
         />
+        </ScrollView>
+        </View>
 
         <View>
           <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>
@@ -176,7 +194,7 @@ class ProfileSchoolMarks extends React.Component {
     }
 
   render() {
-    const receivedValue = this.props.navigation.getParam('receivedValue', () => {});
+
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
         <Headers navigation={this.props.navigation} name={'ACADEMIC MARKS'}
@@ -205,15 +223,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps =(state) => {
-    return {
-
-  }
+  return {}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
+  return {};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileSchoolMarks);

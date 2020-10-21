@@ -31,6 +31,7 @@ const { height } = Dimensions.get('window');
 const themeColor = settings.themeColor
 const url = settings.url
 const fontFamily =settings.fontFamily
+
 const semdata=[{no:'#',sub:'SUBJECT',test1:'TEST I',test2:'TEST II',test3:'TEST III',exa:'EXA'},
               {no:'1',sub:'LANGUAGE',test1:'90',test2:'80',test3:'70',exa:'9'},
               {no:'2',sub:'ENGLISH',test1:'80',test2:'70',test3:'90',exa:'8'},
@@ -318,7 +319,7 @@ class ProfileMarks extends React.Component {
   }
 
   render() {
-    const receivedValue = this.props.navigation.getParam('receivedValue', () => {});
+
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
           <Headers navigation={this.props.navigation} name={'ACADEMIC MARKS'}
@@ -354,15 +355,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps =(state) => {
-    return {
-
-  }
+  return{}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
+  return{};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileMarks);

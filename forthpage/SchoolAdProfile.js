@@ -123,10 +123,10 @@ class SchoolAdProfile extends React.Component {
       this.props.navigation.navigate('ProfileForms')
     }
     else if (item.name=='LIBRARY') {
-      this.props.navigation.navigate('ProfileLibrary')
+      this.props.navigation.navigate('ProfileLibrary',{schoolAd:item})
     }
     else if(item.name=='FACULTY DETAILS'){
-      this.props.navigation.navigate('ProfileFacultyDetails')
+      this.props.navigation.navigate('ProfileFacultyDetails',{schoolAd:item})
     }
     else if(item.name=='FEEDBACK & REMARKS'){
       this.props.navigation.navigate('ProfileFeedback')
@@ -144,7 +144,7 @@ class SchoolAdProfile extends React.Component {
       this.props.navigation.navigate('ProfileMedia')
     }
     else if(item.name=='QUESTION PAPERS'){
-      this.props.navigation.navigate('ProfileQuestionPaper')
+      this.props.navigation.navigate('ProfileQuestionPaper',{schoolAd:item})
     }
     else if(item.name=='STATICS'){
       this.props.navigation.navigate('SchoolAdminStatics')
@@ -153,7 +153,7 @@ class SchoolAdProfile extends React.Component {
       this.props.navigation.navigate('SchoolAdminAttendance')
     }
     else if (item.name=='CALENDAR AND REMINDERS') {
-      this.props.navigation.navigate('ProfilCalendar')
+      this.props.navigation.navigate('ProfilCalendar',{schoolAdCal:item})
     }
     else if (item.name=='RANKS'){
       this.props.navigation.navigate('ProfileRank')

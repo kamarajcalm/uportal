@@ -34,6 +34,12 @@ const year=[{label: '2000', value: '2000'},{label: '2001', value: '2001'},
               {label: '2002', value: '2002'},{label: '2003', value: '2003'},
               {label: '2004', value: '2004'},{label: '2005', value: '2005'},
               {label: '2006', value: '2006'},{label: '2007', value: '2007'},]
+const classdata=[{name:'CLASS I'},{name:'CLASS VII'},{name:'CLASS II'},
+                {name:'CLASS VIII'},{name:'CLASS III'},
+                {name:'CLASS IX'},{name:'CLASS IV'},{name:'CLASS X'},
+                {name:'CLASS V'},{name:'CLASS XI'},
+                {name:'CLASS VI'},{name:'CLASS XII'}]
+const subject = [{name:'LANGUAGE'},{name:'MATHEMATICS'},{name:'ENGLISH'}]
 
 class ProfileQuestionPaper extends React.Component {
 
@@ -47,16 +53,30 @@ class ProfileQuestionPaper extends React.Component {
     this.state={
         selectedyear:'',
         year : year,
-        item:'QUESTION PAPERS'
+        item:'QUESTION PAPERS',
+        classdata:classdata,
+        subject:subject,
     }
   }
 
   componentDidMount(){
   }
 
+changeItem=(schoolAd)=>{
+  if(schoolAd!=null){
+    this.setState({classes:true})
+  }else{
+    this.props.navigation.navigate('ProfileMedia',{item:this.state.item})
+  }
+}
+
+touch=(item,index)=>{
+    this.props.navigation.navigate('QuestionPaper')
+}
 
   render() {
     const depart =this.props.navigation.getParam('item',null)
+    var schoolAd = this.props.navigation.getParam('schoolAd',null)
     console.log(depart,'depart')
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
@@ -80,9 +100,28 @@ class ProfileQuestionPaper extends React.Component {
                     containerStyle={{height: 40,width:width*0.3}}
                     onChangeItem={item => {this.setState({
                         selectedyear: item.value
-                    });this.props.navigation.navigate('ProfileMedia',{item:this.state.item})}}
+                    });this.changeItem(schoolAd);}}
             />
           </View>
+          {this.state.classes==true&&<View>
+            <Text style={[styles.text,{color:'#fff',fontSize:14,
+            fontWeight:'700',paddingVertical:20,textAlign:'center'}]}>CHOOSE CLASS</Text>
+            <FlatList
+            contenContainerStyle={{justifyContent:'space-between',}}
+            data={this.state.classdata}
+            keyExtractor={(item, index) => index.toString()}
+            numColumns={2}
+            renderItem={({item, index})=>(
+              <TouchableOpacity
+                onPress={()=>{this.touch(item,index)}}  style={{marginHorizontal:10,marginVertical:10,paddingHorizontal:40,
+                      backgroundColor:'#333333',borderRadius:7,width:width*0.4}}>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
+                        paddingVertical:10,fontWeight:'700'}]}>{item.name}</Text>
+              </TouchableOpacity>
+            )}
+          />
+          </View>}
+
         </View>
       </View>
     );

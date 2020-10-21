@@ -178,7 +178,7 @@ class PageFirst extends React.Component {
           />
         </View>
         <View style={{flexDirection:'row',marginTop:4,justifyContent:'space-between',
-                      backgroundColor:'#141414',paddingHorizontal:30,
+                      backgroundColor:'#0A0A0A',paddingHorizontal:30,
                       paddingVertical:15,alignItems:'center'}}>
           <View style={{flexDirection:'row'}}>
             <FontAwesome name='image' size={20} color='#fff'/>

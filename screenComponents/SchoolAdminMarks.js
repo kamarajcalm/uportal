@@ -64,8 +64,16 @@ const classdata =[{no:'UNIQUE ID',stud:'STUDENTS',img:'',
 const class1 = [{a2:false,class:'CLASS I',classdata:classdata,pk:0},
                 {a2:false,class:'CLASS II',classdata:classdata,pk:1},
                 {a2:false,class:'CLASS III',classdata:classdata,pk:2},]
-                const droptest=[{label: '2020', value: '2020'},{label: '2019', value: '2019'},
-                                {label: '2019', value: '2019'}]
+
+const semester =[{a2:false,class:'CSE SEC A',classdata:classdata,pk:0},
+                {a2:false,class:'CSE SEC B',classdata:classdata,pk:1},
+                {a2:false,class:'CSE SEC C',classdata:classdata,pk:2},]
+
+const droptest=[{label: '2020', value: '2020'},{label: '2019', value: '2019'},
+                {label: '2019', value: '2019'}]
+
+const dropsem=[{label: 'SEM I', value: 'SEM I'},{label: 'SEM II', value: 'SEM II'},
+              {label: 'SEM III', value: 'SEM III'}]
 
 class SchoolAdminMarks extends React.Component {
 
@@ -82,51 +90,70 @@ class SchoolAdminMarks extends React.Component {
       a2:false,
       class1:class1,
       droptest:droptest,
+      semester:semester,
+      dropsem:dropsem,
       }
     }
 
   componentDidMount=async()=>{}
 
-  classResult=(item,index)=>{
+  
+
+  classResult1=(item,index)=>{
     return(
-      <View style={{marginTop:10,borderRadius:10}}>
+      <View>
+      <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
         <FlatList style={{}} data={item.classdata}
             keyExtractor={(item, index) => index.toString()}
+            listKey={(item, index) => index.toString()}
             renderItem={({item, index})=>(
-          <View>
-            {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>}
-            <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',
-                          alignItems:'center',paddingHorizontal:6,}}>
-              <View style={{flex:0.13}}>
+          <View >
+            {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginLeft:10,width:width*0.5}}/>}
+            <View style={{flexDirection:'row',justifyContent:'space-between',
+                          alignItems:'center',paddingHorizontal:6,width:width*0.5}}>
+              <View style={{width:width*0.15,}}>
                 <Text style={[styles.text,
                           {color:'#fff',fontSize:12,textAlign:'center',
                           fontWeight:item.no=='#'?'700':'400'}]}>{item.no}</Text>
               </View>
-              <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-              <View style={{flex:0.25,flexDirection:'row',alignItems:'center'}}>
+              <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6,marginHorizontal:0,}}/>
+              <View style={{flexDirection:'row',alignItems:'flex-start',width:width*0.2}}>
                 <Image source={(item.img)} style={{height:20,width:20,borderRadius:50}}/>
                 <Text style={[styles.text,
                   {color:'#fff',fontSize:12,fontWeight:item.no=='#'?'700':'400',paddingLeft:6}]}>{item.stud}</Text>
               </View>
               <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-              <View style={{flex:0.13}}>
+            </View>
+          </View>
+        )}
+        />
+        <ScrollView horizontal={true}>
+        <FlatList style={{}} data={item.classdata}
+            keyExtractor={(item, index) => index.toString()}
+            listKey={(item, index) => index.toString()}
+            renderItem={({item, index})=>(
+          <View>
+            {item.no==''&&<View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginRight:10,width:width*0.65}}/>}
+            <View style={{flexDirection:'row',justifyContent:'space-between',
+                          alignItems:'center',paddingHorizontal:6,width:width*0.65}}>
+              <View style={{width:width*0.15,}}>
                 <Text style={[styles.text,{color:'#fff',fontSize:12,
                         textAlign:'center',fontWeight:item.no=='#'?'700':'400'}]}>{item.test1}</Text>
               </View>
               <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-              <View style={{flex:0.13}}>
+              <View style={{width:width*0.15,}}>
                 <Text style={[styles.text,
                             {color:'#fff',fontSize:12,textAlign:'center',
                             fontWeight:item.no=='#'?'700':'400'}]}>{item.test2}</Text>
               </View>
               <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-              <View style={{flex:0.13}}>
+              <View style={{width:width*0.15,}}>
                 <Text style={[styles.text,
                             {color:'#fff',fontSize:12,textAlign:'center',
                             fontWeight:item.no=='#'?'700':'400'}]}>{item.test3}</Text>
               </View>
               <View style={{borderWidth:0.2,height:40,borderColor:'#fff',paddingVertical:-6}}/>
-              <View style={{flex:0.13}}>
+              <View style={{width:width*0.15,}}>
                 <Text style={[styles.text,
                             {color:'#fff',fontSize:12,textAlign:'center',
                             fontWeight:item.no=='#'?'700':'400'}]}>{item.exa}</Text>
@@ -135,23 +162,31 @@ class SchoolAdminMarks extends React.Component {
           </View>
         )}
         />
+        </ScrollView>
+      </View>
         <View>
-          <View style={{borderWidth:0.2,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>
+          <View style={{borderWidth:0.5,borderColor:'#fff',width:'100%',marginHorizontal:10}}/>
         </View>
       </View>
     )
   }
 
-  touch=(item,index)=>{
-    this.state.class1[index].a2=!this.state.class1[index].a2
-    this.setState({class1})
-    this.setState({itemIndex:item.pk})
+  touch=(item,index,collegeAd)=>{
+    if(collegeAd!=null){
+      this.state.semester[index].a2=!this.state.semester[index].a2
+      this.setState({semester})
+      this.setState({itemIndex:item.pk})
+    }else{
+      this.state.class1[index].a2=!this.state.class1[index].a2
+      this.setState({class1})
+      this.setState({itemIndex:item.pk})
+    }
   }
 
-  classes=()=>{
+  classes=(collegeAd)=>{
     return(
       <View>
-        <FlatList style={{}} data={this.state.class1}
+        <FlatList style={{}} data={collegeAd!=null?this.state.semester:this.state.class1}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item, index})=>(
           <View style={{borderRadius:10,marginHorizontal:15,marginVertical:0,
@@ -159,7 +194,7 @@ class SchoolAdminMarks extends React.Component {
             <TouchableOpacity style={{height:width*0.35,alignItems:'center',justifyContent:'center',
                           shadowOpacity: 0.18,elevation:5,backgroundColor:'#3F3F3F',shadowColor:'#000',
                           borderRadius:10,shadowOffset: {height: 2,width:0}}}
-              onPress={()=>{this.touch(item,index)}}>
+              onPress={()=>{this.touch(item,index,collegeAd)}}>
               <Image source={require('../assets/Unknown_Boy.jpg')} style={{height:'100%',width:'100%',borderRadius:10,zIndex:0,opacity:0.5}}/>
               <View style={{alignSelf:'center',position:'absolute',
                             alignItems:'center',justifyContent:'center',zIndex:1}}>
@@ -170,7 +205,7 @@ class SchoolAdminMarks extends React.Component {
             </TouchableOpacity>
             {(item.a2&&item.pk==this.state.itemIndex)&&
               <ScrollView style={{backgroundColor:'#3F3F3F',paddingVertical:10,marginVertical:10,}}>
-                {this.classResult(item,index)}
+                {this.classResult1(item,index)}
               </ScrollView>
             }
           </View>)}/>
@@ -201,16 +236,41 @@ class SchoolAdminMarks extends React.Component {
       )
     }
 
+    dropSem=()=>{
+      return(
+        <View style={{justifyContent:'flex-start',marginVertical:20,alignSelf:'flex-start',marginHorizontal:20}}>
+        <DropDownPicker
+              items={this.state.dropsem}
+              defaultNull={ null}
+              dropDownStyle={{backgroundColor:'#333333',borderWidth:0}}
+              defaultValue={this.state.test1}
+              placeholder="SEM"
+              arrowColor={'#fff'}
+              dropDownMaxHeight={width}
+              style={{backgroundColor:'#333333',borderWidth:1,borderColor:'#333333'}}
+              placeholderStyle={{fontWeight: 'bold',color:'#fff'}}
+              labelStyle={{fontSize: 14, color: '#fff'}}
+              containerStyle={{height: 40,width:width*0.4}}
+              onChangeItem={item => this.setState({
+                  test1: item.value
+              })}
+          />
+        </View>
+      )
+    }
+
   render() {
-    const receivedValue = this.props.navigation.getParam('receivedValue', () => {});
+
+    var collegeAd=this.props.navigation.getParam('collegeAd',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
         <Headers navigation={this.props.navigation} name={'ACADEMIC MARKS'}
           screen={'SchoolAdminMarks'}/>
           <View style={{flex:1,paddingVertical:20,}}>
-          <View>{this.dropTest()}</View>
+          {collegeAd!=null&&<View style={{flexDirection:'row'}}>{this.dropSem()}{this.dropTest()}</View>}
+          {collegeAd==null&&<View>{this.dropTest()}</View>}
             <ScrollView>
-              {this.classes()}
+              {this.classes(collegeAd)}
             </ScrollView>
           </View>
       </View>

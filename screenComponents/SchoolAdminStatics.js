@@ -71,17 +71,17 @@ const droptest=[{label: 'TEST-1', value: 'TEST-1'},{label: 'TEST-1', value: 'TES
                 {label: 'TEST-1', value: 'TEST-1'}]
 
 const subjects=[{name:'MATHS',color1:'#FF0000',data:[20,30,70,10],
-                 color:(opacity=1)=>`rgba(255,0,0,${opacity})`,},
+                 color:(opacity=1)=>`rgba(255,0,0,1)`,},
                 {name:'SCIENCE',color1:'#FFE500',data:[40,50,90,20],
-                 color:(opacity=1)=>`rgba(255,230,0,${opacity})`},
+                 color:(opacity=1)=>`rgba(255,230,0,1)`},
                 {name:'SOCIAL',color1:'#04B600',data:[10,20,90,40],
-                color:(opacity=1)=>`rgba(4,182,0,${opacity})`},
+                color:(opacity=1)=>`rgba(4,182,0,1)`},
                 {name:'ENGLISH',color1:'#001AFF',data:[30,50,40,20],
-                color:(opacity=1)=>`rgba(0,26,255,${opacity})`},
+                color:(opacity=1)=>`rgba(0,26,255,1)`},
                 {name:'KANNDA',color1:'#FF4D00',data:[40,50,90,20],
-                color:(opacity=1)=>`rgba(255,77,0,${opacity})`,},
+                color:(opacity=1)=>`rgba(255,77,0,1)`,},
                 {name:'HINDI',color1:'#10E9DC',data:[40,20,90,60],
-                color:(opacity=1)=>`rgba(16,233,220,${opacity})`,},]
+                color:(opacity=1)=>`rgba(16,233,220,1)`,},]
 const data = {labels: ["1", "2", "3", "4", "5", "6","7","8"],
                   datasets: [
                     {
@@ -107,8 +107,8 @@ class SchoolAdminStatics extends React.Component {
         dropdown : dropdown,
         dropclass:dropclass,
         data:[40,50,90,20],
-        color:(opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-        color1:(opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+        color:(opacity = 1) => `rgba(255, 255, 255, 1)`,
+        color1:(opacity = 1) => `rgba(255, 255, 255, 1)`,
         subjects:subjects,
         droptest:droptest,
         drop:'',
@@ -136,7 +136,7 @@ class SchoolAdminStatics extends React.Component {
  }
  dropTest=(collegeAd)=>{
    return(
-     <View style={{justifyContent:'flex-end',marginVertical:20,alignSelf:'flex-end',marginHorizontal:20}}>
+     <View style={{justifyContent:'flex-start',marginVertical:20,alignSelf:'flex-start',marginHorizontal:10}}>
      <DropDownPicker
            items={this.state.droptest}
            defaultNull={ null}
@@ -148,7 +148,7 @@ class SchoolAdminStatics extends React.Component {
            style={{backgroundColor:'#333333',borderWidth:1,borderColor:'#333333'}}
            placeholderStyle={{fontWeight: 'bold',color:'#fff'}}
            labelStyle={{fontSize: 14, color: '#fff'}}
-           containerStyle={{height: 40,width:width*0.4}}
+           containerStyle={{height: 40,width:width*0.27}}
            onChangeItem={item => this.setState({
                test: item.value
            })}
@@ -158,7 +158,7 @@ class SchoolAdminStatics extends React.Component {
  }
  dropdown=(collegeAd)=>{
    return(
-     <View style={{justifyContent:'flex-end',marginVertical:20,alignSelf:'flex-end',marginHorizontal:20}}>
+     <View style={{justifyContent:'flex-end',marginVertical:20,alignSelf:'flex-end',marginHorizontal:10}}>
      <DropDownPicker
            items={collegeAd!=null?this.state.dropdown:this.state.dropclass}
            defaultNull={ null}
@@ -170,7 +170,7 @@ class SchoolAdminStatics extends React.Component {
            style={{backgroundColor:'#333333',borderWidth:1,borderColor:'#333333'}}
            placeholderStyle={{fontWeight: 'bold',color:'#fff'}}
            labelStyle={{fontSize: 14, color: '#fff'}}
-           containerStyle={{height: 40,width:width*0.4}}
+           containerStyle={{height: 40,width:width*0.35}}
            onChangeItem={item => this.setState({
                drop: item.value
            })}
@@ -254,26 +254,33 @@ class SchoolAdminStatics extends React.Component {
 
  }
 
- secTion=(collegeAd)=>{
-   return(
-         <View style={{margin:10,marginVertical:20}}>
-           <FlatList data={this.state.sections} keyExtractor={(item, index) => index.toString()} horizontal={true} renderItem={({item, index})=>(
-             <TouchableOpacity onPress={()=>{this.clickSection(item,index)}} style={{width:width*0.2,borderRadius:10,margin:7,paddingVertical:10,borderColor:(item.click==true&&this.state.itemindex==item.pk)?'#333333':'#fff',borderWidth:0.5,alignItems:'center',flexDirection:'row',justifyContent:'center',alignItems:'center',backgroundColor:(item.click==true&&this.state.itemindex==item.pk)?'#333333':'#000'}}>
-                 <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',paddingHorizontal:10}]}>{item.name}</Text>
-             </TouchableOpacity>
-             )}
-           />
-         </View>
-   )
- }
+  secTion=(collegeAd)=>{
+    return(
+        <View style={{margin:10,marginVertical:20}}>
+          <FlatList data={this.state.sections} keyExtractor={(item, index) => index.toString()} horizontal={true} renderItem={({item, index})=>(
+            <TouchableOpacity onPress={()=>{this.clickSection(item,index)}} style={{width:width*0.2,borderRadius:10,margin:7,paddingVertical:10,alignItems:'center',
+              borderColor:(item.click==true&&this.state.itemindex==item.pk)?'#333333':'#fff',
+              borderWidth:0.5,alignItems:'center',flexDirection:'row',justifyContent:'center',
+              backgroundColor:(item.click==true&&this.state.itemindex==item.pk)?'#333333':'#000'}}>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',
+                              paddingHorizontal:10}]}>{item.name}</Text>
+            </TouchableOpacity>
+            )}
+          />
+        </View>
+    )
+  }
 
 view1=(collegeAd,type)=>{
   return(
     <View style={{margin:10,marginVertical:20}}>
       <FlatList data={this.state.subjects} keyExtractor={(item, index) => index.toString()} numColumns={3} renderItem={({item, index})=>(
-        <TouchableOpacity onPress={()=>{this.setState({color:item.color,data:item.data})}} style={{width:width*0.27,borderRadius:10,margin:10,paddingVertical:10,borderColor:'#fff',borderWidth:0.5,alignItems:'center',flexDirection:'row',justifyContent:'center',alignItems:'center',}}>
+        <TouchableOpacity onPress={()=>{this.setState({color:item.color,data:item.data})}} style={{width:width*0.27,borderRadius:10,margin:10,paddingVertical:10,
+          borderColor:'#fff',borderWidth:0.5,alignItems:'center',flexDirection:'row',
+          justifyContent:'center',alignItems:'center',}}>
             <View style={{backgroundColor:type=='nocolor'?'#000':item.color1,height:10,width:10}}></View>
-            <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',paddingHorizontal:10}]}>{item.name}</Text>
+            <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',
+                        paddingHorizontal:10}]}>{item.name}</Text>
         </TouchableOpacity>
         )}
       />
@@ -287,12 +294,25 @@ view1=(collegeAd,type)=>{
       <Headers navigation={this.props.navigation} name={'STATISTICS'}
           screen={'SchoolAdminStatics'}/>
             <ScrollView contenContainerStyle={{flex:1,alignItems:'center',backgroundColor:'#000'}}>
-              {(this.state.drop=='ALL SEMESTERS'||this.state.drop=='ALL CLASSES')?<View>
-                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                {this.dropTest()}
+              {(this.state.drop=='ALL SEMESTERS'||this.state.drop=='ALL CLASSES')?
+                <View>
+                  <View style={{flexDirection:'row',justifyContent:'space-between'}}>
 
-                {this.dropdown(collegeAd)}
-                </View></View>:<View>{this.dropdown(collegeAd)}{this.secTion(collegeAd)}</View>
+                  {collegeAd!=null&& <View>{this.dropTest()}</View>}
+
+                  {this.dropTest()}
+
+                  {this.dropdown(collegeAd)}
+                  </View>
+                </View>:<View>
+                  <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+
+                     <View>{collegeAd!=null&& <View>{this.dropTest()}</View>}</View>
+                     <View style={{alignSelf:'flex-end',justifyContent:'flex-end',
+                      alignItems:'flex-end'}}>{this.dropdown(collegeAd)}</View>
+                  </View>
+                  {this.secTion(collegeAd)}
+                </View>
               }
 
               {(this.state.drop=='ALL SEMESTERS'||this.state.drop=='ALL CLASSES')&&
@@ -300,21 +320,28 @@ view1=(collegeAd,type)=>{
                 {this.barChart(collegeAd)}
                 </View>
               }
+
               {(this.state.drop=='ALL SEMESTERS'||this.state.drop=='ALL CLASSES')?
                 <View></View>:<View>
                 {this.chart(collegeAd)}
                 </View>
               }
+
               {(this.state.drop=='ALL SEMESTERS'||this.state.drop=='ALL CLASSES')?
                 <View></View>:<View>
-                <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',textAlign:'center'}]}>X AXIS-EXAM TYPE</Text>
-                <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',textAlign:'center'}]}>Y AXIS-PERCENTAGE</Text>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',
+                              textAlign:'center'}]}>X AXIS-EXAM TYPE</Text>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',
+                              textAlign:'center'}]}>Y AXIS-PERCENTAGE</Text>
                 </View>
               }
+              
               {(this.state.drop=='ALL SEMESTERS'||this.state.drop=='ALL CLASSES')&&
                 <View style={{marginVertical:20}}>
-                <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700',textAlign:'center'}]}>X AXIS-SEMESTER</Text>
-                <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700',textAlign:'center'}]}>Y AXIS-AVERAGE PERCENTAGE</Text>
+                <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700',
+                              textAlign:'center'}]}>X AXIS-SEMESTER</Text>
+                <Text style={[styles.text,{color:'#fff',fontSize:16,fontWeight:'700',
+                              textAlign:'center'}]}>Y AXIS-AVERAGE PERCENTAGE</Text>
                 </View>
               }
 
@@ -327,9 +354,12 @@ view1=(collegeAd,type)=>{
               }
 
                 <View style={{marginHorizontal:25}}>
-                <TouchableOpacity  onPress={()=>{this.setState({color:this.state.color1,data:[40,50,90,20]})}} style={{borderRadius:10,paddingVertical:10,paddingHorizontal:0,borderColor:'#fff',borderWidth:0.5,alignItems:'center',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                <TouchableOpacity  onPress={()=>{this.setState({color:this.state.color1,data:[40,50,90,20]})}} style={{borderRadius:10,paddingVertical:10,paddingHorizontal:0,
+                        borderColor:'#fff',borderWidth:0.5,alignItems:'center',
+                        flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                     <View style={{backgroundColor:'#fff',height:10,width:10}}></View>
-                    <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',paddingHorizontal:10}]}>AVERAGE OF ALL THE SUBJECT</Text>
+                    <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700',
+                       paddingHorizontal:10}]}>AVERAGE OF ALL THE SUBJECT</Text>
                 </TouchableOpacity>
                 </View>
 
@@ -355,15 +385,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps =(state) => {
-    return {
-
-  }
+    return {}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
+  return {};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchoolAdminStatics);

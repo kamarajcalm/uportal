@@ -325,15 +325,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps =(state) => {
-    return {
-
-  }
+  return{}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
+  return {};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StaticsAcademic);
