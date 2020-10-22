@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Image,Platform,Switch,
+  Image,Platform,
   ScrollView,StyleSheet,
   Text,Button,TextInput,NativeModules,
   TouchableOpacity,View,Animated,
@@ -22,6 +22,7 @@ import TabComponent  from '../navigationComponents/TabComponent.js';
 import Headers  from '../helpers/Headers.js';
 import settings from '../appSettings';
 import HttpsClient from '../helpers/HttpsClient';
+import { Switch } from 'react-native-switch';
 
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
@@ -39,7 +40,8 @@ class ProfileSetting extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      emailid:''
+      emailid:'',
+      active:true,
       }
     }
 
@@ -55,7 +57,8 @@ class ProfileSetting extends React.Component {
   }
 
   render() {
-
+    var collegeAd = this.props.navigation.getParam('collegeAd',null)
+    var schoolAd = this.props.navigation.getParam('schoolAd',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
             <Headers navigation={this.props.navigation} name={'SETTINGS'}
@@ -81,7 +84,7 @@ class ProfileSetting extends React.Component {
                       <FontAwesome name='angle-right' size={18} color='#fff'/>
                     </View>
                   </TouchableOpacity>
-                  <View style={{borderWidth:0.5,borderColor:'#fff',width:width}}></View>
+
                   <TouchableOpacity style={{flexDirection:'row',justifyContent:'space-between',width:width*0.9,alignItems:'center',paddingVertical:20}}
                   onPress={()=>{this.props.navigation.navigate('Language',{receivedLanguage: this.receivedLanguage })}}>
                     <Text style={[styles.text,{color:'#fff',fontSize:16,
@@ -92,7 +95,7 @@ class ProfileSetting extends React.Component {
                       <FontAwesome name='angle-right' size={18} color='#fff'/>
                     </View>
                   </TouchableOpacity>
-                  <View style={{borderWidth:0.5,borderColor:'#fff',width:width}}></View>
+
                   <TouchableOpacity style={{flexDirection:'row',justifyContent:'space-between',width:width*0.9,alignItems:'center',paddingVertical:20}}
                   onPress={()=>{this.props.navigation.navigate('ChangePassword')}}>
                     <Text style={[styles.text,{color:'#fff',fontSize:16,
@@ -100,7 +103,45 @@ class ProfileSetting extends React.Component {
                     <FontAwesome name='angle-right' size={18} color='#fff'
                                   style={{alignSelf:'flex-end'}}/>
                   </TouchableOpacity>
-                  <View style={{borderWidth:0.5,borderColor:'#fff',width:width}}></View>
+
+                  {(collegeAd!=null || schoolAd!=null)&& <View style={{justifyContent:'center',alignItems:'center'}}>
+                  <TouchableOpacity style={{flexDirection:'row',justifyContent:'space-between',width:width*0.9,alignItems:'center',paddingVertical:20}}
+                  onPress={()=>{this.props.navigation.navigate('GiveAccessScreen')}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:16,
+                            fontWeight:'700'}]}>Give access</Text>
+                    <FontAwesome name='angle-right' size={18} color='#fff'
+                                  style={{alignSelf:'flex-end'}}/>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{flexDirection:'row',justifyContent:'space-between',width:width*0.9,alignItems:'center',paddingVertical:20}}
+                  >
+                    <Text style={[styles.text,{color:'#fff',fontSize:16,
+                            fontWeight:'700'}]}>End to End Encryption</Text>
+                            <Switch
+                              value={this.state.active}
+                              onValueChange={(val) => this.setState({active:!this.state.active})}
+                              disabled={false}
+                              activeText={'On'}
+                              inActiveText={'Off'}
+                              circleSize={30}
+                              barHeight={30}
+                              circleBorderWidth={0}
+                              backgroundActive={'#1dff03'}
+                              backgroundInactive={'gray'}
+                              circleActiveColor={'#fff'}
+                              circleInActiveColor={'#fff'}
+                              changeValueImmediately={true}
+                              changeValueImmediately={true}
+                              innerCircleStyle={{ alignItems: "center", justifyContent: "center" }}
+                              renderActiveText={false}
+                              renderInActiveText={false}
+                              switchLeftPx={2}
+                              switchRightPx={2}
+                              switchWidthMultiplier={2}
+                              switchBorderRadius={17}
+                            />
+                  </TouchableOpacity>
+                  </View>}
               </View>
             </View>
       </View>

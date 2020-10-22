@@ -85,6 +85,10 @@ import ChooseSec from '../screenComponents/ChooseSec';
 import StudentAttendance from '../screenComponents/StudentAttendance';
 import SchoolAdminStatics from '../screenComponents/SchoolAdminStatics';
 import Semester from '../screenComponents/Semester';
+import GiveAccessScreen from '../screenComponents/GiveAccessScreen';
+import GiveAccessDetails from '../screenComponents/GiveAccessDetails';
+
+import SchoolStafSyllabus from '../screenComponents/SchoolStafSyllabus';
 
 const HomeStack = createStackNavigator({
    Home:Home,
@@ -180,6 +184,10 @@ const PageFourthStack = createStackNavigator({
    StudentAttendance:StudentAttendance,
    SchoolAdminStatics:SchoolAdminStatics,
    Semester:Semester,
+   GiveAccessScreen:GiveAccessScreen,
+   GiveAccessDetails:GiveAccessDetails,
+
+   SchoolStafSyllabus:SchoolStafSyllabus
 },
 {
   initialRouteName: 'PageFourth',

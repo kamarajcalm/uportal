@@ -68,21 +68,27 @@ class MediaUniversity extends React.Component {
   componentDidMount(){
   }
 
-  touchuniversity=(quespaper,item)=>{
+  touchuniversity=(quespaper,item,collegeStaf,collegeStafother,collegeAdother)=>{
     if(quespaper!=null){
       this.props.navigation.navigate('MediaDepart',{item:{item:item,quespaper:quespaper}})
+    }else if (collegeStaf!=null) {
+      this.props.navigation.navigate('MediaDepart',{item:{item:item,collegeStaf:collegeStaf}})
+    }else if(collegeStafother!=null){
+      this.props.navigation.navigate('MediaDepart',{item:{item:item,collegeStafother:collegeStafother}})
+    }else if (collegeAdother!=null) {
+      this.props.navigation.navigate('MediaDepart',{collegeAd:{item:item,collegeAd:collegeAdother}})
     }else{
       this.props.navigation.navigate('MediaDepart',{item:{item:item}})
     }
   }
 
-  university=(quespaper)=>{
+  university=(quespaper,collegeStaf,collegeStafother,collegeAdother)=>{
     return(
       <View style={{marginVertical:15,width:width}}>
         <FlatList  data={this.state.university}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index})=>(
-          <TouchableOpacity  onPress={()=>{this.touchuniversity(quespaper,item)}} style={{flexDirection:'row',marginHorizontal:15,marginVertical:8,borderRadius:7,
+          <TouchableOpacity  onPress={()=>{this.touchuniversity(quespaper,item,collegeStaf,collegeStafother,collegeAdother)}} style={{flexDirection:'row',marginHorizontal:15,marginVertical:8,borderRadius:7,
                   alignItems:'center',justifyContent:'space-between',paddingHorizontal:15,}}>
             <View style={{}}>
               <Text style={[styles.text,{color:'#fff',fontSize:14,paddingVertical:4,
@@ -99,6 +105,9 @@ class MediaUniversity extends React.Component {
 
   render() {
     const quespaper =this.props.navigation.getParam('quespaper',null)
+    var collegeStaf = this.props.navigation.getParam('collegeStaf',null)
+    var collegeStafother = this.props.navigation.getParam('collegeStafother',null)
+    var collegeAdother = this.props.navigation.getParam('collegeAdother',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
         <Headers navigation={this.props.navigation} name={quespaper?'QUESTION PAPERS':'MEDIA'}
@@ -106,7 +115,7 @@ class MediaUniversity extends React.Component {
           <View style={{flex:1,alignItems:'center',backgroundColor:'#000'}}>
               <Text style={[styles.text,{paddingVertical:10,color:'#fff',fontSize:14,
                     fontWeight:'700',textAlign:'center'}]}>CHOOSE UNIVERSITY</Text>
-              {this.university(quespaper)}
+              {this.university(quespaper,collegeStaf,collegeStafother,collegeAdother)}
           </View>
       </View>
     );

@@ -59,11 +59,12 @@ class MediaChooseSubject extends React.Component {
   }
 
   render() {
+    var schoolStud = this.props.navigation.getParam('schoolStud',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
             <Headers navigation={this.props.navigation} name={'MEDIA'}
             screen={'MediaChooseSubject'}/>
-            <View style={{flex:1,paddingVertical:50,justifyContent:'center',alignItems:'center'}}>
+            <View style={{paddingVertical:50,justifyContent:'center',alignItems:'center'}}>
               <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
                           paddingVertical:15,fontWeight:'700'}]}>CHOOSE SUBJECT</Text>
               <FlatList
@@ -78,6 +79,12 @@ class MediaChooseSubject extends React.Component {
                   </TouchableOpacity>
                 )}
               />
+              {schoolStud!=null && <TouchableOpacity     style={{marginHorizontal:10,marginVertical:15,paddingHorizontal:40,
+                      backgroundColor:'#333333',borderRadius:7,width:width*0.5}}
+                onPress={()=>{this.props.navigation.navigate('SchoolStafMediaChoose')}}>
+                <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
+                      paddingVertical:10,fontWeight:'700'}]}>OTHERS</Text>
+              </TouchableOpacity>}
             </View>
       </View>
     );

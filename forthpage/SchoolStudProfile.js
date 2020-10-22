@@ -139,7 +139,7 @@ class SchoolStudProfile extends React.Component {
       this.props.navigation.navigate('ProfileSyllabus')
     }
     else if(item.name=='MEDIA'){
-      this.props.navigation.navigate('ProfileMedia')
+      this.props.navigation.navigate('MediaChooseSubject',{schoolStud:item})
     }
     else if(item.name=='QUESTION PAPERS'){
       this.props.navigation.navigate('ProfileQuestionPaper')

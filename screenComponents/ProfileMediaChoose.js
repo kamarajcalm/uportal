@@ -32,7 +32,8 @@ const fontFamily =settings.fontFamily
 const semdata=[{name:'LANGUAGE'},{name:'MATHEMATICS'},
                {name:'ENGLISH'},{name:'LANGUAGE'},
                {name:'MATHEMATICS'},{name:'ENGLISH'},]
-
+const semdata1=[{name:'LANGUAGE'},{name:'MATHEMATICS'},
+              {name:'ENGLISH'},]
 const otherdata =[{name:'ENGINEERING'},{name:'MEDICAL'},{name:'COMMERCE'}]
 
 class ProfileMediaChoose extends React.Component {
@@ -46,12 +47,13 @@ class ProfileMediaChoose extends React.Component {
     super(props);
     var semesters=this.props.navigation.getParam('item',null)
     console.log(semesters,'semesters')
-    
+
     this.state={
       emailid:'',
       a1:false,
       a2:false,
       semdata:semdata,
+      semdata1:semdata1,
       otherdata:otherdata,
       semesters:semesters,
     }
@@ -71,11 +73,35 @@ class ProfileMediaChoose extends React.Component {
   touch=(semesters)=>{
     if(semesters.quespaper!=null){
         this.props.navigation.navigate('MediaUniversity',{quespaper:semesters.quespaper})
+    }else if (semesters.collegeStaf!=null) {
+      this.props.navigation.navigate('MediaUniversity',{collegeStaf:semesters.collegeStaf})
+    }else if(semesters.collegeStafother!=null){
+      this.props.navigation.navigate('MediaUniversity',{collegeStafother:semesters.collegeStafother});
+      console.log(semesters.collegeStafother,'semesters.collegeStafother')
+    }else if (semesters.collegeAdother!=null) {
+      this.props.navigation.navigate('MediaUniversity',{collegeAdother:semesters.collegeAdother});
+      console.log(semesters.collegeAdother,'semesters.collegeAdother')
     }else{
       this.props.navigation.navigate('MediaUniversity')
     }
   }
-
+  
+  click =(sem)=>{
+    if(sem.item!=null){
+      this.touchsem(this.state.semesters)
+    }else if(sem.collegeStaf!=null){
+      this.touchsem(this.state.semesters)
+    }
+    else if(sem.collegeAdother!=null){
+      this.touch(this.state.semesters)
+    }else if(sem.collegeStafother!=null){
+      this.touch(this.state.semesters)
+    }else if(sem.collegeAd!=null){
+      this.touchsem(this.state.semesters)
+    }else{
+      this.touch(this.state.semesters)
+    }
+  }
   render() {
 
 
@@ -86,15 +112,19 @@ class ProfileMediaChoose extends React.Component {
             screen={'ProfileMediaChoose'}/>
 
             <View style={{flex:1,paddingVertical:50,justifyContent:'center',alignItems:'center'}}>
-              {this.state.semesters.item &&
+              {(this.state.semesters.item!=null||this.state.semesters.collegeStaf!=null) &&
                 <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
                           paddingVertical:15,fontWeight:'700'}]}>CHOOSE SUBJECT</Text>
               }
+              {(this.state.semesters.collegeStafother!=null||this.state.semesters.collegeAdother!=null) &&
+                <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
+                          paddingVertical:15,fontWeight:'700'}]}>CHOOSE BOARD</Text>}
               <FlatList
-                contenContainerStyle={{justifyContent:'space-between',}} data={this.state.semesters.item?this.state.semdata:this.state.otherdata}
+                contenContainerStyle={{justifyContent:'space-between',}} data={this.state.semesters.item!=null?this.state.semdata:this.state.semesters.collegeStaf!=null?this.state.semdata1:this.state.semesters.collegeAd!=null?this.state.semdata1:this.state.otherdata}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({item, index})=>(
-                  <TouchableOpacity  onPress={()=>{this.state.semesters.item?this.touchsem(this.state.semesters):this.touch(this.state.semesters)}} style={{marginHorizontal:10,marginVertical:15,paddingHorizontal:40,
+                  <TouchableOpacity  onPress={()=>{this.click(this.state.semesters)}}
+                   style={{marginHorizontal:10,marginVertical:15,paddingHorizontal:40,
                           backgroundColor:'#333333',borderRadius:7,}}>
                     <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
                           paddingVertical:10,fontWeight:'700'}]}>{item.name}</Text>

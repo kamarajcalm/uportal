@@ -52,17 +52,23 @@ class ProfileMedia extends React.Component {
 
   componentDidMount=async()=>{}
 
-  touch=(item,quespaper)=>{
+  touch=(item,quespaper,collegeStaf,collegeAd)=>{
       if(quespaper!=null){
         this.props.navigation.navigate('ProfileMediaChoose',{item:{item:item,quespaper:quespaper}})
+      }else if (collegeStaf!=null) {
+        this.props.navigation.navigate('ProfileMediaChoose',{item:{collegeStaf:item}})
+      }else if(collegeAd!=null){
+        this.props.navigation.navigate('ProfileMediaChoose',{item:{collegeAd:item}})
       }else{
         this.props.navigation.navigate('ProfileMediaChoose',{item:{item:item}})
       }
   }
 
-  otherTouch=(quespaper)=>{
+  otherTouch=(quespaper,collegeStaf)=>{
     if(quespaper!=null){
       this.props.navigation.navigate('ProfileMediaChoose',{item:{quespaper:quespaper}})
+    }else if (collegeStaf!=null) {
+      this.props.navigation.navigate('ProfileMediaChoose',{item:{collegeStafother:collegeStaf}})
     }else {
         this.props.navigation.navigate('ProfileMediaChoose',{item:{}})
     }
@@ -71,9 +77,11 @@ class ProfileMedia extends React.Component {
   render() {
     const quespaper=this.props.navigation.getParam('item',null)
     console.log(quespaper,'quespaper')
+    var collegeStaf = this.props.navigation.getParam('collegeStaf',null)
+    var collegeAd = this.props.navigation.getParam('collegeAd',null)
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-            <Headers navigation={this.props.navigation} name={quespaper?'QUESTION PAPERS':'MEDIA'}
+            <Headers navigation={this.props.navigation} name={quespaper!=null?'QUESTION PAPERS':'MEDIA'}
             screen={'ProfileMedia'}/>
             <View style={{flex:1,paddingVertical:50,justifyContent:'center',alignItems:'center'}}>
 
@@ -84,18 +92,19 @@ class ProfileMedia extends React.Component {
                 numColumns={2}
                 renderItem={({item, index})=>(
                   <TouchableOpacity
-                    onPress={()=>{this.touch(item,quespaper)}}  style={{marginHorizontal:10,marginVertical:10,paddingHorizontal:40,
+                    onPress={()=>{this.touch(item,quespaper,collegeStaf,collegeAd)}}  style={{marginHorizontal:10,marginVertical:10,paddingHorizontal:40,
                           backgroundColor:'#333333',borderRadius:7,width:width*0.35}}>
                     <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
                             paddingVertical:10,fontWeight:'700'}]}>{item.name}</Text>
                   </TouchableOpacity>
                 )}
               />
+              {collegeAd!=null?<View></View>:<View>
+                <TouchableOpacity onPress={()=>{this.otherTouch(quespaper,collegeStaf)}} style={{marginVertical:10,paddingHorizontal:40,backgroundColor:'#333333',borderRadius:7}}>
+                    <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
+                                  paddingVertical:10,fontWeight:'700'}]}>OTHERS</Text>
+                </TouchableOpacity></View>}
 
-              <TouchableOpacity onPress={()=>{this.otherTouch(quespaper)}} style={{marginVertical:10,paddingHorizontal:40,backgroundColor:'#333333',borderRadius:7}}>
-                  <Text style={[styles.text,{color:'#fff',fontSize:14,textAlign:'center',
-                                paddingVertical:10,fontWeight:'700'}]}>OTHERS</Text>
-              </TouchableOpacity>
           </View>
       </View>
     );
