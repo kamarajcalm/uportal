@@ -32,7 +32,7 @@ const fontFamily= settings.fontFamily
 const listofdetails=[{id:1,icon:require('../assets/marks.png'),name:'MARKS'},
                      {id:2,icon:require('../assets/Attendance.png'),name:'ATTENDANCE'},
                      {id:3,icon:require('../assets/statistics.png'),name:'STATICS'},
-                     {id:4,icon:require('../assets/statistics.png'),name:'RANKS'},
+                     {id:4,icon:require('../assets/RANKS.png'),name:'RANKS'},
                      {id:5,icon:require('../assets/media.png'),name:'MEDIA'},
                      {id:6,icon:require('../assets/library.png'),name:'LIBRARY'},
                      {id:7,icon:require('../assets/syllabus.png'),name:'SYLLABUS & TIMETABLE'},
@@ -137,7 +137,7 @@ class SchoolStafProfile extends React.Component {
       this.props.navigation.navigate('SchoolStafMarks')
     }
     else if(item.name=='SYLLABUS & TIMETABLE'){
-      this.props.navigation.navigate('ProfileSyllabus')
+      this.props.navigation.navigate('SchoolStafSyllabus')
     }
     else if(item.name=='MEDIA'){
       this.props.navigation.navigate('SchoolStafMedia',)

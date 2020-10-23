@@ -298,7 +298,6 @@ class ProfileAttendance extends React.Component {
     )
   }
 
-
   attendModal=()=>{
     return(
       <View>
@@ -416,17 +415,10 @@ const styles = StyleSheet.create({
     lineHeight:22
   }
 });
-
 const mapStateToProps =(state) => {
-    return {
-
-  }
+  return {}
 }
-
 const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
+  return {};
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileAttendance);

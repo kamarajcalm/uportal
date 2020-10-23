@@ -22,6 +22,7 @@ import TabComponent  from '../navigationComponents/TabComponent.js';
 import Headers  from '../helpers/Headers.js';
 import settings from '../appSettings';
 import HttpsClient from '../helpers/HttpsClient';
+import TimeTable from '../screenComponents/TimeTable';
 
 const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
@@ -62,8 +63,6 @@ const syllabusdata =[{a1:false,name:'MATHEMATICS',pk:1,
 const semesterdata=[{a1:false,name:'SEMESTER III',pk:1,
                       img:require('../assets/Unknown_Boy.jpg'),semtimetable:semtimetable}]
 
-const month =['January','February','March','April','May','Jun','July',
-              'August','September','October','November','December']
 
 class ProfileSyllabus extends React.Component {
 
@@ -82,13 +81,10 @@ class ProfileSyllabus extends React.Component {
       itemIndex:1,
       syllabusdata:syllabusdata,
       semesterdata:semesterdata,
-      month:month,
-      selectedDate: null
       }
     }
 
   componentDidMount(){
-    this.setDate();
   }
 
   handlePageChange=(e)=>{
@@ -243,48 +239,13 @@ class ProfileSyllabus extends React.Component {
 
 
 
-  setDate = (newDate) => {
-    const date = newDate || new Date();
-    this.setState({
-      selectedDate:
-        date.getDate() + " " + this.state.month[date.getMonth()] + " " + date.getFullYear()
-    });
-  };
 
-  getPreviousDate = () => {
-    const { selectedDate } = this.state
-    const currentDayInMilli = new Date(selectedDate).getTime()
-    const oneDay = 1000 * 60 *60 *24
-    const previousDayInMilli = currentDayInMilli - oneDay
-    const previousDate = new Date(previousDayInMilli)
-    this.setDate(previousDate)
-  }
 
-  getNextDate = () => {
-    const { selectedDate } = this.state
-    const currentDayInMilli = new Date(selectedDate).getTime()
-    const oneDay = 1000 * 60 *60 *24
-    const nextDayInMilli = currentDayInMilli + oneDay
-    const nextDate = new Date(nextDayInMilli)
-    this.setDate(nextDate)
-  }
 
-  timeTable=()=>{
-    return(
-      <View style={{alignItems:'center',paddingVertical:20}}>
-        <View style={{flexDirection:'row',justifyContent:'space-between',
-                    paddingHorizontal:10,paddingVertical:10,width:width*0.6,alignItems:'center'}}>
-          <TouchableOpacity style={{padding:8}} onPress={()=>{this.getPreviousDate()}}>
-            <FontAwesome name='angle-left' size={20} color='#fff'/>
-          </TouchableOpacity>
-          <Text style={[styles.text,{color:'#fff',fontSize:14,fontWeight:'700'}]}>{this.state.selectedDate}</Text>
-          <TouchableOpacity style={{padding:8}} onPress={()=>{this.getNextDate()}}>
-            <FontAwesome name='angle-right' size={20} color='#fff'/>
-          </TouchableOpacity>
-        </View>
-      </View>
-    )
-  }
+
+
+
+
 
   semester=()=>{
     return(
@@ -373,7 +334,7 @@ class ProfileSyllabus extends React.Component {
                         {i==1&&this.state.selectedTab==1&&
                           <View style={{flex:1,}}>
                            <ScrollView >
-                             {this.timeTable()}
+                             <TimeTable/>
                              {this.semester()}
                            </ScrollView>
                           </View>

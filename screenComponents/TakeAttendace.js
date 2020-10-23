@@ -140,7 +140,6 @@ class TakeAttendace extends React.Component {
                   <Text style={[styles.text,{color:'#fff',fontWeight:'700',
                           fontSize:14,paddingHorizontal:10}]}>ABSENT</Text>
                 </TouchableOpacity>
-
                 }
               </View>
              </TouchableOpacity>
@@ -158,7 +157,6 @@ class TakeAttendace extends React.Component {
     console.log(this.state.takeattendace[index].absent,'this.state.takeattendace[index].absent')
     console.log(this.state.takeattendace[index].present,'this.state.takeattendace[index].present')
   }
-
 
   componentDidMount(){
     this.setDate();

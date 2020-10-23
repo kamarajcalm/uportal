@@ -32,7 +32,7 @@ const fontFamily= settings.fontFamily
 const listofdetails=[{id:1,icon:require('../assets/marks.png'),name:'MARKS'},
                      {id:2,icon:require('../assets/Attendance.png'),name:'ATTENDANCE'},
                      {id:3,icon:require('../assets/statistics.png'),name:'STATICS'},
-                     {id:4,icon:require('../assets/statistics.png'),name:'RANKS'},
+                     {id:4,icon:require('../assets/RANKS.png'),name:'RANKS'},
                      {id:4,icon:require('../assets/library.png'),name:'LIBRARY'},
                      {id:5,icon:require('../assets/syllabus.png'),name:'SYLLABUS & TIMETABLE'},
                      {id:6,icon:require('../assets/calendar.png'),name:'CALENDAR AND REMINDERS'},
