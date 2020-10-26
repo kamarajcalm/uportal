@@ -32,21 +32,22 @@ const themeColor = settings.themeColor
 const url = settings.url
 const fontFamily=settings.fontFamily
 
-
-
-
-const semtimetable=[
-                    {day:'DAY',i:'I',ii:'II',iii:'III',iv:'IV',v:'V',vi:'VI',vii:'VII',viii:'VIII'},
-                    {day:'MONDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
-                    {day:'TUESDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
-                    {day:'WEDNESDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
-                    {day:'THURSDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
-                    {day:'FRIDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
-                    {day:'SATURDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},]
+const semtimetable=[{day:'DAY',i:'I',ii:'II',iii:'III',iv:'IV',v:'V',vi:'VI',vii:'VII',viii:'VIII'},
+                    {day:'MONDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',
+                    vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
+                    {day:'TUESDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',
+                    vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
+                    {day:'WEDNESDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',
+                    vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
+                    {day:'THURSDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',
+                    vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
+                    {day:'FRIDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',
+                    vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},
+                    {day:'SATURDAY',i:'SCIENCE',ii:'MATHS',iii:'HINDI',iv:'ENGLISH',v:'LANGUGE',
+                    vi:'SCIENCE',vii:'WORKSHOP',viii:'GAME'},]
 
 const semesterdata = [{a1:false,name:'SEMESTER III',pk:1,edit:false,
                       img:require('../assets/Unknown_Boy.jpg'),semtimetable:semtimetable}]
-
 
 class SubjectsTimeTable extends React.Component{
 
@@ -311,7 +312,6 @@ const styles = StyleSheet.create({
     fontFamily:fontFamily,
     lineHeight:22
   }
-
 });
 
 const mapStateToProps =(state) => {

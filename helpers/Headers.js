@@ -72,6 +72,7 @@ export default class Headers extends React.Component {
 
       var teach = ['TeachersWall','ClassWall']
 
+      var createpost = ['CreatePost']
     return (
       <View style={{height:55,width:width,
               backgroundColor:comp.includes(this.props.screen)?'#000':themeColor,
@@ -79,7 +80,12 @@ export default class Headers extends React.Component {
           <View style={{flexDirection: 'row',height:55,alignItems: 'center',}}>
 
              <View style={{ flex: 0.2,justifyContent: 'flex-start', alignItems: 'center',}}>
-
+             {createpost.includes(this.props.screen)&&
+                <TouchableOpacity  style={{paddingHorizontal: 15,paddingVertical:10}}
+                   onPress={()=>{this.props.navigation.goBack()}}>
+                  <AntDesign name="close" size={this.state.size} color="#fff" />
+                </TouchableOpacity>
+             }
                {notify.includes(this.props.screen)&&
                   <TouchableOpacity  style={{paddingHorizontal: 15,paddingVertical:10}}
                      onPress={()=>{}}>
@@ -112,7 +118,7 @@ export default class Headers extends React.Component {
              <View style={{flex:0.6,flexDirection:'row',
                             justifyContent:'center',alignItems:'center',}}>
                  <Text  numberOfLines={1} style={[styles.text,{color:'#fff',
-                 fontSize:comp.includes(this.props.screen)||notes.includes(this.props.screen)?16:24,
+                 fontSize:comp.includes(this.props.screen)||notes.includes(this.props.screen)||createpost.includes(this.props.screen)?16:24,
                  textAlign:'center',fontWeight:'700'}]}>{this.props.name}</Text>
              </View>
 
@@ -163,6 +169,14 @@ export default class Headers extends React.Component {
                   <FontAwesome5 name="edit" size={this.state.size} color="#fff" />
                 </TouchableOpacity>
               }
+              {createpost.includes(this.props.screen)&&
+                <TouchableOpacity onPress={()=>{}}
+                    style={{flex:0.2,flexDirection:'row',justifyContent:'center',
+                          alignItems:'center',}}>
+                  <Ionicons name="md-send" size={this.state.size} color="#fff" />
+                </TouchableOpacity>
+              }
+
 
            </View>
        </View>

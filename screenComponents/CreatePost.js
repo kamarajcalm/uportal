@@ -64,7 +64,7 @@ const imag=[{img:require('../assets/marks.png'),name:'Whatsapp'},
 
 const index=1
 
-class Home extends React.Component {
+class CreatePost extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state
@@ -356,41 +356,41 @@ class Home extends React.Component {
       console.log(e) // Logs 'idle'
   }
 
+
+  timelinePost=()=>{
+    return(
+      <View style={{}}>
+        <TouchableOpacity style={{flexDirection:'row',paddingHorizontal:25,marginVertical:8}}>
+          <Image source={require('../assets/Unknown_Boy.jpg')}  style={{height:width*0.14,width:width*0.14,borderRadius:30}}/>
+          <TextInput
+            style={{borderWidth:0,borderColor:'#000',width:width*0.6,
+                    borderRadius:0,color:'#000',paddingHorizontal:15}}
+            placeholder="Whats on your mind?"
+            placeholderTextColor={'#7A7A7A'}
+            selectionColor={'#fff'}
+            onChangeText={()=> this.setState({ timelinepost})}
+            value={this.state.timelinepost}
+          />
+        </TouchableOpacity>
+      </View>
+    )
+  }
   render(){
 
     return (
       <View style={{flex:1,backgroundColor:'#000'}}>
-        <Swiper style={{}}
-                onScrollBeginDrag={this._onScrollBeginDrag.bind(this)}
-                onScrollSettlingDrag={this._onScrollSettlingDrag.bind(this)}
-                onScrollEndDrag={this._onScrollSettlingDrag.bind(this)}
-                showsButtons={true} loop={false}
-                buttonWrapperStyle ={{backgroundColor:'transparent',flexDirection:'row',
-                                    position: 'absolute',top:0,left:0,flex:1,
-                                    paddingHorizontal:10,paddingVertical:10,
-                                    justifyContent: 'space-between',alignItems:'center'}}
-                prevButton={this.state.index==2?<Text style={[styles.text1,{transform:[{rotate:'270 deg'}],}]}>BACK</Text>:<Text style={[styles.text1,{transform:[{rotate:'270 deg'}],}]}>NOTES</Text>}
-
-                nextButton={this.state.index==0?<Text style={[styles.text1,{transform:[{rotate:'90 deg'}],}]}>BACK</Text>:<Text style={[styles.text1,{transform:[{rotate:'90 deg'}],}]}>CHATS</Text>}
-
-                disablePrevButton={false}
-                scrollEnabled={true}
-                disableNextButton={false}
-                onIndexChanged={(index)=>{this.setState({index})}}
-                index={index}>
-                <View style={styles.slide1}>
-                    <Notes navigation={this.props.navigation}/>
-                </View>
-                <View style={styles.slide2}>
-                    {this.home()}
-                </View>
-                <View style={{}}>
-                  <View>
-                    <Headers navigation={this.props.navigation} name={'Chats'} screen={'Chat'}/>
-                    <Chat />
-                  </View>
-                </View>
-        </Swiper>
+        <Headers navigation={this.props.navigation} name={'CREATE POST'} screen={'CreatePost'}/>
+        {this.timelinePost()}
+        <View style={{position:'absolute',bottom:60,left:0,right:0,backgroundColor:'#0a0a0a',paddingVertical:10,justifyContent:'center',marginBottom:0,paddingHorizontal:20}}>
+          <View style={{flexDirection:'row',paddingVertical:10}}>
+            <Image source={require('../assets/photovideo.png')} style={{height:width*0.07,width:width*0.07,}}/>
+            <Text style={[styles.text,{color:'#fff',paddingHorizontal:6,fontWeight:'700',fontSize:14}]}>PHOTO/VIDEOS</Text>
+          </View>
+          <View style={{flexDirection:'row',paddingVertical:10}}>
+            <Image source={require('../assets/photovideo.png')} style={{height:width*0.07,width:width*0.07,}}/>
+            <Text style={[styles.text,{color:'#fff',paddingHorizontal:6,fontWeight:'700',fontSize:14}]}>DOCUMENT/FILE</Text>
+          </View>
+        </View>
         <TabComponent navigation={this.props.navigation}  />
       </View>
     );
@@ -452,4 +452,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);

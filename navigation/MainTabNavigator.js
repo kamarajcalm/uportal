@@ -48,6 +48,7 @@ import QuestionPaper from '../screenComponents/QuestionPaper';
 import ProfileStatistics from '../screenComponents/ProfileStatistics';
 import StaticsAcademic from '../screenComponents/StaticsAcademic';
 import ProfileRank from '../screenComponents/ProfileRank';
+import CreatePost from '../screenComponents/CreatePost';
 
 import ProfilCalendar from '../screenComponents/ProfilCalendar';
 import Notes from '../screenComponents/Notes';
@@ -94,6 +95,7 @@ const HomeStack = createStackNavigator({
    Home:Home,
    MyWallScreen:MyWallScreen,
    Notes:Notes,
+   CreatePost:CreatePost,
 },
 {
   initialRouteName: 'Home',
